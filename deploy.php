@@ -97,7 +97,7 @@ task('deploy:git_config', function () {
 task('deploy:production', function () {
     within('{{release_path}}', function () {
         run('touch .production');
-        run('rm -f web/index.test.php');
+        run('rm -f web/index-test.php');
     });
 });
 
@@ -124,7 +124,7 @@ task('deploy:build', function () {
 });
 
 task('deploy:clear_opcache', function () {
-    // run('curl -f --insecure --resolve ipv4.fetus.jp:443:127.0.0.1 https://ipv4.fetus.jp/site/clear-opcache');
+    run('curl -f --insecure --resolve ipv4.fetus.jp:443:127.0.0.1 https://ipv4.fetus.jp/site/clear-opcache');
 });
 
 task('deploy:clear_proxy', function () {
