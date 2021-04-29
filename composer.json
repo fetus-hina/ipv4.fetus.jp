@@ -39,6 +39,7 @@
         "codeception/module-yii2": "*",
         "codeception/specify": "*",
         "codeception/verify": "*",
+        "deployer/deployer": "*",
         "proget-hq/phpstan-yii2": "*",
         "squizlabs/php_codesniffer": "*",
         "symfony/browser-kit": "*",
