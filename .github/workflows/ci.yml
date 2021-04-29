@@ -1,0 +1,144 @@
+name: 'CI'
+on:
+  - 'pull_request'
+  - 'push'
+jobs:
+  phpSyntaxCheck:
+    name: 'PHP Syntax Check'
+    strategy:
+      matrix:
+        php_version:
+          - '7.4'
+          - '8.0'
+    runs-on: 'ubuntu-20.04'
+    steps:
+      - uses: 'actions/checkout@v2'
+
+      - name: 'Set up PHP version ${{ matrix.php_version }}'
+        run: sudo update-alternatives --set php /usr/bin/php${{ matrix.php_version }}
+
+      - name: 'Syntax check'
+        run: |
+          find . \( -type d \( -name '.git' -or -name 'vendor' -or -name 'node_modules' -or -name 'runtime' \) -prune \) -or \( -type f -name '*.php' -print \) \
+            | LANG=C sort \
+            | xargs -n 1 php -l
+
+  makeComposerCache:
+    name: 'Make composer cache'
+    runs-on: 'ubuntu-20.04'
+    steps:
+      - uses: 'actions/checkout@v2'
+
+      - uses: 'actions/cache@v2'
+        with:
+          path: |
+            ~/.cache/composer/files
+            vendor
+          key: ${{ runner.os }}-composer-${{ hashFiles('composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      - name: 'Install Composer dependencies'
+        run: 'composer install --prefer-dist'
+
+  makeNpmCache:
+    name: 'Make npm cache'
+    runs-on: 'ubuntu-20.04'
+    steps:
+      - uses: 'actions/checkout@v2'
+
+      - uses: 'actions/cache@v2'
+        with:
+          path: |
+            ~/.npm
+            node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: 'Install NPM dependencies'
+        run: 'npm install'
+
+  phpStyleCheck:
+    name: 'PHP Coding Style'
+    runs-on: 'ubuntu-20.04'
+    needs: 'makeComposerCache'
+    steps:
+      - uses: 'actions/checkout@v2'
+
+      - uses: 'actions/cache@v2'
+        with:
+          path: |
+            ~/.cache/composer/files
+            vendor
+          key: ${{ runner.os }}-composer-${{ hashFiles('composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      - name: 'Set up PHP version 8.0'
+        run: sudo update-alternatives --set php /usr/bin/php8.0
+
+      - name: 'Install PHP dependencies'
+        run: 'composer install --prefer-dist'
+
+      - name: 'Run PHPCS'
+        run: 'vendor/bin/phpcs'
+
+      - name: 'Run PHPStan'
+        run: 'vendor/bin/phpstan analyze --memory-limit=1G || true'
+
+  phpTest:
+    name: 'PHP test (PHP ${{ matrix.php_version }}, DB ${{ matrix.pgsql_version }})'
+    strategy:
+      matrix:
+        php_version:
+          - '7.4'
+          - '8.0'
+        pgsql_version:
+          - 'postgres:11-alpine'
+          - 'postgres:9.6-alpine' # EL8 default
+    runs-on: 'ubuntu-20.04'
+    needs:
+      - 'makeComposerCache'
+      - 'makeNpmCache'
+    services:
+      pgsql:
+        image: "${{ matrix.pgsql_version }}"
+        ports:
+          - '5432:5432'
+        env:
+          POSTGRES_DB: 'ipv4test'
+          POSTGRES_PASSWORD: 'ipv4test'
+          POSTGRES_USER: 'ipv4test'
+          POSTGRES_INITDB_ARGS: '-E UTF-8 --locale=en_US.UTF8 -k'
+        options: '--health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5'
+    steps:
+      - uses: 'actions/checkout@v2'
+
+      - uses: 'actions/cache@v2'
+        with:
+          path: |
+            ~/.cache/composer/files
+            vendor
+          key: ${{ runner.os }}-composer-${{ hashFiles('composer.lock') }}
+
+      - uses: 'actions/cache@v2'
+        with:
+          path: |
+            ~/.npm
+            node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+
+      - name: 'Set up PHP version ${{ matrix.php_version }}'
+        run: |
+            sudo update-alternatives --set php /usr/bin/php${{ matrix.php_version }}
+            ln -s `which composer` composer.phar
+
+      - name: 'Set up application'
+        run: 'make'
+
+      - name: 'Database migration'
+        run: 'tests/bin/yii migrate/up --compact=1 --interactive=0'
+
+      - name: 'Run unit test'
+        run: 'vendor/bin/codecept run unit'

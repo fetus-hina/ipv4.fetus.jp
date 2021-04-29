@@ -1,0 +1,74 @@
+{
+    "name": "jp3cki/ipv4.fetus.jp",
+    "description": "ipv4.fetus.jp",
+    "homepage": "https://ipv4.fetus.jp/",
+    "type": "project",
+    "license": "MIT",
+    "support": {
+        "issues": "https://github.com/fetus-hina/ipv4.fetus.jp/issues",
+        "source": "https://github.com/fetus-hina/ipv4.fetus.jp"
+    },
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">= 7.4",
+        "php-64bit": "*",
+        "php-ipv6": "*",
+
+        "ext-date": "*",
+        "ext-pcre": "*",
+        "ext-hash": "*",
+        "ext-json": "*",
+        "ext-spl": "*",
+        "ext-session": "*",
+        "ext-curl": "*",
+        "ext-mbstring": "*",
+        "ext-intl": "*",
+        "ext-pdo": "*",
+        "ext-pdo_pgsql": "*",
+
+        "omnilight/yii2-scheduling": "^1.1",
+        "statink/yii2-sortable-table": "*",
+        "yiisoft/yii2": "*",
+        "yiisoft/yii2-bootstrap4": "*",
+        "yiisoft/yii2-httpclient": "*"
+    },
+    "require-dev": {
+        "codeception/codeception": "^4.0",
+        "codeception/module-asserts": "*",
+        "codeception/module-filesystem": "*",
+        "codeception/module-yii2": "*",
+        "codeception/specify": "*",
+        "codeception/verify": "*",
+        "proget-hq/phpstan-yii2": "*",
+        "squizlabs/php_codesniffer": "*",
+        "symfony/browser-kit": "*",
+        "yiisoft/yii2-debug": "*",
+        "yiisoft/yii2-gii": "*"
+    },
+    "replace": {
+        "bower-asset/bootstrap": "*",
+        "bower-asset/inputmask": "*",
+        "bower-asset/jquery": "*",
+        "bower-asset/punycode": "*",
+        "bower-asset/yii2-pjax": "*",
+        "npm-asset/bootstrap": "*",
+        "npm-asset/stupid-table-plugin": "*"
+    },
+    "config": {
+        "process-timeout": 1800,
+        "platform": {
+            "php": "7.4.0"
+        }
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "vendor/bin/codecept build"
+        ]
+    },
+    "repositories": {
+        "statink": {
+            "type": "composer",
+            "url": "https://satis.stat.ink"
+        }
+    }
+}

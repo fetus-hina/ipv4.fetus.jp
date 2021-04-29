@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ruleset name="customized">
+  <description>A custom coding standard</description>
+
+  <ini name="memory_limit" value="-1" />
+
+  <arg name="basepath" value="." />
+  <arg name="extensions" value="php" />
+  <arg value="p" />
+  <arg value="s" />
+
+  <file>.</file>
+  <exclude-pattern>./node_modules</exclude-pattern>
+  <exclude-pattern>./runtime</exclude-pattern>
+  <exclude-pattern>./vendor</exclude-pattern>
+
+  <rule ref="PSR12" />
+  <rule ref="Generic.Files.ByteOrderMark" />
+  <rule ref="Generic.Files.EndFileNewline" />
+  <rule ref="Generic.Files.LineEndings" />
+  <rule ref="Generic.PHP.BacktickOperator" />
+  <rule ref="Generic.PHP.DeprecatedFunctions" />
+  <rule ref="Generic.PHP.ForbiddenFunctions" />
+  <rule ref="Generic.PHP.RequireStrictTypes" />
+  <rule ref="Generic.PHP.Syntax" />
+  <rule ref="Generic.VersionControl.GitMergeConflict" />
+  <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace" />
+
+  <rule ref="PSR1.Classes.ClassDeclaration.MissingNamespace">
+    <exclude-pattern>./migrations</exclude-pattern>
+    <exclude-pattern>./tests</exclude-pattern>
+  </rule>
+  <rule ref="Squiz.Classes.ValidClassName.NotCamelCaps">
+    <exclude-pattern>./migrations</exclude-pattern>
+  </rule>
+
+  <rule ref="Generic.Files.LineLength.TooLong">
+    <exclude-pattern>./views</exclude-pattern>
+  </rule>
+
+  <rule ref="Generic.WhiteSpace.ScopeIndent">
+    <exclude-pattern>./views</exclude-pattern>
+  </rule>
+
+  <rule ref="PSR2.Methods.FunctionCallSignature.Indent">
+    <exclude-pattern>./views</exclude-pattern>
+  </rule>
+
+  <rule ref="PSR12.ControlStructures.ControlStructureSpacing.LineIndent">
+    <exclude-pattern>./views</exclude-pattern>
+  </rule>
+
+  <rule ref="PSR1.Files.SideEffects.FoundWithSymbols">
+    <exclude-pattern>./tests/_bootstrap.php</exclude-pattern>
+    <exclude-pattern>./views</exclude-pattern>
+    <exclude-pattern>./web</exclude-pattern>
+  </rule>
+
+  <rule ref="PSR2.Methods.MethodDeclaration.Underscore">
+    <exclude-pattern>./tests</exclude-pattern>
+  </rule>
+</ruleset>

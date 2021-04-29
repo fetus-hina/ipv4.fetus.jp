@@ -1,0 +1,104 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+define('MINIMUM_BITMASK', 8);
+
+function doMain(): void
+{
+    $list = readFromStdin();
+    $list = mergeList($list);
+    foreach ($list as $entry) {
+        $list2 = splitBlock($entry['startlong'], $entry['count']);
+        foreach ($list2 as $tmp) {
+            echo "$tmp\n";
+        }
+    }
+}
+
+function readFromStdin(): array
+{
+    $result = [];
+    if ($fh = @fopen('php://stdin', 'r')) {
+        while (!feof($fh)) {
+            $line = trim((string)fgets($fh, 1024));
+            if (preg_match('!^(\d+\.\d+\.\d+\.\d+)(?:/(\d+))?$!', $line, $match)) {
+                $bitlen = (count($match) === 3) ? (int)$match[2] : 32;
+                $bitlen = min(32, $bitlen);
+                $bitlen = max(8, $bitlen);
+                $iplong = ip2long($match[1]);
+                if ($iplong !== false) {
+                    $mask = bitmask($bitlen);
+                    $startip = ($iplong & $mask);
+                    $result[] = [
+                        'start' => long2ip($startip),
+                        'startlong' => $startip,
+                        'count' => (0xffffffff & ~$mask) + 1,
+                    ];
+                }
+            }
+        }
+        fclose($fh);
+    }
+    usort($result, fn($a, $b) => ($a['startlong'] <=> $b['startlong']));
+    return $result;
+}
+
+function mergeList(array $list): array
+{
+    $result = [];
+    $i = 0;
+    while ($i < count($list)) {
+        $entry = $list[$i];
+        $increment = 1;
+
+        // 次のブロックが隣接していないか調べる
+        for ($j = 1; $i + $j < count($list); ++$j) {
+            $tmp = $list[$i + $j];
+            if ($entry['startlong'] + $entry['count'] == $tmp['startlong']) {
+                // 次のブロックが隣接している
+                ++$increment;
+                $entry['count'] += $tmp['count'];   // 隣接分をマージ
+            } else {
+                break;
+            }
+        }
+        $result[] = $entry;
+        $i += $increment;   // 自分 + 隣接していた分だけポインタをすすめる
+    }
+
+    return $result;
+}
+
+function splitBlock(int $startIp, int $count): array
+{
+    $result = array();
+    $endIp = $startIp + $count - 1;
+    while ($count > 0) {
+        for ($bitnum = MINIMUM_BITMASK; $bitnum <= 32; ++$bitnum) {
+            $tmpblockmask = bitmask($bitnum);
+            $tmpblocksize = (0xffffffff & ~$tmpblockmask) + 1;
+            $tmpendaddress = $startIp + $tmpblocksize - 1;
+            if ($tmpendaddress <= $endIp) {
+                if (($startIp & $tmpblockmask) == ($tmpendaddress & $tmpblockmask)) {
+                    $result[] = sprintf('%s/%d', long2ip($startIp), $bitnum);
+                    $startIp += $tmpblocksize;
+                    $count -= $tmpblocksize;
+                    break;
+                }
+            }
+        }
+    }
+
+    return $result;
+}
+
+function bitmask(int $bits): ?int {
+    if ($bits < 1 || $bits > 32) {
+        return null;
+    }
+    return (0xffffffff << (32 - $bits)) & 0xffffffff;
+}
+
+doMain();
