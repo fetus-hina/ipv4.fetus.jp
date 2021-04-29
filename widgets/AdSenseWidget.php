@@ -33,13 +33,19 @@ final class AdSenseWidget extends Widget
 
         if (YII_ENV_PROD) {
             AdSenseAsset::register($this->view);
-            return Html::tag('ins', '', [
-                'class' => 'adsbygoogle',
-                'data' => [
-                    'ad-client' => $params['client'],
-                    'ad-slot' => $params['slots'][$this->slot],
-                ],
-                'style' => $this->makeStyles($this->size),
+            return implode('', [
+                Html::tag('ins', '', [
+                    'class' => 'adsbygoogle',
+                    'data' => [
+                        'ad-client' => $params['client'],
+                        'ad-slot' => $params['slots'][$this->slot],
+                    ],
+                    'style' => $this->makeStyles($this->size),
+                ]),
+                Html::tag(
+                    'script',
+                    '(adsbygoogle=window.adsbygoogle||[]).push({});',
+                ),
             ]);
         } else {
             return Html::tag('ins', Html::img($this->makePlaceholder($this->size)), [

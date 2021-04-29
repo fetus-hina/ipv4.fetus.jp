@@ -14,16 +14,4 @@ class AdSenseAsset extends AssetBundle
     public $depends = [
         JSLoaderAsset::class,
     ];
-
-    public static function register($view)
-    {
-        if ($view instanceof View) {
-            $view->registerJs(
-                '(adsbygoogle=window.adsbygoogle||[]).push({});',
-                View::POS_HEAD,
-                __METHOD__
-            );
-        }
-        return parent::register($view);
-    }
 }
