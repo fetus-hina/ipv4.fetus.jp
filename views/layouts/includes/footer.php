@@ -44,12 +44,30 @@ use yii\web\View;
       ])) . "\n" ?>
     </div>
 <?php if (Yii::$app->params['repository'] ?? '') { ?>
-    <div class="small">
-      <?= Html::a('ソースコード', Yii::$app->params['repository'], [
-        'target' => '_blank',
-        'rel' => 'external noopener noreferrer',
-      ]) . "\n" ?>
-    </div>
+<?php $gitRevision = Yii::$app->params['gitRevision']; ?>
+    <?= Html::tag(
+      'div',
+      implode(', ', array_map(
+        fn($html) => Html::tag('span', $html, ['class' => 'text-nowrap']),
+        array_filter([
+          Html::a(
+            Html::encode('ソースコード'),
+            Yii::$app->params['repository'],
+            [
+              'target' => '_blank',
+              'rel' => 'external noopener noreferrer',
+            ]
+          ),
+          ($gitRevision && $gitRevision['version'])
+            ? Html::encode($gitRevision['version'])
+            : null,
+          ($gitRevision && $gitRevision['short'])
+            ? Html::encode($gitRevision['short'])
+            : null,
+        ])
+      )),
+      ['class' => 'small']
+    ) . "\n" ?>
 <?php } ?>
   </div>
 </footer>
