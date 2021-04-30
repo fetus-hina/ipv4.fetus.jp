@@ -5,6 +5,7 @@ declare(strict_types=1);
 return [
     'client' => 'ca-pub-******',
     'slots' => [
+        'pc-brand' => '123456789',
         'pc-side' => '123456789',
         'pc-top' => '123456789',
         'sp-top' => '123456789',
