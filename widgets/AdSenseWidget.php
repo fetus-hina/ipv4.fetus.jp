@@ -15,6 +15,7 @@ final class AdSenseWidget extends Widget
     public const SIZE_728_90 = '728x90';
     public const SIZE_320_50 = '320x50';
     public const SIZE_300_250 = '300x250';
+    public const SIZE_300_600 = '300x600';
 
     public string $slot;
     public string $size = self::SIZE_728_90;

@@ -49,36 +49,39 @@ if (
   <hr>
   <?= $this->render('//layouts/ads/top') . "\n" ?>
   <div class="row">
-    <div class="col-12 d-lg-none">
-      <div class="mb-4">
-        <?= $this->render('//region/view/download', ['region' => $region]) . "\n" ?>
-      </div>
+    <div class="col-12 col-lg-8 mb-4">
+      <?= $this->render('//region/view/download', ['region' => $region]) . "\n" ?>
     </div>
-    <div class="col-12 col-lg-8">
+    <div class="d-none d-lg-block col-4 mb-4">
+      <?= $this->render('//layouts/ads/side') . "\n" ?>
+    </div>
+    <?= $this->render('//layouts/ads/sp-rect') . "\n" ?>
 <?php if ($region->getKrfilters()->exists()) { ?>
-      <aside class="mb-4">
-        <div class="alert alert-info">
+    <aside class="col-12 mb-4">
+      <div class="card border-info">
+        <div class="card-header bg-info">
+          krfilter / eufilter
+        </div>
+        <div class="card-body">
           頻繁にアクセス拒否リストに使用すると思われる国をまとめた一覧があります。<br>
           <?= Html::a(
             '詳しくはこちらをご覧ください。',
-            ['krfilter/view'],
-            ['class' => 'alert-link']
+            ['krfilter/view']
           ) . "\n" ?>
         </div>
-      </aside>
+      </div>
+    </aside>
 <?php } ?>
+    <div class="col-12 col-lg-8">
       <div class="mb-4">
         <?= $this->render('//region/view/list', ['region' => $region]) . "\n" ?>
       </div>
     </div>
     <div class="col-12 col-lg-4">
-      <div class="mb-4 d-none d-lg-block">
-        <?= $this->render('//region/view/download', ['region' => $region]) . "\n" ?>
-      </div>
-      <?= $this->render('//layouts/ads/side') . "\n" ?>
       <div class="mb-4">
         <?= $this->render('//region/view/cidr', ['region' => $region]) . "\n" ?>
       </div>
+      <?= $this->render('//layouts/ads/side-skyscraper') . "\n" ?>
     </div>
   </div>
 </main>

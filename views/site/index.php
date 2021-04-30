@@ -29,6 +29,7 @@ $this->title = Yii::$app->name . ' : 国/地域別IPアドレス(IPv4アドレ�
         <?= $this->render('//site/index/search', ['form' => $search]) . "\n" ?>
       </aside>
     </div>
+    <?= $this->render('//layouts/ads/sp-rect') . "\n" ?>
     <div class="col-12 col-lg-8">
       <div class="mb-4">
         <?= $this->render('//site/index/main') . "\n" ?>
@@ -42,6 +43,7 @@ $this->title = Yii::$app->name . ' : 国/地域別IPアドレス(IPv4アドレ�
       <aside class="mb-4">
         <?= $this->render('//site/index/about') . "\n" ?>
       </aside>
+      <?= $this->render('//layouts/ads/side-skyscraper') . "\n" ?>
     </div>
   </div>
 </main>
