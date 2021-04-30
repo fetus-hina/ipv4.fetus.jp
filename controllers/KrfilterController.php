@@ -10,6 +10,7 @@ use DateTimeZone;
 use Generator;
 use Yii;
 use app\models\Krfilter;
+use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -33,6 +34,7 @@ class KrfilterController extends Controller
             if (
                 $template !== 'apache' &&
                 $template !== 'apache24' &&
+                $template !== 'ipsecurity' &&
                 $template !== 'iptables' &&
                 $template !== 'nginx' &&
                 $template !== 'nginx-geo' &&
@@ -67,6 +69,12 @@ class KrfilterController extends Controller
                 case 'apache24':
                     return fn($v) => "Require not ip {$v}";
 
+                case 'ipsecurity':
+                    return fn($v) => vsprintf('  <add allowed="false" ipAddress="%s" subnetMask="%s" />', [
+                        Html::encode(static::extractIP($v)),
+                        Html::encode(static::subnetMask($v)),
+                    ]);
+
                 case 'iptables':
                     return fn($v) => sprintf(
                         '-A RULE1 -s %s -j RULE2',
@@ -89,6 +97,8 @@ class KrfilterController extends Controller
         if ($template === 'nginx-geo') {
             yield "geo \$ipv4_krfilter_{$krfilter->id} {\n";
             yield "  default 0;\n";
+        } elseif ($template === 'ipsecurity') {
+            yield '<ipSecurity allowUnlisted="true">' . "\n";
         }
 
         $query = $krfilter->getKrfilterCidrs()
@@ -100,16 +110,21 @@ class KrfilterController extends Controller
 
         if ($template === 'nginx-geo') {
             yield "}\n";
+        } elseif ($template === 'ipsecurity') {
+            yield "</ipSecurity>\n";
         }
     }
 
-    private function createPlainHeaders(Krfilter $krfilter, ?string $template): array
+    private function createPlainHeaders(Krfilter $krfilter, ?string $template): Generator
     {
         $now = (new DateTimeImmutable())
             ->setTimestamp((int)($_SERVER['REQUEST_TIME'] ?? time()))
             ->setTimeZone(new DateTimeZone(Yii::$app->timeZone));
 
-        $comment = '# ';
+        $commentBlockPrefix = '';
+        $commentBlockSuffix = '';
+        $commentPrefix = '# ';
+        $commentSuffix = '';
 
         $values = [
             '',
@@ -133,7 +148,9 @@ class KrfilterController extends Controller
 
         $regions = $krfilter->regions;
         usort($regions, fn($a, $b) => strcmp($a->id, $b->id));
-        $perLine = (int)floor(((72 + strlen(', ')) - (strlen($comment) + 4)) / strlen('kr, '));
+        $perLine = (int)floor(
+            ((72 + strlen(', ')) - (strlen($commentPrefix) + strlen($commentSuffix) + 4)) / strlen('kr, ')
+        );
         for ($i = 0; $i < count($regions); $i += $perLine) {
             $values[] = '    ' . implode(', ', array_map(
                 fn($region) => $region->id,
@@ -143,6 +160,11 @@ class KrfilterController extends Controller
         $values[] = '';
 
         switch ($template) {
+            case 'ipsecurity':
+                $commentBlockPrefix = '<!--';
+                $commentBlockSuffix = '-->';
+                break;
+
             case 'iptables':
                 $values[] = 'Usage: RULE1 を "INPUT" などに、RULE2 を "ACCEPT" や "DROP" に置き換えて利用してください';
                 $values[] = '';
@@ -155,9 +177,26 @@ class KrfilterController extends Controller
                 break;
         }
 
-        return array_map(
-            fn($line) => rtrim($comment . $line),
-            $values
-        );
+        if ($commentBlockPrefix != '') {
+            yield $commentBlockPrefix;
+        }
+        foreach ($values as $line) {
+            yield rtrim($commentPrefix . $line . $commentSuffix);
+        }
+        if ($commentBlockSuffix != '') {
+            yield $commentBlockSuffix;
+        }
+    }
+
+    private static function extractIP(string $cidr): string
+    {
+        return preg_replace('!/\d+$!', '', $cidr);
+    }
+
+    private static function subnetMask(string $cidr): string
+    {
+        $prefix = (int)preg_replace('!^.+?/!', '', $cidr);
+        $maskBin = (0xffffffff << (32 - $prefix)) & 0xffffffff;
+        return long2ip($maskBin);
     }
 }

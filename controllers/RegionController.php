@@ -10,6 +10,7 @@ use DateTimeZone;
 use Generator;
 use Yii;
 use app\models\Region;
+use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -43,6 +44,7 @@ class RegionController extends Controller
             if (
                 $template !== 'apache' &&
                 $template !== 'apache24' &&
+                $template !== 'ipsecurity' &&
                 $template !== 'iptables' &&
                 $template !== 'nginx' &&
                 $template !== 'nginx-geo' &&
@@ -97,6 +99,13 @@ class RegionController extends Controller
                         ? fn($v) => "Require ip {$v}"
                         : fn($v) => "Require not ip {$v}";
 
+                case 'ipsecurity':
+                    return fn($v) => vsprintf('  <add allowed="%s" ipAddress="%s" subnetMask="%s" />', [
+                        ($control === 'allow') ? 'true' : 'false',
+                        Html::encode(static::extractIP($v)),
+                        Html::encode(static::subnetMask($v)),
+                    ]);
+
                 case 'iptables':
                     return fn($v) => sprintf(
                         '-A RULE1 -s %s -j RULE2',
@@ -125,6 +134,10 @@ class RegionController extends Controller
         if ($template === 'nginx-geo') {
             yield "geo \$ipv4_{$region->id} {\n";
             yield "  default 0;\n";
+        } elseif ($template === 'ipsecurity') {
+            yield vsprintf('<ipSecurity allowUnlisted="%s">', [
+                ($control === 'allow') ? 'false' : 'true',
+            ]) . "\n";
         }
 
         $query = $region->getMergedCidrs()
@@ -136,6 +149,8 @@ class RegionController extends Controller
 
         if ($template === 'nginx-geo') {
             yield "}\n";
+        } elseif ($template === 'ipsecurity') {
+            yield "</ipSecurity>\n";
         }
     }
 
@@ -143,12 +158,15 @@ class RegionController extends Controller
         Region $region,
         ?string $template,
         ?string $control
-    ): array {
+    ): Generator {
         $now = (new DateTimeImmutable())
             ->setTimestamp((int)($_SERVER['REQUEST_TIME'] ?? time()))
             ->setTimeZone(new DateTimeZone(Yii::$app->timeZone));
 
-        $comment = '# ';
+        $commentBlockPrefix = '';
+        $commentBlockSuffix = '';
+        $commentPrefix = '# ';
+        $commentSuffix = '';
 
         $values = [
             '',
@@ -175,6 +193,11 @@ class RegionController extends Controller
         ];
 
         switch ($template) {
+            case 'ipsecurity':
+                $commentBlockPrefix = '<!--';
+                $commentBlockSuffix = '-->';
+                break;
+
             case 'iptables':
                 $values[] = 'Usage: RULE1 を "INPUT" などに、RULE2 を "ACCEPT" や "DROP" に置き換えて利用してください';
                 $values[] = '';
@@ -187,9 +210,26 @@ class RegionController extends Controller
                 break;
         }
 
-        return array_map(
-            fn($line) => rtrim($comment . $line),
-            $values
-        );
+        if ($commentBlockPrefix != '') {
+            yield $commentBlockPrefix;
+        }
+        foreach ($values as $line) {
+            yield rtrim($commentPrefix . $line . $commentSuffix);
+        }
+        if ($commentBlockSuffix != '') {
+            yield $commentBlockSuffix;
+        }
+    }
+
+    private static function extractIP(string $cidr): string
+    {
+        return preg_replace('!/\d+$!', '', $cidr);
+    }
+
+    private static function subnetMask(string $cidr): string
+    {
+        $prefix = (int)preg_replace('!^.+?/!', '', $cidr);
+        $maskBin = (0xffffffff << (32 - $prefix)) & 0xffffffff;
+        return long2ip($maskBin);
     }
 }

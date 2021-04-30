@@ -19,6 +19,7 @@ $accessControls = [
   'apache24' => 'Apache 2.4',
   'nginx' => 'Nginx',
   'nginx-geo' => 'Nginx (Geo)',
+  'ipsecurity' => 'IIS/Azure (ipSecurity)',
   'iptables' => 'iptables',
   'postfix' => 'Postfix',
 ];
