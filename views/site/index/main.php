@@ -54,6 +54,7 @@ SortableTableAsset::register($this);
               ]),
             'sort' => false,
             'pagination' => false,
+            'key' => 'region_id',
           ]),
           'columns' => [
             [

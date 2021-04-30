@@ -76,6 +76,7 @@ if ($isPjax) {
               'pageParam' => 'list-page',
               'pageSizeParam' => 'list-per-page',
             ],
+            'key' => fn($model) => 'list-' . preg_replace('/[^0-9]/', '-', $model->cidr),
           ]),
           'columns' => [
             [

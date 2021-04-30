@@ -50,6 +50,7 @@ if (
               'pageParam' => 'cidr-page',
               'pageSizeParam' => 'cidr-per-page',
             ],
+            'key' => fn($model) => 'cidr-' . preg_replace('/[^0-9]/', '-', $model->cidr),
           ]),
           'columns' => [
             [
