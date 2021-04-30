@@ -1,4 +1,6 @@
-CONFIG_FILES := config/components/web/request--cookie.php
+CONFIG_FILES := \
+	config/components/web/request--cookie.php \
+	config/params/git-revision.php
 
 .PHONY: all
 all: init
@@ -46,3 +48,7 @@ composer.phar:
 
 config/components/web/request--cookie.php:
 	bin/generate-secret > $@
+
+.PHONY: config/params/git-revision.php
+config/params/git-revision.php:
+	bin/git-revison > $@

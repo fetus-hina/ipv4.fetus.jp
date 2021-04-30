@@ -14,6 +14,10 @@ return (function (): array {
         'repository' => 'https://github.com/fetus-hina/ipv4.fetus.jp',
         'report' => 'https://github.com/fetus-hina/ipv4.fetus.jp/issues',
 
+        'gitRevision' => file_exists(__DIR__ . '/params/git-revision.php')
+            ? require(__DIR__ . '/params/git-revision.php')
+            : null,
+
         'adsense' => file_exists(__DIR__ . '/params/adsense.php')
             ? require(__DIR__ . '/params/adsense.php')
             : null,
