@@ -36,7 +36,7 @@ if ($isPjax) {
 <?php assert($stats instanceof RegionStat) ?>
     <div class="text-muted">
       <p class="mb-2">
-        <?= Html::encode($region->name_ja) ?>に割り振りられたIPアドレスの一覧です。
+        <?= Html::encode($region->name_ja) ?>に割り振られたIPアドレスの一覧です。
       </p>
       <p class="mb-2">
         データをアクセス制御に使いたい方は「Download」をご利用ください。
