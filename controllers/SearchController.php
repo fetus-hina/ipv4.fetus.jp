@@ -28,4 +28,9 @@ class SearchController extends Controller
             'result' => $result,
         ]);
     }
+
+    public function actionCompat(string $query): void
+    {
+        $this->redirect(['search/index', 'query' => $query], 301);
+    }
 }

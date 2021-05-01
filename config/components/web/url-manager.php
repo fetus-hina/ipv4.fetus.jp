@@ -13,6 +13,7 @@ return [
         'krfilter.<id:[0-9]+>.<template:[a-z0-9-]+>.txt' => 'krfilter/plain',
         'krfilter.<id:[0-9]+>.txt' => 'krfilter/plain',
         'search' => 'search/index',
+        'search/<query:[0-9.]+>' => 'search/compat',
         'robots.txt' => 'site/robots',
         '' => 'site/index',
     ],
