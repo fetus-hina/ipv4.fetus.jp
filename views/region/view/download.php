@@ -37,11 +37,11 @@ $accessControls = [
     <div class="text-muted">
       <p class="mb-2">
         アクセス制御等にご利用ください。<br>
-        自動化される場合は必ず中身があることを確認してから反映するように設定してください。<br>
+        自動化される際は<?= Html::a('こちらの注意事項', ['site/about', '#' => 'automation']) ?>をご確認ください。<br>
         内容は保証しません。
       </p>
     </div>
-    <nav class="mb-3">
+    <nav>
       <div class="mb-2">
         <?= Html::a(
           Html::encode('プレインテキスト'),
@@ -52,7 +52,7 @@ $accessControls = [
           ]
         ) . "\n" ?>
       </div>
-      <div class="dropdown mb-2">
+      <div class="dropdown">
         <?= Html::tag('button', Html::encode('アクセス制御用ひな型'), [
           'class' => 'btn btn-primary btn-block dropdown-toggle',
           'type' => 'button',
@@ -82,10 +82,5 @@ $accessControls = [
         )) ?></div>
       </div>
     </nav>
-    <div class="text-muted small">
-      <p class="mb-0">
-        自動アクセスについて：この一覧に自動アクセスすることは<strong>想定しています</strong>が、内容は1日あたり高々1回しか更新されません。また、割り振りされた直後に運用開始されるわけでもありませんから、<strong>10分ごとに最新版を取得するなどは全く必要ない</strong>はずです。また、可能であれば User-Agent に連絡先を記載してください。
-      </p>
-    </div>
   </div>
 </aside>

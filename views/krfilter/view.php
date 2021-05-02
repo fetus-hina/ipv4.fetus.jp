@@ -26,6 +26,8 @@ $accessControls = [
 
 FlagIconCssAsset::register($this);
 
+$this->registerCss('.card-body li{margin-bottom:1rem}');
+
 ?>
 <main>
   <h1 class="mb-4">
@@ -67,9 +69,7 @@ FlagIconCssAsset::register($this);
               このリストを使用したことによるいかなる損害にも関知しません。
             </li>
             <li>
-              各リストへの自動化したアクセスを行っても構いませんが、常識的な頻度に抑えて下さい。
-              また、ダウンロードしたファイルに中身があることを確認してから適用してください。
-              （内容は1日1回しか更新されませんから、頻繁にアクセスする意味はありません）
+              各リストへの自動化したアクセスを行っても構いませんが、あらかじめ<?= Html::a('こちらのページ', ['site/about', '#' => 'automation']) ?>をご確認ください。
             </li>
           </ul>
           <p class="mb-0">

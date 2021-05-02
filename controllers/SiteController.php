@@ -53,6 +53,11 @@ class SiteController extends Controller
         ]);
     }
 
+    public function actionAbout(): string
+    {
+        return $this->render('about');
+    }
+
     public function actionRobots(): void
     {
         $resp = Yii::$app->response;
