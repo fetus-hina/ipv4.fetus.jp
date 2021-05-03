@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use app\assets\FlagIconCssAsset;
+use app\models\DownloadTemplate;
 use app\models\Krfilter;
 use app\widgets\SnsWidget;
 use yii\helpers\Html;
@@ -13,16 +14,6 @@ use yii\web\View;
  */
 
 $this->title = 'krfilter / eufilter : ' . Yii::$app->name;
-
-$accessControls = [
-  'apache' => 'Apache (.htaccess)',
-  'apache24' => 'Apache 2.4',
-  'nginx' => 'Nginx',
-  'nginx-geo' => 'Nginx (Geo)',
-  'ipsecurity' => 'IIS/Azure (ipSecurity)',
-  'iptables' => 'iptables',
-  'postfix' => 'Postfix',
-];
 
 FlagIconCssAsset::register($this);
 
@@ -138,19 +129,21 @@ $this->registerCss('.card-body li{margin-bottom:1rem}');
             <?= Html::tag(
               'div',
               implode('', array_map(
-                fn($type, $label) => Html::a(
-                  Html::encode($label),
+                fn($model) => Html::a(
+                  Html::encode($model->name),
                   ['krfilter/plain',
                     'id' => $filter->id,
-                    'template' => $type,
+                    'template' => $model->key,
                   ],
                   [
                     'class' => 'dropdown-item',
                     'type' => 'text/plain',
                   ]
                 ),
-                array_keys($accessControls),
-                array_values($accessControls),
+                DownloadTemplate::find()
+                  ->andWhere(['can_use_in_url' => true])
+                  ->orderBy(['key' => SORT_ASC])
+                  ->all(),
               )),
               [
                 'class' => 'dropdown-menu',

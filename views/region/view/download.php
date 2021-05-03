@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use app\models\DownloadTemplate;
 use app\models\MergedCidr;
 use app\models\Region;
 use yii\data\ActiveDataProvider;
@@ -17,16 +18,6 @@ use yii\web\View;
 if (Yii::$app->request->isPjax) {
   return;
 }
-
-$accessControls = [
-  'apache' => 'Apache (.htaccess)',
-  'apache24' => 'Apache 2.4',
-  'nginx' => 'Nginx',
-  'nginx-geo' => 'Nginx (Geo)',
-  'ipsecurity' => 'IIS/Azure (ipSecurity)',
-  'iptables' => 'iptables',
-  'postfix' => 'Postfix',
-];
 
 ?>
 <aside class="card border-primary">
@@ -66,19 +57,21 @@ $accessControls = [
           ],
         ]) . "\n" ?>
         <div class="dropdown-menu" aria-labelledby="download-access-control"><?= implode('', array_map(
-          fn($type, $label) => Html::a(
-            Html::encode($label),
+          fn($model) => Html::a(
+            Html::encode($model->name),
             ['region/plain',
               'cc' => $region->id,
-              'template' => $type,
+              'template' => $model->key,
             ],
             [
               'class' => 'dropdown-item',
               'type' => 'text/plain',
             ]
           ),
-          array_keys($accessControls),
-          array_values($accessControls),
+          DownloadTemplate::find()
+            ->andWhere(['can_use_in_url' => true])
+            ->orderBy(['key' => SORT_ASC])
+            ->all(),
         )) ?></div>
       </div>
     </nav>
