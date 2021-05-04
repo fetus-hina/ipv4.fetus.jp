@@ -57,8 +57,16 @@ class UpdateController extends Controller
         /** @var int */
         $status = ExitCode::OK;
 
+        /** @var ?float */
+        $updateStartAt = null;
+
+        /** @var ?float */
+        $updateFinishAt = null;
+
         if (!$skip_update) {
             try {
+                $updateStartAt = microtime(true);
+
                 Yii::$app->db->transaction(function (): void {
                     Yii::info('Deleting allocation_cidr', __METHOD__);
                     AllocationCidr::deleteAll('1 = 1');
@@ -90,8 +98,21 @@ class UpdateController extends Controller
             $this->actionStat();
         }
         $this->actionKrfilter();
+        $updateFinishAt = microtime(true);
 
-        return $status === ExitCode::OK ? ExitCode::OK : ExitCode::UNSPECIFIED_ERROR;
+        if ($status !== ExitCode::OK) {
+            return ExitCode::UNSPECIFIED_ERROR;
+        }
+
+        if (
+            !$skip_update &&
+            $updateStartAt !== null &&
+            $updateFinishAt !== null
+        ) {
+            $this->saveTimeRecord($updateStartAt, $updateFinishAt);
+        }
+
+        return ExitCode::OK;
     }
 
     public function actionAfrinic(): int
@@ -483,5 +504,29 @@ class UpdateController extends Controller
                 ->batchInsert(KrfilterCidr::tableName(), ['krfilter_id', 'cidr'], $values)
                 ->execute();
         });
+    }
+
+    private function saveTimeRecord(float $startAt, float $finishAt): void
+    {
+        file_put_contents(
+            Yii::getAlias('@app/config/params/database-update-timestamp.php'),
+            implode("\n", [
+                '<?php',
+                '',
+                'declare(strict_types=1);',
+                '',
+                'return [',
+                vsprintf("    'startAt' => new DateTimeImmutable('@%d'),", [
+                    (int)floor($startAt),
+                ]),
+                vsprintf("    'finishAt' => new DateTimeImmutable('@%d'),", [
+                    (int)floor($finishAt),
+                ]),
+                vsprintf("    'took' => %f,", [
+                    $finishAt - $startAt,
+                ]),
+                '];',
+            ]) . "\n"
+        );
     }
 }

@@ -14,6 +14,9 @@ return (function (): array {
         'repository' => 'https://github.com/fetus-hina/ipv4.fetus.jp',
         'report' => 'https://github.com/fetus-hina/ipv4.fetus.jp/issues',
 
+        'dbUpdateTimestamp' => file_exists(__DIR__ . '/params/database-update-timestamp.php')
+            ? require(__DIR__ . '/params/database-update-timestamp.php')
+            : null,
         'gitRevision' => file_exists(__DIR__ . '/params/git-revision.php')
             ? require(__DIR__ . '/params/git-revision.php')
             : null,

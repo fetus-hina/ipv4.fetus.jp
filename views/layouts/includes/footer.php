@@ -69,5 +69,6 @@ use yii\web\View;
       ['class' => 'small']
     ) . "\n" ?>
 <?php } ?>
+    <?= $this->render('//layouts/includes/footer/database-timestamp') . "\n" ?>
   </div>
 </footer>
