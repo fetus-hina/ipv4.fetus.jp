@@ -22,6 +22,7 @@ add('shared_files', [
     'config/components/db/password.php',
     'config/components/web/request--cookie.php',
     'config/params/adsense.php',
+    'config/params/database-update-timestamp.php',
 ]);
 add('shared_dirs', [
     'runtime',
