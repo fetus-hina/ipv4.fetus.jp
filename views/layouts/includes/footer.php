@@ -9,7 +9,7 @@ use yii\web\View;
 
 ?>
 <footer class="bg-light border-top">
-  <div class="container text-right py-3">
+  <div class="container text-end py-3">
     <div>
       <?= implode(' ', array_filter([
         vsprintf('Copyright © %s %s.', [

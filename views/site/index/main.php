@@ -21,7 +21,7 @@ SortableTableAsset::register($this);
     国/地域別IPアドレス割振数一覧
   </div>
   <div class="card-body">
-    <div class="text-muted small">
+    <div class="text-muted">
       <p class="mb-2">
         見出しをクリックすると並び替えが行えます。
       </p>
@@ -29,7 +29,7 @@ SortableTableAsset::register($this);
         国/地域名をクリックするとIPアドレスの一覧を表示します。（リンク先ページでアクセス制御用のひな形を取得できます）
       </p>
     </div>
-    <div style="margin:0 -1.25rem -0.75rem">
+    <div style="margin:0 -1rem -0.5rem">
       <div class="table-responsive">
         <?= GridView::widget([
           'layout' => '{items}',
@@ -121,7 +121,7 @@ SortableTableAsset::register($this);
               'attribute' => 'total_address_count',
               'format' => 'integer',
               'contentOptions' => fn($model) => [
-                'class' => 'text-right',
+                'class' => 'text-end',
                 'data' => [
                   'sort-value' => $model->total_address_count,
                 ],
@@ -137,7 +137,7 @@ SortableTableAsset::register($this);
               'format' => ['percent', 5],
               'value' => fn(RegionStat $model) => $model->total_address_count / (1 << 32),
               'contentOptions' => fn($model) => [
-                'class' => 'text-right d-none d-md-table-cell',
+                'class' => 'text-end d-none d-md-table-cell',
                 'data' => [
                   'sort-value' => $model->total_address_count,
                 ],
@@ -154,7 +154,7 @@ SortableTableAsset::register($this);
               'format' => ['percent', 5],
               'value' => fn(RegionStat $model) => $model->total_address_count / ((1 << 32) - 592715776),
               'contentOptions' => fn($model) => [
-                'class' => 'text-right d-none d-md-table-cell',
+                'class' => 'text-end d-none d-md-table-cell',
                 'data' => [
                   'sort-value' => $model->total_address_count,
                 ],
@@ -171,7 +171,7 @@ SortableTableAsset::register($this);
               'attribute' => 'last_allocation_date',
               'format' => ['date', 'short'],
               'contentOptions' => fn($model) => [
-                'class' => 'text-right d-none d-md-table-cell',
+                'class' => 'text-end d-none d-md-table-cell',
                 'data' => [
                   'sort-value' => $model->last_allocation_date ?? '',
                 ],

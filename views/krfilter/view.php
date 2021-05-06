@@ -103,23 +103,23 @@ $this->registerCss('.card-body li{margin-bottom:1rem}');
               $regions,
             )) ?>の統合リストです。
           </p>
-          <div class="mb-2">
+          <div class="mb-2 d-grid">
             <?= Html::a(
               Html::encode('プレインテキスト'),
               ['krfilter/plain', 'id' => $filter->id],
               [
-                'class' => 'btn btn-block btn-primary',
+                'class' => 'btn btn-primary',
                 'type' => 'text/plain',
               ]
             ) . "\n" ?>
           </div>
-          <div class="dropdown">
+          <div class="dropdown d-grid">
             <?= Html::tag('button', Html::encode('アクセス制御用ひな型'), [
-              'class' => 'btn btn-primary btn-block dropdown-toggle',
+              'class' => 'btn btn-primary dropdown-toggle',
               'type' => 'button',
               'id' => 'download-access-control-' . $filter->id,
               'data' => [
-                'toggle' => 'dropdown',
+                'bs-toggle' => 'dropdown',
               ],
               'aria' => [
                 'haspopup' => 'true',

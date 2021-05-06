@@ -22,7 +22,7 @@ Yii::$container->set(Pagination::class, [
 Yii::$container->set(GridView::class, [
     'layout' => '{summary}{pager}{items}{pager}',
     'summary' => Html::tag('div', '{begin}-{end} of {totalCount} rows', [
-        'class' => 'summary text-right font-italic small text-muted',
+        'class' => 'summary text-end font-italic small text-muted',
         'style' => [
             'margin' => '0 1.25rem 0.75rem',
         ],

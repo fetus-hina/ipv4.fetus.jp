@@ -57,7 +57,7 @@ if ($isPjax) {
     </div>
     <hr>
 <?php } ?>
-    <div style="margin:0 -1.25rem -0.75rem">
+    <div style="margin:0 -1rem -0.5rem">
       <div class="table-responsive">
 <?php Pjax::begin([
   'id' => 'pjax-cidr-list',

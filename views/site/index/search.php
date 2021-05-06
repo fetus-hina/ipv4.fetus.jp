@@ -20,14 +20,18 @@ use yii\helpers\Html;
       'action' => ['search/index'],
       'method' => 'get',
     ]); echo "\n" ?>
-      <?= $af->field($form, 'query')
-        ->label(false)
-        ->textInput(['placeholder' => '例: 203.0.113.1']) . "\n"
-      ?>
-      <?= Html::submitButton(
-        Html::tag('span', '', ['class' => 'fas fa-search']) . ' 検索',
-        ['class' => 'btn btn-primary btn-block']
-      ) . "\n" ?>
+      <div class="mb-2">
+        <?= $af->field($form, 'query')
+          ->label(false)
+          ->textInput(['placeholder' => '例: 203.0.113.1']) . "\n"
+        ?>
+      </div>
+      <div class="d-grid">
+        <?= Html::submitButton(
+          Html::tag('span', '', ['class' => 'fas fa-search']) . ' 検索',
+          ['class' => 'btn btn-primary']
+        ) . "\n" ?>
+      </div>
     <?php ActiveForm::end(); echo "\n" ?>
   </div>
 </div>

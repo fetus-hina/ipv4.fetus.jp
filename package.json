@@ -2,9 +2,9 @@
   "name": "ipv4.fetus.jp",
   "description": "",
   "dependencies": {
-    "@fetus-hina/fetus.css": "git+https://github.com/fetus-hina/fetus.css.git#semver:^4.5",
+    "@fetus-hina/fetus.css": "git+https://github.com/fetus-hina/fetus.css.git#semver:^5.0",
     "@fortawesome/fontawesome-free": "^5.15.3",
-    "bootstrap": "^4.6.0",
+    "bootstrap": "^5.0.0",
     "flag-icon-css": "^3.5.0",
     "inputmask": "^5.0.5",
     "jquery": "^3.6.0",

@@ -12,7 +12,7 @@ BootstrapPluginAsset::register($this);
 
 ?>
 <div class="container">
-  <nav class="navbar navbar-dark bg-dark navbar-expand-md rounded">
+  <nav class="navbar navbar-dark bg-dark navbar-expand-md rounded px-3">
     <?= Html::a(Html::encode(Yii::$app->name), ['site/index'], ['class' => 'navbar-brand']) . "\n" ?>
     <?= Html::tag(
       'button',
@@ -21,8 +21,8 @@ BootstrapPluginAsset::register($this);
         'class' => 'navbar-toggler',
         'type' => 'button',
         'data' => [
-          'target' => '#navbarLinks',
-          'toggle' => 'collapse',
+          'bs-target' => '#navbarLinks',
+          'bs-toggle' => 'collapse',
         ],
         'aria' => [
           'controls' => 'navbarLinks',
@@ -32,7 +32,7 @@ BootstrapPluginAsset::register($this);
       ]
     ) . "\n" ?>
     <div class="collapse navbar-collapse" id="navbarLinks">
-      <ul class="navbar-nav mr-auto">
+      <ul class="navbar-nav me-auto">
         <li class="nav-item"><?= Html::a(
           Html::encode('トップ'),
           ['site/index'],

@@ -24,8 +24,8 @@ echo Html::tag(
   [
     'class' => 'mb-4 text-center',
     'style' => [
-      'margin-left' => '-15px',
-      'margin-right' => '-15px',
+      'margin-left' => '-.75rem',
+      'margin-right' => '-.75rem',
     ],
   ]
 );

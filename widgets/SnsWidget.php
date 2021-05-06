@@ -51,7 +51,7 @@ final class SnsWidget extends Widget
                     'data-show-count' => 'false',
                 ]
             ),
-            ['class' => 'mr-1'],
+            ['class' => 'me-1'],
         );
     }
 
@@ -87,7 +87,7 @@ final class SnsWidget extends Widget
                     ],
                 ]
             ),
-            ['class' => 'mr-1'],
+            ['class' => 'me-1'],
         );
     }
 }
