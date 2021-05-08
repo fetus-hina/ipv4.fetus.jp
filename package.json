@@ -13,6 +13,6 @@
     "yii2-pjax": "^2.0.7"
   },
   "devDependencies": {
-    "updates": "^12.0.2"
+    "updates": "^12.1.0"
   }
 }
