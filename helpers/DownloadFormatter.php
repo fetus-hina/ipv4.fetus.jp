@@ -68,6 +68,15 @@ final class DownloadFormatter
             '/\{([a-zA-Z0-9_]+)((?::[A-Za-z0-9]+)+)?\}/',
             function (array $match) use ($template, $cc, $cidr, $isAllow): string {
                 switch ($match[1]) {
+                    case 'broadcast':
+                        if ($cidr === null) {
+                            throw new Exception('Unexpected {broadcast} in download template');
+                        }
+                        return static::formatPlaceholder(
+                            static::calcBroadcastAddress($cidr),
+                            explode(':', ltrim($match[2] ?? '', ':')),
+                        );
+
                     case 'cc':
                         return static::formatPlaceholder($cc, explode(':', ltrim($match[2] ?? '', ':')));
 
@@ -138,6 +147,27 @@ final class DownloadFormatter
         return long2ip($maskBin);
     }
 
+    private static function calcBroadcastAddress(string $cidr): string
+    {
+        if (!preg_match('#^([0-9.]+)/([0-9]+)$#', $cidr, $match)) {
+            throw new Exception('Invalid CIDR: ' . $cidr);
+        }
+
+        $network = @ip2long($match[1]);
+        if (!is_int($network)) {
+            throw new Exception('ip2long failed');
+        }
+
+        $prefix = (int)$match[2];
+        if ($prefix < 1 || $prefix > 32) {
+            throw new Exception('Invalid prefix: ' . $prefix);
+        }
+
+        $subnetMask = (0xffffffff << (32 - $prefix)) & 0xffffffff;
+        $broadcast = $network | ($subnetMask ^ 0xffffffff);
+        return long2ip($broadcast);
+    }
+
     private static function formatPlaceholder(string $value, array $modifiers): string
     {
         foreach ($modifiers as $modifier) {
@@ -151,6 +181,17 @@ final class DownloadFormatter
         switch ((string)trim($modifier)) {
             case '':
                 return $value;
+
+            case 'csv':
+                if (
+                    !str_contains($value, ',') &&
+                    !str_contains($value, '"') &&
+                    !str_contains($value, "\n") &&
+                    !str_contains($value, "\r")
+                ) {
+                    return $value;
+                }
+                return '"' . str_replace('"', '""', $value) . '"';
 
             case 'fillSpace':
                 $len = strlen('000.000.000.000/32');
