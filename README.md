@@ -40,6 +40,8 @@
 
    cd ipv4.fetus.jp
 
+   touch .production
+
    make
 
    ./yii migrate/up --interactive=0
