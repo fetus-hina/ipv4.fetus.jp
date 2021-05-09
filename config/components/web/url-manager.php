@@ -16,6 +16,7 @@ return [
         'search/<query:[0-9.]+>' => 'search/compat',
         'robots.txt' => 'site/robots',
         'about' => 'site/about',
+        'schema' => 'site/schema',
         '' => 'site/index',
     ],
 ];

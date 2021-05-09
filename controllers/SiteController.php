@@ -58,6 +58,11 @@ class SiteController extends Controller
         return $this->render('about');
     }
 
+    public function actionSchema(): string
+    {
+        return $this->render('schema');
+    }
+
     public function actionRobots(): void
     {
         $resp = Yii::$app->response;
