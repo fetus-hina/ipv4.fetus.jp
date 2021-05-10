@@ -109,6 +109,13 @@ task('deploy:vendors', function () {
     });
 });
 
+task('deploy:run_migrations', function () {
+    within('{{release_path}}', function () {
+        run('{{bin/php}} ./yii migrate up --interactive=0');
+        run('{{bin/php}} ./yii cache/flush-schema db --interactive=0');
+    });
+});
+
 task('deploy:build', function () {
     within('{{release_path}}', function () {
         if ($scl = get('softwarecollections')) {
