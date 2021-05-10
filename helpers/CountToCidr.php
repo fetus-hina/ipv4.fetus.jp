@@ -8,9 +8,13 @@ class CountToCidr
 {
     private const MINIMUM_BITMASK = 8;
 
-    public static function convert(string $start_addr, int $count): ?array
+    public static function convert(string $startAddress, int $count): ?array
     {
-        $iplong = @ip2long($start_addr);
+        if ($count < 1 || $count > 0xffffffff) {
+            return null;
+        }
+
+        $iplong = @ip2long($startAddress);
         if ($iplong !== false) {
             return static::splitBlock($iplong, (int)$count);
         }
@@ -18,20 +22,20 @@ class CountToCidr
         return null;
     }
 
-    private static function splitBlock(int $start_ip, int $count): array
+    private static function splitBlock(int $startAddress, int $count): array
     {
         $result = [];
-        $end_ip = $start_ip + $count - 1;
+        $endAddress = $startAddress + $count - 1;
         while ($count > 0) {
-            for ($bitnum = static::MINIMUM_BITMASK; $bitnum <= 32; ++$bitnum) {
-                $tmpblockmask = static::bitmask($bitnum);
-                $tmpblocksize = (0xffffffff & ~$tmpblockmask) + 1;
-                $tmpendaddress = $start_ip + $tmpblocksize - 1;
-                if ($tmpendaddress <= $end_ip) {
-                    if (($start_ip & $tmpblockmask) == ($tmpendaddress & $tmpblockmask)) {
-                        $result[] = sprintf('%s/%d', long2ip($start_ip), $bitnum);
-                        $start_ip += $tmpblocksize;
-                        $count -= $tmpblocksize;
+            for ($bitNum = static::MINIMUM_BITMASK; $bitNum <= 32; ++$bitNum) {
+                $tmpBlockMask = static::bitmask($bitNum);
+                $tmpBlockSize = (0xffffffff & ~$tmpBlockMask) + 1;
+                $tmpEndAddress = $startAddress + $tmpBlockSize - 1;
+                if ($tmpEndAddress <= $endAddress) {
+                    if (($startAddress & $tmpBlockMask) == ($tmpEndAddress & $tmpBlockMask)) {
+                        $result[] = sprintf('%s/%d', long2ip($startAddress), $bitNum);
+                        $startAddress += $tmpBlockSize;
+                        $count -= $tmpBlockSize;
                         break;
                     }
                 }
