@@ -19,6 +19,7 @@ coverage:
     include:
       # - commands/*
       # - controllers/*
+      - helpers/*
       - models/*
 
 # To enable code coverage:
