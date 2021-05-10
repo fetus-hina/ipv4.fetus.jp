@@ -28,7 +28,7 @@ class CountToCidr
         $endAddress = $startAddress + $count - 1;
         while ($count > 0) {
             for ($bitNum = static::MINIMUM_BITMASK; $bitNum <= 32; ++$bitNum) {
-                $tmpBlockMask = static::bitmask($bitNum);
+                $tmpBlockMask = IPHelper::bitmask($bitNum);
                 $tmpBlockSize = (0xffffffff & ~$tmpBlockMask) + 1;
                 $tmpEndAddress = $startAddress + $tmpBlockSize - 1;
                 if ($tmpEndAddress <= $endAddress) {
@@ -43,11 +43,5 @@ class CountToCidr
         }
 
         return $result;
-    }
-
-    private static function bitmask(int $bits): int
-    {
-        assert(1 <= $bits && $bits <= 32);
-        return (0xffffffff << (32 - $bits)) & 0xffffffff;
     }
 }

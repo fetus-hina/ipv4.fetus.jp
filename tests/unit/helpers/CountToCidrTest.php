@@ -7,6 +7,9 @@ namespace tests\unit\helpers;
 use Codeception\Test\Unit;
 use app\helpers\CountToCidr;
 
+/**
+ * @covers \app\helpers\CountToCidr
+ */
 class CountToCidrTest extends Unit
 {
     public function testConvertInvalidAddress(): void
