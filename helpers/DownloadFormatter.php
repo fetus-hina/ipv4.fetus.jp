@@ -11,6 +11,7 @@ use Exception;
 use Generator;
 use Yii;
 use app\models\DownloadTemplate;
+use app\models\Newline;
 use yii\helpers\Url;
 
 final class DownloadFormatter
@@ -29,31 +30,33 @@ final class DownloadFormatter
         iterable $cidrList,
         ?string $note
     ): Generator {
+        $newline = static::getNewLineCode($template->newline);
+
         if ($template->file_begin !== null && $template->file_begin !== '') {
-            yield static::fillPlaceholder($template->file_begin, $template, $cc, null, $isAllow) . "\n";
-            yield "\n";
+            yield static::fillPlaceholder($template->file_begin, $template, $cc, null, $isAllow) . $newline;
+            yield $newline;
         }
 
         foreach (static::generateHeaders($name, $thisUrl, $pageUrl, $template, $note) as $row) {
-            yield $row . "\n";
+            yield $row . $newline;
         }
 
-        yield "\n";
+        yield $newline;
 
         if ($template->list_begin !== null && $template->list_begin !== '') {
-            yield static::fillPlaceholder($template->list_begin, $template, $cc, null, $isAllow) . "\n";
+            yield static::fillPlaceholder($template->list_begin, $template, $cc, null, $isAllow) . $newline;
         }
 
         foreach ($cidrList as $cidr) {
-            yield static::fillPlaceholder($template->template, $template, $cc, $cidr, $isAllow) . "\n";
+            yield static::fillPlaceholder($template->template, $template, $cc, $cidr, $isAllow) . $newline;
         }
 
         if ($template->list_end !== null && $template->list_end !== '') {
-            yield static::fillPlaceholder($template->list_end, $template, $cc, null, $isAllow) . "\n";
+            yield static::fillPlaceholder($template->list_end, $template, $cc, null, $isAllow) . $newline;
         }
 
         if ($template->file_end !== null && $template->file_end !== '') {
-            yield static::fillPlaceholder($template->file_end, $template, $cc, null, $isAllow) . "\n";
+            yield static::fillPlaceholder($template->file_end, $template, $cc, null, $isAllow) . $newline;
         }
     }
 
@@ -271,5 +274,20 @@ final class DownloadFormatter
         if ($comment->block_end !== null && $comment->block_end !== '') {
             yield $comment->block_end;
         }
+    }
+
+    private static function getNewLineCode(?Newline $newline): string
+    {
+        if ($newline) {
+            switch ($newline->key) {
+                case 'unix':
+                    return chr(0x0a);
+
+                case 'win':
+                    return chr(0x0d) . chr(0x0a);
+            }
+        }
+
+        return "\n"; // default
     }
 }

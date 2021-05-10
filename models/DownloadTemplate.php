@@ -22,10 +22,12 @@ use yii\db\ActiveRecord;
  * @property string|null $list_begin
  * @property string|null $list_end
  * @property string $name
+ * @property int|null $newline_id
  * @property string $template
  * @property string|null $usage
  *
  * @property ?CommentStyle $commentStyle
+ * @property ?Newline $newline
  */
 final class DownloadTemplate extends ActiveRecord
 {
@@ -41,7 +43,7 @@ final class DownloadTemplate extends ActiveRecord
     {
         return [
             [['key', 'name', 'template', 'comment_style_id'], 'required'],
-            [['comment_style_id'], 'integer'],
+            [['comment_style_id', 'newline_id'], 'integer'],
             [['file_begin', 'file_end', 'list_begin', 'list_end', 'usage'], 'string'],
             [['can_use_in_url'], 'boolean'],
             [['key'], 'string',
@@ -57,6 +59,13 @@ final class DownloadTemplate extends ActiveRecord
                 'targetClass' => CommentStyle::class,
                 'targetAttribute' => [
                     'comment_style_id' => 'id',
+                ],
+            ],
+            [['newline_id'], 'exist',
+                'skipOnError' => true,
+                'targetClass' => Newline::class,
+                'targetAttribute' => [
+                    'newline_id' => 'id',
                 ],
             ],
         ];
@@ -80,6 +89,7 @@ final class DownloadTemplate extends ActiveRecord
             'list_begin' => 'List Begin',
             'list_end' => 'List End',
             'name' => 'Name',
+            'newline_id' => 'Newline ID',
             'template' => 'Template',
             'usage' => 'Usage',
         ];
@@ -88,5 +98,10 @@ final class DownloadTemplate extends ActiveRecord
     public function getCommentStyle(): ActiveQuery
     {
         return $this->hasOne(CommentStyle::class, ['id' => 'comment_style_id']);
+    }
+
+    public function getNewline(): ActiveQuery
+    {
+        return $this->hasOne(Newline::class, ['id' => 'newline_id']);
     }
 }
