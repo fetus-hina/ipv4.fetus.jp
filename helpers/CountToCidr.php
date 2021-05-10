@@ -29,6 +29,7 @@ class CountToCidr
         while ($count > 0) {
             for ($bitNum = static::MINIMUM_BITMASK; $bitNum <= 32; ++$bitNum) {
                 $tmpBlockMask = IPHelper::bitmask($bitNum);
+                assert($tmpBlockMask !== null);
                 $tmpBlockSize = (0xffffffff & ~$tmpBlockMask) + 1;
                 $tmpEndAddress = $startAddress + $tmpBlockSize - 1;
                 if ($tmpEndAddress <= $endAddress) {
