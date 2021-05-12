@@ -59,20 +59,43 @@ if (
 <?php if ($region->getKrfilters()->exists()) { ?>
     <aside class="col-12 mb-4">
       <div class="card border-info">
-        <div class="card-header bg-info">
+        <div class="card-header bg-info text-white">
           krfilter / eufilter
         </div>
         <div class="card-body">
-          頻繁にアクセス拒否リストに使用すると思われる国をまとめた一覧があります。<br>
-          <?= Html::a(
-            '詳しくはこちらをご覧ください。',
-            ['krfilter/view']
+          <p>
+            頻繁にアクセス拒否リストに使用すると思われる国をまとめた一覧があります。
+          </p>
+          <?= Html::tag(
+            'p',
+            Html::a(
+              '詳しくはこちらをご覧ください。',
+              ['krfilter/view']
+            ),
+            ['class' => 'mb-0']
           ) . "\n" ?>
         </div>
       </div>
     </aside>
 <?php } ?>
     <div class="col-12 col-lg-8">
+<?php if ($region->id === 'eu') { ?>
+      <aside class="mb-4">
+        <div class="card border-danger">
+          <div class="card-header bg-danger text-white">
+            ご注意ください
+          </div>
+          <div class="card-body">
+            <p>
+              このリストは、欧州地域全体に割り振られたIPアドレスの一覧ではありません。
+            </p>
+            <p class="mb-0">
+              欧州地域の大半のIPアドレスは、各国に割り振られています。
+            </p>
+          </div>
+        </div>
+      </aside>
+<?php } ?>
       <div class="mb-4">
         <?= $this->render('//region/view/list', ['region' => $region]) . "\n" ?>
       </div>
