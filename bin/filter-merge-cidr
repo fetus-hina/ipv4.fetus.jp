@@ -3,6 +3,10 @@
 
 declare(strict_types=1);
 
+use app\helpers\IPHelper;
+
+require(__DIR__ . '/../vendor/autoload.php');
+
 define('MINIMUM_BITMASK', 8);
 
 function doMain(): void
@@ -10,7 +14,7 @@ function doMain(): void
     $list = readFromStdin();
     $list = mergeList($list);
     foreach ($list as $entry) {
-        $list2 = splitBlock($entry['startlong'], $entry['count']);
+        $list2 = IPHelper::splitBlock($entry['startlong'], $entry['count']);
         foreach ($list2 as $tmp) {
             echo "$tmp\n";
         }
@@ -29,13 +33,15 @@ function readFromStdin(): array
                 $bitlen = max(8, $bitlen);
                 $iplong = ip2long($match[1]);
                 if ($iplong !== false) {
-                    $mask = bitmask($bitlen);
-                    $startip = ($iplong & $mask);
-                    $result[] = [
-                        'start' => long2ip($startip),
-                        'startlong' => $startip,
-                        'count' => (0xffffffff & ~$mask) + 1,
-                    ];
+                    $mask = IPHelper::bitmask($bitlen);
+                    if ($mask !== null) {
+                        $startip = ($iplong & $mask);
+                        $result[] = [
+                            'start' => long2ip($startip),
+                            'startlong' => $startip,
+                            'count' => (0xffffffff & ~$mask) + 1,
+                        ];
+                    }
                 }
             }
         }
@@ -69,36 +75,6 @@ function mergeList(array $list): array
     }
 
     return $result;
-}
-
-function splitBlock(int $startIp, int $count): array
-{
-    $result = array();
-    $endIp = $startIp + $count - 1;
-    while ($count > 0) {
-        for ($bitnum = MINIMUM_BITMASK; $bitnum <= 32; ++$bitnum) {
-            $tmpblockmask = bitmask($bitnum);
-            $tmpblocksize = (0xffffffff & ~$tmpblockmask) + 1;
-            $tmpendaddress = $startIp + $tmpblocksize - 1;
-            if ($tmpendaddress <= $endIp) {
-                if (($startIp & $tmpblockmask) == ($tmpendaddress & $tmpblockmask)) {
-                    $result[] = sprintf('%s/%d', long2ip($startIp), $bitnum);
-                    $startIp += $tmpblocksize;
-                    $count -= $tmpblocksize;
-                    break;
-                }
-            }
-        }
-    }
-
-    return $result;
-}
-
-function bitmask(int $bits): ?int {
-    if ($bits < 1 || $bits > 32) {
-        return null;
-    }
-    return (0xffffffff << (32 - $bits)) & 0xffffffff;
 }
 
 doMain();
