@@ -1,0 +1,62 @@
+name: 'CD'
+
+on:
+  workflow_run:
+    workflows:
+      - 'CI'
+    push:
+      tags: 'v[0-9.]+'
+    types:
+      - 'completed'
+
+jobs:
+  deploy:
+    name: 'Deploy the app'
+
+    runs-on: 'ubuntu-20.04'
+
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
+    steps:
+      - name: 'Detect & Set current tag'
+        run: |
+          echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+
+      - uses: 'actions/checkout@v2'
+
+      - name: 'Set up SSH key'
+        env:
+          PRIVATE_KEY: '${{ secrets.ACTIONS_DEPLOY_PRIVATE_KEY_ED25519 }}'
+          KNOWN_HOSTS: '${{ secrets.KNOWN_HOSTS_AYANAMI }}'
+        run: |
+          mkdir -p ~/.ssh
+
+          echo "$PRIVATE_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+
+          echo "$KNOWN_HOSTS" >> ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+
+          chmod 700 ~/.ssh
+
+      - uses: 'actions/cache@v2'
+        with:
+          path: |
+            ~/.cache/composer/files
+            vendor
+          key: ${{ runner.os }}-composer-${{ hashFiles('composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      - name: 'Set up PHP version 8.0'
+        run: |
+          sudo update-alternatives --set php /usr/bin/php8.0
+
+      - name: 'Set up vendor directory'
+        run: |
+          ln -s `which composer` composer.phar
+          ./composer.phar install --prefer-dist
+
+      - name: 'Deploy ${{ env.RELEASE_VERSION }}'
+        run: |
+          vendor/bin/dep deploy -o git_tty=false --tag=${{ env.RELEASE_VERSION }} -- production
