@@ -5,7 +5,8 @@ on:
     workflows:
       - 'CI'
     push:
-      tags: 'v[0-9.]+'
+      tags:
+        - 'v[0-9.]+'
     types:
       - 'completed'
 
@@ -45,17 +46,10 @@ jobs:
             ~/.cache/composer/files
             vendor
           key: ${{ runner.os }}-composer-${{ hashFiles('composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-composer-
 
       - name: 'Set up PHP version 8.0'
         run: |
           sudo update-alternatives --set php /usr/bin/php8.0
-
-      - name: 'Set up vendor directory'
-        run: |
-          ln -s `which composer` composer.phar
-          ./composer.phar install --prefer-dist
 
       - name: 'Deploy ${{ env.RELEASE_VERSION }}'
         run: |
