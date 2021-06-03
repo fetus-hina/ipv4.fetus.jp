@@ -6,7 +6,7 @@
     "@fortawesome/fontawesome-free": "^5.15.3",
     "bootstrap": "^5.0.1",
     "flag-icon-css": "^3.5.0",
-    "inputmask": "^5.0.5",
+    "inputmask": "^5.0.6",
     "jquery": "^3.6.0",
     "punycode": "^2.1.1",
     "stupid-table-plugin": "^1.1.3",
