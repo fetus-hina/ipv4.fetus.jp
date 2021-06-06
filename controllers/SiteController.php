@@ -74,10 +74,16 @@ class SiteController extends Controller
                 'user-agent: *',
                 'allow: /',
                 '',
+                'user-agent: BLEXBot',
+                'crawl-delay: 20',
+                '',
             ])
             : implode("\n", [
                 'user-agent: *',
                 'disallow: /',
+                '',
+                'user-agent: BLEXBot',
+                'crawl-delay: 20',
                 '',
             ]);
     }
