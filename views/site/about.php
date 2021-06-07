@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use ScssPhp\ScssPhp\Compiler as Scss;
 use app\widgets\SnsWidget;
 use yii\helpers\Html;
 use yii\web\View;
@@ -11,6 +12,18 @@ use yii\web\View;
  */
 
 $this->title = 'About - ' . Yii::$app->name;
+
+$this->registerCss(
+    (new Scss())
+        ->compileString('
+            #automation {
+                li {
+                    margin-bottom: 1rem;
+                }
+            }
+        ')
+        ->getCss()
+);
 
 ?>
 <main>
@@ -91,7 +104,6 @@ $this->title = 'About - ' . Yii::$app->name;
           <p class="mb-0">
             ご協力をお願いします。
           </p>
-<?php $this->registerCss('#automation li{margin-bottom:1rem') ?>
         </div>
       </div>
     </div>

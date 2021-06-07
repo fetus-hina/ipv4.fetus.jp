@@ -27,6 +27,7 @@
         "ext-pdo_pgsql": "*",
 
         "omnilight/yii2-scheduling": "^1.1",
+        "scssphp/scssphp": "^1.5",
         "statink/yii2-sortable-table": "*",
         "symfony/polyfill-php80": "^1.22",
         "yiisoft/yii2": "*",

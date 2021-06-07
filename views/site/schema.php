@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use ScssPhp\ScssPhp\Compiler as Scss;
 use app\widgets\SnsWidget;
 use yii\helpers\Html;
 use yii\web\View;
@@ -13,9 +14,25 @@ use yii\web\View;
 $this->title = '出力ファイル仕様 - ' . Yii::$app->name;
 
 $this->registerCss(
-    '.card-body ul:last-child{margin-bottom:0}' .
-    '.card-body li{margin-bottom:1rem}' .
-    '.card-body li:last-child{margin-bottom:0}'
+    (new Scss())
+        ->compileString('
+            .card-body {
+                ul {
+                    &:last-chid {
+                        margin-bottom: 0;
+                    }
+                }
+
+                li {
+                    margin-bottom: 1rem;
+
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
+                }
+            }
+        ')
+        ->getCss()
 );
 ?>
 <main>

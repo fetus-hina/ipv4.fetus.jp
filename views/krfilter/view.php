@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use ScssPhp\ScssPhp\Compiler as Scss;
 use app\assets\FlagIconCssAsset;
 use app\models\DownloadTemplate;
 use app\models\Krfilter;
@@ -17,7 +18,17 @@ $this->title = 'krfilter / eufilter : ' . Yii::$app->name;
 
 FlagIconCssAsset::register($this);
 
-$this->registerCss('.card-body li{margin-bottom:1rem}');
+$this->registerCss(
+    (new Scss())
+        ->compileString('
+            .card-body {
+                li {
+                    margin-bottom: 1rem;
+                }
+            }
+        ')
+        ->getCss()
+);
 
 ?>
 <main>
