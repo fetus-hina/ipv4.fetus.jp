@@ -14,9 +14,6 @@ jobs:
     strategy:
       matrix:
         env:
-          - php: '7.4'
-            experimental: false
-
           - php: '8.0'
             experimental: false
 
@@ -113,11 +110,6 @@ jobs:
     strategy:
       matrix:
         env:
-          - php: '7.4'
-            pgsql: '11-alpine'
-            phpenv: 'os'
-            experimental: false
-
           - php: '8.0'
             pgsql: '9.6-alpine' # EL8 default
             phpenv: 'os'

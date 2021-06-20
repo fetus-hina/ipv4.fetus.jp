@@ -24,32 +24,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: 'Set up SSH key'
-        env:
-          PRIVATE_KEY: '${{ secrets.ACTIONS_DEPLOY_PRIVATE_KEY_ED25519 }}'
-          KNOWN_HOSTS: '${{ secrets.KNOWN_HOSTS_AYANAMI }}'
-        run: |
-          mkdir -p ~/.ssh
-
-          echo "$PRIVATE_KEY" > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
-
-          echo "$KNOWN_HOSTS" >> ~/.ssh/known_hosts
-          chmod 644 ~/.ssh/known_hosts
-
-          chmod 700 ~/.ssh
-
-      - uses: 'actions/cache@v2'
-        with:
-          path: |
-            ~/.cache/composer/files
-            vendor
-          key: ${{ runner.os }}-composer-${{ hashFiles('composer.lock') }}
-
-      - name: 'Set up PHP version 8.0'
-        run: |
-          sudo update-alternatives --set php /usr/bin/php8.0
-
       - name: 'Check version tag'
         run: |
           COMMIT_REVISION=$(git log -n 1 --pretty='format:%H')
@@ -70,7 +44,35 @@ jobs:
 
           echo "RELEASE_VERSION=$CURRENT_VERSION" >> $GITHUB_ENV
 
+      - name: 'Set up SSH key'
+        if: ${{ env.RELEASE_VERSION != '' }}
+        env:
+          PRIVATE_KEY: '${{ secrets.ACTIONS_DEPLOY_PRIVATE_KEY_ED25519 }}'
+          KNOWN_HOSTS: '${{ secrets.KNOWN_HOSTS_AYANAMI }}'
+        run: |
+          mkdir -p ~/.ssh
+
+          echo "$PRIVATE_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+
+          echo "$KNOWN_HOSTS" >> ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+
+          chmod 700 ~/.ssh
+
+
+      - name: 'Set up PHP 8.0'
+        if: ${{ env.RELEASE_VERSION != '' }}
+        uses: 'shivammathur/setup-php@v2'
+        with:
+          php-version: '8.0'
+
       - name: 'Deploy'
         if: ${{ env.RELEASE_VERSION != '' }}
         run: |
-          vendor/bin/dep deploy -o git_tty=false --tag=${{ env.RELEASE_VERSION }} -- production
+          pushd bin
+            curl -o dep 'https://deployer.org/releases/v6.8.0/deployer.phar'
+            chmod +x dep
+            sha1sum -c dep.sha1sum.txt
+          popd
+          bin/dep deploy -o git_tty=false --tag=${{ env.RELEASE_VERSION }} -- production

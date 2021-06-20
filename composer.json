@@ -10,7 +10,7 @@
     },
     "minimum-stability": "stable",
     "require": {
-        "php": ">= 7.4",
+        "php": ">= 8.0",
         "php-64bit": "*",
         "php-ipv6": "*",
 
@@ -41,7 +41,6 @@
         "codeception/module-yii2": "*",
         "codeception/specify": "*",
         "codeception/verify": "*",
-        "deployer/deployer": "*",
         "proget-hq/phpstan-yii2": "*",
         "squizlabs/php_codesniffer": "*",
         "symfony/browser-kit": "*",
@@ -60,7 +59,7 @@
     "config": {
         "process-timeout": 1800,
         "platform": {
-            "php": "7.4.0"
+            "php": "8.0.7"
         }
     },
     "autoload": {

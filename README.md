@@ -18,7 +18,7 @@
 ## Requirements
 
 - Linux （Unix-like のコマンドラインインタフェースが扱えれば動くかも）
-- PHP (64bit) ≧ 7.4 (8.0 推奨)
+- PHP (64bit) ≧ 8.0
   - PHP-FPM
 - Node.js (LTS or 最新)
 - PostgreSQL
