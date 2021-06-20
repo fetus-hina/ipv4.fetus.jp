@@ -88,20 +88,14 @@ class Generator extends BaseGenerator
 
     private function propertySortGroup(string $propName): int
     {
-        switch ($propName) {
-            case 'id':
-                return 0;
-            default:
-                return 1;
-            case 'created_at':
-                return 2;
-            case 'created_by':
-                return 3;
-            case 'updated_at':
-                return 4;
-            case 'updated_by':
-                return 5;
-        }
+        return match ($propName) {
+            'id' => 0,
+            'created_at' => 2,
+            'created_by' => 3,
+            'updated_at' => 4,
+            'updated_by' => 5,
+            default => 1,
+        };
     }
 
     public function generateUses(string $tableName): array

@@ -278,16 +278,10 @@ final class DownloadFormatter
 
     private static function getNewLineCode(?Newline $newline): string
     {
-        if ($newline) {
-            switch ($newline->key) {
-                case 'unix':
-                    return chr(0x0a);
-
-                case 'win':
-                    return chr(0x0d) . chr(0x0a);
-            }
-        }
-
-        return "\n"; // default
+        return match ($newline?->key) {
+            'unix' => chr(0x0a),
+            'win' => chr(0x0d) . chr(0x0a),
+            default => "\n",
+        };
     }
 }
