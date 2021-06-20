@@ -1,26 +1,43 @@
 name: 'CI'
+
 on:
   - 'pull_request'
   - 'push'
+
+env:
+  LANG: 'C'
+
 jobs:
   phpSyntaxCheck:
-    name: 'PHP Syntax Check'
+    name: 'PHP Syntax Check (PHP ${{ matrix.env.php }})'
+
     strategy:
       matrix:
-        php_version:
-          - '7.4'
-          - '8.0'
+        env:
+          - php: '7.4'
+            experimental: false
+
+          - php: '8.0'
+            experimental: false
+
+          - php: '8.1'
+            experimental: true
+
     runs-on: 'ubuntu-20.04'
+
     steps:
       - uses: 'actions/checkout@v2'
 
-      - name: 'Set up PHP version ${{ matrix.php_version }}'
-        run: sudo update-alternatives --set php /usr/bin/php${{ matrix.php_version }}
+      - name: 'Set up PHP ${{ matrix.env.php }}'
+        uses: 'shivammathur/setup-php@v2'
+        with:
+          php-version: '${{ matrix.env.php }}'
 
       - name: 'Syntax check'
+        continue-on-error: '${{ matrix.env.experimental }}'
         run: |
           find . \( -type d \( -name '.git' -or -name 'vendor' -or -name 'node_modules' -or -name 'runtime' \) -prune \) -or \( -type f -name '*.php' -print \) \
-            | LANG=C sort \
+            | sort \
             | xargs -n 1 php -l
 
   makeComposerCache:
@@ -57,7 +74,7 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: 'Install NPM dependencies'
-        run: 'npm install'
+        run: 'npm clean-install'
 
   phpStyleCheck:
     name: 'PHP Coding Style'
@@ -75,8 +92,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-composer-
 
-      - name: 'Set up PHP version 8.0'
-        run: sudo update-alternatives --set php /usr/bin/php8.0
+      - name: 'Set up PHP 8.0'
+        uses: 'shivammathur/setup-php@v2'
+        with:
+          php-version: '8.0'
 
       - name: 'Install PHP dependencies'
         run: 'composer install --prefer-dist'
@@ -85,33 +104,63 @@ jobs:
         run: 'vendor/bin/phpcs'
 
       - name: 'Run PHPStan'
-        run: 'vendor/bin/phpstan analyze --memory-limit=1G || true'
+        continue-on-error: true
+        run: 'vendor/bin/phpstan analyze --memory-limit=1G'
 
   phpTest:
-    name: 'PHP test (PHP ${{ matrix.php_version }}, DB ${{ matrix.pgsql_version }})'
+    name: 'PHP test (PHP ${{ matrix.env.php }}, PgSQL ${{ matrix.env.pgsql }})'
+
     strategy:
       matrix:
-        php_version:
-          - '7.4'
-          - '8.0'
-        pgsql_version:
-          - 'postgres:11-alpine'
-          - 'postgres:9.6-alpine' # EL8 default
+        env:
+          - php: '7.4'
+            pgsql: '11-alpine'
+            phpenv: 'os'
+            experimental: false
+
+          - php: '8.0'
+            pgsql: '9.6-alpine' # EL8 default
+            phpenv: 'os'
+            experimental: false
+
+          - php: '8.0'
+            pgsql: '11-alpine'
+            phpenv: 'os'
+            experimental: false
+
+          - php: '8.0'
+            pgsql: 'latest'
+            phpenv: 'os'
+            experimental: true
+
+          - php: '8.1'
+            pgsql: '11-alpine'
+            phpenv: 'setup-php'
+            experimental: true
+
     runs-on: 'ubuntu-20.04'
+
     needs:
       - 'makeComposerCache'
       - 'makeNpmCache'
+
     services:
       pgsql:
-        image: "${{ matrix.pgsql_version }}"
+        image: "postgres:${{ matrix.env.pgsql }}"
+
         ports:
           - '5432:5432'
+
         env:
           POSTGRES_DB: 'ipv4test'
           POSTGRES_PASSWORD: 'ipv4test'
           POSTGRES_USER: 'ipv4test'
           POSTGRES_INITDB_ARGS: '-E UTF-8 --locale=en_US.UTF8 -k'
+
         options: '--health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5'
+
+    continue-on-error: '${{ matrix.env.experimental }}'
+
     steps:
       - uses: 'actions/checkout@v2'
 
@@ -129,13 +178,15 @@ jobs:
             node_modules
           key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
 
-      - name: 'Set up PHP version ${{ matrix.php_version }}'
-        run: |
-            sudo update-alternatives --set php /usr/bin/php${{ matrix.php_version }}
-            ln -s `which composer` composer.phar
+      - name: 'Set up PHP ${{ matrix.env.php }}'
+        uses: 'shivammathur/setup-php@v2'
+        with:
+          php-version: '${{ matrix.env.php }}'
 
       - name: 'Set up application'
-        run: 'make'
+        run: |
+          ln -s `which composer` composer.phar
+          make
 
       - name: 'Database migration'
         run: 'tests/bin/yii migrate/up --compact=1 --interactive=0'
