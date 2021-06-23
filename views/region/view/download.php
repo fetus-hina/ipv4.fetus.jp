@@ -56,7 +56,7 @@ if (Yii::$app->request->isPjax) {
             'expanded' => 'false',
           ],
         ]) . "\n" ?>
-        <div class="dropdown-menu" aria-labelledby="download-access-control"><?= implode('', array_map(
+        <div class="dropdown-menu shadow" aria-labelledby="download-access-control"><?= implode('', array_map(
           fn($model) => Html::a(
             Html::encode($model->name),
             ['region/plain',

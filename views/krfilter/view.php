@@ -157,7 +157,7 @@ $this->registerCss(
                   ->all(),
               )),
               [
-                'class' => 'dropdown-menu',
+                'class' => 'dropdown-menu shadow',
                 'aria' => [
                   'labelledby' => 'download-access-control-' . $filter->id,
                 ],
