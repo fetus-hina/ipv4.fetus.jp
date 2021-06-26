@@ -6,6 +6,7 @@ use ScssPhp\ScssPhp\Compiler as Scss;
 use app\assets\FlagIconCssAsset;
 use app\models\DownloadTemplate;
 use app\models\Krfilter;
+use app\widgets\KrfilterTargetListWidget;
 use app\widgets\SnsWidget;
 use yii\helpers\Html;
 use yii\web\View;
@@ -22,8 +23,10 @@ $this->registerCss(
     (new Scss())
         ->compileString('
             .card-body {
-                li {
-                    margin-bottom: 1rem;
+                .note-list {
+                    li {
+                        margin-bottom: 1rem;
+                    }
                 }
             }
         ')
@@ -54,7 +57,7 @@ $this->registerCss(
           <p>
             対象各国からの接続をまとめて遮断するために使用することができますが、次のような点に充分注意をしてください。
           </p>
-          <ul>
+          <ul class="note-list">
             <li>
               このリストの内容は無保証です。
               そのようなことは無いように作っているつもりですが、漏れがあるかも知れませんし、多すぎるかもしれません。
@@ -114,6 +117,9 @@ $this->registerCss(
               $regions,
             )) ?>の統合リストです。
           </p>
+          <?= KrfilterTargetListWidget::widget([
+            'filter' => $filter,
+          ]) . "\n" ?>
           <div class="mb-2 d-grid">
             <?= Html::a(
               Html::encode('プレインテキスト'),

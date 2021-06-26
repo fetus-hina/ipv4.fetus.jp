@@ -10,7 +10,7 @@ use yii\helpers\Html;
 use yii\widgets\LinkPager;
 use yii\widgets\Pjax;
 
-Widget::$autoIdPrefix = vsprintf('w-%s', [
+Widget::$autoIdPrefix = vsprintf('w-%s-', [
     substr(hash('sha256', uniqid('', true), false), 0, 12),
 ]);
 
