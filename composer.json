@@ -29,7 +29,6 @@
         "omnilight/yii2-scheduling": "^1.1",
         "scssphp/scssphp": "^1.6",
         "statink/yii2-sortable-table": "*",
-        "symfony/polyfill-php80": "*",
         "yiisoft/yii2": "*",
         "yiisoft/yii2-bootstrap4": "*",
         "yiisoft/yii2-httpclient": "*"
