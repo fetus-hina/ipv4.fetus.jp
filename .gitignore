@@ -1,3 +1,5 @@
+*.min.css
+*.min.js
 .DS_Store
 .buildpath
 .idea

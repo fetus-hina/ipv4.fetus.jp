@@ -2,8 +2,11 @@ CONFIG_FILES := \
 	config/components/web/request--cookie.php \
 	config/params/git-revision.php
 
+JS_SRC_FILES := $(shell find web/js \( -type f \( -name '*.min.js' -prune \) -or \( -name '*.js' -print \) \))
+JS_DEST_FILES := $(patsubst %.js,%.min.js,$(JS_SRC_FILES))
+
 .PHONY: all
-all: init
+all: init $(JS_DEST_FILES)
 
 .PHONY: init
 init: node_modules vendor $(CONFIG_FILES)
@@ -11,10 +14,12 @@ init: node_modules vendor $(CONFIG_FILES)
 .PHONY: clean
 clean:
 	rm -rf \
+		$(JS_DEST_FILES) \
 		composer.phar \
 		coverage.serialized \
 		node_modules \
-		vendor
+		vendor \
+		web/assets/*
 
 .PHONY: test
 test: vendor
@@ -22,7 +27,7 @@ test: vendor
 	/usr/bin/env XDEBUG_MODE=coverage vendor/bin/codecept run unit --coverage --coverage-html=./web/coverage
 
 .PHONY: check-style
-check-style: check-style-php
+check-style: check-style-php check-style-js
 
 .PHONY: check-style-php
 check-style-php: check-style-phpcs check-style-phpstan
@@ -34,6 +39,10 @@ check-style-phpcs: vendor
 .PHONY: check-style-phpstan
 check-style-phpstan: vendor
 	vendor/bin/phpstan --memory-limit=1G
+
+.PHONY: check-style-js
+check-style-js: node_modules
+	npx semistandard | npx snazzy
 
 node_modules: package-lock.json
 	npm clean-install
@@ -52,3 +61,6 @@ config/components/web/request--cookie.php:
 .PHONY: config/params/git-revision.php
 config/params/git-revision.php:
 	bin/git-revison > $@
+
+%.min.js: %.js node_modules
+	npx babel $< | npx terser --compress --mangle -o $@

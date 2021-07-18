@@ -6,14 +6,20 @@ namespace app\assets;
 
 use yii\bootstrap4\BootstrapAsset;
 use yii\web\AssetBundle;
+use yii\web\JqueryAsset;
 use yii\web\YiiAsset;
 
 class AppAsset extends AssetBundle
 {
-    /** @var string[] */
+    public $basePath = '@webroot';
+    public $baseUrl = '@web';
+    public $js = [
+        'js/focus-input.min.js',
+    ];
     public $depends = [
         BootstrapAsset::class,
         FontAwesomeAsset::class,
+        JqueryAsset::class,
         YiiAsset::class,
     ];
 }

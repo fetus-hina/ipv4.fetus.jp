@@ -185,3 +185,25 @@ jobs:
 
       - name: 'Run unit test'
         run: 'vendor/bin/codecept run unit'
+
+  jsStyleCheck:
+    name: 'JS Coding Style'
+
+    runs-on: 'ubuntu-20.04'
+
+    needs:
+      - 'makeNpmCache'
+
+    steps:
+      - uses: 'actions/checkout@v2'
+
+      - uses: 'actions/cache@v2'
+        with:
+          path: |
+            ~/.npm
+            node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+
+      - name: 'Run semistandard'
+        run: |
+          npx semistandard | npx snazzy

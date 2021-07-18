@@ -65,11 +65,12 @@ $this->title = '検索結果 : ' . Yii::$app->name;
                 ],
                 [
                   'label' => '国または地域',
-                  'value' => vsprintf('%s %s', [
+                  'value' => vsprintf('%s %s %s', [
                     Html::tag('span', '', ['class' => [
                       'flag-icon',
                       "flag-icon-{$result->region->id}",
                     ]]),
+                    Html::tag('code', Html::encode($result->region->id)),
                     Html::a(
                       Html::encode(vsprintf('%s (%s)', [
                         $result->region->name_ja,
@@ -88,18 +89,37 @@ $this->title = '検索結果 : ' . Yii::$app->name;
 
                     return implode('', [
                       vsprintf('「%s」から %s 個 (%s ～ %s)', [
-                        Html::tag('code', Html::encode($result->block->start_address)),
+                        Html::tag(
+                          'code',
+                          Html::encode($result->block->start_address),
+                          ['class' => 'text-body']
+                        ),
                         Yii::$app->formatter->asInteger($result->block->count),
-                        Html::tag('code', Html::encode($result->block->start_address)),
-                        Html::tag('code', (string)long2ip(ip2long($result->block->start_address) + $result->block->count - 1)),
+                        Html::tag(
+                          'code',
+                          Html::encode($result->block->start_address),
+                          ['class' => 'text-body']
+                        ),
+                        Html::tag(
+                          'code',
+                          (string)long2ip(ip2long($result->block->start_address) + $result->block->count - 1),
+                          ['class' => 'text-body']
+                        ),
                       ]),
                       Html::tag(
-                        'div',
-                        implode('<br>', array_map(
-                          fn($row) => Html::tag('code', Html::encode($row->cidr)),
-                          $cidrs,
-                        )),
-                        ['class' => 'text-muted small ml-3']
+                        'textarea',
+                        implode(
+                          "\n",
+                          array_map(
+                            fn($row) => $row->cidr,
+                            $cidrs
+                          )
+                        ),
+                        [
+                          'class' => 'form-control bg-body text-body font-monospace',
+                          'readonly' => true,
+                          'rows' => (string)count($cidrs),
+                        ]
                       ),
                     ]);
                   },
@@ -107,7 +127,11 @@ $this->title = '検索結果 : ' . Yii::$app->name;
                 ],
                 [
                   'label' => 'Merged CIDR (※2)',
-                  'value' => Html::tag('code', Html::encode($result->mergedCidr->cidr)),
+                  'value' => Html::tag('input', '', [
+                    'class' => 'form-control bg-body text-body font-monospace',
+                    'type' => 'text',
+                    'value' => $result->mergedCidr->cidr,
+                  ]),
                   'format' => 'raw',
                 ],
                 [
