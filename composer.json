@@ -58,7 +58,7 @@
     "config": {
         "process-timeout": 1800,
         "platform": {
-            "php": "8.0.7"
+            "php": "8.0.8"
         }
     },
     "autoload": {
@@ -68,7 +68,10 @@
     },
     "scripts": {
         "post-install-cmd": [
-            "vendor/bin/codecept build"
+            "[ $COMPOSER_DEV_MODE -eq 0 ] || ./vendor/bin/codecept build"
+        ],
+        "post-update-cmd": [
+            "[ $COMPOSER_DEV_MODE -eq 0 ] || ./vendor/bin/codecept build"
         ]
     },
     "repositories": {

@@ -10,12 +10,13 @@ set('application', 'ipv4.fetus.jp');
 set('repository', 'git@github.com:fetus-hina/ipv4.fetus.jp.git');
 set('composer_options', implode(' ', [
     'install',
-    '--verbose',
-    '--prefer-dist',
-    '--no-progress',
+    '--no-dev',
     '--no-interaction',
-    '--optimize-autoloader',
+    '--no-progress',
     '--no-suggest',
+    '--optimize-autoloader',
+    '--prefer-dist',
+    '--verbose',
 ]));
 set('git_tty', true);
 add('shared_files', [
@@ -106,6 +107,7 @@ task('deploy:vendors', function () {
     within('{{release_path}}', function () {
         run('{{bin/composer}} {{composer_options}}');
         run('{{bin/npm}} clean-install');
+        run('{{bin/npm}} prune --production');
     });
 });
 
