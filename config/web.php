@@ -31,7 +31,10 @@ return (function (): array {
         'params' => require(__DIR__ . '/params.php'),
     ];
 
-    if (YII_ENV_DEV) {
+    if (
+        YII_ENV_DEV &&
+        file_exists(__DIR__ . '/../vendor/yiisoft/yii2-debug')
+    ) {
         $config['bootstrap'][] = 'debug';
         $config['modules']['debug'] = [
             'class' => DebugModule::class,
