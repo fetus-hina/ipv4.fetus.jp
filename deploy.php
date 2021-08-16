@@ -10,7 +10,6 @@ set('application', 'ipv4.fetus.jp');
 set('repository', 'git@github.com:fetus-hina/ipv4.fetus.jp.git');
 set('composer_options', implode(' ', [
     'install',
-    '--no-dev',
     '--no-interaction',
     '--no-progress',
     '--no-suggest',
@@ -85,6 +84,7 @@ task('deploy', [
     'deploy:writable',
     'deploy:run_migrations',
     'deploy:build',
+    'deploy:vendors_production',
     'deploy:symlink',
     'deploy:clear_opcache',
     'deploy:clear_proxy',
@@ -107,6 +107,12 @@ task('deploy:vendors', function () {
     within('{{release_path}}', function () {
         run('{{bin/composer}} {{composer_options}}');
         run('{{bin/npm}} clean-install');
+    });
+});
+
+task('deploy:vendors_production', function () {
+    within('{{release_path}}', function () {
+        run('{{bin/composer}} --no-dev {{composer_options}}');
         run('{{bin/npm}} prune --production');
     });
 });
