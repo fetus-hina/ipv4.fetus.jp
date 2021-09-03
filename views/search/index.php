@@ -116,9 +116,13 @@ $this->title = '検索結果 : ' . Yii::$app->name;
                           )
                         ),
                         [
-                          'class' => 'form-control bg-body text-body font-monospace',
+                          'class' => 'form-control font-monospace',
                           'readonly' => true,
                           'rows' => (string)count($cidrs),
+                          'style' => [
+                            'background-color' => 'var(--bs-body-bg)',
+                            'color' => 'var(--bs-body-text)',
+                          ],
                         ]
                       ),
                     ]);
@@ -128,9 +132,14 @@ $this->title = '検索結果 : ' . Yii::$app->name;
                 [
                   'label' => 'Merged CIDR (※2)',
                   'value' => Html::tag('input', '', [
-                    'class' => 'form-control bg-body text-body font-monospace',
+                    'class' => 'form-control font-monospace',
                     'type' => 'text',
                     'value' => $result->mergedCidr->cidr,
+                    'readonly' => true,
+                    'style' => [
+                      'background-color' => 'var(--bs-body-bg)',
+                      'color' => 'var(--bs-body-text)',
+                    ],
                   ]),
                   'format' => 'raw',
                 ],
