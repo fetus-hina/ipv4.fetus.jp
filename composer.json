@@ -58,7 +58,7 @@
     "config": {
         "process-timeout": 1800,
         "platform": {
-            "php": "8.0.8"
+            "php": "8.0.10"
         }
     },
     "autoload": {

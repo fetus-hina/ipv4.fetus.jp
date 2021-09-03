@@ -13,12 +13,12 @@
     "yii2-pjax": "^2.0.7"
   },
   "devDependencies": {
-    "@babel/cli": "^7.14.8",
-    "@babel/core": "^7.15.0",
-    "@babel/preset-env": "^7.15.0",
+    "@babel/cli": "^7.15.4",
+    "@babel/core": "^7.15.4",
+    "@babel/preset-env": "^7.15.4",
     "semistandard": "^16.0.1",
     "snazzy": "^9.0.0",
-    "terser": "^5.7.1",
+    "terser": "^5.7.2",
     "updates": "^12.1.0"
   },
   "semistandard": {
