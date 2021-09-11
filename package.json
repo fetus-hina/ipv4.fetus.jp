@@ -2,9 +2,9 @@
   "name": "ipv4.fetus.jp",
   "description": "",
   "dependencies": {
-    "@fetus-hina/fetus.css": "git+https://github.com/fetus-hina/fetus.css.git#semver:^5.1",
+    "@fetus-hina/fetus.css": "git+https://github.com/fetus-hina/fetus.css.git#semver:^5.1.1",
     "@fortawesome/fontawesome-free": "^5.15.4",
-    "bootstrap": "^5.1.0",
+    "bootstrap": "^5.1.1",
     "flag-icon-css": "^3.5.0",
     "inputmask": "^5.0.6",
     "jquery": "^3.6.0",
@@ -14,8 +14,8 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.15.4",
-    "@babel/core": "^7.15.4",
-    "@babel/preset-env": "^7.15.4",
+    "@babel/core": "^7.15.5",
+    "@babel/preset-env": "^7.15.6",
     "semistandard": "^16.0.1",
     "snazzy": "^9.0.0",
     "terser": "^5.7.2",
