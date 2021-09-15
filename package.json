@@ -18,8 +18,8 @@
     "@babel/preset-env": "^7.15.6",
     "semistandard": "^16.0.1",
     "snazzy": "^9.0.0",
-    "terser": "^5.7.2",
-    "updates": "^12.1.0"
+    "terser": "^5.8.0",
+    "updates": "^12.2.0"
   },
   "semistandard": {
     "envs": {
