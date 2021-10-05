@@ -4,7 +4,7 @@
   "dependencies": {
     "@fetus-hina/fetus.css": "git+https://github.com/fetus-hina/fetus.css.git#semver:^5.1.1",
     "@fortawesome/fontawesome-free": "^5.15.4",
-    "bootstrap": "^5.1.1",
+    "bootstrap": "^5.1.2",
     "flag-icon-css": "^3.5.0",
     "inputmask": "^5.0.6",
     "jquery": "^3.6.0",
@@ -13,13 +13,13 @@
     "yii2-pjax": "^2.0.7"
   },
   "devDependencies": {
-    "@babel/cli": "^7.15.4",
+    "@babel/cli": "^7.15.7",
     "@babel/core": "^7.15.5",
     "@babel/preset-env": "^7.15.6",
     "semistandard": "^16.0.1",
     "snazzy": "^9.0.0",
-    "terser": "^5.8.0",
-    "updates": "^12.2.0"
+    "terser": "^5.9.0",
+    "updates": "^12.2.1"
   },
   "semistandard": {
     "envs": {
