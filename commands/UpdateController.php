@@ -18,7 +18,6 @@ use app\models\RegionStat;
 use yii\console\Controller;
 use yii\console\ExitCode;
 use yii\db\Connection;
-use yii\helpers\FileHelper;
 use yii\httpclient\Client as HttpClient;
 
 class UpdateController extends Controller

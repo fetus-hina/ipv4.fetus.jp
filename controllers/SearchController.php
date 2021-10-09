@@ -6,14 +6,13 @@ namespace app\controllers;
 
 use Yii;
 use app\models\SearchForm;
-use app\models\SearchResult;
 use yii\web\Controller;
 
 class SearchController extends Controller
 {
     public function actionIndex(): string
     {
-        /** @var ?SearchResult */
+        /** @var ?\app\models\SearchResult */
         $result = null;
         $form = Yii::createObject(SearchForm::class);
         if (
