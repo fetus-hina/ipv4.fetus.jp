@@ -6,7 +6,6 @@ namespace app\assets;
 
 use app\assets\adsense\JSLoaderAsset;
 use yii\web\AssetBundle;
-use yii\web\View;
 
 class AdSenseAsset extends AssetBundle
 {

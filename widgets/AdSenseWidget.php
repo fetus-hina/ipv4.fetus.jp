@@ -8,7 +8,6 @@ use Yii;
 use app\assets\AdSenseAsset;
 use yii\base\Widget;
 use yii\helpers\Html;
-use yii\web\View;
 
 final class AdSenseWidget extends Widget
 {

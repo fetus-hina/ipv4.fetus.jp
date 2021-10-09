@@ -21,9 +21,6 @@ use yii\web\View;
  * @var array[] $properties
  */
 
-$now = (new DateTimeImmutable('now', new DateTimeZone('Asia/Tokyo')))
-    ->setTimestamp($_SERVER['REQUEST_TIME'] ?? time());
-
 $renderRules = function (int $indentWidth, array $rules): string {
     if (empty($rules)) {
         return 'return [];';

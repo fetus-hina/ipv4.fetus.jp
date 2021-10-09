@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace app\widgets;
 
-use Yii;
 use app\assets\FlagIconCssAsset;
 use app\assets\FontAwesomeAsset;
 use app\models\Krfilter;
@@ -13,7 +12,6 @@ use yii\base\Widget;
 use yii\bootstrap4\BootstrapAsset;
 use yii\bootstrap4\BootstrapPluginAsset;
 use yii\helpers\Html;
-use yii\web\View;
 
 final class KrfilterTargetListWidget extends Widget
 {
@@ -25,7 +23,6 @@ final class KrfilterTargetListWidget extends Widget
         BootstrapAsset::register($this->view);
         BootstrapPluginAsset::register($this->view);
 
-        $id = $this->id;
         return Html::tag(
             'div',
             implode('', [

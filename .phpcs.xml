@@ -24,7 +24,15 @@
   <rule ref="Generic.PHP.RequireStrictTypes" />
   <rule ref="Generic.PHP.Syntax" />
   <rule ref="Generic.VersionControl.GitMergeConflict" />
+  <rule ref="ImportDetection" />
+  <rule ref="ImportDetection.Imports.RequireImports.Symbol"><severity>0</severity></rule>
   <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace" />
+  <rule ref="VariableAnalysis">
+    <properties>
+      <property name="allowUnusedFunctionParameters" value="true" />
+      <property name="allowUndefinedVariablesInFileScope" value="true" />
+    </properties>
+  </rule>
 
   <rule ref="PSR1.Classes.ClassDeclaration.MissingNamespace">
     <exclude-pattern>./migrations</exclude-pattern>

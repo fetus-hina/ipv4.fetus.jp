@@ -17,7 +17,6 @@ use yii\db\ActiveQuery;
 use yii\db\Expression;
 use yii\db\ExpressionInterface;
 use yii\db\Schema;
-use yii\db\TableSchema;
 use yii\gii\generators\model\Generator as BaseGenerator;
 use yii\helpers\ArrayHelper;
 
@@ -101,10 +100,17 @@ class Generator extends BaseGenerator
     public function generateUses(string $tableName): array
     {
         $use = [
-            Yii::class,
-            ActiveQuery::class,
             ltrim($this->baseClass, '\\'),
         ];
+
+        if ($this->db !== 'db') {
+            $use[] = Yii::class;
+        }
+
+        $relations = $this->generateRelations();
+        if (isset($relations[$tableName])) {
+            $use[] = ActiveQuery::class;
+        }
 
         $db = $this->getDbConnection();
         $schema = $db->getTableSchema($tableName);

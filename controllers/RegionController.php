@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace app\controllers;
 
-use Generator;
 use Yii;
 use app\helpers\DownloadFormatter;
 use app\models\DownloadTemplate;
