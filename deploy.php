@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Deployer;
 
-require('recipe/yii2-app-basic.php');
+require 'recipe/yii2-app-basic.php';
 
 set('application', 'ipv4.fetus.jp');
 set('repository', 'git@github.com:fetus-hina/ipv4.fetus.jp.git');

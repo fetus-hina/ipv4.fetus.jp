@@ -42,7 +42,7 @@ class UpdateController extends Controller
     // const KRFILTER_4 = 'eu,at,ax,be,bg,cy,cz,de,dk,ee,es,fi,fr,gb,gf,gi,gp,gr,hr,hu,ie,it,li,lt,lu,lv,mf,mq,mt,nl,no,pl,pt,re,ro,se,si,sk,uk,yt';
 
     /** @var array<string, int> */
-    private array $checked_countries = [];
+    private array $checkedCountries = [];
 
     /** @return void */
     public function init()
@@ -51,7 +51,7 @@ class UpdateController extends Controller
         ini_set('memory_limit', '1G');
     }
 
-    public function actionIndex(bool $skip_update = false): int
+    public function actionIndex(bool $skipUpdate = false): int
     {
         /** @var int */
         $status = ExitCode::OK;
@@ -62,7 +62,7 @@ class UpdateController extends Controller
         /** @var ?float */
         $updateFinishAt = null;
 
-        if (!$skip_update) {
+        if (!$skipUpdate) {
             try {
                 $updateStartAt = microtime(true);
 
@@ -75,11 +75,11 @@ class UpdateController extends Controller
 
                     /** @var array<string, callable> */
                     $actions = [
-                        'AfriNIC'   => fn() => $this->actionAfrinic(),
-                        'APNIC'     => fn() => $this->actionApnic(),
-                        'ARIN'      => fn() => $this->actionArin(),
-                        'LACNIC'    => fn() => $this->actionLacnic(),
-                        'RIPE NCC'  => fn() => $this->actionRipeNcc(),
+                        'AfriNIC'   => fn () => $this->actionAfrinic(),
+                        'APNIC'     => fn () => $this->actionApnic(),
+                        'ARIN'      => fn () => $this->actionArin(),
+                        'LACNIC'    => fn () => $this->actionLacnic(),
+                        'RIPE NCC'  => fn () => $this->actionRipeNcc(),
                     ];
                     foreach ($actions as $label => $action) {
                         Yii::info("Updating {$label}", __METHOD__);
@@ -104,7 +104,7 @@ class UpdateController extends Controller
         }
 
         if (
-            !$skip_update &&
+            !$skipUpdate &&
             $updateStartAt !== null &&
             $updateFinishAt !== null
         ) {
@@ -172,9 +172,9 @@ class UpdateController extends Controller
 
     private function updateRecord(string $tag, array $info): bool
     {
-        if (!isset($this->checked_countries[$info['cc']])) {
+        if (!isset($this->checkedCountries[$info['cc']])) {
             if (Region::findOne(['id' => $info['cc']])) {
-                $this->checked_countries[$info['cc']] = 1;
+                $this->checkedCountries[$info['cc']] = 1;
             } else {
                 Yii::warning("不明な地域コード: {$info['cc']}@" . static::formatRecord($info), __METHOD__);
                 return false;
@@ -189,7 +189,7 @@ class UpdateController extends Controller
                 'count' => (int)$info['count'],
                 'registry_id' => $info['registry'],
                 'region_id' => $info['cc'],
-                'date' => ($info['date'] === '00000000')
+                'date' => $info['date'] === '00000000'
                     ? null
                     : vsprintf('%04d-%02d-%02d', [
                         (int)substr($info['date'], 0, 4),
@@ -204,7 +204,7 @@ class UpdateController extends Controller
 
             Yii::info('allocation_block を登録しました: ' . static::formatRecord($info), __METHOD__);
         } else {
-            $dbdate = ($info['date'] === '00000000')
+            $dbdate = $info['date'] === '00000000'
                 ? null
                 : vsprintf('%04d-%02d-%02d', [
                     (int)substr($info['date'], 0, 4),
@@ -212,14 +212,12 @@ class UpdateController extends Controller
                     (int)substr($info['date'], 6, 2),
                 ]);
             if (
-                $block->start_address === $info['start'] &&
-                (int)$block->count === (int)$info['count'] &&
-                $block->registry_id === $info['registry'] &&
-                $block->region_id === $info['cc'] &&
-                $block->date === $dbdate
+                $block->start_address !== $info['start'] ||
+                (int)$block->count !== (int)$info['count'] ||
+                $block->registry_id !== $info['registry'] ||
+                $block->region_id !== $info['cc'] ||
+                $block->date !== $dbdate
             ) {
-                // nothing to do
-            } else {
                 // 更新
                 $block->start_address = $info['start'];
                 $block->count = (int)$info['count'];
@@ -274,14 +272,14 @@ class UpdateController extends Controller
         Yii::info('解析を開始します', __METHOD__);
         $ret = [];
         $offset = 0;
-        $record_regex = static::getRirStatisticsExchangeRecordFormatRegex();
+        $recordRegex = static::getRirStatisticsExchangeRecordFormatRegex();
         while (preg_match('/(.*?)(?:\x0d\x0a|\x0d|\x0a)/', $text, $match, 0, $offset)) {
             $offset += strlen($match[0]);
             $line = trim($match[1]);
-            if ($line == '' || $line[0] === '#') {
+            if ($line === '' || $line[0] === '#') {
                 continue;
             }
-            if (!preg_match($record_regex, $line, $info)) {
+            if (!preg_match($recordRegex, $line, $info)) {
                 continue;
             }
 

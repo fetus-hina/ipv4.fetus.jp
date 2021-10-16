@@ -22,7 +22,7 @@ use yii\web\View;
  */
 
 $renderRules = function (int $indentWidth, array $rules): string {
-    if (empty($rules)) {
+    if (!$rules) {
         return 'return [];';
     }
 
@@ -40,7 +40,7 @@ $renderRelation = function (int $indentWidth, string $code): string {
     $code = str_replace('::className()', '::class', $code);
     $code = preg_replace_callback(
         '/->via/',
-        fn($m) => "\n" . str_repeat(' ', $indentWidth) . $m[0],
+        fn ($m) => "\n" . str_repeat(' ', $indentWidth) . $m[0],
         $code
     );
     return $code;
@@ -66,7 +66,7 @@ use <?= $useClass ?>;
 <?php foreach ($properties as $property => $data) { ?>
  * @property <?= "{$data['type']} \${$property}"  . ($data['comment'] ? ' ' . strtr($data['comment'], ["\n" => ' ']) : '') . "\n" ?>
 <?php } ?>
-<?php if (!empty($relations)) { ?>
+<?php if ($relations) { ?>
  *
 <?php foreach ($relations as $name => $relation) { ?>
  * @property <?= ($relation[2] ? '' : '?') . $relation[1] . ($relation[2] ? '[]' : '') . ' $' . lcfirst($name) . "\n" ?>
@@ -82,7 +82,7 @@ use <?= $useClass ?>;
     $className,
     preg_replace('!^.+\x5c([^\x5c]+)!', '$1', $generator->baseClass),
     implode(', ', array_map(
-        fn($fqcn) => preg_replace('!^.+\x5c([^\x5c]+)!', '$1', $fqcn),
+        fn ($fqcn) => preg_replace('!^.+\x5c([^\x5c]+)!', '$1', $fqcn),
         $interfaces
     )),
 ]) ?>
@@ -100,7 +100,7 @@ final class <?= $className . "\n" ?>
 <?php if ($interfaces) { ?>
     implements
         <?= implode(",\n        ", array_map(
-            fn($fqcn) => preg_replace('!^.+\x5c([^\x5c]+)!', '$1', $fqcn),
+            fn ($fqcn) => preg_replace('!^.+\x5c([^\x5c]+)!', '$1', $fqcn),
             $interfaces
         )) . "\n" ?>
 <?php } ?>
@@ -163,7 +163,7 @@ final class <?= $className . "\n" ?>
     }
 <?php } ?>
 <?php if ($queryClassName) { ?>
-<?php $queryClassFullName = ($generator->ns === $generator->queryNs) ? $queryClassName : '\\' . $generator->queryNs . '\\' . $queryClassName; ?>
+<?php $queryClassFullName = $generator->ns === $generator->queryNs ? $queryClassName : '\\' . $generator->queryNs . '\\' . $queryClassName; ?>
 
     public static function find(): ActiveQuery
     {

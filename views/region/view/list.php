@@ -76,7 +76,7 @@ if ($isPjax) {
               'pageParam' => 'list-page',
               'pageSizeParam' => 'list-per-page',
             ],
-            'key' => fn($model) => 'list-' . preg_replace('/[^0-9]/', '-', $model->cidr),
+            'key' => fn ($model) => 'list-' . preg_replace('/[^0-9]/', '-', $model->cidr),
           ]),
           'columns' => [
             [
@@ -90,6 +90,7 @@ if ($isPjax) {
               'label' => 'IPアドレス',
               'value' => function (AllocationCidr $model): string {
                 $tmp = explode('/', $model->cidr);
+                // phpcs:ignore SlevomatCodingStandard.PHP.UselessParentheses.UselessParentheses
                 $mask = (0xffffffff << (32 - (int)$tmp[1])) & 0xffffffff;
                 $count = (~$mask) & 0xffffffff;
                 return vsprintf('%s - %s', [

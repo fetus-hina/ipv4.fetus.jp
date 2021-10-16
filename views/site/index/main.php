@@ -60,11 +60,11 @@ SortableTableAsset::register($this);
             [
               'label' => '',
               'attribute' => 'region_id',
-              'format' => fn($t) => Html::tag('span', '', ['class' => [
+              'format' => fn ($t) => Html::tag('span', '', ['class' => [
                 'flag-icon',
                 "flag-icon-{$t}",
               ]]),
-              'contentOptions' => fn($model) => [
+              'contentOptions' => fn ($model) => [
                 'class' => 'text-center',
                 'data' => [
                   'sort-value' => $model->region_id,
@@ -79,8 +79,8 @@ SortableTableAsset::register($this);
             [
               'label' => 'CC',
               'attribute' => 'region_id',
-              'format' => fn($t) => Html::tag('code', Html::encode((string)$t)),
-              'contentOptions' => fn($model) => [
+              'format' => fn ($t) => Html::tag('code', Html::encode((string)$t)),
+              'contentOptions' => fn ($model) => [
                 'class' => 'text-center',
                 'data' => [
                   'sort-value' => $model->region_id,
@@ -95,14 +95,14 @@ SortableTableAsset::register($this);
             [
               'label' => '国/地域名',
               'format' => 'raw',
-              'value' => fn(RegionStat $model) => Html::a(
+              'value' => fn (RegionStat $model) => Html::a(
                 Html::encode(vsprintf('%s (%s)', [
                   $model->region->name_ja,
                   $model->region->name_en,
                 ])),
                 ['region/view', 'cc' => $model->region_id]
               ),
-              'contentOptions' => fn($model) => [
+              'contentOptions' => fn ($model) => [
                 'class' => 'text-wrap',
                 'data' => [
                   'sort-value' => $model->region->name_ja,
@@ -120,7 +120,7 @@ SortableTableAsset::register($this);
               'encodeLabel' => false,
               'attribute' => 'total_address_count',
               'format' => 'integer',
-              'contentOptions' => fn($model) => [
+              'contentOptions' => fn ($model) => [
                 'class' => 'text-end',
                 'data' => [
                   'sort-value' => $model->total_address_count,
@@ -135,8 +135,8 @@ SortableTableAsset::register($this);
             [
               'label' => '対全空間',
               'format' => ['percent', 5],
-              'value' => fn(RegionStat $model) => $model->total_address_count / (1 << 32),
-              'contentOptions' => fn($model) => [
+              'value' => fn (RegionStat $model) => $model->total_address_count / (1 << 32),
+              'contentOptions' => fn ($model) => [
                 'class' => 'text-end d-none d-md-table-cell',
                 'data' => [
                   'sort-value' => $model->total_address_count,
@@ -152,8 +152,8 @@ SortableTableAsset::register($this);
             [
               'label' => '除予約領域',
               'format' => ['percent', 5],
-              'value' => fn(RegionStat $model) => $model->total_address_count / ((1 << 32) - 592715776),
-              'contentOptions' => fn($model) => [
+              'value' => fn (RegionStat $model) => $model->total_address_count / ((1 << 32) - 592715776),
+              'contentOptions' => fn ($model) => [
                 'class' => 'text-end d-none d-md-table-cell',
                 'data' => [
                   'sort-value' => $model->total_address_count,
@@ -170,7 +170,7 @@ SortableTableAsset::register($this);
               'label' => '最終割振日',
               'attribute' => 'last_allocation_date',
               'format' => ['date', 'short'],
-              'contentOptions' => fn($model) => [
+              'contentOptions' => fn ($model) => [
                 'class' => 'text-end d-none d-md-table-cell',
                 'data' => [
                   'sort-value' => $model->last_allocation_date ?? '',

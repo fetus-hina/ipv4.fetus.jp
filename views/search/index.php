@@ -85,7 +85,7 @@ $this->title = '検索結果 : ' . Yii::$app->name;
                   'label' => '割り振りブロック (※1)',
                   'value' => function () use ($result): string {
                     $cidrs = $result->block->allocationCidrs;
-                    usort($cidrs, fn($a, $b) => strnatcasecmp($a->cidr, $b->cidr));
+                    usort($cidrs, fn ($a, $b) => strnatcasecmp($a->cidr, $b->cidr));
 
                     return implode('', [
                       vsprintf('「%s」から %s 個 (%s ～ %s)', [
@@ -111,7 +111,7 @@ $this->title = '検索結果 : ' . Yii::$app->name;
                         implode(
                           "\n",
                           array_map(
-                            fn($row) => $row->cidr,
+                            fn ($row) => $row->cidr,
                             $cidrs
                           )
                         ),

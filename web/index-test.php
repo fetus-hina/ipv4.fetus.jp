@@ -14,9 +14,9 @@ if (
 define('YII_DEBUG', true);
 define('YII_ENV', 'test');
 
-require(__DIR__ . '/../vendor/autoload.php');
-require(__DIR__ . '/../vendor/yiisoft/yii2/Yii.php');
-require(__DIR__ . '/../config/bootstrap.php');
+require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/../vendor/yiisoft/yii2/Yii.php';
+require __DIR__ . '/../config/bootstrap.php';
 
-(new Application(require(__DIR__ . '/../config/test.php')))
+(new Application(require __DIR__ . '/../config/test.php'))
     ->run();

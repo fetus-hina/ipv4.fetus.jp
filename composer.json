@@ -47,7 +47,8 @@
         "squizlabs/php_codesniffer": "*",
         "symfony/browser-kit": "*",
         "yiisoft/yii2-debug": "*",
-        "yiisoft/yii2-gii": "*"
+        "yiisoft/yii2-gii": "*",
+        "slevomat/coding-standard": "^7.0"
     },
     "replace": {
         "bower-asset/bootstrap": "*",

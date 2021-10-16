@@ -19,7 +19,7 @@
     "semistandard": "^16.0.1",
     "snazzy": "^9.0.0",
     "terser": "^5.9.0",
-    "updates": "^12.2.1"
+    "updates": "^12.2.2"
   },
   "semistandard": {
     "envs": {

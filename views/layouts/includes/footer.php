@@ -19,7 +19,7 @@ use yii\web\View;
             Yii::$app->params['authorWebsite'] ?? ['site/index']
           ),
         ]),
-        (Yii::$app->params['authorTwitter'] ?? null)
+        Yii::$app->params['authorTwitter'] ?? null
           ? Html::a(
             Html::tag('span', '', ['class' => 'fab fa-twitter']),
             sprintf('https://twitter.com/%s', Yii::$app->params['authorTwitter']),
@@ -30,7 +30,7 @@ use yii\web\View;
             ]
           )
           : '',
-        (Yii::$app->params['authorGitHub'] ?? null)
+        Yii::$app->params['authorGitHub'] ?? null
           ? Html::a(
             Html::tag('span', '', ['class' => 'fab fa-github']),
             sprintf('https://github.com/%s', Yii::$app->params['authorGitHub']),
@@ -48,7 +48,7 @@ use yii\web\View;
     <?= Html::tag(
       'div',
       implode(', ', array_map(
-        fn($html) => Html::tag('span', $html, ['class' => 'text-nowrap']),
+        fn ($html) => Html::tag('span', $html, ['class' => 'text-nowrap']),
         array_filter([
           Html::a(
             Html::encode('ソースコード'),
@@ -58,10 +58,10 @@ use yii\web\View;
               'rel' => 'external noopener noreferrer',
             ]
           ),
-          ($gitRevision && $gitRevision['version'])
+          $gitRevision && $gitRevision['version']
             ? Html::encode($gitRevision['version'])
             : null,
-          ($gitRevision && $gitRevision['short'])
+          $gitRevision && $gitRevision['short']
             ? Html::encode($gitRevision['short'])
             : null,
         ])

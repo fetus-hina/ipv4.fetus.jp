@@ -14,6 +14,7 @@ class IPHelper
             return null;
         }
 
+        // phpcs:ignore SlevomatCodingStandard.PHP.UselessParentheses.UselessParentheses
         return (0xffffffff << (32 - $bits)) & 0xffffffff;
     }
 
@@ -28,7 +29,7 @@ class IPHelper
                 $tmpBlockSize = (0xffffffff & ~$tmpBlockMask) + 1;
                 $tmpEndAddress = $startAddress + $tmpBlockSize - 1;
                 if ($tmpEndAddress <= $endAddress) {
-                    if (($startAddress & $tmpBlockMask) == ($tmpEndAddress & $tmpBlockMask)) {
+                    if (($startAddress & $tmpBlockMask) === ($tmpEndAddress & $tmpBlockMask)) {
                         $result[] = sprintf('%s/%d', long2ip($startAddress), $bitNum);
                         $startAddress += $tmpBlockSize;
                         $count -= $tmpBlockSize;

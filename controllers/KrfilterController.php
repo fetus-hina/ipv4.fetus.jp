@@ -26,7 +26,7 @@ class KrfilterController extends Controller
             throw new NotFoundHttpException(Yii::t('yii', 'Page not found.'));
         }
 
-        $templateModel = ($template !== null)
+        $templateModel = $template !== null
             ? DownloadTemplate::find()
                 ->andWhere([
                     'can_use_in_url' => true,
@@ -43,7 +43,7 @@ class KrfilterController extends Controller
             $resp->format = Response::FORMAT_RAW;
             $resp->charset = 'UTF-8';
             $resp->headers->set('Content-Type', 'text/plain');
-            $resp->stream = fn() => DownloadFormatter::format(
+            $resp->stream = fn () => DownloadFormatter::format(
                 $krfilter->name,
                 sprintf('krfilter_%d', $krfilter->id),
                 ['krfilter/plain', 'id' => $krfilter->id, 'template' => $template],
@@ -62,13 +62,13 @@ class KrfilterController extends Controller
                     $lines = ['次の国や地域が統合されて出力されています:'];
 
                     $regions = $krfilter->regions;
-                    usort($regions, fn($a, $b) => strcmp($a->id, $b->id));
+                    usort($regions, fn ($a, $b) => strcmp($a->id, $b->id));
                     $perLine = (int)floor(
-                        ((72 + strlen(', ')) - (strlen('# ') + 2)) / strlen('kr, ')
+                        (72 + strlen(', ') - (strlen('# ') + 2)) / strlen('kr, ')
                     );
                     for ($i = 0; $i < count($regions); $i += $perLine) {
                         $lines[] = '  ' . implode(', ', array_map(
-                            fn($region) => $region->id,
+                            fn ($region) => $region->id,
                             array_slice($regions, $i, $perLine),
                         ));
                     }

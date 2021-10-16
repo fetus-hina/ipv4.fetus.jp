@@ -8,4 +8,4 @@ return (function (array $db): array {
         'username' => 'ipv4test',
         'password' => 'ipv4test',
     ]);
-})(require(__DIR__ . '/db.php'));
+})(require __DIR__ . '/db.php');

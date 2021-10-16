@@ -12,7 +12,7 @@ use yii\web\View;
 $controller = Yii::$app->controller;
 $pageId = vsprintf('%s/%s', [
   $controller->id,
-  $controller->action->id ?? 'UNKNOWN'
+  $controller->action->id ?? 'UNKNOWN',
 ]);
 
 ?>
@@ -22,7 +22,7 @@ $pageId = vsprintf('%s/%s', [
   implode('', [
     Html::tag('h1', Html::a(
       Html::encode('fetus'),
-      ($pageId === 'site/index')
+      $pageId === 'site/index'
         ? Yii::$app->params['authorWebsite']
         : ['site/index']
     )),

@@ -57,7 +57,7 @@ if (Yii::$app->request->isPjax) {
           ],
         ]) . "\n" ?>
         <div class="dropdown-menu shadow" aria-labelledby="download-access-control"><?= implode('', array_map(
-          fn($model) => Html::a(
+          fn ($model) => Html::a(
             Html::encode($model->name),
             ['region/plain',
               'cc' => $region->id,

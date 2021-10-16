@@ -144,7 +144,7 @@ final class KrfilterTargetListWidget extends Widget
             Html::tag(
                 'ul',
                 implode('', array_map(
-                    fn($region) => Html::tag(
+                    fn ($region) => Html::tag(
                         'li',
                         $this->renderDialogBodyRow($region),
                         ['class' => 'list-group-item']

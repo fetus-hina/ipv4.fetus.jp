@@ -146,6 +146,7 @@ final class DownloadFormatter
             throw new Exception('Invalid prefix: ' . $prefix);
         }
 
+        // phpcs:ignore SlevomatCodingStandard.PHP.UselessParentheses.UselessParentheses
         $maskBin = (0xffffffff << (32 - $prefix)) & 0xffffffff;
         return long2ip($maskBin);
     }
@@ -166,6 +167,7 @@ final class DownloadFormatter
             throw new Exception('Invalid prefix: ' . $prefix);
         }
 
+        // phpcs:ignore SlevomatCodingStandard.PHP.UselessParentheses.UselessParentheses
         $subnetMask = (0xffffffff << (32 - $prefix)) & 0xffffffff;
         $broadcast = $network | ($subnetMask ^ 0xffffffff);
         return long2ip($broadcast);
@@ -223,12 +225,12 @@ final class DownloadFormatter
 
         $row = function (string $text) use ($comment): string {
             return implode('', [
-                ($comment->line_begin !== null && $comment->line_begin !== '')
-                    ? ($comment->line_begin . ' ')
+                $comment->line_begin !== null && $comment->line_begin !== ''
+                    ? $comment->line_begin . ' '
                     : '',
                 $text,
-                ($comment->line_end !== null && $comment->line_end !== '')
-                    ? ($comment->line_end . ' ')
+                $comment->line_end !== null && $comment->line_end !== ''
+                    ? $comment->line_end . ' '
                     : '',
             ]);
         };

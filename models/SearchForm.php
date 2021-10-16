@@ -61,7 +61,7 @@ final class SearchForm extends Model
         }
 
         return implode('.', array_map(
-            fn($v) => (string)intval($v, 10),
+            fn ($v) => (string)intval($v, 10),
             explode('.', (string)$this->query)
         ));
     }

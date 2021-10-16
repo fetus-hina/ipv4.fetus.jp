@@ -36,7 +36,7 @@ class RegionController extends Controller
             throw new NotFoundHttpException(Yii::t('yii', 'Page not found.'));
         }
 
-        $templateModel = ($template !== null)
+        $templateModel = $template !== null
             ? DownloadTemplate::find()
                 ->andWhere([
                     'can_use_in_url' => true,
@@ -61,7 +61,7 @@ class RegionController extends Controller
             $resp->format = Response::FORMAT_RAW;
             $resp->charset = 'UTF-8';
             $resp->headers->set('Content-Type', 'text/plain');
-            $resp->stream = fn() => DownloadFormatter::format(
+            $resp->stream = fn () => DownloadFormatter::format(
                 vsprintf('[%s] %s (%s)', [
                     $region->id,
                     $region->name_ja,
@@ -71,7 +71,7 @@ class RegionController extends Controller
                 ['region/plain', 'cc' => $region->id, 'template' => $template, 'control' => $control],
                 ['region/view', 'cc' => $region->id],
                 $templateModel,
-                ($control !== null)
+                $control !== null
                     ? ($control === 'allow')
                     : ($region->id === 'jp'),
                 (function () use ($region) {
