@@ -10,7 +10,7 @@ class FlagIconCssAsset extends AssetBundle
 {
     public $sourcePath = '@npm/flag-icon-css';
     public $css = [
-        'css/flag-icon.min.css',
+        'css/flag-icons.min.css',
     ];
     public $publishOptions = [
         'only' => [

@@ -5,7 +5,7 @@
     "@fetus-hina/fetus.css": "git+https://github.com/fetus-hina/fetus.css.git#semver:^5.1.1",
     "@fortawesome/fontawesome-free": "^5.15.4",
     "bootstrap": "^5.1.3",
-    "flag-icon-css": "^3.5.0",
+    "flag-icon-css": "^4.0.0",
     "inputmask": "^5.0.6",
     "jquery": "^3.6.0",
     "punycode": "^2.1.1",
