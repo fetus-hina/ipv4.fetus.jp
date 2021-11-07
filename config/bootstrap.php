@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use yii\base\Widget;
-use yii\bootstrap4\LinkPager as BSLinkPager;
+use yii\bootstrap5\LinkPager as BSLinkPager;
 use yii\data\Pagination;
 use yii\grid\GridView;
 use yii\helpers\Html;

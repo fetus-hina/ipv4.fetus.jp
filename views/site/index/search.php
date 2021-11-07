@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use app\models\SearchForm;
-use yii\bootstrap4\ActiveForm;
+use yii\bootstrap5\ActiveForm;
 use yii\helpers\Html;
 
 /**

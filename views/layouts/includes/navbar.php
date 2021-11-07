@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use yii\bootstrap4\BootstrapPluginAsset;
+use yii\bootstrap5\BootstrapPluginAsset;
 use yii\helpers\Html;
 use yii\web\View;
 

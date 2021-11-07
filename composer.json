@@ -30,7 +30,7 @@
         "scssphp/scssphp": "^1.6",
         "statink/yii2-sortable-table": "*",
         "yiisoft/yii2": "*",
-        "yiisoft/yii2-bootstrap4": "*",
+        "yiisoft/yii2-bootstrap5": "*",
         "yiisoft/yii2-httpclient": "*"
     },
     "require-dev": {

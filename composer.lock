@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cf4ec8a3c5b762431399e4726879705b",
+    "content-hash": "791ef30e647049b3431996d1e4663b61",
     "packages": [
         {
             "name": "cebe/markdown",
@@ -658,46 +658,38 @@
             "time": "2021-08-09T17:38:43+00:00"
         },
         {
-            "name": "yiisoft/yii2-bootstrap4",
-            "version": "2.0.10",
+            "name": "yiisoft/yii2-bootstrap5",
+            "version": "2.0.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/yiisoft/yii2-bootstrap4.git",
-                "reference": "e6d0e58f43d3910129d554ac183aac17f65be639"
+                "url": "https://github.com/yiisoft/yii2-bootstrap5.git",
+                "reference": "258583d8a61c7a32d7164d9a6dfeb9b9ea0e83fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-bootstrap4/zipball/e6d0e58f43d3910129d554ac183aac17f65be639",
-                "reference": "e6d0e58f43d3910129d554ac183aac17f65be639",
+                "url": "https://api.github.com/repos/yiisoft/yii2-bootstrap5/zipball/258583d8a61c7a32d7164d9a6dfeb9b9ea0e83fc",
+                "reference": "258583d8a61c7a32d7164d9a6dfeb9b9ea0e83fc",
                 "shasum": ""
             },
             "require": {
-                "npm-asset/bootstrap": "^4.3",
-                "yiisoft/yii2": "~2.0"
+                "bower-asset/bootstrap": "^5.1.0",
+                "ext-json": "*",
+                "php": ">=7.0",
+                "yiisoft/yii2": "^2.0.42"
             },
             "require-dev": {
-                "cweagans/composer-patches": "^1.7",
-                "phpunit/phpunit": "4.8.34",
+                "phpunit/phpunit": "^6.5.14",
                 "yiisoft/yii2-coding-standards": "~2.0"
             },
             "type": "yii2-extension",
             "extra": {
                 "branch-alias": {
                     "dev-master": "1.0.x-dev"
-                },
-                "patches": {
-                    "phpunit/phpunit-mock-objects": {
-                        "Fix PHP 7 and 8 compatibility": "https://yiisoft.github.io/phpunit-patches/phpunit_mock_objects.patch"
-                    },
-                    "phpunit/phpunit": {
-                        "Fix PHP 7 compatibility": "https://yiisoft.github.io/phpunit-patches/phpunit_php7.patch",
-                        "Fix PHP 8 compatibility": "https://yiisoft.github.io/phpunit-patches/phpunit_php8.patch"
-                    }
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "yii\\bootstrap4\\": "src"
+                    "yii\\bootstrap5\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -706,40 +698,24 @@
             ],
             "authors": [
                 {
-                    "name": "Qiang Xue",
-                    "email": "qiang.xue@gmail.com",
-                    "homepage": "http://www.yiiframework.com/"
-                },
-                {
-                    "name": "Alexander Makarov",
-                    "email": "sam@rmcreative.ru",
-                    "homepage": "http://rmcreative.ru/"
-                },
-                {
-                    "name": "Antonio Ramirez",
-                    "email": "amigo.cobos@gmail.com"
-                },
-                {
-                    "name": "Paul Klimov",
-                    "email": "klimov.paul@gmail.com"
+                    "name": "Sergey Zhukovskiy",
+                    "email": "mylistryx@gmail.com",
+                    "homepage": "https://net23.ru/"
                 },
                 {
                     "name": "Simon Karlen",
                     "email": "simi.albi@outlook.com"
                 }
             ],
-            "description": "The Twitter Bootstrap extension for the Yii framework",
+            "description": "The Twitter Bootstrap v5 extension for the Yii framework",
             "keywords": [
                 "bootstrap",
-                "bootstrap4",
+                "bootstrap5",
                 "yii2"
             ],
             "support": {
-                "forum": "http://www.yiiframework.com/forum/",
-                "irc": "irc://irc.freenode.net/yii",
-                "issues": "https://github.com/yiisoft/yii2-bootstrap4/issues",
-                "source": "https://github.com/yiisoft/yii2-bootstrap4",
-                "wiki": "http://www.yiiframework.com/wiki/"
+                "issues": "https://github.com/yiisoft/yii2-bootstrap5/issues",
+                "source": "https://github.com/yiisoft/yii2-bootstrap5"
             },
             "funding": [
                 {
@@ -751,11 +727,11 @@
                     "type": "open_collective"
                 },
                 {
-                    "url": "https://tidelift.com/funding/github/packagist/yiisoft/yii2-bootstrap4",
+                    "url": "https://tidelift.com/funding/github/packagist/yiisoft/yii2-bootstrap5",
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-05-05T21:56:41+00:00"
+            "time": "2021-10-21T20:37:19+00:00"
         },
         {
             "name": "yiisoft/yii2-composer",

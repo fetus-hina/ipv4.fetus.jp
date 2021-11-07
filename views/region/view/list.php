@@ -5,7 +5,7 @@ declare(strict_types=1);
 use app\models\AllocationCidr;
 use app\models\Region;
 use app\models\RegionStat;
-use yii\bootstrap4\LinkPager;
+use yii\bootstrap5\LinkPager;
 use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
 use yii\helpers\Html;
