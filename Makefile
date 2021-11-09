@@ -9,7 +9,7 @@ JS_DEST_FILES := $(patsubst %.js,%.min.js,$(JS_SRC_FILES))
 all: init $(JS_DEST_FILES)
 
 .PHONY: init
-init: node_modules vendor $(CONFIG_FILES)
+init: node_modules vendor $(CONFIG_FILES) web/favicon.ico
 
 .PHONY: clean
 clean:
@@ -19,7 +19,8 @@ clean:
 		coverage.serialized \
 		node_modules \
 		vendor \
-		web/assets/*
+		web/assets/* \
+		web/favicon.ico
 
 .PHONY: test
 test: vendor
@@ -64,3 +65,6 @@ config/params/git-revision.php:
 
 %.min.js: %.js node_modules
 	npx babel $< | npx terser --compress --mangle -o $@
+
+web/favicon.ico:
+	curl -o $@ -fsSL https://fetus.jp/favicon.ico
