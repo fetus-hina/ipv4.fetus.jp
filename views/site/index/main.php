@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use app\assets\FlagIconCssAsset;
+use app\assets\FlagIconsAsset;
 use app\models\RegionStat;
 use statink\yii2\sortableTable\SortableTableAsset;
 use yii\data\ActiveDataProvider;
@@ -12,7 +12,7 @@ use yii\web\View;
 
 /** @var View $this */
 
-FlagIconCssAsset::register($this);
+FlagIconsAsset::register($this);
 SortableTableAsset::register($this);
 
 ?>

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use app\assets\FlagIconCssAsset;
+use app\assets\FlagIconsAsset;
 use app\models\SearchForm;
 use app\models\SearchResult;
 use app\widgets\SnsWidget;
@@ -16,7 +16,7 @@ use yii\widgets\DetailView;
  * @var View $this
  */
 
-FlagIconCssAsset::register($this);
+FlagIconsAsset::register($this);
 
 $this->title = '検索結果 : ' . Yii::$app->name;
 ?>

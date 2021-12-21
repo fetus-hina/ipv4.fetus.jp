@@ -6,9 +6,9 @@ namespace app\assets;
 
 use yii\web\AssetBundle;
 
-class FlagIconCssAsset extends AssetBundle
+final class FlagIconsAsset extends AssetBundle
 {
-    public $sourcePath = '@npm/flag-icon-css';
+    public $sourcePath = '@npm/flag-icons';
     public $css = [
         'css/flag-icons.min.css',
     ];

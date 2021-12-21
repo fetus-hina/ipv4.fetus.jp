@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use app\assets\FlagIconCssAsset;
+use app\assets\FlagIconsAsset;
 use app\models\Region;
 use app\widgets\SnsWidget;
 use yii\helpers\Html;
@@ -14,7 +14,7 @@ use yii\web\View;
  * @var Region $region
  */
 
-FlagIconCssAsset::register($this);
+FlagIconsAsset::register($this);
 
 $this->title = vsprintf('%s[%s]に割り振りされたIPアドレスの一覧 : %s', [
   $region->name_ja,

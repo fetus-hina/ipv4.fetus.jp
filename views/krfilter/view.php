@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use ScssPhp\ScssPhp\Compiler as Scss;
-use app\assets\FlagIconCssAsset;
+use app\assets\FlagIconsAsset;
 use app\models\DownloadTemplate;
 use app\models\Krfilter;
 use app\widgets\KrfilterTargetListWidget;
@@ -17,7 +17,7 @@ use yii\web\View;
 
 $this->title = 'krfilter / eufilter : ' . Yii::$app->name;
 
-FlagIconCssAsset::register($this);
+FlagIconsAsset::register($this);
 
 $this->registerCss(
     (new Scss())

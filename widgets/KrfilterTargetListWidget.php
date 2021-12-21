@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace app\widgets;
 
-use app\assets\FlagIconCssAsset;
+use app\assets\FlagIconsAsset;
 use app\assets\FontAwesomeAsset;
 use app\models\Krfilter;
 use app\models\Region;
@@ -137,7 +137,7 @@ final class KrfilterTargetListWidget extends Widget
 
     private function renderDialogBody(): string
     {
-        FlagIconCssAsset::register($this->view);
+        FlagIconsAsset::register($this->view);
 
         return Html::tag(
             'div',
