@@ -50,7 +50,7 @@ Yii::$container->set(LinkPager::class, [
     'nextPageLabel' => implode('', [
         Html::tag(
             'span',
-            Html::tag('span', '', ['class' => 'fas fa-angle-right']),
+            Html::tag('span', '', ['class' => 'bi bi-chevron-right']),
             ['aria-hidden' => 'true']
         ),
         Html::tag('span', Html::encode('Next'), ['class' => 'sr-only']),
@@ -58,7 +58,7 @@ Yii::$container->set(LinkPager::class, [
     'prevPageLabel' => implode('', [
         Html::tag(
             'span',
-            Html::tag('span', '', ['class' => 'fas fa-angle-left']),
+            Html::tag('span', '', ['class' => 'bi bi-chevron-left']),
             ['aria-hidden' => 'true']
         ),
         Html::tag('span', Html::encode('Previous'), ['class' => 'sr-only']),
@@ -66,7 +66,7 @@ Yii::$container->set(LinkPager::class, [
     'firstPageLabel' => implode('', [
         Html::tag(
             'span',
-            Html::tag('span', '', ['class' => 'fas fa-angle-double-left']),
+            Html::tag('span', '', ['class' => 'bi bi-chevron-double-left']),
             ['aria-hidden' => 'true']
         ),
         Html::tag('span', Html::encode('First'), ['class' => 'sr-only']),
@@ -74,7 +74,7 @@ Yii::$container->set(LinkPager::class, [
     'lastPageLabel' => implode('', [
         Html::tag(
             'span',
-            Html::tag('span', '', ['class' => 'fas fa-angle-double-right']),
+            Html::tag('span', '', ['class' => 'bi bi-chevron-double-right']),
             ['aria-hidden' => 'true']
         ),
         Html::tag('span', Html::encode('Last'), ['class' => 'sr-only']),

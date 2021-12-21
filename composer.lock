@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "791ef30e647049b3431996d1e4663b61",
+    "content-hash": "171ddd90c75d2c5b36f4a74a712f8d3c",
     "packages": [
         {
             "name": "cebe/markdown",
@@ -534,6 +534,45 @@
                 }
             ],
             "time": "2021-11-22T22:36:24+00:00"
+        },
+        {
+            "name": "twbs/bootstrap-icons",
+            "version": "v1.7.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twbs/icons.git",
+                "reference": "b69fe3911e064d1baa772393aa96bb082f420872"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twbs/icons/zipball/b69fe3911e064d1baa772393aa96bb082f420872",
+                "reference": "b69fe3911e064d1baa772393aa96bb082f420872",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mark Otto",
+                    "email": "markdotto@gmail.com"
+                }
+            ],
+            "description": "Official open source SVG icon library for Bootstrap",
+            "homepage": "https://icons.getbootstrap.com/",
+            "keywords": [
+                "bootstrap",
+                "icon font",
+                "icons",
+                "svg"
+            ],
+            "support": {
+                "issues": "https://github.com/twbs/icons/issues",
+                "source": "https://github.com/twbs/icons/tree/v1.7.2"
+            },
+            "time": "2021-12-03T21:41:47+00:00"
         },
         {
             "name": "yiisoft/yii2",

@@ -2,10 +2,15 @@
 
 declare(strict_types=1);
 
+use app\assets\BootstrapIconsAsset;
 use yii\helpers\Html;
 use yii\web\View;
 
-/** @var View $this */
+/**
+ * @var View $this
+ */
+
+BootstrapIconsAsset::register($this);
 
 ?>
 <footer class="bg-light border-top">
@@ -21,7 +26,7 @@ use yii\web\View;
         ]),
         Yii::$app->params['authorTwitter'] ?? null
           ? Html::a(
-            Html::tag('span', '', ['class' => 'fab fa-twitter']),
+            Html::tag('span', '', ['class' => 'bi bi-twitter']),
             sprintf('https://twitter.com/%s', Yii::$app->params['authorTwitter']),
             [
               'target' => '_blank',
@@ -32,7 +37,7 @@ use yii\web\View;
           : '',
         Yii::$app->params['authorGitHub'] ?? null
           ? Html::a(
-            Html::tag('span', '', ['class' => 'fab fa-github']),
+            Html::tag('span', '', ['class' => 'bi bi-github']),
             sprintf('https://github.com/%s', Yii::$app->params['authorGitHub']),
             [
               'target' => '_blank',

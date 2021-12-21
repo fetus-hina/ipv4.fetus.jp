@@ -116,7 +116,7 @@ SortableTableAsset::register($this);
             ],
             [
               'label' => 'IPアドレス数 ' .
-                '<span class="arrow"><span class="fa fa-angle-down"></span></span>',
+                '<span class="arrow"><span class="bi bi-arrow-down-short"></span></span>',
               'encodeLabel' => false,
               'attribute' => 'total_address_count',
               'format' => 'integer',

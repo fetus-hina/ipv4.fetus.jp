@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
+use app\assets\BootstrapIconsAsset;
 use statink\yii2\sortableTable\JqueryStupidTableAsset;
+use statink\yii2\sortableTable\SortableTableAsset;
 use yii\bootstrap5\BootstrapAsset;
 use yii\bootstrap5\BootstrapPluginAsset;
 use yii\validators\PunycodeAsset;
@@ -16,6 +18,18 @@ return [
     'bundles' => [
         JqueryStupidTableAsset::class => [
             'sourcePath' => '@npm/stupid-table-plugin',
+        ],
+        SortableTableAsset::class => [
+            'basePath' => '@webroot/js',
+            'baseUrl' => '@web/js',
+            'sourcePath' => null,
+            'js' => [
+                'sortable-table.min.js',
+            ],
+            'depends' => [
+                JqueryStupidTableAsset::class,
+                BootstrapIconsAsset::class,
+            ],
         ],
         BootstrapAsset::class => [
             'sourcePath' => '@npm/@fetus-hina/fetus.css/dist',

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace app\widgets;
 
+use app\assets\BootstrapIconsAsset;
 use app\assets\FlagIconsAsset;
-use app\assets\FontAwesomeAsset;
 use app\models\Krfilter;
 use app\models\Region;
 use yii\base\Widget;
@@ -21,7 +21,9 @@ final class KrfilterTargetListWidget extends Widget
     public function run()
     {
         BootstrapAsset::register($this->view);
+        BootstrapIconsAsset::register($this->view);
         BootstrapPluginAsset::register($this->view);
+        FlagIconsAsset::register($this->view);
 
         return Html::tag(
             'div',
@@ -35,15 +37,13 @@ final class KrfilterTargetListWidget extends Widget
 
     private function renderButton(): string
     {
-        FontAwesomeAsset::register($this->view);
-
         return Html::tag(
             'div',
             Html::tag(
                 'button',
                 implode(' ', [
                     Html::encode('対象国/地域一覧'),
-                    Html::tag('span', '', ['class' => 'far fa-clone']),
+                    Html::tag('span', '', ['class' => 'bi bi-window-stack']),
                 ]),
                 [
                     'class' => 'btn btn-outline-secondary btn-sm',
@@ -137,8 +137,6 @@ final class KrfilterTargetListWidget extends Widget
 
     private function renderDialogBody(): string
     {
-        FlagIconsAsset::register($this->view);
-
         return Html::tag(
             'div',
             Html::tag(
@@ -190,7 +188,7 @@ final class KrfilterTargetListWidget extends Widget
                 Html::tag(
                     'div',
                     Html::a(
-                        Html::tag('span', '', ['class' => 'fas fa-info-circle']),
+                        Html::tag('span', '', ['class' => 'bi bi-info-circle']),
                         ['region/view', 'cc' => $region->id],
                         []
                     ),

@@ -2,13 +2,18 @@
 
 declare(strict_types=1);
 
+use app\assets\BootstrapIconsAsset;
 use app\models\SearchForm;
 use yii\bootstrap5\ActiveForm;
 use yii\helpers\Html;
+use yii\web\View;
 
 /**
  * @var SearchForm $form
+ * @var View $this
  */
+
+BootstrapIconsAsset::register($this);
 
 ?>
 <div class="card border-primary">
@@ -28,7 +33,7 @@ use yii\helpers\Html;
       </div>
       <div class="d-grid">
         <?= Html::submitButton(
-          Html::tag('span', '', ['class' => 'fas fa-search']) . ' 検索',
+          Html::tag('span', '', ['class' => 'bi bi-search']) . ' 検索',
           ['class' => 'btn btn-primary']
         ) . "\n" ?>
       </div>
