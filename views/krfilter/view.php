@@ -112,7 +112,7 @@ $this->registerCss(
                     'title' => $model->name_ja,
                   ]
                 ),
-                Html::tag('span', Html::encode("({$model->name_ja}), "), ['class' => 'sr-only']),
+                Html::tag('span', Html::encode("({$model->name_ja}), "), ['class' => 'visually-hidden']),
               ]),
               $regions,
             )) ?>の統合リストです。
