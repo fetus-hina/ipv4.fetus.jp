@@ -13,4 +13,4 @@ make bin/dep
 git tag -m $VERSION_TAG $VERSION_TAG || /bin/true
 git push origin master $VERSION_TAG
 
-bin/dep --tag="$VERSION_TAG" -- production
+bin/dep deploy --tag="$VERSION_TAG" -- production
