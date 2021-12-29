@@ -24,6 +24,9 @@ use yii\helpers\Html;
       'National flags of the countries are displayed using ' . $flagIcons . '.',
       'You may not see the latest flag, or you may see the incorrect flag.',
     ]),
-    ['class' => 'small'],
+    [
+      'class' => 'small',
+      'lang' => 'en',
+    ],
   );
 })();
