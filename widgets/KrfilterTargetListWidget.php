@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace app\widgets;
 
 use app\assets\BootstrapIconsAsset;
-use app\assets\FlagIconsAsset;
 use app\models\Krfilter;
 use app\models\Region;
 use yii\base\Widget;
@@ -23,7 +22,6 @@ final class KrfilterTargetListWidget extends Widget
         BootstrapAsset::register($this->view);
         BootstrapIconsAsset::register($this->view);
         BootstrapPluginAsset::register($this->view);
-        FlagIconsAsset::register($this->view);
 
         return Html::tag(
             'div',
@@ -162,7 +160,7 @@ final class KrfilterTargetListWidget extends Widget
             implode('', [
                 Html::tag(
                     'div',
-                    Html::tag('span', '', ['class' => ['flag-icon', 'flag-icon-' . $region->id]]),
+                    FlagIcon::widget(['cc' => $region->id]),
                     ['class' => 'me-2']
                 ),
                 Html::tag(

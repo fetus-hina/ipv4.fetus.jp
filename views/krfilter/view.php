@@ -3,9 +3,9 @@
 declare(strict_types=1);
 
 use ScssPhp\ScssPhp\Compiler as Scss;
-use app\assets\FlagIconsAsset;
 use app\models\DownloadTemplate;
 use app\models\Krfilter;
+use app\widgets\FlagIcon;
 use app\widgets\KrfilterTargetListWidget;
 use app\widgets\SnsWidget;
 use yii\helpers\Html;
@@ -16,8 +16,6 @@ use yii\web\View;
  */
 
 $this->title = 'krfilter / eufilter : ' . Yii::$app->name;
-
-FlagIconsAsset::register($this);
 
 $this->registerCss(
     (new Scss())
@@ -101,17 +99,9 @@ $this->registerCss(
           <p class="mb-2 flex-grow-1">
             <?= implode(' ', array_map(
               fn ($model) => implode('', [
-                Html::tag(
-                  'span',
-                  '',
-                  [
-                    'class' => [
-                      'flag-icon',
-                      "flag-icon-{$model->id}",
-                    ],
-                    'title' => $model->name_ja,
-                  ]
-                ),
+                Html::tag('span', FlagIcon::widget(['cc' => $model->id]), [
+                  'title' => $model->name_ja,
+                ]),
                 Html::tag('span', Html::encode("({$model->name_ja}), "), ['class' => 'visually-hidden']),
               ]),
               $regions,

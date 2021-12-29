@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-use app\assets\FlagIconsAsset;
 use app\models\SearchForm;
 use app\models\SearchResult;
+use app\widgets\FlagIcon;
 use app\widgets\SnsWidget;
 use yii\helpers\Html;
 use yii\web\View;
@@ -15,8 +15,6 @@ use yii\widgets\DetailView;
  * @var ?SearchResult $result
  * @var View $this
  */
-
-FlagIconsAsset::register($this);
 
 $this->title = '検索結果 : ' . Yii::$app->name;
 ?>
@@ -66,10 +64,7 @@ $this->title = '検索結果 : ' . Yii::$app->name;
                 [
                   'label' => '国または地域',
                   'value' => vsprintf('%s %s %s', [
-                    Html::tag('span', '', ['class' => [
-                      'flag-icon',
-                      "flag-icon-{$result->region->id}",
-                    ]]),
+                    FlagIcon::widget(['cc' => $result->region->id]),
                     Html::tag('code', Html::encode($result->region->id)),
                     Html::a(
                       Html::encode(vsprintf('%s (%s)', [

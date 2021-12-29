@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use app\assets\FlagIconsAsset;
 use app\models\RegionStat;
+use app\widgets\FlagIcon;
 use statink\yii2\sortableTable\SortableTableAsset;
 use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
@@ -12,7 +12,6 @@ use yii\web\View;
 
 /** @var View $this */
 
-FlagIconsAsset::register($this);
 SortableTableAsset::register($this);
 
 ?>
@@ -60,10 +59,7 @@ SortableTableAsset::register($this);
             [
               'label' => '',
               'attribute' => 'region_id',
-              'format' => fn ($t) => Html::tag('span', '', ['class' => [
-                'flag-icon',
-                "flag-icon-{$t}",
-              ]]),
+              'format' => fn ($t) => FlagIcon::widget(['cc' => $t]),
               'contentOptions' => fn ($model) => [
                 'class' => 'text-center',
                 'data' => [

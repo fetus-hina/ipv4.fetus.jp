@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use app\assets\FlagIconsAsset;
 use app\models\Region;
+use app\widgets\FlagIcon;
 use app\widgets\SnsWidget;
 use yii\helpers\Html;
 use yii\web\Controller;
@@ -13,8 +13,6 @@ use yii\web\View;
  * @var View $this
  * @var Region $region
  */
-
-FlagIconsAsset::register($this);
 
 $this->title = vsprintf('%s[%s]に割り振りされたIPアドレスの一覧 : %s', [
   $region->name_ja,
@@ -32,10 +30,7 @@ if (
 ?>
 <main>
   <h1><?= vsprintf('%s%s %s', [
-    Html::tag('span', '', ['class' => [
-      'flag-icon',
-      "flag-icon-{$region->id}",
-    ]]),
+    FlagIcon::widget(['cc' => $region->id]),
     Html::encode($region->name_ja),
     Html::tag(
       'small',
