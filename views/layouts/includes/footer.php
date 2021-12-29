@@ -75,5 +75,6 @@ BootstrapIconsAsset::register($this);
     ) . "\n" ?>
 <?php } ?>
     <?= $this->render('//layouts/includes/footer/database-timestamp') . "\n" ?>
+    <?= $this->render('//layouts/includes/footer/flag-icons') . "\n" ?>
   </div>
 </footer>
