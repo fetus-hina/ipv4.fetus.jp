@@ -206,4 +206,26 @@ jobs:
 
       - name: 'Run semistandard'
         run: |
-          npx semistandard | npx snazzy
+          npx semistandard 'resources/**/*.es' | npx snazzy
+
+  cssStyleCheck:
+    name: 'CSS Coding Style'
+
+    runs-on: 'ubuntu-20.04'
+
+    needs:
+      - 'makeNpmCache'
+
+    steps:
+      - uses: 'actions/checkout@v2'
+
+      - uses: 'actions/cache@v2'
+        with:
+          path: |
+            ~/.npm
+            node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+
+      - name: 'Run stylelint'
+        run: |
+          npx stylelint 'resources/**/*.scss'

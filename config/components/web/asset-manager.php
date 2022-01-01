@@ -20,15 +20,16 @@ return [
             'sourcePath' => '@npm/stupid-table-plugin',
         ],
         SortableTableAsset::class => [
-            'basePath' => '@webroot/js',
-            'baseUrl' => '@web/js',
-            'sourcePath' => null,
+            'basePath' => null,
+            'baseUrl' => null,
+            'sourcePath' => '@app/resources',
             'js' => [
-                'sortable-table.min.js',
+                'js/sortable-table.min.js',
             ],
             'depends' => [
-                JqueryStupidTableAsset::class,
                 BootstrapIconsAsset::class,
+                JqueryAsset::class,
+                JqueryStupidTableAsset::class,
             ],
         ],
         BootstrapAsset::class => [

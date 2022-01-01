@@ -9,16 +9,14 @@ use yii\web\AssetBundle;
 use yii\web\JqueryAsset;
 use yii\web\YiiAsset;
 
-class AppAsset extends AssetBundle
+final class AppAsset extends AssetBundle
 {
     public $basePath = '@webroot';
     public $baseUrl = '@web';
-    public $js = [
-        'js/focus-input.min.js',
-    ];
     public $depends = [
         BootstrapAsset::class,
         CardShadowAsset::class,
+        FocusInputAsset::class,
         JqueryAsset::class,
         YiiAsset::class,
     ];
