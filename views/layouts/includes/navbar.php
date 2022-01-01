@@ -12,7 +12,7 @@ BootstrapPluginAsset::register($this);
 
 ?>
 <div class="container">
-  <nav class="navbar navbar-dark bg-dark navbar-expand-md rounded px-3">
+  <nav class="navbar navbar-dark bg-dark navbar-expand-md shadow rounded px-3">
     <?= Html::a(Html::encode(Yii::$app->name), ['site/index'], ['class' => 'navbar-brand']) . "\n" ?>
     <?= Html::tag(
       'button',
