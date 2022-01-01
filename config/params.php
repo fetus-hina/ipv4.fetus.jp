@@ -9,7 +9,7 @@ return (function (): array {
     };
 
     return [
-        'copyrightYear' => '2014-2021',
+        'copyrightYear' => '2014-2022',
         'copyrightHolder' => 'AIZAWA Hina',
 
         'authorWebsite' => 'https://fetus.jp/',
