@@ -18,6 +18,7 @@ class AppAsset extends AssetBundle
     ];
     public $depends = [
         BootstrapAsset::class,
+        CardShadowAsset::class,
         JqueryAsset::class,
         YiiAsset::class,
     ];
