@@ -82,10 +82,12 @@ config/params/git-revision.php:
 
 %.min.css: %.css node_modules
 	npx postcss $< --no-map --use cssnano -o $@
+	@touch $@
 
 .PRECIOUS: %.css node_modules
 %.css: %.scss node_modules
 	npx sass $< | npx postcss --no-map --use autoprefixer -o $@
+	@touch $@
 
 web/favicon.ico:
 	curl -o $@ -fsSL https://fetus.jp/favicon.ico
