@@ -154,6 +154,10 @@ jobs:
     continue-on-error: '${{ matrix.env.experimental }}'
 
     steps:
+      - name: 'Install additional packages'
+        run:
+          sudo apt install -y gettext
+
       - uses: 'actions/checkout@v2'
 
       - uses: 'actions/cache@v2'
