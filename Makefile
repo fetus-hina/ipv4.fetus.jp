@@ -8,8 +8,11 @@ JS_DEST_FILES := $(patsubst %.es,%.min.js,$(JS_SRC_FILES))
 CSS_SRC_FILES := $(shell find resources/css -type f -name '*.scss')
 CSS_DEST_FILES := $(patsubst %.scss,%.min.css,$(CSS_SRC_FILES))
 
+MESSAGE_SRC_FILES := $(shell find messages -type f -name '*.po')
+MESSAGE_DEST_FILES := $(MESSAGE_SRC_FILES:.po=.mo)
+
 .PHONY: all
-all: init $(JS_DEST_FILES) $(CSS_DEST_FILES)
+all: init $(JS_DEST_FILES) $(CSS_DEST_FILES) $(MESSAGE_DEST_FILES) messages
 
 .PHONY: init
 init: node_modules vendor $(CONFIG_FILES) web/favicon.ico
@@ -21,6 +24,7 @@ clean:
 		$(CSS_DEST_FILES:%.min.css=%.css) \
 		$(JS_DEST_FILES) \
 		$(JS_DEST_FILES:%.min.js=%.js) \
+		$(MESSAGE_DEST_FILES) \
 		composer.phar \
 		coverage.serialized \
 		node_modules \
@@ -88,6 +92,15 @@ config/params/git-revision.php:
 %.css: %.scss node_modules
 	npx sass $< | npx postcss --no-map --use autoprefixer -o $@
 	@touch $@
+
+.PHONY: messages
+messages: vendor
+	./yii message/extract @app/messages/config.php
+
+%.po: messages
+
+%.mo: %.po
+	msgfmt -o $@ $<
 
 web/favicon.ico:
 	curl -o $@ -fsSL https://fetus.jp/favicon.ico

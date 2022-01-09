@@ -32,7 +32,8 @@
         "twbs/bootstrap-icons": "^1.7",
         "yiisoft/yii2": "*",
         "yiisoft/yii2-bootstrap5": "*",
-        "yiisoft/yii2-httpclient": "*"
+        "yiisoft/yii2-httpclient": "*",
+        "matomo/device-detector": "^5.0"
     },
     "require-dev": {
         "codeception/codeception": "^4.0",

@@ -56,7 +56,7 @@ BootstrapIconsAsset::register($this);
         fn ($html) => Html::tag('span', $html, ['class' => 'text-nowrap']),
         array_filter([
           Html::a(
-            Html::encode('ソースコード'),
+            Yii::t('app', 'Source Code'),
             Yii::$app->params['repository'],
             [
               'target' => '_blank',

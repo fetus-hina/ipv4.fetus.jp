@@ -22,13 +22,13 @@ if (!($timestamp instanceof DateTimeImmutable)) {
 
 echo Html::tag(
   'div',
-  vsprintf('DB最終更新日時: %s (%.3f 秒)', [
-    Html::tag(
+  Yii::t('app', 'Database last updated: {updatedAt} ({took,number,,0.000} sec.)', [
+    'updatedAt' => Html::tag(
       'time',
       Html::encode(
         $timestamp
           ->setTimezone(new DateTimeZone(Yii::$app->timeZone))
-          ->format('Y-m-d H:i:s')
+          ->format('Y-m-d H:i:s P')
       ),
       [
         'datetime' => $timestamp
@@ -36,7 +36,7 @@ echo Html::tag(
           ->format(DateTime::ATOM),
       ]
     ),
-    $params['dbUpdateTimestamp']['took'],
+    'took' => $params['dbUpdateTimestamp']['took'],
   ]),
-  ['class' => 'small']
+  ['class' => 'small'],
 );

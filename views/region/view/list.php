@@ -28,7 +28,7 @@ if ($isPjax) {
 ?>
 <div class="card border-primary" id="cidr-list">
   <div class="card-header bg-primary text-white">
-    割り振り一覧
+    <?= Yii::t('app', 'Allocation List') . "\n" ?>
   </div>
   <div class="card-body">
 <?php if (!$isPjax) { ?>
@@ -36,23 +36,31 @@ if ($isPjax) {
 <?php assert($stats instanceof RegionStat) ?>
     <div class="text-muted">
       <p class="mb-2">
-        <?= Html::encode($region->name_ja) ?>に割り振られたIPアドレスの一覧です。
+        <?= Yii::t('app', 'This is a list of IP addresses allocated to {country}.', [
+          'country' => preg_match('/^ja\b/i', Yii::$app->language)
+            ? $region->name_ja
+            : $region->name_en,
+        ]) . "\n" ?>
       </p>
       <p class="mb-2">
-        データをアクセス制御に使いたい方は「Download」をご利用ください。
+        <?= Yii::t('app', 'In most cases, "{mergedCidr}" is more useful than this list.', [
+          'mergedCidr' => Yii::t('app', 'Merged CIDR'),
+        ]) . "\n" ?>
       </p>
       <p class="mb-2">
-        大体のケースでは「Merged CIDR」の表示のほうが便利です。（「だれが」「いつ」の情報は必要ないため）
+        <?= Yii::t('app', 'If you want to use it access control, use "{download}."', [
+          'download' => Yii::t('app', 'Download'),
+        ]) . "\n" ?>
       </p>
       <p class="mb-2">
-        <?= Html::encode(
-          vsprintf('%sには%s個のIPアドレスが割り振られています。これは全アドレス空間の%s、予約領域を除くと%sです。', [
-            $region->name_ja,
-            Yii::$app->formatter->asInteger($stats->total_address_count),
-            Yii::$app->formatter->asPercent($stats->total_address_count / (1 << 32), 5),
-            Yii::$app->formatter->asPercent($stats->total_address_count / ((1 << 32) - 592715776), 5),
-          ])
-        ) . "\n" ?>
+        <?= Yii::t('app', 'There are {total,number,integer} IP addresses allocated to {country}. This is {totalPct} of the total address space, and {nonReservedPct} excluding reserved space.', [
+          'country' => preg_match('/^ja\b/i', Yii::$app->language)
+            ? $region->name_ja
+            : $region->name_en,
+          'total' => $stats->total_address_count,
+          'totalPct' => Yii::$app->formatter->asPercent($stats->total_address_count / (1 << 32), 5),
+          'nonReservedPct' => Yii::$app->formatter->asPercent($stats->total_address_count / ((1 << 32) - 592715776), 5),
+        ]) . "\n" ?>
       </p>
     </div>
     <hr>
@@ -80,14 +88,14 @@ if ($isPjax) {
           ]),
           'columns' => [
             [
-              'label' => 'CIDR',
+              'label' => Yii::t('app', 'CIDR'),
               'attribute' => 'cidr',
               'contentOptions' => [
                 'class' => 'text-center',
               ],
             ],
             [
-              'label' => 'IPアドレス',
+              'label' => Yii::t('app', 'IP Address'),
               'value' => function (AllocationCidr $model): string {
                 $tmp = explode('/', $model->cidr);
                 // phpcs:ignore SlevomatCodingStandard.PHP.UselessParentheses.UselessParentheses
@@ -106,7 +114,7 @@ if ($isPjax) {
               ],
             ],
             [
-              'label' => '割り振り日',
+              'label' => Yii::t('app', 'Alloc Date'),
               'attribute' => 'block.date',
               'format' => ['date', 'short'],
               'contentOptions' => [
@@ -117,7 +125,7 @@ if ($isPjax) {
               ],
             ],
             [
-              'label' => 'レジストリ',
+              'label' => Yii::t('app', 'Registry'),
               'attribute' => 'block.registry.name',
               'contentOptions' => [
                 'class' => 'text-center d-none d-md-table-cell',

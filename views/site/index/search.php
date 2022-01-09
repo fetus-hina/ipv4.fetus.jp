@@ -18,7 +18,7 @@ BootstrapIconsAsset::register($this);
 ?>
 <div class="card border-primary">
   <div class="card-header bg-primary text-white">
-    IPアドレス検索
+    <?= Html::encode(Yii::t('app/search', 'Search IP Address')) . "\n" ?>
   </div>
   <div class="card-body">
     <?php $af = ActiveForm::begin([
@@ -28,12 +28,19 @@ BootstrapIconsAsset::register($this);
       <div class="mb-2">
         <?= $af->field($form, 'query')
           ->label(false)
-          ->textInput(['placeholder' => '例: 203.0.113.1']) . "\n"
+          ->textInput([
+            'placeholder' => Yii::t('app/search', 'e.g., {exampleIP}', [
+                'exampleIP' => '203.0.113.1',
+            ]),
+          ]) . "\n"
         ?>
       </div>
       <div class="d-grid">
         <?= Html::submitButton(
-          Html::tag('span', '', ['class' => 'bi bi-search']) . ' 検索',
+          implode(' ', [
+            Html::tag('span', '', ['class' => 'bi bi-search']),
+            Html::encode(Yii::t('app/search', 'Search')),
+          ]),
           ['class' => 'btn btn-primary']
         ) . "\n" ?>
       </div>

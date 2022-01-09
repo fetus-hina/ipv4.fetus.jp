@@ -7,26 +7,29 @@ use yii\helpers\Html;
 ?>
 <div class="card">
   <div class="card-header bg-primary text-white">
-    当サイトについて
+    <?= Yii::t('app/about', 'About Us') . "\n" ?>
   </div>
   <div class="card-body">
     <p>
-      情報は無保証です。
-      掲載されている情報を利用することで発生したいかなる損害等について当サイトは関知しません。
+      <?= Yii::t('app/about', 'Information is not guaranteed.') . "\n" ?>
+      <?= Yii::t('app/about', 'We are not responsible for any damage caused by the use of the information on this site.') . "\n" ?>
     </p>
     <p>
-      情報は毎日地域インターネットレジストリから自動的に取得して更新されます。
+      <?= Yii::t('app/about', 'The information is updated automatically every day by retrieving it from the Regional Internet Registry.') . "\n" ?>
     </p>
     <p>
-      <?= Html::a('詳しくはこちらをご覧ください。', ['site/about']) . "\n" ?>
+      <?= Html::a(
+        Yii::t('app/about', 'Click here for more information.'),
+        ['site/about']
+      ) . "\n" ?>
     </p>
     <p>
-      自動化されたアクセスについても、上記ページをご参照ください。
+      <?= Yii::t('app/about', 'For automated access, see the page above.') . "\n" ?>
     </p>
     <p class="mb-0">
-      ダウンロード可能な形式についての一応明文化された仕様については、<?= Html::a(
-        'こちらをご確認ください。',
-        ['site/schema']
+      <?= Html::a(
+        Yii::t('app/about', 'For specifications about downloadable formats, please click here.'),
+        ['site/schema'],
       ) . "\n" ?>
     </p>
   </div>

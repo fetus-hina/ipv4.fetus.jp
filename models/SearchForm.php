@@ -45,7 +45,7 @@ final class SearchForm extends Model
     public function attributeLabels()
     {
         return [
-            'query' => '検索クエリー',
+            'query' => Yii::t('app', 'Search Query'),
         ];
     }
 

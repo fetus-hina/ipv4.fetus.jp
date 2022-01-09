@@ -11,7 +11,10 @@ use yii\web\View;
  * @var View $this
  */
 
-$this->title = '出力ファイル仕様 - ' . Yii::$app->name;
+$this->title = implode(' - ', [
+    Yii::t('app/schema', 'Output Specifications'),
+    Yii::$app->name,
+]);
 
 $this->registerCss(
     (new Scss())
@@ -37,7 +40,7 @@ $this->registerCss(
 ?>
 <main>
   <h1 class="mb-4">
-    出力ファイル仕様
+    <?= Yii::t('app/schema', 'Output Specifications') . "\n" ?>
   </h1>
   <aside class="mb-0">
     <?= SnsWidget::widget() . "\n" ?>
@@ -48,73 +51,73 @@ $this->registerCss(
     <div class="col-12 col-lg-8">
       <div class="card border-primary mb-4">
         <div class="card-header bg-primary text-white">
-          このページについて
+          <?= Yii::t('app/schema', 'About This') . "\n" ?>
         </div>
         <div class="card-body">
-          <p>
-            このページでは、各ページにある「プレインテキスト」「アクセス制御用ひな形」からダウンロードできるデータファイルの形式を定義します。
-          </p>
           <p class="mb-0">
-            このファイルが無くても「見ればわかる」ように作ってありますが、明示しておくのが重要かと思いましたのでここに記録します。
+            <?= Yii::t('app/schema', 'This page defines the format of data files that can be downloaded from "{plainText}" and "{template}" on each page.', [
+              'plainText' => Yii::t('app', 'Plain Text'),
+              'template' => Yii::t('app', 'Access-Control Templates'),
+            ]) . "\n" ?>
           </p>
         </div>
       </div>
       <div class="card border-primary mb-4">
         <div class="card-header bg-primary text-white">
-          総則
+          <?= Yii::t('app/schema', 'General Rules') . "\n" ?>
         </div>
         <div class="card-body">
           <p>
-            それぞれのデータ形式で上書き規定されない限り、次の情報が全ての形式で適用されます。
+            <?= Yii::t('app/schema', 'Unless overridden by the individual data formats, the following information applies to all formats.') . "\n" ?>
           </p>
           <ul>
             <li>
-              文字コードはUTF-8です。いわゆるBOMはありません。
+              <?= Yii::t('app/schema', 'The encoding is UTF-8. No BOM.') . "\n" ?>
             </li>
             <li>
-              改行コードはCR+LFまたはLFのいずれかです。
+              <?= Yii::t('app/schema', 'The new-line code is one of CR+LF or LF.') . "\n" ?>
             </li>
             <li>
-              それぞれのレコードは改行で区切られ、1レコード1行で記載されます。
+              <?= Yii::t('app/schema', 'Each record is separated by a new-line.') . "\n" ?>
             </li>
           </ul>
           <p>
-            アクセス制御（アクセス許可・拒否）が明確にあらかじめ出力されている形式の場合、次の内容が適用されます。
+            <?= Yii::t('app/schema', 'In case of a format where access control is pre-output, the following will be applied.') . "\n" ?>
           </p>
           <ul>
             <li>
-              出力している国・地域が「日本」である場合、デフォルトで「許可」設定が出力されます。
+              <?= Yii::t('app/schema', 'If the country/region being output is "Japan", the "Allow" setting is output by default.') . "\n" ?>
             </li>
             <li>
-              出力している国・地域が「日本」以外の場合、デフォルトで「拒否」設定で出力されます。
+              <?= Yii::t('app/schema', 'If the country/region being output is not "Japan", the "Deny" setting is output by default.') . "\n" ?>
             </li>
             <li>
-              URLに「<code>?control=allow</code>」を付与すると、「許可」設定に変更できます。
+              <?= Yii::t('app/schema', 'You can change the setting to "Allow" by adding "{code}" to the URL.', [
+                'code' => '<code>?control=allow</code>',
+              ]) . "\n" ?>
             </li>
             <li>
-              URLに「<code>?control=deny</code>」を付与すると、「拒否」設定に変更できます。
+              <?= Yii::t('app/schema', 'You can change the setting to "Deny" by adding "{code}" to the URL.', [
+                'code' => '<code>?control=deny</code>',
+              ]) . "\n" ?>
             </li>
           </ul>
         </div>
       </div>
       <div class="card border-primary mb-4">
         <div class="card-header bg-primary text-white">
-          プレインテキスト
+          <?= Yii::t('app', 'Plain Text') . "\n" ?>
         </div>
         <div class="card-body">
           <ul>
             <li>
-              「<code>#</code>」で始まる行は全てコメントです。<br>
-              内容については規定されず、人間が読むことを前提にしています。機械処理時にはこの行を単純に無視します。<br>
-              コメントが行の途中から始まることはありません。<br>
-              データレコード同士の間にも挟まる可能性があります。
+              <?= $this->render('//site/schema/hash-comment') . "\n" ?>
             </li>
             <li>
-              任意の場所に空行が挟まります。<br>
-              データレコード同士の間にも挟まる可能性があります。
+              <?= $this->render('//site/schema/blank-line') . "\n" ?>
             </li>
             <li>
-              データレコードはCIDRがそのまま配置されます。
+              <?= Yii::t('app/schema', 'CIDRs are output as is.') . "\n" ?>
             </li>
           </ul>
         </div>
@@ -126,17 +129,13 @@ $this->registerCss(
         <div class="card-body">
           <ul>
             <li>
-              Apache 2.2 形式のデータが出力されます。
+              <?= Yii::t('app/schema', 'Apache 2.2 format data is output.') . "\n" ?>
             </li>
             <li>
-              「<code>#</code>」で始まる行は全てコメントです。<br>
-              内容については規定されず、人間が読むことを前提にしています。機械処理時にはこの行を単純に無視します。<br>
-              コメントが行の途中から始まることはありません。<br>
-              データレコード同士の間にも挟まる可能性があります。
+              <?= $this->render('//site/schema/hash-comment') . "\n" ?>
             </li>
             <li>
-              任意の場所に空行が挟まります。<br>
-              データレコード同士の間にも挟まる可能性があります。
+              <?= $this->render('//site/schema/blank-line') . "\n" ?>
             </li>
           </ul>
         </div>
@@ -148,17 +147,13 @@ $this->registerCss(
         <div class="card-body">
           <ul>
             <li>
-              Apache 2.4 形式のデータが出力されます。
+              <?= Yii::t('app/schema', 'Apache 2.4 format data is output.') . "\n" ?>
             </li>
             <li>
-              「<code>#</code>」で始まる行は全てコメントです。<br>
-              内容については規定されず、人間が読むことを前提にしています。機械処理時にはこの行を単純に無視します。<br>
-              コメントが行の途中から始まることはありません。<br>
-              データレコード同士の間にも挟まる可能性があります。
+              <?= $this->render('//site/schema/hash-comment') . "\n" ?>
             </li>
             <li>
-              任意の場所に空行が挟まります。<br>
-              データレコード同士の間にも挟まる可能性があります。
+              <?= $this->render('//site/schema/blank-line') . "\n" ?>
             </li>
           </ul>
         </div>
@@ -170,50 +165,68 @@ $this->registerCss(
         <div class="card-body">
           <ul>
             <li>
-              CSV(RFC 4180)形式のデータが出力されます。<br>
-              正しく取り扱うには、RFC 4180に準拠したパーサーが必要です。
+              <?= Yii::t('app/schema', 'CSV (RFC 4180) format data is output.') ?><br>
+              <?= Yii::t('app/schema', 'To handle it correctly, a parser that conforms to RFC 4180 is required.') . "\n" ?>
               <ul>
                 <li>
-                  改行コードはCR+LFです。
-                  （※v2.4.20210510.051523以前はバグのためLFで出力されていました）
+                  <?= Yii::t('app/schema', 'The new-line code is CR+LF.') . "\n" ?>
                 </li>
                 <li>
-                  各カラムの値はダブルクォートで括られるかもしれないし、括られないかもしれません。
+                  <?= Yii::t('app/schema', 'The value of each column may or may not be enclosed in double quotes.') . "\n" ?>
                 </li>
                 <li>
-                  カラムにダブルクォートを含むかもしれません。<br>
-                  含む場合は、RFC 4180に示される通り、例えば「<code>A"B</code>」という値は「<code>"A""B"</code>」と出力されます。
+                  <?= Yii::t('app/schema', 'The column may contain double quotes.') ?><br>
+                  <?= Yii::t('app/schema', 'If it contains double-quotes, for example, the value "{code1}" will be printed as "{code2}", as shown in RFC 4180.', [
+                    'code1' => '<code>A"B</code>',
+                    'code2' => '<code>"A""B"</code>',
+                  ]) . "\n" ?>
                 </li>
                 <li>
-                  カラムに改行を含むかもしれません。
+                  <?= Yii::t('app/schema', 'The column may contain line breaks.') . "\n" ?>
                 </li>
               </ul>
             </li>
             <li>
-              BOMの出力はありませんので、Microsoft Excelではコメント部の日本語が文字化けする可能性があります。
+              <?= Yii::t('app/schema', 'Because no BOM is output, it is possible that non-ASCII characters in the comment part will be {mojibake} in Microsoft Excel.', [
+                'mojibake' => Html::a(
+                  '<i>mojibake</i>',
+                  'https://en.wikipedia.org/wiki/Mojibake',
+                  [
+                    'rel' => 'nofollow noopener',
+                    'target' => '_blank',
+                  ],
+                ),
+              ]) . "\n" ?>
             </li>
             <li>
-              「<code>#</code>」で始まる行は全てコメントです。<br>
-              内容については規定されず、人間が読むことを前提にしています。機械処理時にはこの行を単純に無視します。<br>
-              コメントが行の途中から始まることはありません。<br>
-              データレコード同士の間にも挟まる可能性があります。
+              <?= $this->render('//site/schema/hash-comment') . "\n" ?>
             </li>
             <li>
-              任意の場所に空行が挟まります。<br>
-              データレコード同士の間にも挟まる可能性があります。
+              <?= $this->render('//site/schema/blank-line') . "\n" ?>
             </li>
             <li>
-              カラムは左から、
+              <?= Yii::t('app/schema', 'The columns are output in the following order.') . "\n" ?>
               <ul>
-                <li>CIDR</li>
-                <li>開始アドレス</li>
-                <li>終了アドレス</li>
-                <li>プレフィックス</li>
-                <li>サブネットマスク</li>
+                <li>
+                  <?= Yii::t('app/schema', 'CIDR') . "\n" ?>
+                </li>
+                <li>
+                  <?= Yii::t('app/schema', 'Start Address') . "\n" ?>
+                </li>
+                <li>
+                  <?= Yii::t('app/schema', 'End Address') . "\n" ?>
+                </li>
+                <li>
+                  <?= Yii::t('app/schema', 'Prefix') . "\n" ?>
+                </li>
+                <li>
+                  <?= Yii::t('app/schema', 'Subnet Mask') . "\n" ?>
+                </li>
               </ul>
-              の順で並んでいます。
-              将来拡張される可能性があります（拡張の際は右側に追加されます）。
-              ちょうど5カラムであることを期待してはいけません。
+              <?= Yii::t('app/schema', 'It may be expanded in the future (when expanded, it will be added to the right side).') ?><br>
+              <?= Yii::t('app/schema', 'Do not expect it is exactly {num,number,integer} columns.', [
+                'num' => 5,
+              ]) . "\n" ?>
             </li>
           </ul>
         </div>
@@ -225,16 +238,20 @@ $this->registerCss(
         <div class="card-body">
           <ul>
             <li>
-              Firewalldの設定ファイルとして利用できるXML形式を出力します。<br>
-              /etc/firewalld/ipsets/に設置して利用します。<br>
-              ipsetコマンドまたはfirewall-cmdからの利用はできません。
+              <?= Yii::t('app', 'Outputs XML format can be used as Firewalld configuration file.') ?><br>
+              <?= Yii::t('app', 'It is installed into {path} for use.', [
+                'path' => '<code>/etc/firewalld/ipsets/</code>',
+              ]) ?><br>
+              <?= Yii::t('app', 'You cannot use it from the {ipset} or {firewallcmd} command.', [
+                'ipset' => '<code>ipset</code>',
+                'firewallcmd' => '<code>firewall-cmd</code>',
+              ]) . "\n" ?>
             </li>
             <li>
-              XML整形式として妥当なデータが出力されます。
+              <?= Yii::t('app', 'The output is well-formed XML.') . "\n" ?>
             </li>
             <li>
-              「<code>&lt;!--</code>」から「<code>--&gt;</code>」の間はコメントです。<br>
-              行ベースのプロセッサ（例えばgrep）で簡単に除去できるよう、コメントの中身は「<code>#</code>」で始まるようになっています。
+              <?= $this->render('//site/schema/xml-comment') . "\n" ?>
             </li>
           </ul>
         </div>
@@ -246,15 +263,21 @@ $this->registerCss(
         <div class="card-body">
           <ul>
             <li>
-              IISの設定ファイルの一部として利用できるXMLを出力します。
+              <?= Yii::t('app', 'Outputs XML format can be used as part of IIS configuration file.') . "\n" ?>
             </li>
             <li>
-              XML整形式として妥当なデータが出力されます。<br>
-              ルート要素は<code>&lt;ipSecurity&gt;</code>になっています。実際の利用には加工が必要だと思われます。
+              <?= Yii::t('app', 'The output is well-formed XML.') . "\n" ?>
             </li>
             <li>
-              「<code>&lt;!--</code>」から「<code>--&gt;</code>」の間はコメントです。<br>
-              行ベースのプロセッサ（例えばgrep）で簡単に除去できるよう、コメントの中身は「<code>#</code>」で始まるようになっています。
+              <?= implode('<br>', [
+                Yii::t('app', 'The root element is {element}.', [
+                  'element' => '<code>' . Html::encode('<ipSecurity>') . '</code>',
+                ]),
+                Yii::t('app', 'You need to edit the XML with an XML processor to use it.'),
+              ]) . "\n" ?>
+            </li>
+            <li>
+              <?= $this->render('//site/schema/xml-comment') . "\n" ?>
             </li>
           </ul>
         </div>
@@ -266,22 +289,30 @@ $this->registerCss(
         <div class="card-body">
           <ul>
             <li>
-              iptables-restore等で利用する形式のデータが出力されます。
-              /etc/sysconfig/iptables等のiptables設定ファイルを編集して利用することになるでしょう。
+              <?= Yii::t('app', 'The output is in data format for use with {command}, etc.', [
+                'command' => '<code>iptables-restore</code>',
+              ]) ?><br>
+              <?= Yii::t('app', 'Used as part of a configuration file for {command}, such as {path}.', [
+                'command' => '<code>iptables</code>',
+                'path' => '<code>/etc/sysconfig/iptables</code>',
+              ]) ?>
             </li>
             <li>
-              「<code>#</code>」で始まる行は全てコメントです。<br>
-              内容については規定されず、人間が読むことを前提にしています。機械処理時にはこの行を単純に無視します。<br>
-              コメントが行の途中から始まることはありません。<br>
-              データレコード同士の間にも挟まる可能性があります。
+              <?= $this->render('//site/schema/hash-comment') . "\n" ?>
             </li>
             <li>
-              任意の場所に空行が挟まります。<br>
-              データレコード同士の間にも挟まる可能性があります。
+              <?= $this->render('//site/schema/blank-line') . "\n" ?>
             </li>
             <li>
-              アクセス制御変更はできません。常に<code>-A RULE1 -s (CIDR) -j RULE2</code>の形式で出力されます。<br>
-              <code>sed</code>等を使って目的の動作になるように置換することになるでしょう。
+              <?= implode('<br>', [
+                Yii::t('app', 'You cannot change the access control.'),
+                Yii::t('app', 'The output is always in the format {format}.', [
+                  'format' => '<code>-A RULE1 -s 198.51.100.0/24 -j RULE2</code>',
+                ]),
+                Yii::t('app', 'You will need to use {command} etc. to replace it to get the expected behavior.', [
+                  'command' => '<code>sed</code>',
+                ]),
+              ]) ?>
             </li>
           </ul>
         </div>
@@ -293,18 +324,19 @@ $this->registerCss(
         <div class="card-body">
           <ul>
             <li>
-              Nginxのアクセス制御構文を出力します。
-              serverやlocationの設定として組み込むことになるでしょう。
+              <?= implode('<br>', [
+                Yii::t('app', 'Outputs the access control syntax for Nginx.'),
+                Yii::t('app', 'You will probably include it as a {server} or {location} setting.', [
+                  'server' => '<code>server</code>',
+                  'location' => '<code>location</code>',
+                ]),
+              ]) . "\n" ?>
             </li>
             <li>
-              「<code>#</code>」で始まる行は全てコメントです。<br>
-              内容については規定されず、人間が読むことを前提にしています。機械処理時にはこの行を単純に無視します。<br>
-              コメントが行の途中から始まることはありません。<br>
-              データレコード同士の間にも挟まる可能性があります。
+              <?= $this->render('//site/schema/hash-comment') . "\n" ?>
             </li>
             <li>
-              任意の場所に空行が挟まります。<br>
-              データレコード同士の間にも挟まる可能性があります。
+              <?= $this->render('//site/schema/blank-line') . "\n" ?>
             </li>
           </ul>
         </div>
@@ -316,21 +348,31 @@ $this->registerCss(
         <div class="card-body">
           <ul>
             <li>
-              Nginxの<a href="http://nginx.org/en/docs/http/ngx_http_geo_module.html" rel="external" target="_blank">ngx_http_geo_module</a>で利用できる形式を出力します。
+              <?= Yii::t('app', 'Output the format used by Nginx\'s {module}.', [
+                'module' => Html::a(
+                  'nginx_http_geo_module',
+                  'http://nginx.org/en/docs/http/ngx_http_geo_module.html',
+                  [
+                    'rel' => 'external noopener noreferrer',
+                    'target' => '_blank',
+                  ],
+                ),
+              ]) . "\n" ?>
             </li>
             <li>
-              変数名は「<code>$ipv4_jp</code>」のように「<code>$ipv4_</code> + <var>CC</var>」になっています。<br>
-              krfilter/eufilterでは<var>CC</var>部分は<code>krfilter_1</code>のようになります。
+              <?= Yii::t('app', 'The variable name is like "{example}", which is "{define}."', [
+                'example' => '<code>$ipv4_jp</code>',
+                'define' => '<code>$ipv4_</code>+<var>CC</var>',
+              ]) ?><br>
+              <?= Yii::t('app', 'For krfilter/eufilter, it will be like "{example}."', [
+                'example' => '<code>$ipv4_krfilter_1</code>',
+              ]) . "\n" ?>
             </li>
             <li>
-              「<code>#</code>」で始まる行は全てコメントです。<br>
-              内容については規定されず、人間が読むことを前提にしています。機械処理時にはこの行を単純に無視します。<br>
-              コメントが行の途中から始まることはありません。<br>
-              データレコード同士の間にも挟まる可能性があります。
+              <?= $this->render('//site/schema/hash-comment') . "\n" ?>
             </li>
             <li>
-              任意の場所に空行が挟まります。<br>
-              データレコード同士の間にも挟まる可能性があります。
+              <?= $this->render('//site/schema/blank-line') . "\n" ?>
             </li>
           </ul>
         </div>
@@ -342,18 +384,18 @@ $this->registerCss(
         <div class="card-body">
           <ul>
             <li>
-              Postfixの<code>check_client_access</code>などで利用できる形式を出力します。<br>
-              <code>smtpd_client_restrictions = check_client_access cidr:/etc/postfix/kr.cidr</code>のように指定することになるでしょう。
+              <?= Yii::t('app', 'Outputs formats which can be used for Postfix\'s {var}, etc.', [
+                'var' => '<code>check_client_access</code>',
+              ]) ?><br>
+              <?= Yii::t('app', 'Set up and use it like "{example}".', [
+                'example' => '<code>smtpd_client_restrictions = check_client_access cidr:/etc/postfix/kr.cidr</code>',
+              ]) . "\n" ?>
             </li>
             <li>
-              「<code>#</code>」で始まる行は全てコメントです。<br>
-              内容については規定されず、人間が読むことを前提にしています。機械処理時にはこの行を単純に無視します。<br>
-              コメントが行の途中から始まることはありません。<br>
-              データレコード同士の間にも挟まる可能性があります。
+              <?= $this->render('//site/schema/hash-comment') . "\n" ?>
             </li>
             <li>
-              任意の場所に空行が挟まります。<br>
-              データレコード同士の間にも挟まる可能性があります。
+              <?= $this->render('//site/schema/blank-line') . "\n" ?>
             </li>
           </ul>
         </div>

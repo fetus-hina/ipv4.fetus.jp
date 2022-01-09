@@ -9,6 +9,7 @@ use app\widgets\FlagIcon;
 use app\widgets\KrfilterTargetListWidget;
 use app\widgets\SnsWidget;
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\web\View;
 
 /**
@@ -45,38 +46,42 @@ $this->registerCss(
     <div class="col-12 mb-4">
       <div class="card card-primary">
         <div class="card-header bg-primary text-white">
-          What's This?
+          <?= Yii::t('app/krfilter', 'About This') . "\n" ?>
         </div>
         <div class="card-body">
           <p>
-            複数の国や地域からのアクセスをまとめて遮断するためのIPアドレスの一覧です。
-            （以前某所で公開されていた「krfilter」に倣って名前をつけていますが、今となっては特に意味のあるものではありません）
+            <?= Yii::t('app/krfilter', 'This is a list of IP addresses to block access from multiple countries or regions at once.') ?><br>
+            <?= Yii::t('app/krfilter', 'The name "krfilter" is a historical term and does not have any meaning at this time.') . "\n" ?>
           </p>
           <p>
-            対象各国からの接続をまとめて遮断するために使用することができますが、次のような点に充分注意をしてください。
+            <?= Yii::t('app/krfilter', 'This can be used to block all connections from the target countries at once, but please be very careful about the following points.') . "\n" ?>
           </p>
           <ul class="note-list">
             <li>
-              このリストの内容は無保証です。
-              そのようなことは無いように作っているつもりですが、漏れがあるかも知れませんし、多すぎるかもしれません。
-              また、常に最新の情報を出力しているとは限りません。
+              <?= implode('<br>', [
+                Yii::t('app/krfilter', 'The contents of this list are not guaranteed.'),
+                Yii::t('app/krfilter', 'Some IP addresses may be missing, or there may be too many.'),
+                Yii::t('app/krfilter', 'Also, it may not always output the latest information.'),
+              ]) . "\n" ?>
             </li>
             <li>
-              対象国の選び方は独断と偏見です。深い意味はありません。
+              <?= Yii::t('app/krfilter', 'We are not responsible for any damage caused by the use of this list.') . "\n" ?>
             </li>
             <li>
-              単純にリストを使用すると、意外なところでメールが受信できなくなったりするかもしれません。
-              充分に理解の上使用してください。
+              <?= Yii::t('app/krfilter', 'The selection of target countries is based on my own judgment and prejudice. There is no strong meaning.') . "\n" ?>
             </li>
             <li>
-              このリストを使用したことによるいかなる損害にも関知しません。
+              <?= Yii::t('app/krfilter', 'If you use this list to reject/discard emails, you might encounter unexpected behavior.') ?><br>
+              <?= Yii::t('app/krfilter', 'Please use this list with full understanding.') . "\n" ?>
             </li>
             <li>
-              各リストへの自動化したアクセスを行っても構いませんが、あらかじめ<?= Html::a('こちらのページ', ['site/about', '#' => 'automation']) ?>をご確認ください。
+              <?= Yii::t('app/krfilter', 'You can automate access to each list, but {link}please check this page beforehand.</a>', [
+                'link' => '<a href="' . Url::to(['site/about', '#' => 'automation']) . '">',
+              ]) . "\n" ?>
             </li>
           </ul>
           <p class="mb-0">
-            なお、各国を統合しない個別のリストについては、それぞれの国/地域のページを参照してください。
+            <?= Yii::t('app/krfilter', 'For individual lists that do not consolidate countries, please refer to the respective country/region page.') . "\n" ?>
           </p>
         </div>
       </div>
@@ -97,22 +102,30 @@ $this->registerCss(
         </div>
         <div class="card-body d-flex flex-column">
           <p class="mb-2 flex-grow-1">
-            <?= implode(' ', array_map(
-              fn ($model) => implode('', [
-                Html::tag('span', FlagIcon::widget(['cc' => $model->id]), [
-                  'title' => $model->name_ja,
+            <?= Yii::t('app/krfilter', 'Consolidated list for<br>{list}', [
+              'list' => implode(' ', array_map(
+                fn ($model) => implode('', [
+                  Html::tag('span', FlagIcon::widget(['cc' => $model->id]), [
+                    'title' => $model->formattedName,
+                  ]),
+                  Html::tag(
+                    'span',
+                    preg_match('/^ja\b/i', Yii::$app->language)
+                      ? Html::encode("({$model->name_ja}), ")
+                      : Html::encode("({$model->name_en}), "),
+                    ['class' => 'visually-hidden'],
+                  ),
                 ]),
-                Html::tag('span', Html::encode("({$model->name_ja}), "), ['class' => 'visually-hidden']),
-              ]),
-              $regions,
-            )) ?>の統合リストです。
+                $regions,
+              )),
+            ]) . "\n" ?>
           </p>
           <?= KrfilterTargetListWidget::widget([
             'filter' => $filter,
           ]) . "\n" ?>
           <div class="mb-2 d-grid">
             <?= Html::a(
-              Html::encode('プレインテキスト'),
+              Yii::t('app', 'Plain Text'),
               ['krfilter/plain', 'id' => $filter->id],
               [
                 'class' => 'btn btn-primary',
@@ -121,18 +134,22 @@ $this->registerCss(
             ) . "\n" ?>
           </div>
           <div class="dropdown d-grid">
-            <?= Html::tag('button', Html::encode('アクセス制御用ひな型'), [
-              'class' => 'btn btn-primary dropdown-toggle',
-              'type' => 'button',
-              'id' => 'download-access-control-' . $filter->id,
-              'data' => [
-                'bs-toggle' => 'dropdown',
-              ],
-              'aria' => [
-                'haspopup' => 'true',
-                'expanded' => 'false',
-              ],
-            ]) . "\n" ?>
+            <?= Html::tag(
+              'button',
+              Yii::t('app', 'Access-Control Templates'),
+              [
+                'class' => 'btn btn-primary dropdown-toggle',
+                'type' => 'button',
+                'id' => 'download-access-control-' . $filter->id,
+                'data' => [
+                  'bs-toggle' => 'dropdown',
+                ],
+                'aria' => [
+                  'haspopup' => 'true',
+                  'expanded' => 'false',
+                ],
+              ]
+            ) . "\n" ?>
             <?= Html::tag(
               'div',
               implode('', array_map(

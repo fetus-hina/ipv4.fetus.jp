@@ -14,9 +14,12 @@ use yii\web\View;
  * @var Region $region
  */
 
-$this->title = vsprintf('%s[%s]に割り振りされたIPアドレスの一覧 : %s', [
-  $region->name_ja,
-  $region->id,
+$this->title = vsprintf('%s : %s', [
+  Yii::t('app', 'List of IP addresses allocated to {countryEn} [{cc}]', [
+    'cc' => $region->id,
+    'countryEn' => $region->name_en,
+    'countryJa' => $region->name_ja,
+  ]),
   Yii::$app->name,
 ]);
 
@@ -29,14 +32,21 @@ if (
 
 ?>
 <main>
-  <h1><?= vsprintf('%s%s %s', [
+  <h1><?= vsprintf('%s%s', [
     FlagIcon::widget(['cc' => $region->id]),
-    Html::encode($region->name_ja),
-    Html::tag(
-      'small',
-      Html::encode($region->name_en),
-      ['class' => 'text-muted', 'lang' => 'en']
-    ),
+    preg_match('/^en\b/i', Yii::$app->language)
+      ? Html::encode($region->name_en)
+      : vsprintf('%s %s', [
+        Html::encode($region->name_ja),
+        Html::tag(
+          'small',
+          Html::encode($region->name_en),
+          [
+            'class' => 'text-muted',
+            'lang' => 'en',
+          ],
+        ),
+      ]),
   ]) ?></h1>
   <aside class="mb-0">
     <?= SnsWidget::widget() . "\n" ?>
@@ -59,12 +69,12 @@ if (
         </div>
         <div class="card-body">
           <p>
-            頻繁にアクセス拒否リストに使用すると思われる国をまとめた一覧があります。
+            <?= Yii::t('app', 'We have a list of countries that we think are frequently used for denied access lists.') . "\n" ?>
           </p>
           <?= Html::tag(
             'p',
             Html::a(
-              '詳しくはこちらをご覧ください。',
+              Yii::t('app', 'For more information, please click here.'),
               ['krfilter/view']
             ),
             ['class' => 'mb-0']
@@ -78,14 +88,22 @@ if (
       <aside class="mb-4">
         <div class="card border-danger">
           <div class="card-header bg-danger text-white">
-            ご注意ください
+            <?= Yii::t('app', 'Attention') . "\n" ?>
           </div>
           <div class="card-body">
             <p>
-              このリストは、欧州地域全体に割り振られたIPアドレスの一覧ではありません。
+              <?= Yii::t('app', 'This list is NOT a complete list of IP addresses allocated to the entire European region.') . "\n" ?>
+            </p>
+            <p>
+              <?= Yii::t('app', 'Most IP addresses in the European region are allocated to individual countries.') . "\n" ?>
             </p>
             <p class="mb-0">
-              欧州地域の大半のIPアドレスは、各国に割り振られています。
+              <?= Yii::t('app', 'Refer to {eufilter} if you need the whole integrated list.', [
+                'eufilter' => Html::a(
+                  'eufilter',
+                  ['krfilter/view'],
+                ),
+              ]) . "\n" ?>
             </p>
           </div>
         </div>

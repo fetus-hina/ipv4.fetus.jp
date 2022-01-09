@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace app\models;
 
+use app\models\traits\RegionNameTrait;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
@@ -22,6 +23,8 @@ use yii\db\ActiveRecord;
  */
 final class Region extends ActiveRecord
 {
+    use RegionNameTrait;
+
     public static function tableName(): string
     {
         return '{{%region}}';

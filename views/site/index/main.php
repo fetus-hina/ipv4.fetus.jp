@@ -17,15 +17,16 @@ SortableTableAsset::register($this);
 ?>
 <div class="card border-primary">
   <div class="card-header bg-primary text-white">
-    国/地域別IPアドレス割振数一覧
+    <?= Yii::t('app', 'IPv4 Address Allocation List for Each Country/Region') . "\n" ?>
   </div>
   <div class="card-body">
     <div class="text-muted">
       <p class="mb-2">
-        見出しをクリックすると並び替えが行えます。
+        <?= Yii::t('app', 'Click on a heading to sort.') . "\n" ?>
       </p>
       <p class="mb-2">
-        国/地域名をクリックするとIPアドレスの一覧を表示します。（リンク先ページでアクセス制御用のひな形を取得できます）
+        <?= Yii::t('app', 'Click on the country/region name to display a list of IP addresses.') . "\n" ?>
+        <?= Yii::t('app', '(You can get a template for access control from the linked page)') . "\n" ?>
       </p>
     </div>
     <div style="margin:0 -1rem -0.5rem">
@@ -73,7 +74,7 @@ SortableTableAsset::register($this);
               ],
             ],
             [
-              'label' => 'CC',
+              'label' => Yii::t('app/cclist', 'CC'),
               'attribute' => 'region_id',
               'format' => fn ($t) => Html::tag('code', Html::encode((string)$t)),
               'contentOptions' => fn ($model) => [
@@ -89,19 +90,16 @@ SortableTableAsset::register($this);
               ],
             ],
             [
-              'label' => '国/地域名',
+              'label' => Yii::t('app/cclist', 'Country/Region'),
               'format' => 'raw',
               'value' => fn (RegionStat $model) => Html::a(
-                Html::encode(vsprintf('%s (%s)', [
-                  $model->region->name_ja,
-                  $model->region->name_en,
-                ])),
+                Html::encode($model->region->formattedName),
                 ['region/view', 'cc' => $model->region_id]
               ),
               'contentOptions' => fn ($model) => [
                 'class' => 'text-wrap',
                 'data' => [
-                  'sort-value' => $model->region->name_ja,
+                  'sort-value' => $model->region->formattedName,
                 ],
               ],
               'headerOptions' => [
@@ -111,8 +109,8 @@ SortableTableAsset::register($this);
               ],
             ],
             [
-              'label' => 'IPアドレス数 ' .
-                '<span class="arrow"><span class="bi bi-arrow-down-short"></span></span>',
+              'label' => Yii::t('app/cclist', 'IP Addresses') .
+                ' <span class="arrow"><span class="bi bi-arrow-down-short"></span></span>',
               'encodeLabel' => false,
               'attribute' => 'total_address_count',
               'format' => 'integer',
@@ -129,7 +127,7 @@ SortableTableAsset::register($this);
               ],
             ],
             [
-              'label' => '対全空間',
+              'label' => Yii::t('app/cclist', 'Alloc %'),
               'format' => ['percent', 5],
               'value' => fn (RegionStat $model) => $model->total_address_count / (1 << 32),
               'contentOptions' => fn ($model) => [
@@ -146,7 +144,7 @@ SortableTableAsset::register($this);
               ],
             ],
             [
-              'label' => '除予約領域',
+              'label' => Yii::t('app/cclist', 'Non Reserved'),
               'format' => ['percent', 5],
               'value' => fn (RegionStat $model) => $model->total_address_count / ((1 << 32) - 592715776),
               'contentOptions' => fn ($model) => [
@@ -163,7 +161,7 @@ SortableTableAsset::register($this);
               ],
             ],
             [
-              'label' => '最終割振日',
+              'label' => Yii::t('app/cclist', 'Last Alloc'),
               'attribute' => 'last_allocation_date',
               'format' => ['date', 'short'],
               'contentOptions' => fn ($model) => [

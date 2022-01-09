@@ -22,20 +22,25 @@ if (Yii::$app->request->isPjax) {
 ?>
 <aside class="card border-primary">
   <div class="card-header bg-primary text-white">
-    Download
+    <?= Yii::t('app', 'Download') . "\n" ?>
   </div>
   <div class="card-body">
     <div class="text-muted">
       <p class="mb-2">
-        アクセス制御等にご利用ください。<br>
-        自動化される際は<?= Html::a('こちらの注意事項', ['site/about', '#' => 'automation']) ?>をご確認ください。<br>
-        内容は保証しません。
+        <?= Yii::t('app', 'Use for access control.') ?><br>
+        <?= Yii::t('app', 'No guarantee.') . "\n" ?>
+      </p>
+      <p class="mb-2">
+        <?= Html::a(
+          Yii::t('app', 'Please read this notice when you want to automate the process.'),
+          ['site/about', '#' => 'automation'],
+        ) . "\n" ?>
       </p>
     </div>
     <nav>
       <div class="mb-2 d-grid">
         <?= Html::a(
-          Html::encode('プレインテキスト'),
+          Yii::t('app', 'Plain Text'),
           ['region/plain', 'cc' => $region->id],
           [
             'class' => 'btn btn-primary',
@@ -44,18 +49,22 @@ if (Yii::$app->request->isPjax) {
         ) . "\n" ?>
       </div>
       <div class="dropdown d-grid">
-        <?= Html::tag('button', Html::encode('アクセス制御用ひな型'), [
-          'class' => 'btn btn-primary dropdown-toggle',
-          'type' => 'button',
-          'id' => 'download-access-control',
-          'data' => [
-            'bs-toggle' => 'dropdown',
-          ],
-          'aria' => [
-            'haspopup' => 'true',
-            'expanded' => 'false',
-          ],
-        ]) . "\n" ?>
+        <?= Html::tag(
+          'button',
+          Yii::t('app', 'Access-Control Templates'),
+          [
+            'class' => 'btn btn-primary dropdown-toggle',
+            'type' => 'button',
+            'id' => 'download-access-control',
+            'data' => [
+              'bs-toggle' => 'dropdown',
+            ],
+            'aria' => [
+              'haspopup' => 'true',
+              'expanded' => 'false',
+            ],
+          ]
+        ) . "\n" ?>
         <div class="dropdown-menu shadow" aria-labelledby="download-access-control"><?= implode('', array_map(
           fn ($model) => Html::a(
             Html::encode($model->name),

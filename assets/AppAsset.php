@@ -18,6 +18,8 @@ final class AppAsset extends AssetBundle
         CardShadowAsset::class,
         FocusInputAsset::class,
         JqueryAsset::class,
+        LanguageSwitcherAsset::class,
+        LatinFontAsset::class,
         YiiAsset::class,
     ];
 }

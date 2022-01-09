@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace app\widgets;
 
+use Yii;
 use app\assets\BootstrapIconsAsset;
 use app\models\Krfilter;
 use app\models\Region;
@@ -40,7 +41,7 @@ final class KrfilterTargetListWidget extends Widget
             Html::tag(
                 'button',
                 implode(' ', [
-                    Html::encode('対象国/地域一覧'),
+                    Yii::t('app/krfilter', 'List of countries/regions'),
                     Html::tag('span', '', ['class' => 'bi bi-window-stack']),
                 ]),
                 [
@@ -98,12 +99,14 @@ final class KrfilterTargetListWidget extends Widget
             implode('', [
                 Html::tag(
                     'h5',
-                    Html::encode('対象の国/地域 - ' . $this->filter->name),
+                    Yii::t('app/krfilter', 'Countries/regions for {filter}', [
+                        'filter' => $this->filter->name,
+                    ]),
                     ['class' => 'modal-title']
                 ),
                 Html::tag('button', '', [
                     'aria' => [
-                        'label' => '閉じる',
+                        'label' => Yii::t('app', 'Close'),
                     ],
                     'class' => 'btn-close',
                     'data' => [
@@ -121,7 +124,7 @@ final class KrfilterTargetListWidget extends Widget
         return Html::tag(
             'div',
             implode('', [
-                Html::tag('button', Html::encode('閉じる'), [
+                Html::tag('button', Yii::t('app', 'Close'), [
                     'class' => 'btn btn-primary',
                     'data' => [
                         'bs-dismiss' => 'modal',
@@ -170,18 +173,8 @@ final class KrfilterTargetListWidget extends Widget
                 ),
                 Html::tag(
                     'div',
-                    vsprintf('%s %s', [
-                        Html::encode($region->name_ja),
-                        Html::tag(
-                            'span',
-                            Html::encode(sprintf('(%s)', $region->name_en)),
-                            [
-                                'class' => 'text-muted small',
-                                'lang' => 'en-US',
-                            ]
-                        ),
-                    ]),
-                    ['class' => 'flex-grow-1 w-auto me-2']
+                    Html::encode($region->formattedName),
+                    ['class' => 'flex-grow-1 w-auto me-2'],
                 ),
                 Html::tag(
                     'div',

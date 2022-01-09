@@ -26,12 +26,12 @@ if (
 ?>
 <div class="card border-primary" id="merged-cidr">
   <div class="card-header bg-primary text-white">
-    Merged CIDR
+    <?= Yii::t('app', 'Merged CIDR') . "\n" ?>
   </div>
   <div class="card-body">
     <div class="text-muted">
       <p class="mb-2">
-        連続したブロックをまとめたものです。
+        <?= Yii::t('app', 'This is a consolidated list of contiguous allocation blocks.') . "\n" ?>
       </p>
     </div>
     <div style="margin:0 -1rem -0.5rem">

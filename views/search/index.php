@@ -16,11 +16,11 @@ use yii\widgets\DetailView;
  * @var View $this
  */
 
-$this->title = '検索結果 : ' . Yii::$app->name;
+$this->title = Yii::t('app/search', 'Search Results') . ' : ' . Yii::$app->name;
 ?>
 <main>
   <h1 class="mb-4">
-    検索結果
+    <?= Html::encode(Yii::t('app/search', 'Search Results')) . "\n" ?>
 <?php if (!$form->hasErrors()) { ?>
     <?= Html::tag(
       'small',
@@ -47,7 +47,7 @@ $this->title = '検索結果 : ' . Yii::$app->name;
       <div class="mb-4">
         <div class="card border-primary">
           <div class="card-header bg-primary text-white">
-            検索結果
+            <?= Html::encode(Yii::t('app/search', 'Search Results')) . "\n" ?>
           </div>
           <div class="card-body">
 <?php if ($result) { ?>
@@ -58,11 +58,11 @@ $this->title = '検索結果 : ' . Yii::$app->name;
               'model' => $result,
               'attributes' => [
                 [
-                  'label' => 'IPアドレス',
+                  'label' => Yii::t('app/search', 'IP Address'),
                   'value' => $form->normalizedIP,
                 ],
                 [
-                  'label' => '国または地域',
+                  'label' => Yii::t('app/search', 'Country/Region'),
                   'value' => vsprintf('%s %s %s', [
                     FlagIcon::widget(['cc' => $result->region->id]),
                     Html::tag('code', Html::encode($result->region->id)),
@@ -77,30 +77,29 @@ $this->title = '検索結果 : ' . Yii::$app->name;
                   'format' => 'raw',
                 ],
                 [
-                  'label' => '割り振りブロック (※1)',
+                  'label' => Yii::t('app/search', 'Allocation Block') . ' ' . Yii::t('app', '(*1)'),
                   'value' => function () use ($result): string {
                     $cidrs = $result->block->allocationCidrs;
                     usort($cidrs, fn ($a, $b) => strnatcasecmp($a->cidr, $b->cidr));
 
                     return implode('', [
-                      vsprintf('「%s」から %s 個 (%s ～ %s)', [
-                        Html::tag(
-                          'code',
-                          Html::encode($result->block->start_address),
-                          ['class' => 'text-body']
-                        ),
-                        Yii::$app->formatter->asInteger($result->block->count),
-                        Html::tag(
-                          'code',
-                          Html::encode($result->block->start_address),
-                          ['class' => 'text-body']
-                        ),
-                        Html::tag(
-                          'code',
-                          (string)long2ip(ip2long($result->block->start_address) + $result->block->count - 1),
-                          ['class' => 'text-body']
-                        ),
-                      ]),
+                      Yii::t(
+                        'app/search',
+                        '{count,number,integer} addresses from "{startAddress}" ({startAddress} - {endAddress})',
+                        [
+                          'count' => (int)$result->block->count,
+                          'startAddress' => Html::tag(
+                            'code',
+                            Html::encode($result->block->start_address),
+                            ['class' => 'text-body'],
+                          ),
+                          'endAddress' => Html::tag(
+                            'code',
+                            (string)long2ip(ip2long($result->block->start_address) + $result->block->count - 1),
+                            ['class' => 'text-body'],
+                          ),
+                        ]
+                      ),
                       Html::tag(
                         'textarea',
                         implode(
@@ -125,7 +124,7 @@ $this->title = '検索結果 : ' . Yii::$app->name;
                   'format' => 'raw',
                 ],
                 [
-                  'label' => 'Merged CIDR (※2)',
+                  'label' => Yii::t('app/search', 'Merged CIDR') . ' ' . Yii::t('app', '(*2)'),
                   'value' => Html::tag('input', '', [
                     'class' => 'form-control font-monospace',
                     'type' => 'text',
@@ -139,29 +138,38 @@ $this->title = '検索結果 : ' . Yii::$app->name;
                   'format' => 'raw',
                 ],
                 [
-                  'label' => '割り振り日',
+                  'label' => Yii::t('app/search', 'Allocated Date'),
                   'attribute' => 'block.date',
                   'format' => 'date',
                 ],
                 [
-                  'label' => 'レジストリ',
+                  'label' => Yii::t('app/search', 'Registry'),
                   'attribute' => 'block.registry.name',
                 ],
               ],
             ]) . "\n" ?>
             <div class="text-muted small">
               <p>
-                (※1) 割り振りは開始アドレスと個数で指定され、必ずしも256個などの「きりのいい数」となるとは限りません。
-                そのため、ひとつのブロックが複数のCIDRとして表現される場合があります。
+                <?= Yii::t('app', '(*1)') . "\n" ?>
+                <?= implode('<br>', [
+                  Yii::t('app/search', 'The allocation is specified by the starting address and the number of addresses, which may not always be a "good number" such as 256.'),
+                  Yii::t('app/search', 'For this reason, a single allocation may be expressed as multiple CIDRs.'),
+                ]) . "\n" ?>
               </p>
               <p class="mb-0">
-                (※2) Merged CIDR は、各国または地域一覧画面の「Merged CIDR」のどれに含まれるかを示しています。<br>
-                この部分の表示は、「割り振りブロック」と等しいことも、より大きいことも、そのブロックの一部を示していることもあります。
+                <?= Yii::t('app', '(*2)') . "\n" ?>
+                <?= implode('<br>', [
+                  Yii::t('app/search', 'The {mergedCidrThis} indicates which of the "{mergedCidrForeign}" in the Country/Region List is included.', [
+                    'mergedCidrThis' => Yii::t('app/search', 'Merged CIDR'),
+                    'mergedCidrForeign' => Yii::t('app', 'Merged CIDR'),
+                  ]),
+                  Yii::t('app/search', 'This part of the display may be equal to, greater than, or part of the "Allocation Block".'),
+                ]) . "\n" ?>
               </p>
             </div>
 <?php } else { ?>
             <p class="mb-0">
-              該当するデータが見つかりませんでした。
+              <?= Yii::t('app/search', 'No data was found.') . "\n" ?>
             </p>
 <?php } ?>
           </div>

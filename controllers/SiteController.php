@@ -5,9 +5,12 @@ declare(strict_types=1);
 namespace app\controllers;
 
 use Yii;
+use app\helpers\ApplicationLanguage;
 use app\models\SearchForm;
 use yii\filters\AccessControl;
+use yii\web\BadRequestHttpException;
 use yii\web\Controller;
+use yii\web\Cookie;
 use yii\web\ErrorAction;
 use yii\web\Response;
 
@@ -86,6 +89,39 @@ class SiteController extends Controller
                 'crawl-delay: 20',
                 '',
             ]);
+    }
+
+    public function actionSwitchLanguage(): Response
+    {
+        $r = Yii::$app->response;
+        $r->format = Response::FORMAT_JSON;
+
+        $req = Yii::$app->request;
+        if (!$req->isPost || !$req->isAjax) {
+            throw new BadRequestHttpException();
+        }
+
+        $lang = $req->post('language');
+        if ($lang === 'default') {
+            $r->cookies->remove(ApplicationLanguage::COOKIE_NAME);
+        } elseif (ApplicationLanguage::isValidLanguageCode($lang)) {
+            $r->cookies->add(
+                Yii::createObject([
+                    'class' => Cookie::class,
+                    'expire' => strtotime('2100-01-01T00:00:00+00:00'),
+                    'httpOnly' => true,
+                    'name' => ApplicationLanguage::COOKIE_NAME,
+                    'sameSite' => Cookie::SAME_SITE_STRICT,
+                    'secure' => YII_ENV_PROD,
+                    'value' => $lang,
+                ])
+            );
+        } else {
+            throw new BadRequestHttpException();
+        }
+
+        $r->data = 'OK';
+        return $r;
     }
 
     public function actionClearOpcache(): string

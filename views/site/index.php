@@ -11,12 +11,14 @@ use yii\web\View;
  * @var View $this
  */
 
-$this->title = Yii::$app->name . ' : 国/地域別IPアドレス(IPv4アドレス)割り振り（割り当て）一覧';
+$this->title = Yii::t('app', '{siteName}: IPv4 Address Allocation List for Each Country/Region', [
+    'siteName' => Yii::$app->name,
+]);
 
 ?>
 <main>
   <h1 class="mb-4">
-    国/地域別IPアドレス割り振り<span class="d-none">（割り当て）</span>一覧
+    <?= Yii::t('app', 'IPv4 Address Allocation List for Each Country/Region') . "\n" ?>
   </h1>
   <aside class="mb-0">
     <?= SnsWidget::widget() . "\n" ?>

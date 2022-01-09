@@ -1,0 +1,696 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgctxt "app"
+msgid "(*1)"
+msgstr "（※1）"
+
+msgctxt "app"
+msgid "(*2)"
+msgstr "（※2）"
+
+msgctxt "app"
+msgid "(You can get a template for access control from the linked page)"
+msgstr "（リンク先ページでアクセス制御用のひな形を取得できます）"
+
+msgctxt "app"
+msgid "Access-Control Templates"
+msgstr "アクセス制御用ひな型"
+
+msgctxt "app"
+msgid "Alloc Date"
+msgstr "割り振り日"
+
+msgctxt "app"
+msgid "Allocation List"
+msgstr "割り振り一覧"
+
+msgctxt "app"
+msgid "Attention"
+msgstr "ご注意ください"
+
+msgctxt "app"
+msgid "Between \"{start}\" and \"{end}\" is a comment."
+msgstr "「{start}」と「{end}」の間はコメントです。"
+
+msgctxt "app"
+msgid "CIDR"
+msgstr "CIDR"
+
+msgctxt "app"
+msgid "Click on a heading to sort."
+msgstr "見出しをクリックすると並び替えが行えます。"
+
+msgctxt "app"
+msgid "Click on the country/region name to display a list of IP addresses."
+msgstr "国/地域名をクリックするとIPアドレスの一覧を表示します。"
+
+msgctxt "app"
+msgid "Close"
+msgstr "閉じる"
+
+msgctxt "app"
+msgid "Database last updated: {updatedAt} ({took,number,,0.000} sec.)"
+msgstr "DB最終更新日時: {updatedAt}（{took,number,,0.000}秒）"
+
+msgctxt "app"
+msgid "Default"
+msgstr "デフォルト"
+
+msgctxt "app"
+msgid "Download"
+msgstr "ダウンロード"
+
+msgctxt "app"
+msgid "For krfilter/eufilter, it will be like \"{example}.\""
+msgstr "krfilter/eufilterでは「{example}」のようになります。"
+
+msgctxt "app"
+msgid "For more information, please click here."
+msgstr "詳しくはこちらをご覧ください。"
+
+msgctxt "app"
+msgid "IP Address"
+msgstr "IPアドレス"
+
+msgctxt "app"
+msgid "IPv4 Address Allocation List for Each Country/Region"
+msgstr "国/地域別IPアドレス割り振り<span class=\"d-none\">（割り当て）</span>一覧"
+
+msgctxt "app"
+msgid "If you want to use it access control, use \"{download}.\""
+msgstr "データをアクセス制御に使いたい方は「{download}」をご利用ください。"
+
+msgctxt "app"
+msgid "In most cases, \"{mergedCidr}\" is more useful than this list."
+msgstr "大体のケースでは「{mergedCidr}」の表示の方が便利です。"
+
+msgctxt "app"
+msgid "It is installed into {path} for use."
+msgstr "{path}に設置して利用します。"
+
+msgctxt "app"
+msgid "List of IP addresses allocated to {countryEn} [{cc}]"
+msgstr "{countryJa}[{cc}]に割り振りされたIPアドレスの一覧"
+
+msgctxt "app"
+msgid "Merged CIDR"
+msgstr "Merged CIDR"
+
+msgctxt "app"
+msgid "Most IP addresses in the European region are allocated to individual countries."
+msgstr "欧州地域の大半のIPアドレスは、各国に割り振られています。"
+
+msgctxt "app"
+msgid "National flags of the countries are displayed using {source}."
+msgstr "各国の国旗は{source}を使用して表示しています。"
+
+msgctxt "app"
+msgid "No guarantee."
+msgstr "内容は無保証です。"
+
+msgctxt "app"
+msgid "Output the format used by Nginx's {module}."
+msgstr "Nginxの{module}で利用できる形式で出力します。"
+
+msgctxt "app"
+msgid "Outputs XML format can be used as Firewalld configuration file."
+msgstr "Firewalldの設定ファイルとして利用できるXML形式を出力します。"
+
+msgctxt "app"
+msgid "Outputs XML format can be used as part of IIS configuration file."
+msgstr "IISの設定ファイルの一部として利用できるXMLを出力します。"
+
+msgctxt "app"
+msgid "Outputs formats which can be used for Postfix's {var}, etc."
+msgstr "Postfixの{var}などで利用できる形式を出力します。"
+
+msgctxt "app"
+msgid "Outputs the access control syntax for Nginx."
+msgstr "Nginxのアクセス制御構文を出力します。"
+
+msgctxt "app"
+msgid "Plain Text"
+msgstr "プレインテキスト"
+
+msgctxt "app"
+msgid "Please read this notice when you want to automate the process."
+msgstr "自動化される際はこちらの注意事項をご確認ください。"
+
+msgctxt "app"
+msgid "Refer to {eufilter} if you need the whole integrated list."
+msgstr "全体を統合したリストについては{eufilter}を参照してください。"
+
+msgctxt "app"
+msgid "Registry"
+msgstr "レジストリ"
+
+msgctxt "app"
+msgid "Search Query"
+msgstr "検索クエリ―"
+
+msgctxt "app"
+msgid "Set up and use it like \"{example}\"."
+msgstr "「{example}」のように指定することになるでしょう。"
+
+msgctxt "app"
+msgid "Source Code"
+msgstr "ソースコード"
+
+msgctxt "app"
+msgid "The lines of the comment begins with \"{hash}\" so that it can be easily removed by line-based processors (e.g., {grep})."
+msgstr "行ベースのプロセッサ（例えば{grep}）で簡単に除去できるよう、コメントの中身は「{hash}」で始まるようになっています。"
+
+msgctxt "app"
+msgid "The output is always in the format {format}."
+msgstr "出力は常に{format}形式となります。"
+
+msgctxt "app"
+msgid "The output is in data format for use with {command}, etc."
+msgstr "{command}等で利用する形式のデータが出力されます。"
+
+msgctxt "app"
+msgid "The output is well-formed XML."
+msgstr "XML整形式として妥当なデータが出力されます。"
+
+msgctxt "app"
+msgid "The root element is {element}."
+msgstr "ルート要素は{element}になっています。"
+
+msgctxt "app"
+msgid "The variable name is like \"{example}\", which is \"{define}.\""
+msgstr "変数名は「{example}」のように「{define}」です。"
+
+msgctxt "app"
+msgid "There are {total,number,integer} IP addresses allocated to {country}. This is {totalPct} of the total address space, and {nonReservedPct} excluding reserved space."
+msgstr "{country}には{total,number,integer}個のIPアドレスが割り振られています。これは全アドレス空間の{totalPct}、予約領域を除くと{nonReservedPct}です。"
+
+msgctxt "app"
+msgid "This is a consolidated list of contiguous allocation blocks."
+msgstr "連続した割り振りブロックを統合したリストです。"
+
+msgctxt "app"
+msgid "This is a list of IP addresses allocated to {country}."
+msgstr "{country}に割り振りされたIPアドレスの一覧です。"
+
+msgctxt "app"
+msgid "This list is NOT a complete list of IP addresses allocated to the entire European region."
+msgstr "このリストは、欧州地域全体に割り振られたIPアドレスの一覧ではありません。"
+
+msgctxt "app"
+msgid "Use for access control."
+msgstr "アクセスコントロール等にご利用ください。"
+
+msgctxt "app"
+msgid "Used as part of a configuration file for {command}, such as {path}."
+msgstr "{path}等の{command}用設定ファイルを編集して利用することになるでしょう。"
+
+msgctxt "app"
+msgid "We have a list of countries that we think are frequently used for denied access lists."
+msgstr "頻繁にアクセス拒否リストに使用すると思われる国をまとめた一覧があります。"
+
+msgctxt "app"
+msgid "You cannot change the access control."
+msgstr "アクセス制御の変更はできません。"
+
+msgctxt "app"
+msgid "You cannot use it from the {ipset} or {firewallcmd} command."
+msgstr "{ipset}コマンドまたは{firewallcmd}コマンドからの利用はできません。"
+
+msgctxt "app"
+msgid "You may not see the latest flag, or you may see the incorrect flag."
+msgstr "最新の国旗が表示されていない場合や、誤ったデザインの国旗が表示されている場合があります。"
+
+msgctxt "app"
+msgid "You need to edit the XML with an XML processor to use it."
+msgstr "実際の利用にはXMLプロセッサでの加工が必要です。"
+
+msgctxt "app"
+msgid "You will need to use {command} etc. to replace it to get the expected behavior."
+msgstr "{command}等を利用して目的の動作となるように置換してください。"
+
+msgctxt "app"
+msgid "You will probably include it as a {server} or {location} setting."
+msgstr "{server}や{location}の設定として組み込むことになるでしょう。"
+
+msgctxt "app"
+msgid "{siteName}: IPv4 Address Allocation List for Each Country/Region"
+msgstr "{siteName}: 国/地域別IPアドレス(IPv4アドレス)割り振り（割り当て）一覧"
+
+msgctxt "app/about"
+msgid "About Automated-Access"
+msgstr "自動化されたアクセスについて"
+
+msgctxt "app/about"
+msgid "About Us"
+msgstr "当サイトについて"
+
+msgctxt "app/about"
+msgid "As a rule, we do not accept opinions or requests regarding these political domains."
+msgstr "それら政治的な領域についての意見や要望には原則としてお応えしません。"
+
+msgctxt "app/about"
+msgid "Click here for more information."
+msgstr "詳しくはこちらをご覧ください。"
+
+msgctxt "app/about"
+msgid "For automated access, see the page above."
+msgstr "自動化したアクセスについても、上記ページをご覧ください。"
+
+msgctxt "app/about"
+msgid "For specifications about downloadable formats, please click here."
+msgstr "ダウンロード可能な形式についての仕様については、こちらをご確認ください。"
+
+msgctxt "app/about"
+msgid "However, please keep the following points in mind in order to make effective use of limited computing resources."
+msgstr "ただし、限られた計算リソースを有効活用するため、次の点にご留意ください。"
+
+msgctxt "app/about"
+msgid "If too many requests are received at the same time, it may take a long time to respond or it may not be possible to respond."
+msgstr "PHPプロセスの同時実行数に制限をかけていますから最悪レスポンスが返せなくなります。きちんとデータを受け取りたいならずらしたほうが良いでしょう。"
+
+msgctxt "app/about"
+msgid "If you find any problems, please contact us here."
+msgstr "何か不具合が発生している場合は、こちらへご連絡ください。"
+
+msgctxt "app/about"
+msgid "Information is not guaranteed."
+msgstr "情報は無保証です。"
+
+msgctxt "app/about"
+msgid "No responsibility is assumed for any problems that may arise, whether they are caused by Regional Internet Registry, our website, you, or any other communication channels."
+msgstr "地域インターネットレジストリ側、当サイト側、利用者側、その他通信経路等のいずれかで発生した問題かにかかわらず、一切の責任を負いません。"
+
+msgctxt "app/about"
+msgid "Please check the downloaded file to make sure that the contents are present and in the expected format."
+msgstr "ダウンロードしたファイルに中身がきちんと存在するか、想定したフォーマットであるかは必ず確認してください。"
+
+msgctxt "app/about"
+msgid "Please distribute the traffic appropriately."
+msgstr "適当に分散をお願いします。"
+
+msgctxt "app/about"
+msgid "Please include your contact information in the User-Agent whenever possible when access."
+msgstr "自動化アクセス時には、可能な限りUser-Agentに連絡先を記載してください。"
+
+msgctxt "app/about"
+msgid "Please think carefully about whether the execution interval of the cron job is meaningful."
+msgstr "cron等の実行間隔に意味があるのかはよくお考え下さい。"
+
+msgctxt "app/about"
+msgid "Thanks in advance for your cooperation."
+msgstr "ご協力をお願いします。"
+
+msgctxt "app/about"
+msgid "The Japanese names commonly used in Japan or on the Ministry of Foreign Affairs website, and the English names on Wikipedia and other sites are used."
+msgstr "日本で一般的な、または外務省サイトに掲載されている日本語名称、Wikipedia等に掲載されている英語名称を利用しています。"
+
+msgctxt "app/about"
+msgid "The database of this site is updated only once a day as a rule."
+msgstr "このサイトのデータベースは原則として毎日1回だけ更新されます。"
+
+msgctxt "app/about"
+msgid "The definition of \"what is country\" and \"name of country\" are highly political issues."
+msgstr "「何をもって国とするか（別の国・地域とみなすか）」「各国の名称」などはきわめて政治的な問題です。"
+
+msgctxt "app/about"
+msgid "The information is automatically retrieved and updated daily from the Regional Internet Registry (RIR)."
+msgstr "情報は、地域インターネットレジストリ(RIR)から毎日自動的に取得し、更新されます。"
+
+msgctxt "app/about"
+msgid "The information is updated automatically every day by retrieving it from the Regional Internet Registry."
+msgstr "情報は毎日地域インターネットレジストリから自動的に取得して更新されます。"
+
+msgctxt "app/about"
+msgid "The information we provide is unguaranteed."
+msgstr "提供する情報は無保証です。"
+
+msgctxt "app/about"
+msgid "The text files that can be displayed or downloaded with \"{plainText}\" and \"{template}\" are intended for automated access."
+msgstr "「{plainText}」「{template}」で表示またはダウンロードできるテキストファイルは、自動化アクセスを想定しています。"
+
+msgctxt "app/about"
+msgid "There is a high download access rate around 0 minutes every hour."
+msgstr "毎時0分頃はダウンロードアクセスが集中しています。"
+
+msgctxt "app/about"
+msgid "There is no problem with automated access."
+msgstr "自動化されたアクセスをしても何ら問題ありません。"
+
+msgctxt "app/about"
+msgid "This site provides a list of IPv4 addresses allocated to each country or region."
+msgstr "このサイトは、各「国や地域」に割り振りされたIPv4アドレスの一覧を提供するサイトです。"
+
+msgctxt "app/about"
+msgid "This site uses the classification as presented by the RIR."
+msgstr "このサイトでは、RIRで提示されている分類をそのまま利用しています。"
+
+msgctxt "app/about"
+msgid "We are not responsible for any damage caused by the use of the information on this site."
+msgstr "掲載されている情報を利用することで発生したいかなる損害等について当サイトは関知しません。"
+
+msgctxt "app/about"
+msgid "We are using CloudFlare as a reverse proxy."
+msgstr "リバースプロキシとしてCloudFlareが挟まっています。"
+
+msgctxt "app/about"
+msgid "We do not have any political agenda."
+msgstr "表示内容について何ら政治的意図をもって記載していません。"
+
+msgctxt "app/about"
+msgid "We have returned empty or half-empty data in the past."
+msgstr "過去に空のデータを返したことも、データが半減していたこともあります。"
+
+msgctxt "app/about"
+msgid "You should not use the information on this website if you need to guarantee its accuracy."
+msgstr "正確性等の保証が欲しい場合はご自分で頑張るか、保証ありのサービスをご利用ください。"
+
+msgctxt "app/about"
+msgid "Your access may be automatically denied by CloudFlare's control."
+msgstr "CloudFlare側の制御で自動的にアクセスが拒否される場合があります。"
+
+msgctxt "app/cclist"
+msgid "Alloc %"
+msgstr "対全空間"
+
+msgctxt "app/cclist"
+msgid "CC"
+msgstr "CC"
+
+msgctxt "app/cclist"
+msgid "Country/Region"
+msgstr "国/地域"
+
+msgctxt "app/cclist"
+msgid "IP Addresses"
+msgstr "IPアドレス数"
+
+msgctxt "app/cclist"
+msgid "Last Alloc"
+msgstr "最終割振日"
+
+msgctxt "app/cclist"
+msgid "Non Reserved"
+msgstr "除予約領域"
+
+msgctxt "app/krfilter"
+msgid "About This"
+msgstr "このペ―ジについて"
+
+msgctxt "app/krfilter"
+msgid "Also, it may not always output the latest information."
+msgstr "また、常に最新の情報を出力しているとは限りません。"
+
+msgctxt "app/krfilter"
+msgid "Consolidated list for<br>{list}"
+msgstr "{list}の統合リストです"
+
+msgctxt "app/krfilter"
+msgid "Countries/regions for {filter}"
+msgstr "対象の国/地域 - {filter}"
+
+msgctxt "app/krfilter"
+msgid "For individual lists that do not consolidate countries, please refer to the respective country/region page."
+msgstr "各国を統合しない個別のリストについては、それぞれの国/地域のページを参照してください。"
+
+msgctxt "app/krfilter"
+msgid "If you use this list to reject/discard emails, you might encounter unexpected behavior."
+msgstr "このリストをメール拒否に利用すると、思わぬ挙動に遭遇する場合があります（意外なメールが届かなくなることが多々あります）。"
+
+msgctxt "app/krfilter"
+msgid "List of countries/regions"
+msgstr "対象国/地域一覧"
+
+msgctxt "app/krfilter"
+msgid "Please use this list with full understanding."
+msgstr "充分に理解の上使用してください。"
+
+msgctxt "app/krfilter"
+msgid "Some IP addresses may be missing, or there may be too many."
+msgstr "IPアドレスは漏れがあるかも知れませんし、多すぎるかもしれません。"
+
+msgctxt "app/krfilter"
+msgid "The contents of this list are not guaranteed."
+msgstr "このリストの内容は無保証です。"
+
+msgctxt "app/krfilter"
+msgid "The name \"krfilter\" is a historical term and does not have any meaning at this time."
+msgstr "以前某所で公開されていた「krfilter」に倣って名前をつけていますが、今となっては特に意味のあるものではありません。"
+
+msgctxt "app/krfilter"
+msgid "The selection of target countries is based on my own judgment and prejudice. There is no strong meaning."
+msgstr "対象国の選び方は独断と偏見です。深い意味はありません。"
+
+msgctxt "app/krfilter"
+msgid "This can be used to block all connections from the target countries at once, but please be very careful about the following points."
+msgstr "対象各国からの接続をまとめて遮断するために使用することができますが、次のような点に充分注意をしてください。"
+
+msgctxt "app/krfilter"
+msgid "This is a list of IP addresses to block access from multiple countries or regions at once."
+msgstr "複数の国や地域からのアクセスをまとめて遮断するためのIPアドレスの一覧です。"
+
+msgctxt "app/krfilter"
+msgid "We are not responsible for any damage caused by the use of this list."
+msgstr "このリストを使用したことによるいかなる損害にも関知しません。"
+
+msgctxt "app/krfilter"
+msgid "You can automate access to each list, but {link}please check this page beforehand.</a>"
+msgstr "各リストへの自動化したアクセスを行っても構いませんが、あらかじめ{link}こちらのページ</a>をご確認ください。"
+
+msgctxt "app/navbar"
+msgid "Toggle Navbar"
+msgstr "ナビゲーションをトグル"
+
+msgctxt "app/navbar"
+msgid "Top"
+msgstr "トップ"
+
+msgctxt "app/navbar"
+msgid "krfilter / eufilter (for GDPR)"
+msgstr "krfilter / eufilter (for GDPR)"
+
+msgctxt "app/schema"
+msgid "A blank line may be inserted anywhere."
+msgstr "任意の場所に空行が挟まります。"
+
+msgctxt "app/schema"
+msgid "About This"
+msgstr "このペ―ジについて"
+
+msgctxt "app/schema"
+msgid "All lines beginning with \"{code}\" are comments."
+msgstr "「{code}」で始まる行は全てコメントです。"
+
+msgctxt "app/schema"
+msgid "Apache 2.2 format data is output."
+msgstr "Apache 2.2 形式のデータが出力されます。"
+
+msgctxt "app/schema"
+msgid "Apache 2.4 format data is output."
+msgstr "Apache 2.4 形式のデータが出力されます。"
+
+msgctxt "app/schema"
+msgid "Because no BOM is output, it is possible that non-ASCII characters in the comment part will be {mojibake} in Microsoft Excel."
+msgstr "BOMの出力はありませんので、Microsoft Excelではコメント部の日本語が文字化けする可能性があります。"
+
+msgctxt "app/schema"
+msgid "CIDR"
+msgstr "CIDR"
+
+msgctxt "app/schema"
+msgid "CIDRs are output as is."
+msgstr "データレコードはCIDRがそのまま配置されます。"
+
+msgctxt "app/schema"
+msgid "CSV (RFC 4180) format data is output."
+msgstr "CSV (RFC 4180) 形式のデータが出力されます。"
+
+msgctxt "app/schema"
+msgid "Do not expect it is exactly {num,number,integer} columns."
+msgstr "ちょうど{num,number,integer}カラムであることを期待してはいけません。"
+
+msgctxt "app/schema"
+msgid "Each record is separated by a new-line."
+msgstr "それぞれのレコードは改行で区切られ、1レコード1行で記載されます。"
+
+msgctxt "app/schema"
+msgid "End Address"
+msgstr "終了アドレス"
+
+msgctxt "app/schema"
+msgid "For machine processing, this line should be ignored."
+msgstr "機械処理時にはこの行を単純に無視します。"
+
+msgctxt "app/schema"
+msgid "General Rules"
+msgstr "総則"
+
+msgctxt "app/schema"
+msgid "If it contains double-quotes, for example, the value \"{code1}\" will be printed as \"{code2}\", as shown in RFC 4180."
+msgstr "含む場合は、RFC 4180に示される通り、例えば「{code1}」という値は「{code2}」と出力されます。"
+
+msgctxt "app/schema"
+msgid "If the country/region being output is \"Japan\", the \"Allow\" setting is output by default."
+msgstr "出力している国・地域が「日本」である場合、デフォルトで「許可」設定が出力されます。"
+
+msgctxt "app/schema"
+msgid "If the country/region being output is not \"Japan\", the \"Deny\" setting is output by default."
+msgstr "出力している国・地域が「日本」以外の場合、デフォルトで「拒否」設定で出力されます。"
+
+msgctxt "app/schema"
+msgid "In case of a format where access control is pre-output, the following will be applied."
+msgstr "アクセス制御（アクセス許可・拒否）が明確にあらかじめ出力されている形式の場合、次の内容が適用されます。"
+
+msgctxt "app/schema"
+msgid "It may be expanded in the future (when expanded, it will be added to the right side)."
+msgstr "将来拡張される可能性があります（拡張の際は右側に追加されます）。"
+
+msgctxt "app/schema"
+msgid "Never start a comment in the middle of a line."
+msgstr "コメントが行の途中から始まることはありません。"
+
+msgctxt "app/schema"
+msgid "Output Specifications"
+msgstr "出力ファイル仕様"
+
+msgctxt "app/schema"
+msgid "Prefix"
+msgstr "プレフィックス"
+
+msgctxt "app/schema"
+msgid "Start Address"
+msgstr "開始アドレス"
+
+msgctxt "app/schema"
+msgid "Subnet Mask"
+msgstr "サブネットマスク"
+
+msgctxt "app/schema"
+msgid "The column may contain double quotes."
+msgstr "カラムにダブルクォートを含むかもしれません。"
+
+msgctxt "app/schema"
+msgid "The column may contain line breaks."
+msgstr "カラムに改行を含むかもしれません。"
+
+msgctxt "app/schema"
+msgid "The columns are output in the following order."
+msgstr "カラムは次の順で出力されます。"
+
+msgctxt "app/schema"
+msgid "The content is not specified and is assumed to be read by humans."
+msgstr "内容については規定されず、人間が読むことを前提にしています。"
+
+msgctxt "app/schema"
+msgid "The encoding is UTF-8. No BOM."
+msgstr "文字コードはUTF-8です。いわゆるBOMはありません。"
+
+msgctxt "app/schema"
+msgid "The new-line code is CR+LF."
+msgstr "改行コードはCR+LFです。"
+
+msgctxt "app/schema"
+msgid "The new-line code is one of CR+LF or LF."
+msgstr "改行コードはCR+LFまたはLFのいずれかです。"
+
+msgctxt "app/schema"
+msgid "The value of each column may or may not be enclosed in double quotes."
+msgstr "各カラムの値はダブルクォートで括られるかもしれないし、括られないかもしれません。"
+
+msgctxt "app/schema"
+msgid "They may also be placed between data records."
+msgstr "データレコード同士の間にも挟まる可能性があります。"
+
+msgctxt "app/schema"
+msgid "This page defines the format of data files that can be downloaded from \"{plainText}\" and \"{template}\" on each page."
+msgstr "このページでは、各ページにある「{plainText}」「{template}」からダウンロードできるデータファイルの形式を定義します。"
+
+msgctxt "app/schema"
+msgid "To handle it correctly, a parser that conforms to RFC 4180 is required."
+msgstr "正しく取り扱うには、RFC 4180に準拠したパーサーが必要です。"
+
+msgctxt "app/schema"
+msgid "Unless overridden by the individual data formats, the following information applies to all formats."
+msgstr "それぞれのデータ形式で上書き規定されない限り、次の情報が全ての形式で適用されます。"
+
+msgctxt "app/schema"
+msgid "You can change the setting to \"Allow\" by adding \"{code}\" to the URL."
+msgstr "URLに「{code}」を付与すると、「許可」設定に変更できます。"
+
+msgctxt "app/schema"
+msgid "You can change the setting to \"Deny\" by adding \"{code}\" to the URL."
+msgstr "URLに「{code}」を付与すると、「拒否」設定に変更できます。"
+
+msgctxt "app/search"
+msgid "Allocated Date"
+msgstr "割り振り日"
+
+msgctxt "app/search"
+msgid "Allocation Block"
+msgstr "割り振りブロック"
+
+msgctxt "app/search"
+msgid "Country/Region"
+msgstr "国または地域"
+
+msgctxt "app/search"
+msgid "For this reason, a single allocation may be expressed as multiple CIDRs."
+msgstr "そのため、ひとつのブロックが複数のCIDRとして表現される場合があります。"
+
+msgctxt "app/search"
+msgid "IP Address"
+msgstr "IPアドレス"
+
+msgctxt "app/search"
+msgid "Merged CIDR"
+msgstr "Merged CIDR"
+
+msgctxt "app/search"
+msgid "No data was found."
+msgstr "該当するデータが見つかりませんでした。"
+
+msgctxt "app/search"
+msgid "Registry"
+msgstr "レジストリ"
+
+msgctxt "app/search"
+msgid "Search"
+msgstr "検索"
+
+msgctxt "app/search"
+msgid "Search IP Address"
+msgstr "IPアドレス検索"
+
+msgctxt "app/search"
+msgid "Search Results"
+msgstr "検索結果"
+
+msgctxt "app/search"
+msgid "The allocation is specified by the starting address and the number of addresses, which may not always be a \"good number\" such as 256."
+msgstr "割り振りは開始アドレスと個数で指定され、必ずしも256個などの「きりのいい数」となるとは限りません。"
+
+msgctxt "app/search"
+msgid "The {mergedCidrThis} indicates which of the \"{mergedCidrForeign}\" in the Country/Region List is included."
+msgstr "{mergedCidrThis}は、各国または地域一覧画面の「{mergedCidrForeign}」のどれに含まれるかを示しています。"
+
+msgctxt "app/search"
+msgid "This part of the display may be equal to, greater than, or part of the \"Allocation Block\"."
+msgstr "この部分の表示は、「割り振りブロック」と等しいことも、より大きいことも、そのブロックの一部を示していることもあります。"
+
+msgctxt "app/search"
+msgid "e.g., {exampleIP}"
+msgstr "例: {exampleIP}"
+
+msgctxt "app/search"
+msgid "{count,number,integer} addresses from \"{startAddress}\" ({startAddress} - {endAddress})"
+msgstr "「{startAddress}」から {count,number,integer} 個（{startAddress} ～ {endAddress}）"
+
