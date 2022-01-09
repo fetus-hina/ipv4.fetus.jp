@@ -59,8 +59,8 @@ msgid "Close"
 msgstr "閉じる"
 
 msgctxt "app"
-msgid "Database last updated: {updatedAt} ({took,number,,0.000} sec.)"
-msgstr "DB最終更新日時: {updatedAt}（{took,number,,0.000}秒）"
+msgid "Database last updated: {updatedAt} ({took} sec.)"
+msgstr "DB最終更新日時: {updatedAt}（{took}秒）"
 
 msgctxt "app"
 msgid "Default"

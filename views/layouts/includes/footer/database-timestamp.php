@@ -22,7 +22,7 @@ if (!($timestamp instanceof DateTimeImmutable)) {
 
 echo Html::tag(
   'div',
-  Yii::t('app', 'Database last updated: {updatedAt} ({took,number,,0.000} sec.)', [
+  Yii::t('app', 'Database last updated: {updatedAt} ({took} sec.)', [
     'updatedAt' => Html::tag(
       'time',
       Html::encode(
@@ -36,7 +36,7 @@ echo Html::tag(
           ->format(DateTime::ATOM),
       ]
     ),
-    'took' => $params['dbUpdateTimestamp']['took'],
+    'took' => Yii::$app->formatter->asDecimal($params['dbUpdateTimestamp']['took'], 3),
   ]),
   ['class' => 'small'],
 );
