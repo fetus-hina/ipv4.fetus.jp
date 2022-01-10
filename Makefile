@@ -76,7 +76,7 @@ config/components/web/request--cookie.php:
 
 .PHONY: config/params/git-revision.php
 config/params/git-revision.php:
-	bin/git-revison > $@
+	bin/git-revision > $@
 
 %.min.js: %.js node_modules
 	npx terser --compress --mangle -o $@ $<

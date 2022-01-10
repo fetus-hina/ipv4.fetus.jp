@@ -43,6 +43,10 @@ jobs:
     steps:
       - uses: 'actions/checkout@v2'
 
+      - name: 'symlink composer'
+        run: |
+            ln -s `which composer` composer.phar
+
       - uses: 'actions/cache@v2'
         with:
           path: |
@@ -94,8 +98,10 @@ jobs:
         with:
           php-version: '8.0'
 
-      - name: 'Install PHP dependencies'
-        run: 'composer install --prefer-dist'
+      - name: 'Install dependencies'
+        run: |
+          ln -s `which composer` composer.phar
+          make init
 
       - name: 'Run PHPCS'
         run: 'vendor/bin/phpcs'
@@ -155,7 +161,7 @@ jobs:
 
     steps:
       - name: 'Install additional packages'
-        run:
+        run: |
           sudo apt install -y gettext
 
       - uses: 'actions/checkout@v2'
