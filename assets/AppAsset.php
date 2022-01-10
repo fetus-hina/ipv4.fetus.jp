@@ -16,6 +16,7 @@ final class AppAsset extends AssetBundle
     public $depends = [
         BootstrapAsset::class,
         CardShadowAsset::class,
+        DropdownToggleAsset::class,
         FocusInputAsset::class,
         JqueryAsset::class,
         LanguageSwitcherAsset::class,

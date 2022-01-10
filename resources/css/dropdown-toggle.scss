@@ -1,0 +1,35 @@
+@charset 'UTF-8';
+@use './bootstrap-icons' as bi;
+
+// Cleanup & inherit bootstrap 5's style
+.dropdown-toggle {
+  &::after {
+    border: 0 solid transparent;
+    content: '';
+    display: inline-block;
+    margin-left: 0.255em;
+    vertical-align: baseline;
+  }
+}
+
+// Use bootstrap-icons
+.dropdown-toggle {
+  &::after {
+    display: inline-block;
+    font-family: bootstrap-icons !important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal !important;
+    line-height: 1;
+    text-transform: none;
+    vertical-align: -0.125em;
+  }
+}
+
+.dropdown-toggle {
+  &::after {
+    content: bi.$bi-chevron-down;
+  }
+}

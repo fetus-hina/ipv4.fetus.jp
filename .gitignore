@@ -16,6 +16,7 @@
 /models/Migration.php
 /node_modules
 /phpunit.xml
+/resources/css/_bootstrap-icons.scss
 /tests/_output/*
 /tests/_support/_generated
 /vendor

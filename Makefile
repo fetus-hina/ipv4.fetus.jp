@@ -28,6 +28,7 @@ clean:
 		composer.phar \
 		coverage.serialized \
 		node_modules \
+		resources/css/_bootstrap-icons.* \
 		vendor \
 		web/assets/* \
 		web/favicon.ico
@@ -92,6 +93,11 @@ config/params/git-revision.php:
 %.css: %.scss node_modules
 	npx sass $< | npx postcss --no-map --use autoprefixer -o $@
 	@touch $@
+
+resources/css/dropdown-toggle.css: resources/css/dropdown-toggle.scss resources/css/_bootstrap-icons.scss node_modules
+
+resources/css/_bootstrap-icons.scss: vendor
+	./yii bootstrap-icons/convert > $@
 
 .PHONY: messages
 messages: vendor
