@@ -39,6 +39,10 @@ msgid "Attention"
 msgstr "ご注意ください"
 
 msgctxt "app"
+msgid "Auto Detect"
+msgstr "自動検出 (Auto Detect)"
+
+msgctxt "app"
 msgid "Between \"{start}\" and \"{end}\" is a comment."
 msgstr "「{start}」と「{end}」の間はコメントです。"
 
@@ -61,10 +65,6 @@ msgstr "閉じる"
 msgctxt "app"
 msgid "Database last updated: {updatedAt} ({took} sec.)"
 msgstr "DB最終更新日時: {updatedAt}（{took}秒）"
-
-msgctxt "app"
-msgid "Default"
-msgstr "デフォルト"
 
 msgctxt "app"
 msgid "Download"

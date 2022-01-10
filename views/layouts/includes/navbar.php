@@ -59,7 +59,11 @@ BootstrapPluginAsset::register($this);
               'aria' => [
                 'expanded' => 'false',
               ],
-              'class' => 'nav-link dropdown-toggle',
+              'class' => [
+                'btn',
+                'btn-outline-light',
+                'dropdown-toggle',
+              ],
               'data' => [
                 'bs-toggle' => 'dropdown',
               ],
@@ -70,9 +74,7 @@ BootstrapPluginAsset::register($this);
           <ul class="dropdown-menu" aria-labelledby="navbar-language-dropdown">
             <li>
               <?= Html::a(
-                implode(' ', [
-                  Html::encode(Yii::t('app', 'Default') . ' (Default)'),
-                ]),
+                Yii::t('app', 'Auto Detect'),
                 'javascript:;',
                 [
                   'class' => 'dropdown-item language-switcher',
