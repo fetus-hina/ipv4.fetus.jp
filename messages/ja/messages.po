@@ -12,11 +12,11 @@ msgstr ""
 
 msgctxt "app"
 msgid "(*1)"
-msgstr "（※1）"
+msgstr "(※1)"
 
 msgctxt "app"
 msgid "(*2)"
-msgstr "（※2）"
+msgstr "(※2)"
 
 msgctxt "app"
 msgid "(You can get a template for access control from the linked page)"
@@ -117,6 +117,10 @@ msgstr "各国の国旗は{source}を使用して表示しています。"
 msgctxt "app"
 msgid "No guarantee."
 msgstr "内容は無保証です。"
+
+msgctxt "app"
+msgid "Open Source Licenses"
+msgstr "オープンソースライセンス"
 
 msgctxt "app"
 msgid "Output the format used by Nginx's {module}."
@@ -465,6 +469,30 @@ msgstr "このリストを使用したことによるいかなる損害にも関
 msgctxt "app/krfilter"
 msgid "You can automate access to each list, but {link}please check this page beforehand.</a>"
 msgstr "各リストへの自動化したアクセスを行っても構いませんが、あらかじめ{link}こちらのページ</a>をご確認ください。"
+
+msgctxt "app/license"
+msgid "Application Template ({name})"
+msgstr "アプリケーションテンプレート ({name})"
+
+msgctxt "app/license"
+msgid "Back"
+msgstr "戻る"
+
+msgctxt "app/license"
+msgid "Composer Packages"
+msgstr "Composerパッケージ"
+
+msgctxt "app/license"
+msgid "NPM Packages"
+msgstr "NPMパッケージ"
+
+msgctxt "app/license"
+msgid "Open Source Licenses"
+msgstr "オープンソースライセンス"
+
+msgctxt "app/license"
+msgid "This website uses the artifacts of these open source projects."
+msgstr "このウェブサイトはこれらのオープンソースプロジェクトの成果物を使用して構築しています。"
 
 msgctxt "app/navbar"
 msgid "Toggle Navbar"

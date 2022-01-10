@@ -74,6 +74,12 @@ BootstrapIconsAsset::register($this);
       ['class' => 'small']
     ) . "\n" ?>
 <?php } ?>
+    <div class="small">
+      <?= Html::a(
+        Yii::t('app', 'Open Source Licenses'),
+        ['license/index']
+      ) . "\n" ?>
+    </div>
     <?= $this->render('//layouts/includes/footer/database-timestamp') . "\n" ?>
     <?= $this->render('//layouts/includes/footer/flag-icons') . "\n" ?>
   </div>

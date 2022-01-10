@@ -78,10 +78,14 @@
     },
     "scripts": {
         "post-install-cmd": [
-            "[ $COMPOSER_DEV_MODE -eq 0 ] || ./vendor/bin/codecept build"
+            "[ $COMPOSER_DEV_MODE -eq 0 ] || ./vendor/bin/codecept build",
+            "./yii license/clean-extracted",
+            "./yii license/extract"
         ],
         "post-update-cmd": [
-            "[ $COMPOSER_DEV_MODE -eq 0 ] || ./vendor/bin/codecept build"
+            "[ $COMPOSER_DEV_MODE -eq 0 ] || ./vendor/bin/codecept build",
+            "./yii license/clean-extracted",
+            "./yii license/extract"
         ]
     },
     "repositories": {
