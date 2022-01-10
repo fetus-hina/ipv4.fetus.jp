@@ -140,7 +140,7 @@ $this->title = Yii::t('app/search', 'Search Results') . ' : ' . Yii::$app->name;
                 [
                   'label' => Yii::t('app/search', 'Allocated Date'),
                   'attribute' => 'block.date',
-                  'format' => 'date',
+                  'format' => 'longDate',
                 ],
                 [
                   'label' => Yii::t('app/search', 'Registry'),

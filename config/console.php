@@ -22,11 +22,13 @@ return (function (): array {
             '@tests' => '@app/tests',
         ],
         'components' => [
-            'cache' => require(__DIR__ . '/components/cache.php'),
-            'db' => require(__DIR__ . '/components/db/db.php'),
-            'log' => require(__DIR__ . '/components/log.php'),
+            'cache' => require __DIR__ . '/components/cache.php',
+            'db' => require __DIR__ . '/components/db/db.php',
+            'formatter' => require __DIR__ . '/components/formatter.php',
+            'i18n' => require __DIR__ . '/components/i18n.php',
+            'log' => require __DIR__ . '/components/log.php',
         ],
-        'params' => require(__DIR__ . '/params.php'),
+        'params' => require __DIR__ . '/params.php',
     ];
 
     if (

@@ -25,6 +25,7 @@ return (function (): array {
             'cache' => require __DIR__ . '/components/cache.php',
             'db' => require __DIR__ . '/components/db/db.php',
             'errorHandler' => require __DIR__ . '/components/web/error-handler.php',
+            'formatter' => require __DIR__ . '/components/formatter.php',
             'i18n' => require __DIR__ . '/components/i18n.php',
             'log' => require __DIR__ . '/components/log.php',
             'request' => require __DIR__ . '/components/web/request.php',

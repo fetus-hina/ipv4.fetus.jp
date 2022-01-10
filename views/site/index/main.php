@@ -163,7 +163,7 @@ SortableTableAsset::register($this);
             [
               'label' => Yii::t('app/cclist', 'Last Alloc'),
               'attribute' => 'last_allocation_date',
-              'format' => ['date', 'short'],
+              'format' => 'shortDate',
               'contentOptions' => fn ($model) => [
                 'class' => 'text-end d-none d-md-table-cell',
                 'data' => [

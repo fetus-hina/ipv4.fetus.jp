@@ -116,7 +116,7 @@ if ($isPjax) {
             [
               'label' => Yii::t('app', 'Alloc Date'),
               'attribute' => 'block.date',
-              'format' => ['date', 'short'],
+              'format' => 'shortDate',
               'contentOptions' => [
                 'class' => 'text-center d-none d-md-table-cell',
               ],
