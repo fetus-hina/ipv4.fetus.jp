@@ -352,7 +352,7 @@ class Generator extends BaseGenerator
                             )),
                             $this->quote($type),
                         ]);
-                        if ($i === 1 || strlen($rule) <= static::LINE_WIDTH_LIMIT) {
+                        if ($i === 1 || strlen($rule) <= self::LINE_WIDTH_LIMIT) {
                             $results[] = $rule;
                             $columns = array_slice($columns, $i);
                             break; // for
@@ -390,7 +390,7 @@ class Generator extends BaseGenerator
                         )),
                         $this->quote($type),
                     ]);
-                    if ($i === 1 || strlen($columnsLine) <= static::LINE_WIDTH_LIMIT - 5) {
+                    if ($i === 1 || strlen($columnsLine) <= self::LINE_WIDTH_LIMIT - 5) {
                         $results[] = "[{$columnsLine}";
                         foreach ($attributes as $attrName => $attrValue) {
                             $results[] = vsprintf('    %s => %s,', [

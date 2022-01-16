@@ -23,7 +23,7 @@ class IPHelper
         $result = [];
         $endAddress = $startAddress + $count - 1;
         while ($count > 0) {
-            for ($bitNum = static::MINIMUM_SPLIT_BITLEN; $bitNum <= 32; ++$bitNum) {
+            for ($bitNum = self::MINIMUM_SPLIT_BITLEN; $bitNum <= 32; ++$bitNum) {
                 $tmpBlockMask = static::bitmask($bitNum);
                 assert($tmpBlockMask !== null);
                 $tmpBlockSize = (0xffffffff & ~$tmpBlockMask) + 1;

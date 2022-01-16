@@ -116,27 +116,27 @@ class UpdateController extends Controller
 
     public function actionAfrinic(): int
     {
-        return $this->update(static::TAG_AFRINIC, static::URL_AFRINIC);
+        return $this->update(self::TAG_AFRINIC, self::URL_AFRINIC);
     }
 
     public function actionApnic(): int
     {
-        return $this->update(static::TAG_APNIC, static::URL_APNIC);
+        return $this->update(self::TAG_APNIC, self::URL_APNIC);
     }
 
     public function actionArin(): int
     {
-        return $this->update(static::TAG_ARIN, static::URL_ARIN);
+        return $this->update(self::TAG_ARIN, self::URL_ARIN);
     }
 
     public function actionLacnic(): int
     {
-        return $this->update(static::TAG_LACNIC, static::URL_LACNIC);
+        return $this->update(self::TAG_LACNIC, self::URL_LACNIC);
     }
 
     public function actionRipeNcc(): int
     {
-        return $this->update(static::TAG_RIPENCC, static::URL_RIPENCC);
+        return $this->update(self::TAG_RIPENCC, self::URL_RIPENCC);
     }
 
     private function update(string $tag, string $url): int
@@ -176,7 +176,7 @@ class UpdateController extends Controller
             if (Region::findOne(['id' => $info['cc']])) {
                 $this->checkedCountries[$info['cc']] = 1;
             } else {
-                Yii::warning("不明な地域コード: {$info['cc']}@" . static::formatRecord($info), __METHOD__);
+                Yii::warning("不明な地域コード: {$info['cc']}@" . self::formatRecord($info), __METHOD__);
                 return false;
             }
         }
@@ -198,11 +198,11 @@ class UpdateController extends Controller
                     ]),
             ]);
             if (!$block->save()) {
-                Yii::error('AllocationBlock の新規作成に失敗: ' . static::formatRecord($info), __METHOD__);
+                Yii::error('AllocationBlock の新規作成に失敗: ' . self::formatRecord($info), __METHOD__);
                 throw new Exception('Failed to create new allocation block row');
             }
 
-            Yii::info('allocation_block を登録しました: ' . static::formatRecord($info), __METHOD__);
+            Yii::info('allocation_block を登録しました: ' . self::formatRecord($info), __METHOD__);
         } else {
             $dbdate = $info['date'] === '00000000'
                 ? null
@@ -225,17 +225,17 @@ class UpdateController extends Controller
                 $block->region_id = $info['cc'];
                 $block->date = $dbdate;
                 if (!$block->save()) {
-                    Yii::error('AllocationBlock の更新に失敗: ' . static::formatRecord($info), __METHOD__);
+                    Yii::error('AllocationBlock の更新に失敗: ' . self::formatRecord($info), __METHOD__);
                     throw new Exception('Could not update allocation_block row');
                 }
 
-                Yii::info('allocation_block を更新しました: ' . static::formatRecord($info), __METHOD__);
+                Yii::info('allocation_block を更新しました: ' . self::formatRecord($info), __METHOD__);
             }
         }
 
         // allocation_cidr の登録
         if (!$cidrs = CountToCidr::convert($block->start_address, $block->count)) {
-            Yii::error('start_address,count -> cidr の変換に失敗: ' . static::formatRecord($info), __METHOD__);
+            Yii::error('start_address,count -> cidr の変換に失敗: ' . self::formatRecord($info), __METHOD__);
             throw new Exception('Cannot convert count to cidr');
         }
 
@@ -249,7 +249,7 @@ class UpdateController extends Controller
                 'cidr' => $cidrtext,
             ]);
             if (!$cidr->save()) {
-                Yii::error("allocation_cidr の保存に失敗: {$cidrtext}@" . static::formatRecord($info), __METHOD__);
+                Yii::error("allocation_cidr の保存に失敗: {$cidrtext}@" . self::formatRecord($info), __METHOD__);
                 throw new Exception('Cannot save allocation_cidr');
             }
         }
@@ -272,7 +272,7 @@ class UpdateController extends Controller
         Yii::info('解析を開始します', __METHOD__);
         $ret = [];
         $offset = 0;
-        $recordRegex = static::getRirStatisticsExchangeRecordFormatRegex();
+        $recordRegex = self::getRirStatisticsExchangeRecordFormatRegex();
         while (preg_match('/(.*?)(?:\x0d\x0a|\x0d|\x0a)/', $text, $match, 0, $offset)) {
             $offset += strlen($match[0]);
             $line = trim($match[1]);
@@ -459,7 +459,7 @@ class UpdateController extends Controller
         return ExitCode::OK;
     }
 
-    /** @var Region[] $regions */
+    /** @param Region[] $regions */
     private function createKrfilter(Krfilter $krfilter, array $regions): void
     {
         Yii::$app->db->transaction(function (Connection $db) use ($krfilter, $regions): void {
