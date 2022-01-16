@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use app\helpers\TypeHelper;
 use yii\db\Migration;
 
 final class m210423_084505_region extends Migration
@@ -10,7 +11,7 @@ final class m210423_084505_region extends Migration
     {
         $this->createTable('{{%region}}', [
             'id' => $this->char(2)->notNull()->check(vsprintf('[[id]] ~ %s', [
-                $this->db->quoteValue('^[a-z]{2}$'),
+                TypeHelper::shouldBeDb($this->db)->quoteValue('^[a-z]{2}$'),
             ])),
             'name_ja' => $this->string()->notNull(),
             'name_en' => $this->string()->notNull(),

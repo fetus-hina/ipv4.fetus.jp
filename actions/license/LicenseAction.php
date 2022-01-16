@@ -7,6 +7,7 @@ namespace app\actions\license;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use Yii;
+use app\helpers\TypeHelper;
 use stdClass;
 use yii\base\Action;
 use yii\helpers\Html;
@@ -48,7 +49,7 @@ final class LicenseAction extends Action
 
     private function loadFiles(string $directory): array
     {
-        $basedir = Yii::getAlias($directory);
+        $basedir = TypeHelper::shouldBeString(Yii::getAlias($directory));
         $ret = [];
         $it = new RecursiveIteratorIterator(
             new RecursiveDirectoryIterator($basedir)
@@ -93,7 +94,7 @@ final class LicenseAction extends Action
 
     private function loadFile(string $path, ?callable $checker): ?string
     {
-        $text = file_get_contents($path, false);
+        $text = TypeHelper::shouldBeString(file_get_contents($path, false));
         if ($checker && !call_user_func($checker, $text)) {
             return null;
         }

@@ -8,6 +8,7 @@ use Exception;
 use Throwable;
 use Yii;
 use app\helpers\CountToCidr;
+use app\helpers\TypeHelper;
 use app\models\AllocationBlock;
 use app\models\AllocationCidr;
 use app\models\Krfilter;
@@ -173,10 +174,11 @@ class UpdateController extends Controller
     private function updateRecord(string $tag, array $info): bool
     {
         if (!isset($this->checkedCountries[$info['cc']])) {
-            if (Region::findOne(['id' => $info['cc']])) {
-                $this->checkedCountries[$info['cc']] = 1;
+            $cc = TypeHelper::shouldBeString($info['cc']);
+            if (Region::findOne(['id' => $cc])) {
+                $this->checkedCountries[$cc] = 1;
             } else {
-                Yii::warning("不明な地域コード: {$info['cc']}@" . self::formatRecord($info), __METHOD__);
+                Yii::warning("不明な地域コード: {$cc}@" . self::formatRecord($info), __METHOD__);
                 return false;
             }
         }
@@ -368,7 +370,9 @@ class UpdateController extends Controller
         }
 
         $cmdline = vsprintf('/usr/bin/env %s', [
-            escapeshellarg(Yii::getAlias('@app/bin/filter-merge-cidr')),
+            escapeshellarg(
+                TypeHelper::shouldBeString(Yii::getAlias('@app/bin/filter-merge-cidr')),
+            ),
         ]);
         $descriptorspec = [
             ['pipe', 'r'],
@@ -391,7 +395,10 @@ class UpdateController extends Controller
                 ]);
             foreach ($query->asArray()->each(100) as $row) {
                 ++$inCount;
-                fwrite($pipes[0], $row['cidr'] . "\n");
+                fwrite(
+                    $pipes[0],
+                    TypeHelper::shouldBeArray($row)['cidr'] . "\n",
+                );
             }
             fclose($pipes[0]);
 
@@ -464,7 +471,9 @@ class UpdateController extends Controller
     {
         Yii::$app->db->transaction(function (Connection $db) use ($krfilter, $regions): void {
             $cmdline = vsprintf('/usr/bin/env %s', [
-                escapeshellarg(Yii::getAlias('@app/bin/filter-merge-cidr')),
+                escapeshellarg(
+                    TypeHelper::shouldBeString(Yii::getAlias('@app/bin/filter-merge-cidr')),
+                ),
             ]);
             $descriptorspec = [
                 ['pipe', 'r'],
@@ -478,7 +487,10 @@ class UpdateController extends Controller
                 $query = $region->getMergedCidrs()
                     ->orderBy(['cidr' => SORT_ASC]);
                 foreach ($query->asArray()->each(200) as $cidr) {
-                    fwrite($pipes[0], $cidr['cidr'] . "\n");
+                    fwrite(
+                        $pipes[0],
+                        TypeHelper::shouldBeArray($cidr)['cidr'] . "\n",
+                    );
                 }
             }
             fclose($pipes[0]);
@@ -506,7 +518,9 @@ class UpdateController extends Controller
     private function saveTimeRecord(float $startAt, float $finishAt): void
     {
         file_put_contents(
-            Yii::getAlias('@app/config/params/database-update-timestamp.php'),
+            TypeHelper::shouldBeString(
+                Yii::getAlias('@app/config/params/database-update-timestamp.php'),
+            ),
             implode("\n", [
                 '<?php',
                 '',

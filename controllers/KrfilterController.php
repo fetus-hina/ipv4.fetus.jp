@@ -6,6 +6,7 @@ namespace app\controllers;
 
 use Yii;
 use app\helpers\DownloadFormatter;
+use app\helpers\TypeHelper;
 use app\models\DownloadTemplate;
 use app\models\Krfilter;
 use yii\web\Controller;
@@ -55,7 +56,12 @@ class KrfilterController extends Controller
                         ->asArray()
                         ->orderBy(['cidr' => SORT_ASC]);
                     foreach ($query->each(500) as $row) {
-                        yield (string)$row['cidr'];
+                        yield TypeHelper::shouldBeString(
+                            TypeHelper::shouldBeArray(
+                                $row,
+                                TypeHelper::ARRAY_ASSOC,
+                            )['cidr'],
+                        );
                     }
                 })(),
                 (function () use ($krfilter) {

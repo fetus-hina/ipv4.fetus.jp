@@ -5,6 +5,7 @@
 declare(strict_types=1);
 
 use app\gii\model\Generator;
+use app\helpers\TypeHelper;
 use yii\db\TableSchema;
 use yii\web\View;
 
@@ -33,7 +34,10 @@ $renderRules = function (int $indentWidth, array $rules): string {
     $text .= '];';
 
     $lines = preg_split('/\x0d\x0a|\x0d|\x0a/', $text);
-    return implode("\n" . str_repeat(' ', $indentWidth), $lines);
+    return implode(
+        "\n" . str_repeat(' ', $indentWidth),
+        TypeHelper::shouldBeArray($lines, TypeHelper::ARRAY_INDEXED),
+    );
 };
 
 $renderRelation = function (int $indentWidth, string $code): string {
@@ -43,7 +47,7 @@ $renderRelation = function (int $indentWidth, string $code): string {
         fn ($m) => "\n" . str_repeat(' ', $indentWidth) . $m[0],
         $code
     );
-    return $code;
+    return TypeHelper::shouldBeString($code);
 };
 
 $traits = $generator->getInjectedTraits($tableName);

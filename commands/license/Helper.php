@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace app\commands\license;
 
 use Yii;
+use app\helpers\TypeHelper;
 
 trait Helper
 {
@@ -21,7 +22,9 @@ trait Helper
         }
 
         try {
-            chdir(Yii::getAlias('@app'));
+            chdir(
+                TypeHelper::shouldBeString(Yii::getAlias('@app')),
+            );
             return $this->execCommandImpl($cmdline);
         } finally {
             @chdir($cwd); // restore

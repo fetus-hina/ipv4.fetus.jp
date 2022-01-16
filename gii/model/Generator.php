@@ -10,6 +10,7 @@ use ReflectionClass;
 use Yii;
 use app\attributes\Implement;
 use app\attributes\InjectTo;
+use app\helpers\TypeHelper;
 use yii\base\NotSupportedException;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
@@ -17,6 +18,7 @@ use yii\db\ActiveQuery;
 use yii\db\Expression;
 use yii\db\ExpressionInterface;
 use yii\db\Schema;
+use yii\db\TableSchema;
 use yii\gii\generators\model\Generator as BaseGenerator;
 use yii\helpers\ArrayHelper;
 
@@ -90,8 +92,11 @@ class Generator extends BaseGenerator
             $use[] = ActiveQuery::class;
         }
 
-        $db = $this->getDbConnection();
-        $schema = $db->getTableSchema($tableName);
+        $db = TypeHelper::shouldBeDb($this->getDbConnection());
+        $schema = TypeHelper::shouldBeInstanceOf(
+            $db->getTableSchema($tableName),
+            TableSchema::class,
+        );
         foreach (array_keys($schema->columns) as $columnName) {
             switch ($columnName) {
                 case 'created_at':
@@ -119,8 +124,8 @@ class Generator extends BaseGenerator
 
     public function generateBehaviors(string $tableName, int $indentCount = 8): ?string
     {
-        $db = $this->getDbConnection();
-        $schema = $db->getTableSchema($tableName);
+        $db = TypeHelper::shouldBeDb($this->getDbConnection());
+        $schema = TypeHelper::shouldBeInstanceOf($db->getTableSchema($tableName), TableSchema::class);
         $columns = array_keys($schema->columns);
 
         if (
@@ -267,11 +272,14 @@ class Generator extends BaseGenerator
             $rules[] = $rule;
         }
 
-        $db = $this->getDbConnection();
+        $db = TypeHelper::shouldBeDb($this->getDbConnection());
 
         // Unique indexes rules
         try {
-            $uniqueIndexes = array_merge($db->getSchema()->findUniqueIndexes($table), [$table->primaryKey]);
+            $uniqueIndexes = array_merge(
+                $db->getSchema()->findUniqueIndexes($table),
+                [$table->primaryKey]
+            );
             $uniqueIndexes = array_unique($uniqueIndexes, SORT_REGULAR);
             foreach ($uniqueIndexes as $uniqueColumns) {
                 // Avoid validating auto incremental columns
@@ -430,7 +438,7 @@ class Generator extends BaseGenerator
             return $value ? 'true' : 'false';
         } elseif (is_object($value) && ($value instanceof ExpressionInterface) && method_exists($value, '__toString')) {
             return (string)$value;
-        } elseif (is_array($value) || is_object($value)) {
+        } elseif (is_iterable($value)) {
             $result = "[\n";
             if (is_array($value) && ArrayHelper::isIndexed($value)) {
                 foreach ($value as $v) {
@@ -453,7 +461,7 @@ class Generator extends BaseGenerator
 
     private function findTraits(): array
     {
-        $basePath = Yii::getAlias('@app/models/traits');
+        $basePath = TypeHelper::shouldBeString(Yii::getAlias('@app/models/traits'));
         $it = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($basePath));
 
         $results = [];
@@ -462,6 +470,7 @@ class Generator extends BaseGenerator
                 $entry->isFile() &&
                 $entry->getExtension() === 'php'
             ) {
+                /** @var class-string */
                 $fqcn = 'app\models\traits' .
                     str_replace(
                         '/',
@@ -481,11 +490,13 @@ class Generator extends BaseGenerator
                 foreach ($ref->getAttributes() as $attr) {
                     switch ($attr->getName()) {
                         case Implement::class:
-                            $info['interfaces'] = $attr->newInstance()->interfaces;
+                            $info['interfaces'] = TypeHelper::shouldBeInstanceOf($attr->newInstance(), Implement::class)
+                                ->interfaces;
                             break;
 
                         case InjectTo::class:
-                            $info['injectTo'] = $attr->newInstance()->targetClasses;
+                            $info['injectTo'] = TypeHelper::shouldBeInstanceOf($attr->newInstance(), InjectTo::class)
+                                ->targetClasses;
                             break;
                     }
                 }

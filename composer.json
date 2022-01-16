@@ -26,14 +26,15 @@
         "ext-pdo": "*",
         "ext-pdo_pgsql": "*",
 
+        "cweagans/composer-patches": "^1.7",
+        "matomo/device-detector": "^5.0",
         "omnilight/yii2-scheduling": "^1.1",
         "scssphp/scssphp": "^1.6",
         "statink/yii2-sortable-table": "*",
         "twbs/bootstrap-icons": "^1.7",
         "yiisoft/yii2": "*",
         "yiisoft/yii2-bootstrap5": "*",
-        "yiisoft/yii2-httpclient": "*",
-        "matomo/device-detector": "^5.0"
+        "yiisoft/yii2-httpclient": "*"
     },
     "require-dev": {
         "codeception/codeception": "^4.0",
@@ -63,12 +64,20 @@
     },
     "config": {
         "allow-plugins": {
+            "cweagans/composer-patches": true,
             "dealerdirect/phpcodesniffer-composer-installer": true,
             "yiisoft/yii2-composer": true
         },
         "process-timeout": 1800,
         "platform": {
             "php": "8.0.14"
+        }
+    },
+    "extra": {
+        "patches": {
+            "yiisoft/yii2": {
+                "Add nullable typehint for date and time formatters": "data/patches/composer/yiisoft/yii2/i18n-formatter-typehint-datetime.patch"
+            }
         }
     },
     "autoload": {

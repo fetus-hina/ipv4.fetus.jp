@@ -6,6 +6,7 @@ namespace app\commands;
 
 use Exception;
 use Yii;
+use app\helpers\TypeHelper;
 use yii\console\Controller;
 use yii\console\ExitCode;
 use yii\helpers\Json;
@@ -18,8 +19,17 @@ final class BootstrapIconsController extends Controller
 
     public function actionConvert(): int
     {
-        $json = Json::decode(
-            file_get_contents(Yii::getAlias(self::JSON_PATH)),
+        $json = TypeHelper::shouldBeArray(
+            Json::decode(
+                TypeHelper::shouldBeString(
+                    file_get_contents(
+                        TypeHelper::shouldBeString(
+                            Yii::getAlias(self::JSON_PATH),
+                        ),
+                    ),
+                ),
+            ),
+            TypeHelper::ARRAY_ASSOC,
         );
 
         ksort($json, SORT_NATURAL | SORT_FLAG_CASE);

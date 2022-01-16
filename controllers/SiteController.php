@@ -104,7 +104,7 @@ class SiteController extends Controller
         $lang = $req->post('language');
         if ($lang === 'default') {
             $r->cookies->remove(ApplicationLanguage::COOKIE_NAME);
-        } elseif (ApplicationLanguage::isValidLanguageCode($lang)) {
+        } elseif (is_string($lang) && ApplicationLanguage::isValidLanguageCode($lang)) {
             $r->cookies->add(
                 Yii::createObject([
                     'class' => Cookie::class,

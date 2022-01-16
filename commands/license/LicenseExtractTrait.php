@@ -11,6 +11,7 @@ namespace app\commands\license;
 
 use DirectoryIterator;
 use Yii;
+use app\helpers\TypeHelper;
 use stdClass;
 use yii\helpers\ArrayHelper;
 use yii\helpers\FileHelper;
@@ -29,7 +30,7 @@ trait LicenseExtractTrait
 
     public function actionCleanExtracted(): int
     {
-        $baseDir = Yii::getAlias('@app/data/licenses/composer');
+        $baseDir = TypeHelper::shouldBeString(Yii::getAlias('@app/data/licenses/composer'));
         if (file_exists($baseDir)) {
             FileHelper::removeDirectory($baseDir);
         }
@@ -40,12 +41,16 @@ trait LicenseExtractTrait
     private function getPackages(): array
     {
         $cmdline = vsprintf('/usr/bin/env %s --no-interaction --no-plugins license --format=%s', [
-            escapeshellarg(Yii::getAlias('@app/composer.phar')),
+            escapeshellarg(TypeHelper::shouldBeString(Yii::getAlias('@app/composer.phar'))),
             escapeshellarg('json'),
         ]);
-        return ArrayHelper::getValue(
-            Json::decode($this->execCommand($cmdline)),
-            'dependencies'
+        $json = TypeHelper::shouldBeArray(
+            Json::decode(
+                TypeHelper::shouldBeString($this->execCommand($cmdline)),
+            ),
+        );
+        return TypeHelper::shouldBeArray(
+            ArrayHelper::getValue($json, 'dependencies')
         );
     }
 
@@ -143,16 +148,18 @@ trait LicenseExtractTrait
 
     private function hasLicense(string $path): bool
     {
-        $text = file_get_contents($path, false);
+        $text = TypeHelper::shouldBeString(file_get_contents($path, false));
         return (bool)preg_match('/license|copyright/i', $text);
     }
 
     private function sanitize(string $packageName): string
     {
-        $packageName = preg_replace(
-            '/[^!#$%()+,.\/-9@-Z_a-z]+/',
-            '-',
-            $packageName
+        $packageName = TypeHelper::shouldBeString(
+            preg_replace(
+                '/[^!#$%()+,.\/-9@-Z_a-z]+/',
+                '-',
+                $packageName,
+            ),
         );
         $packageName = str_replace('/../', '/', $packageName);
         $packageName = str_replace('/./', '/', $packageName);

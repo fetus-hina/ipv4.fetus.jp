@@ -7,6 +7,7 @@ namespace app\i18n;
 use DateTimeInterface;
 use LogicException;
 use Yii;
+use app\helpers\TypeHelper;
 
 final class Formatter extends \yii\i18n\Formatter
 {
@@ -36,7 +37,9 @@ final class Formatter extends \yii\i18n\Formatter
     private function dateFormat(string $type): string
     {
         $locale = trim(Yii::$app->language);
-        $lang = strtolower(preg_replace('/^([a-z]+).*/i', '$1', $locale));
+        $lang = strtolower(
+            TypeHelper::shouldBeString(preg_replace('/^([a-z]+).*/i', '$1', $locale))
+        );
 
         return match ($type) {
             self::DATE_FORMAT_LONG => match ($lang) {

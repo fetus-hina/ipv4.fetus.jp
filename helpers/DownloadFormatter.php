@@ -67,76 +67,78 @@ final class DownloadFormatter
         ?string $cidr,
         bool $isAllow
     ): string {
-        return preg_replace_callback(
-            '/\{([a-zA-Z0-9_]+)((?::[A-Za-z0-9]+)+)?\}/',
-            function (array $match) use ($template, $cc, $cidr, $isAllow): string {
-                switch ($match[1]) {
-                    case 'broadcast':
-                        if ($cidr === null) {
-                            throw new Exception('Unexpected {broadcast} in download template');
-                        }
-                        return static::formatPlaceholder(
-                            static::calcBroadcastAddress($cidr),
-                            explode(':', ltrim($match[2] ?? '', ':')),
-                        );
+        return TypeHelper::shouldBeString(
+            preg_replace_callback(
+                '/\{([a-zA-Z0-9_]+)((?::[A-Za-z0-9]+)+)?\}/',
+                function (array $match) use ($template, $cc, $cidr, $isAllow): string {
+                    switch ($match[1]) {
+                        case 'broadcast':
+                            if ($cidr === null) {
+                                throw new Exception('Unexpected {broadcast} in download template');
+                            }
+                            return static::formatPlaceholder(
+                                static::calcBroadcastAddress($cidr),
+                                explode(':', ltrim($match[2] ?? '', ':')),
+                            );
 
-                    case 'cc':
-                        return static::formatPlaceholder($cc, explode(':', ltrim($match[2] ?? '', ':')));
+                        case 'cc':
+                            return static::formatPlaceholder($cc, explode(':', ltrim($match[2] ?? '', ':')));
 
-                    case 'cidr':
-                        if ($cidr === null) {
-                            throw new Exception('Unexpected {cidr} in download template');
-                        }
-                        return static::formatPlaceholder($cidr, explode(':', ltrim($match[2] ?? '', ':')));
+                        case 'cidr':
+                            if ($cidr === null) {
+                                throw new Exception('Unexpected {cidr} in download template');
+                            }
+                            return static::formatPlaceholder($cidr, explode(':', ltrim($match[2] ?? '', ':')));
 
-                    case 'control':
-                        if ($template->allow === null || $template->deny === null) {
-                            throw new Exception('Unexpected {control} in download template');
-                        }
-                        return static::formatPlaceholder(
-                            $isAllow ? $template->allow : $template->deny,
-                            explode(':', ltrim($match[2] ?? '', ':')),
-                        );
+                        case 'control':
+                            if ($template->allow === null || $template->deny === null) {
+                                throw new Exception('Unexpected {control} in download template');
+                            }
+                            return static::formatPlaceholder(
+                                $isAllow ? $template->allow : $template->deny,
+                                explode(':', ltrim($match[2] ?? '', ':')),
+                            );
 
-                    case 'control_not':
-                        if ($template->allow === null || $template->deny === null) {
-                            throw new Exception('Unexpected {control_not} in download template');
-                        }
-                        return static::formatPlaceholder(
-                            !$isAllow ? $template->allow : $template->deny,
-                            explode(':', ltrim($match[2] ?? '', ':')),
-                        );
+                        case 'control_not':
+                            if ($template->allow === null || $template->deny === null) {
+                                throw new Exception('Unexpected {control_not} in download template');
+                            }
+                            return static::formatPlaceholder(
+                                !$isAllow ? $template->allow : $template->deny,
+                                explode(':', ltrim($match[2] ?? '', ':')),
+                            );
 
-                    case 'network':
-                        if ($cidr === null) {
-                            throw new Exception('Unexpected {network} in download template');
-                        }
-                        return static::formatPlaceholder(
-                            explode('/', $cidr)[0],
-                            explode(':', ltrim($match[2] ?? '', ':')),
-                        );
+                        case 'network':
+                            if ($cidr === null) {
+                                throw new Exception('Unexpected {network} in download template');
+                            }
+                            return static::formatPlaceholder(
+                                explode('/', $cidr)[0],
+                                explode(':', ltrim($match[2] ?? '', ':')),
+                            );
 
-                    case 'prefix':
-                        if ($cidr === null) {
-                            throw new Exception('Unexpected {prefix} in download template');
-                        }
-                        return static::formatPlaceholder(
-                            (string)(int)explode('/', $cidr)[1],
-                            explode(':', ltrim($match[2] ?? '', ':')),
-                        );
+                        case 'prefix':
+                            if ($cidr === null) {
+                                throw new Exception('Unexpected {prefix} in download template');
+                            }
+                            return static::formatPlaceholder(
+                                (string)(int)explode('/', $cidr)[1],
+                                explode(':', ltrim($match[2] ?? '', ':')),
+                            );
 
-                    case 'subnet':
-                        if ($cidr === null) {
-                            throw new Exception('Unexpected {subnet} in download template');
-                        }
-                        return static::formatPlaceholder(
-                            static::prefixToSubnetMask((int)explode('/', $cidr)[1]),
-                            explode(':', ltrim($match[2] ?? '', ':')),
-                        );
-                }
-                return $match[0];
-            },
-            $text,
+                        case 'subnet':
+                            if ($cidr === null) {
+                                throw new Exception('Unexpected {subnet} in download template');
+                            }
+                            return static::formatPlaceholder(
+                                static::prefixToSubnetMask((int)explode('/', $cidr)[1]),
+                                explode(':', ltrim($match[2] ?? '', ':')),
+                            );
+                    }
+                    return $match[0];
+                },
+                $text,
+            )
         );
     }
 
@@ -148,7 +150,7 @@ final class DownloadFormatter
 
         // phpcs:ignore SlevomatCodingStandard.PHP.UselessParentheses.UselessParentheses
         $maskBin = (0xffffffff << (32 - $prefix)) & 0xffffffff;
-        return long2ip($maskBin);
+        return TypeHelper::shouldBeString(long2ip($maskBin));
     }
 
     private static function calcBroadcastAddress(string $cidr): string
@@ -170,7 +172,7 @@ final class DownloadFormatter
         // phpcs:ignore SlevomatCodingStandard.PHP.UselessParentheses.UselessParentheses
         $subnetMask = (0xffffffff << (32 - $prefix)) & 0xffffffff;
         $broadcast = $network | ($subnetMask ^ 0xffffffff);
-        return long2ip($broadcast);
+        return TypeHelper::shouldBeString(long2ip($broadcast));
     }
 
     private static function formatPlaceholder(string $value, array $modifiers): string

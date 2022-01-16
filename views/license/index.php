@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use app\helpers\TypeHelper;
 use yii\helpers\Html;
 
 ?>
@@ -29,7 +30,11 @@ use yii\helpers\Html;
   <div class="card-body">
     <?= Html::tag(
       'pre',
-      Html::encode((string)@file_get_contents(Yii::getAlias('@app/LICENSE'))),
+      Html::encode(
+        (string)@file_get_contents(
+          TypeHelper::shouldBeString(Yii::getAlias('@app/LICENSE')),
+        ),
+      ),
       ['class' => 'm-0 fs-6 lh-sm']
     ) . "\n" ?>
   </div>
@@ -45,7 +50,11 @@ use yii\helpers\Html;
   <div class="card-body">
     <?= Html::tag(
       'pre',
-      Html::encode((string)@file_get_contents(Yii::getAlias('@app/LICENSE.app-template.md'))),
+      Html::encode(
+        (string)@file_get_contents(
+          TypeHelper::shouldBeString(Yii::getAlias('@app/LICENSE.app-template.md')),
+        ),
+      ),
       ['class' => 'm-0 fs-6 lh-sm']
     ) . "\n" ?>
   </div>

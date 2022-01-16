@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace app\controllers;
 
+use Throwable;
 use Yii;
+use app\helpers\TypeHelper;
 use app\models\SearchForm;
 use yii\web\Controller;
 
@@ -15,11 +17,21 @@ class SearchController extends Controller
         /** @var ?\app\models\SearchResult */
         $result = null;
         $form = Yii::createObject(SearchForm::class);
-        if (
-            $form->load(Yii::$app->request->get()) &&
-            $form->validate()
-        ) {
-            $result = $form->search();
+        try {
+            if (
+                $form->load(
+                    TypeHelper::shouldBeArray(
+                        Yii::$app->request->get(),
+                        TypeHelper::ARRAY_ASSOC,
+                    )
+                ) &&
+                $form->validate()
+            ) {
+                $result = $form->search();
+            }
+        } catch (Throwable $e) {
+            $form = Yii::createObject(SearchForm::class);
+            $result = null;
         }
 
         return $this->render('index', [
