@@ -76,11 +76,11 @@ class UpdateController extends Controller
 
                     /** @var array<string, callable> */
                     $actions = [
-                        'AfriNIC'   => fn () => $this->actionAfrinic(),
-                        'APNIC'     => fn () => $this->actionApnic(),
-                        'ARIN'      => fn () => $this->actionArin(),
-                        'LACNIC'    => fn () => $this->actionLacnic(),
-                        'RIPE NCC'  => fn () => $this->actionRipeNcc(),
+                        'AfriNIC' => fn (): int => $this->actionAfrinic(),
+                        'APNIC' => fn (): int => $this->actionApnic(),
+                        'ARIN' => fn (): int => $this->actionArin(),
+                        'LACNIC' => fn (): int => $this->actionLacnic(),
+                        'RIPE NCC' => fn (): int => $this->actionRipeNcc(),
                     ];
                     foreach ($actions as $label => $action) {
                         Yii::info("Updating {$label}", __METHOD__);

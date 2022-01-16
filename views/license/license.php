@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use app\helpers\TypeHelper;
 use yii\helpers\Html;
 use yii\web\View;
 
@@ -11,22 +12,29 @@ use yii\web\View;
  * @var View $this
  */
 
-$id = fn ($name) => vsprintf('pkg-%s-%s', [
-  trim(preg_replace('/[^0-9a-zA-Z]+/', '_', $name), '_'),
+$id = fn (string $name): string => vsprintf('pkg-%s-%s', [
+  trim(
+    TypeHelper::shouldBeString(
+      preg_replace('/[^0-9a-zA-Z]+/', '_', $name),
+    ),
+    '_',
+  ),
   hash('crc32b', $name),
 ]);
 
 // Zero Width Space
 $wbr = html_entity_decode('&#x200b;', ENT_QUOTES | ENT_HTML5, 'UTF-8');
 
-$breakable = fn ($text) => preg_replace_callback(
-  '/[@\/]/',
-  fn ($match) => match ($match[0]) {
-    '@' => "{$wbr}{$match[0]}",
-    '/' => "{$match[0]}{$wbr}",
-    default => "{$wbr}{$match[0]}{$wbr}",
-  },
-  $text
+$breakable = fn (string $text): string => TypeHelper::shouldBeString(
+  preg_replace_callback(
+    '/[@\/]/',
+    fn (array $match): string => match ($match[0]) {
+      '@' => "{$wbr}{$match[0]}",
+      '/' => "{$match[0]}{$wbr}",
+      default => "{$wbr}{$match[0]}{$wbr}",
+    },
+    $text,
+  ),
 );
 
 ?>
@@ -43,8 +51,11 @@ $breakable = fn ($text) => preg_replace_callback(
 </p>
 <h2><?= Html::encode($title) ?></h2>
 <ul><?= implode('', array_map(
-  fn ($item) => Html::tag('li', Html::a($breakable(Html::encode($item->name)), '#' . $id($item->name))),
-  $depends
+  fn (stdClass $item): string => Html::tag(
+    'li',
+    Html::a($breakable(Html::encode($item->name)), '#' . $id($item->name)),
+  ),
+  $depends,
 )) ?></ul>
 
 <hr>

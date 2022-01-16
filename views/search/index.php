@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use app\helpers\TypeHelper;
+use app\models\AllocationCidr;
 use app\models\SearchForm;
 use app\models\SearchResult;
 use app\widgets\FlagIcon;
@@ -80,7 +82,10 @@ $this->title = Yii::t('app/search', 'Search Results') . ' : ' . Yii::$app->name;
                   'label' => Yii::t('app/search', 'Allocation Block') . ' ' . Yii::t('app', '(*1)'),
                   'value' => function () use ($result): string {
                     $cidrs = $result->block->allocationCidrs;
-                    usort($cidrs, fn ($a, $b) => strnatcasecmp($a->cidr, $b->cidr));
+                    usort(
+                      $cidrs,
+                      fn (AllocationCidr $a, AllocationCidr $b): int => strnatcasecmp($a->cidr, $b->cidr),
+                    );
 
                     return implode('', [
                       Yii::t(
@@ -95,7 +100,13 @@ $this->title = Yii::t('app/search', 'Search Results') . ' : ' . Yii::$app->name;
                           ),
                           'endAddress' => Html::tag(
                             'code',
-                            (string)long2ip(ip2long($result->block->start_address) + $result->block->count - 1),
+                            TypeHelper::shouldBeString(
+                              long2ip(
+                                TypeHelper::shouldBeInteger(ip2long($result->block->start_address))
+                                  + $result->block->count
+                                  - 1
+                              ),
+                            ),
                             ['class' => 'text-body'],
                           ),
                         ]
@@ -105,7 +116,7 @@ $this->title = Yii::t('app/search', 'Search Results') . ' : ' . Yii::$app->name;
                         implode(
                           "\n",
                           array_map(
-                            fn ($row) => $row->cidr,
+                            fn (AllocationCidr $row): string => $row->cidr,
                             $cidrs
                           )
                         ),

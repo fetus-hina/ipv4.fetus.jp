@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use app\helpers\TypeHelper;
 use app\models\AllocationCidr;
 use app\models\Region;
 use app\models\RegionStat;
@@ -84,7 +85,9 @@ if ($isPjax) {
               'pageParam' => 'list-page',
               'pageSizeParam' => 'list-per-page',
             ],
-            'key' => fn ($model) => 'list-' . preg_replace('/[^0-9]/', '-', $model->cidr),
+            'key' => fn (AllocationCidr $model): string => vsprintf('list-%s', [
+              TypeHelper::shouldBeString(preg_replace('/[^0-9]/', '-', $model->cidr)),
+            ]),
           ]),
           'columns' => [
             [

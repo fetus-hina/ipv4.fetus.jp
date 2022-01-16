@@ -71,7 +71,9 @@ final class LicenseAction extends Action
             $basename = substr($pathname, strlen($basedir));
             $html = $this->loadPlain(
                 $entry->getPathname(),
-                fn ($t) => (bool)preg_match('/copyright|licen[cs]e/i', $t),
+                fn (string $t): bool => (bool)TypeHelper::shouldBeInteger(
+                    preg_match('/copyright|licen[cs]e/i', $t),
+                ),
             );
             if ($html) {
                 $ret[] = (object)[

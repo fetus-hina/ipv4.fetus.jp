@@ -53,7 +53,7 @@ BootstrapIconsAsset::register($this);
     <?= Html::tag(
       'div',
       implode(', ', array_map(
-        fn ($html) => Html::tag('span', $html, ['class' => 'text-nowrap']),
+        fn (string $html): string => Html::tag('span', $html, ['class' => 'text-nowrap']),
         array_filter([
           Html::a(
             Yii::t('app', 'Source Code'),

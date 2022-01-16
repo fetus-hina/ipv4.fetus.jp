@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace app\controllers;
 
+use Generator;
 use Yii;
 use app\helpers\DownloadFormatter;
 use app\helpers\TypeHelper;
@@ -13,7 +14,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
 
-class RegionController extends Controller
+final class RegionController extends Controller
 {
     public function actionView(string $cc): string
     {
@@ -62,7 +63,7 @@ class RegionController extends Controller
             $resp->format = Response::FORMAT_RAW;
             $resp->charset = 'UTF-8';
             $resp->headers->set('Content-Type', 'text/plain');
-            $resp->stream = fn () => DownloadFormatter::format(
+            $resp->stream = fn (): Generator => DownloadFormatter::format(
                 vsprintf('[%s] %s (%s)', [
                     $region->id,
                     $region->name_ja,

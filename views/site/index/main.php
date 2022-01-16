@@ -60,8 +60,8 @@ SortableTableAsset::register($this);
             [
               'label' => '',
               'attribute' => 'region_id',
-              'format' => fn ($t) => FlagIcon::widget(['cc' => $t]),
-              'contentOptions' => fn ($model) => [
+              'format' => fn (string $t): string => FlagIcon::widget(['cc' => $t]),
+              'contentOptions' => fn (RegionStat $model): array => [
                 'class' => 'text-center',
                 'data' => [
                   'sort-value' => $model->region_id,
@@ -76,8 +76,8 @@ SortableTableAsset::register($this);
             [
               'label' => Yii::t('app/cclist', 'CC'),
               'attribute' => 'region_id',
-              'format' => fn ($t) => Html::tag('code', Html::encode((string)$t)),
-              'contentOptions' => fn ($model) => [
+              'format' => fn (string $t): string => Html::tag('code', Html::encode((string)$t)),
+              'contentOptions' => fn (RegionStat $model): array => [
                 'class' => 'text-center',
                 'data' => [
                   'sort-value' => $model->region_id,
@@ -92,14 +92,14 @@ SortableTableAsset::register($this);
             [
               'label' => Yii::t('app/cclist', 'Country/Region'),
               'format' => 'raw',
-              'value' => fn (RegionStat $model) => Html::a(
+              'value' => fn (RegionStat $model): string => Html::a(
                 Html::encode($model->region?->formattedName ?? ''),
                 ['region/view', 'cc' => $model->region_id]
               ),
-              'contentOptions' => fn ($model) => [
+              'contentOptions' => fn (RegionStat $model): array => [
                 'class' => 'text-wrap',
                 'data' => [
-                  'sort-value' => $model->region->formattedName,
+                  'sort-value' => $model->region?->formattedName ?? '',
                 ],
               ],
               'headerOptions' => [
@@ -114,7 +114,7 @@ SortableTableAsset::register($this);
               'encodeLabel' => false,
               'attribute' => 'total_address_count',
               'format' => 'integer',
-              'contentOptions' => fn ($model) => [
+              'contentOptions' => fn (RegionStat $model): array => [
                 'class' => 'text-end',
                 'data' => [
                   'sort-value' => $model->total_address_count,
@@ -129,8 +129,8 @@ SortableTableAsset::register($this);
             [
               'label' => Yii::t('app/cclist', 'Alloc %'),
               'format' => ['percent', 5],
-              'value' => fn (RegionStat $model) => $model->total_address_count / (1 << 32),
-              'contentOptions' => fn ($model) => [
+              'value' => fn (RegionStat $model): int|float => $model->total_address_count / (1 << 32),
+              'contentOptions' => fn (RegionStat $model): array => [
                 'class' => 'text-end d-none d-md-table-cell',
                 'data' => [
                   'sort-value' => $model->total_address_count,
@@ -146,8 +146,8 @@ SortableTableAsset::register($this);
             [
               'label' => Yii::t('app/cclist', 'Non Reserved'),
               'format' => ['percent', 5],
-              'value' => fn (RegionStat $model) => $model->total_address_count / ((1 << 32) - 592715776),
-              'contentOptions' => fn ($model) => [
+              'value' => fn (RegionStat $model): int|float => $model->total_address_count / ((1 << 32) - 592715776),
+              'contentOptions' => fn (RegionStat $model): array => [
                 'class' => 'text-end d-none d-md-table-cell',
                 'data' => [
                   'sort-value' => $model->total_address_count,
@@ -164,7 +164,7 @@ SortableTableAsset::register($this);
               'label' => Yii::t('app/cclist', 'Last Alloc'),
               'attribute' => 'last_allocation_date',
               'format' => 'shortDate',
-              'contentOptions' => fn ($model) => [
+              'contentOptions' => fn (RegionStat $model): array => [
                 'class' => 'text-end d-none d-md-table-cell',
                 'data' => [
                   'sort-value' => $model->last_allocation_date ?? '',

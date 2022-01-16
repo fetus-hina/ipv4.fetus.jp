@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace app\controllers;
 
+use Generator;
 use Yii;
 use app\helpers\DownloadFormatter;
 use app\helpers\TypeHelper;
 use app\models\DownloadTemplate;
 use app\models\Krfilter;
+use app\models\Region;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
@@ -44,14 +46,14 @@ class KrfilterController extends Controller
             $resp->format = Response::FORMAT_RAW;
             $resp->charset = 'UTF-8';
             $resp->headers->set('Content-Type', 'text/plain');
-            $resp->stream = fn () => DownloadFormatter::format(
+            $resp->stream = fn (): Generator => DownloadFormatter::format(
                 $krfilter->name,
                 sprintf('krfilter_%d', $krfilter->id),
                 ['krfilter/plain', 'id' => $krfilter->id, 'template' => $template],
                 ['krfilter/view'],
                 $templateModel,
                 false, // this is denylist
-                (function () use ($krfilter) {
+                (function () use ($krfilter): Generator {
                     $query = $krfilter->getKrfilterCidrs()
                         ->asArray()
                         ->orderBy(['cidr' => SORT_ASC]);
@@ -64,17 +66,17 @@ class KrfilterController extends Controller
                         );
                     }
                 })(),
-                (function () use ($krfilter) {
+                (function () use ($krfilter): string {
                     $lines = ['次の国や地域が統合されて出力されています:'];
 
                     $regions = $krfilter->regions;
-                    usort($regions, fn ($a, $b) => strcmp($a->id, $b->id));
+                    usort($regions, fn (Region $a, Region $b): int => strcmp($a->id, $b->id));
                     $perLine = (int)floor(
                         (72 + strlen(', ') - (strlen('# ') + 2)) / strlen('kr, ')
                     );
                     for ($i = 0; $i < count($regions); $i += $perLine) {
                         $lines[] = '  ' . implode(', ', array_map(
-                            fn ($region) => $region->id,
+                            fn (Region $region): string => $region->id,
                             array_slice($regions, $i, $perLine),
                         ));
                     }

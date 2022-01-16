@@ -6,6 +6,7 @@ namespace app\widgets;
 
 use Yii;
 use app\assets\BootstrapIconsAsset;
+use app\helpers\TypeHelper;
 use app\models\Krfilter;
 use app\models\Region;
 use yii\base\Widget;
@@ -143,7 +144,7 @@ final class KrfilterTargetListWidget extends Widget
             Html::tag(
                 'ul',
                 implode('', array_map(
-                    fn ($region) => Html::tag(
+                    fn (Region $region): string => Html::tag(
                         'li',
                         $this->renderDialogBodyRow($region),
                         ['class' => 'list-group-item']
@@ -192,11 +193,15 @@ final class KrfilterTargetListWidget extends Widget
 
     private function getButtonId(): string
     {
-        return sprintf('%s-btn', $this->id);
+        return vsprintf('%s-btn', [
+            TypeHelper::shouldBeString($this->id),
+        ]);
     }
 
     private function getDialogId(): string
     {
-        return sprintf('%s-modal', $this->id);
+        return vsprintf('%s-modal', [
+            TypeHelper::shouldBeString($this->id),
+        ]);
     }
 }

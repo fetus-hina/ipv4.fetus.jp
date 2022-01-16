@@ -71,6 +71,11 @@ final class TypeHelper
             : throw self::error($fqcn, $value);
     }
 
+    public static function shouldBeInteger(mixed $value): int
+    {
+        return is_int($value) ? $value : throw self::error('integer', $value);
+    }
+
     public static function shouldBeString(mixed $value): string
     {
         return is_string($value) ? $value : throw self::error('string', $value);

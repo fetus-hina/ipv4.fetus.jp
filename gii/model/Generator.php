@@ -46,7 +46,8 @@ class Generator extends BaseGenerator
         $list = parent::generateProperties($table);
         uksort(
             $list,
-            fn ($columnA, $columnB) => $this->propertySortGroup($columnA) <=> $this->propertySortGroup($columnB)
+            // phpcs:ignore Generic.Files.LineLength.TooLong
+            fn (string $columnA, string $columnB): int => $this->propertySortGroup($columnA) <=> $this->propertySortGroup($columnB)
                 ?: strnatcasecmp($columnA, $columnB)
                 ?: strcmp($columnA, $columnB)
         );
@@ -58,7 +59,8 @@ class Generator extends BaseGenerator
         $list = parent::generateLabels($table);
         uksort(
             $list,
-            fn ($columnA, $columnB) => $this->propertySortGroup($columnA) <=> $this->propertySortGroup($columnB)
+            // phpcs:ignore Generic.Files.LineLength.TooLong
+            fn (string $columnA, string $columnB): int => $this->propertySortGroup($columnA) <=> $this->propertySortGroup($columnB)
                 ?: strnatcasecmp($columnA, $columnB)
                 ?: strcmp($columnA, $columnB)
         );
@@ -298,7 +300,10 @@ class Generator extends BaseGenerator
                         $attrs = [
                             'skipOnEmpty' => true,
                             'skipOnError' => true,
-                            'targetAttribute' => array_map(fn ($v) => (string)$v, $uniqueColumns),
+                            'targetAttribute' => array_map(
+                                fn ($v): string => (string)$v,
+                                $uniqueColumns,
+                            ),
                         ];
                         foreach ($this->formatRule($uniqueColumns, 'unique', $attrs) as $rule) {
                             $rules[] = $rule;
@@ -324,7 +329,10 @@ class Generator extends BaseGenerator
             $attrs = [
                 'skipOnError' => true,
                 'targetClass' => new Expression(sprintf('%s::class', $refClassName)),
-                'targetAttribute' => array_map(fn ($v) => (string)$v, $refs),
+                'targetAttribute' => array_map(
+                    fn ($v): string => (string)$v,
+                    $refs,
+                ),
             ];
             foreach ($this->formatRule(array_keys($refs), 'exist', $attrs) as $rule) {
                 $rules[] = $rule;
@@ -345,7 +353,7 @@ class Generator extends BaseGenerator
             if ($doNotSplit) {
                 $results[] = vsprintf('[[%s], %s],', [
                     implode(', ', array_map(
-                        fn ($v) => $this->quote($v),
+                        fn (string $v): string => $this->quote($v),
                         $columns,
                     )),
                     $this->quote($type),
@@ -355,7 +363,7 @@ class Generator extends BaseGenerator
                     for ($i = count($columns);; --$i) {
                         $rule = vsprintf('[[%s], %s],', [
                             implode(', ', array_map(
-                                fn ($v) => $this->quote($v),
+                                fn (string $v): string => $this->quote($v),
                                 array_slice($columns, 0, $i),
                             )),
                             $this->quote($type),
@@ -375,7 +383,7 @@ class Generator extends BaseGenerator
         if ($doNotSplit) {
             $columnsLine = vsprintf('[%s], %s,', [
                 implode(', ', array_map(
-                    fn ($v) => $this->quote($v),
+                    fn (string $v): string => $this->quote($v),
                     $columns,
                 )),
                 $this->quote($type),
@@ -393,7 +401,7 @@ class Generator extends BaseGenerator
                 for ($i = count($columns);; --$i) {
                     $columnsLine = vsprintf('[%s], %s,', [
                         implode(', ', array_map(
-                            fn ($v) => $this->quote($v),
+                            fn (string $v): string => $this->quote($v),
                             array_slice($columns, 0, $i),
                         )),
                         $this->quote($type),
@@ -506,7 +514,10 @@ class Generator extends BaseGenerator
                 }
             }
         }
-        usort($results, fn ($a, $b) => strcmp($a['fqcn'], $b['fqcn']));
+        usort(
+            $results,
+            fn (array $a, array $b): int => strcmp($a['fqcn'], $b['fqcn'])
+        );
         return $results;
     }
 
@@ -515,7 +526,11 @@ class Generator extends BaseGenerator
         $genClass = $this->ns . '\\' . $this->generateClassName($tableName);
         return array_filter(
             $this->traits,
-            fn ($info) => in_array($genClass, $info['injectTo'], true)
+            fn (array $info): bool => in_array(
+                $genClass,
+                $info['injectTo'],
+                true,
+            ),
         );
     }
 

@@ -12,7 +12,7 @@ final class LicenseController extends Controller
 {
     public function actions()
     {
-        $license = fn ($title, $dir) => [
+        $license = fn (string $title, string $dir): array => [
             'class' => LicenseAction::class,
             'directory' => $dir,
             'title' => $title,

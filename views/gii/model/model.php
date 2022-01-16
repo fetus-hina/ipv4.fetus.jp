@@ -44,8 +44,8 @@ $renderRelation = function (int $indentWidth, string $code): string {
     $code = str_replace('::className()', '::class', $code);
     $code = preg_replace_callback(
         '/->via/',
-        fn ($m) => "\n" . str_repeat(' ', $indentWidth) . $m[0],
-        $code
+        fn (array $m): string => "\n" . str_repeat(' ', $indentWidth) . $m[0],
+        $code,
     );
     return TypeHelper::shouldBeString($code);
 };
@@ -86,14 +86,14 @@ use <?= $useClass ?>;
     $className,
     preg_replace('!^.+\x5c([^\x5c]+)!', '$1', $generator->baseClass),
     implode(', ', array_map(
-        fn ($fqcn) => preg_replace('!^.+\x5c([^\x5c]+)!', '$1', $fqcn),
-        $interfaces
+        fn (string $fqcn): string => TypeHelper::shouldBeString(preg_replace('!^.+\x5c([^\x5c]+)!', '$1', $fqcn)),
+        $interfaces,
     )),
 ]) ?>
 <?php } else { ?>
 <?php $declLine = vsprintf('final class %s extends %s', [
     $className,
-    preg_replace('!^.+\x5c([^\x5c]+)!', '$1', $generator->baseClass),
+    TypeHelper::shouldBeString(preg_replace('!^.+\x5c([^\x5c]+)!', '$1', $generator->baseClass)),
 ]) ?>
 <?php } ?>
 <?php if (strlen($declLine) <= 120) { ?>
@@ -104,8 +104,8 @@ final class <?= $className . "\n" ?>
 <?php if ($interfaces) { ?>
     implements
         <?= implode(",\n        ", array_map(
-            fn ($fqcn) => preg_replace('!^.+\x5c([^\x5c]+)!', '$1', $fqcn),
-            $interfaces
+            fn (string $fqcn): string => TypeHelper::shouldBeString(preg_replace('!^.+\x5c([^\x5c]+)!', '$1', $fqcn)),
+            $interfaces,
         )) . "\n" ?>
 <?php } ?>
 <?php } ?>

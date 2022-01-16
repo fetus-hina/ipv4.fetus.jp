@@ -5,6 +5,7 @@ declare(strict_types=1);
 use ScssPhp\ScssPhp\Compiler as Scss;
 use app\models\DownloadTemplate;
 use app\models\Krfilter;
+use app\models\Region;
 use app\widgets\FlagIcon;
 use app\widgets\KrfilterTargetListWidget;
 use app\widgets\SnsWidget;
@@ -94,7 +95,7 @@ $this->registerCss(
 ?>
 <?php foreach ($query->all() as $filter) { ?>
 <?php $regions = $filter->regions ?>
-<?php usort($regions, fn ($a, $b) => strcmp($a->id, $b->id)) ?>
+<?php usort($regions, fn (Region $a, Region $b): int => strcmp($a->id, $b->id)) ?>
     <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4">
       <div class="card card-primary h-100">
         <div class="card-header bg-primary text-white">
@@ -104,7 +105,7 @@ $this->registerCss(
           <p class="mb-2 flex-grow-1">
             <?= Yii::t('app/krfilter', 'Consolidated list for<br>{list}', [
               'list' => implode(' ', array_map(
-                fn ($model) => implode('', [
+                fn (Region $model): string => implode('', [
                   Html::tag('span', FlagIcon::widget(['cc' => $model->id]), [
                     'title' => $model->formattedName,
                   ]),
@@ -153,7 +154,7 @@ $this->registerCss(
             <?= Html::tag(
               'div',
               implode('', array_map(
-                fn ($model) => Html::a(
+                fn (DownloadTemplate $model): string => Html::a(
                   Html::encode($model->name),
                   ['krfilter/plain',
                     'id' => $filter->id,

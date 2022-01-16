@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use app\helpers\TypeHelper;
 use app\models\MergedCidr;
 use app\models\Region;
 use yii\data\ActiveDataProvider;
@@ -50,7 +51,11 @@ if (
               'pageParam' => 'cidr-page',
               'pageSizeParam' => 'cidr-per-page',
             ],
-            'key' => fn ($model) => 'cidr-' . preg_replace('/[^0-9]/', '-', $model->cidr),
+            'key' => fn (MergedCidr $model): string => vsprintf('cidr-%s', [
+              TypeHelper::shouldBeString(
+                preg_replace('/[^0-9]/', '-', $model->cidr),
+              ),
+            ]),
           ]),
           'columns' => [
             [
