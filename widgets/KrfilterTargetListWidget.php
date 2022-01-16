@@ -125,13 +125,20 @@ final class KrfilterTargetListWidget extends Widget
         return Html::tag(
             'div',
             implode('', [
-                Html::tag('button', Yii::t('app', 'Close'), [
-                    'class' => 'btn btn-primary',
-                    'data' => [
-                        'bs-dismiss' => 'modal',
-                    ],
-                    'type' => 'button',
-                ]),
+                Html::tag(
+                    'button',
+                    implode(' ', [
+                        Html::tag('span', '', ['class' => 'bi bi-x-lg']),
+                        Yii::t('app', 'Close'),
+                    ]),
+                    [
+                        'class' => 'btn btn-primary',
+                        'data' => [
+                            'bs-dismiss' => 'modal',
+                        ],
+                        'type' => 'button',
+                    ]
+                ),
             ]),
             ['class' => 'modal-footer']
         );
@@ -142,16 +149,26 @@ final class KrfilterTargetListWidget extends Widget
         return Html::tag(
             'div',
             Html::tag(
-                'ul',
+                'div',
                 implode('', array_map(
-                    fn (Region $region): string => Html::tag(
-                        'li',
+                    fn (Region $region): string => Html::a(
                         $this->renderDialogBodyRow($region),
-                        ['class' => 'list-group-item']
+                        ['region/view', 'cc' => $region->id],
+                        [
+                            'class' => [
+                                'list-group-item',
+                                'list-group-item-action',
+                            ],
+                        ],
                     ),
                     $this->filter->regions,
                 )),
-                ['class' => 'list-group list-group-flush']
+                [
+                    'class' => [
+                        'list-group',
+                        'list-group-flush',
+                    ],
+                ],
             ),
             ['class' => 'modal-body p-0']
         );
@@ -179,12 +196,8 @@ final class KrfilterTargetListWidget extends Widget
                 ),
                 Html::tag(
                     'div',
-                    Html::a(
-                        Html::tag('span', '', ['class' => 'bi bi-info-circle']),
-                        ['region/view', 'cc' => $region->id],
-                        []
-                    ),
-                    []
+                    Html::tag('span', '', ['class' => 'bi bi-chevron-right']),
+                    [],
                 ),
             ]),
             ['class' => 'd-flex']
