@@ -117,24 +117,20 @@ jobs:
       matrix:
         env:
           - php: '8.0'
-            pgsql: '9.6-alpine' # EL8 default
-            phpenv: 'os'
+            pgsql: '9.6-bullseye' # EL8 default
             experimental: false
 
           - php: '8.0'
-            pgsql: '11-alpine'
-            phpenv: 'os'
+            pgsql: '13-bullseye' # Current production
             experimental: false
 
           - php: '8.0'
-            pgsql: 'latest'
-            phpenv: 'os'
-            experimental: true
+            pgsql: 'bullseye' # Latest
+            experimental: false
 
           - php: '8.1'
-            pgsql: '11-alpine'
-            phpenv: 'setup-php'
-            experimental: true
+            pgsql: 'bullseye' # Latest
+            experimental: false
 
     runs-on: 'ubuntu-20.04'
 
