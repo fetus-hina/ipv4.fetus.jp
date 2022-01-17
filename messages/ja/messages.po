@@ -119,8 +119,16 @@ msgid "No guarantee."
 msgstr "内容は無保証です。"
 
 msgctxt "app"
+msgid "Not Allocated"
+msgstr "未割振"
+
+msgctxt "app"
 msgid "Open Source Licenses"
 msgstr "オープンソースライセンス"
+
+msgctxt "app"
+msgid "Others"
+msgstr "その他"
 
 msgctxt "app"
 msgid "Output the format used by Nginx's {module}."
@@ -157,6 +165,10 @@ msgstr "全体を統合したリストについては{eufilter}を参照して�
 msgctxt "app"
 msgid "Registry"
 msgstr "レジストリ"
+
+msgctxt "app"
+msgid "Reserved"
+msgstr "予約"
 
 msgctxt "app"
 msgid "Search Query"

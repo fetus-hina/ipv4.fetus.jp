@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use app\models\RegionStat;
+use app\widgets\AllocationSummaryChart;
 use app\widgets\FlagIcon;
 use statink\yii2\sortableTable\SortableTableAsset;
 use yii\data\ActiveDataProvider;
@@ -20,14 +21,21 @@ SortableTableAsset::register($this);
     <?= Yii::t('app', 'IPv4 Address Allocation List for Each Country/Region') . "\n" ?>
   </div>
   <div class="card-body">
-    <div class="text-muted">
-      <p class="mb-2">
-        <?= Yii::t('app', 'Click on a heading to sort.') . "\n" ?>
-      </p>
-      <p class="mb-2">
-        <?= Yii::t('app', 'Click on the country/region name to display a list of IP addresses.') . "\n" ?>
-        <?= Yii::t('app', '(You can get a template for access control from the linked page)') . "\n" ?>
-      </p>
+    <div class="row">
+      <div class="col-4 col-md-7 col-lg-8 mb-2">
+        <div class="text-muted">
+          <p class="mb-2">
+            <?= Yii::t('app', 'Click on a heading to sort.') . "\n" ?>
+          </p>
+          <p class="m-0">
+            <?= Yii::t('app', 'Click on the country/region name to display a list of IP addresses.') . "\n" ?>
+            <?= Yii::t('app', '(You can get a template for access control from the linked page)') . "\n" ?>
+          </p>
+        </div>
+      </div>
+      <div class="col-8 col-md-5 col-lg-4 order-md-2 mb-2">
+        <?= AllocationSummaryChart::widget() . "\n" ?>
+      </div>
     </div>
     <div style="margin:0 -1rem -0.5rem">
       <div class="table-responsive">
