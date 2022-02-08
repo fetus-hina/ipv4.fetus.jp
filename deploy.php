@@ -15,7 +15,6 @@ set('composer_options', implode(' ', [
     '--no-suggest',
     '--optimize-autoloader',
     '--prefer-dist',
-    '--verbose',
 ]));
 set('git_tty', true);
 add('shared_files', [
@@ -61,6 +60,8 @@ set('bin/npm', function () {
     return locateBinaryPath('npm');
 });
 
+set('bin/composer', fn (): string => sprintf('%s/composer.phar', get('release_path')));
+
 host('2401:2500:102:1206:133:242:147:83')
     ->user('ipv4')
     ->stage('production')
@@ -101,6 +102,7 @@ task('deploy:production', function () {
 
 task('deploy:vendors', function () {
     within('{{release_path}}', function () {
+        run('make composer.phar');
         run('{{bin/composer}} {{composer_options}}');
         run('{{bin/npm}} clean-install');
     });
