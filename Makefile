@@ -69,7 +69,11 @@ vendor: composer.lock composer.phar
 	@touch $@
 
 composer.phar:
-	curl -fsSL https://getcomposer.org/installer | php -- --stable --filename=$@
+ifeq (, $(shell which composer 2>/dev/null))
+	curl -fsSL 'https://getcomposer.org/installer' | php -- --filename=$@ --stable
+else
+	ln -s `which composer` $@
+endif
 
 config/components/web/request--cookie.php:
 	bin/generate-secret > $@
