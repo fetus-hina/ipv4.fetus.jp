@@ -11,10 +11,10 @@ final class LatinFontAsset extends AssetBundle
 {
     public $sourcePath = '@app/resources';
     public $css = [
-        'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap',
         'css/latin-font.min.css',
     ];
     public $depends = [
         BootstrapAsset::class,
+        MontserratAsset::class,
     ];
 }
