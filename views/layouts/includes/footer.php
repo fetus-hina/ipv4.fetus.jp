@@ -13,8 +13,8 @@ use yii\web\View;
 BootstrapIconsAsset::register($this);
 
 ?>
-<footer class="bg-light border-top">
-  <div class="container text-end py-3">
+<footer>
+  <div class="container">
     <div>
       <?= implode(' ', array_filter([
         vsprintf('Copyright © %s %s.', [
