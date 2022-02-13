@@ -631,8 +631,8 @@ msgid "The content is not specified and is assumed to be read by humans."
 msgstr "内容については規定されず、人間が読むことを前提にしています。"
 
 msgctxt "app/schema"
-msgid "The encoding is UTF-8. No BOM."
-msgstr "文字コードはUTF-8です。いわゆるBOMはありません。"
+msgid "The encoding is UTF-8. No BOM (Byte Order Mark). It may contains out-of-ASCII characters such as Japanese text."
+msgstr "文字コードはUTF-8です。いわゆるBOM (Byte Order Mark)はありません。"
 
 msgctxt "app/schema"
 msgid "The new-line code is CR+LF."

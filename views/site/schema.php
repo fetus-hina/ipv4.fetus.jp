@@ -72,7 +72,7 @@ $this->registerCss(
           </p>
           <ul>
             <li>
-              <?= Yii::t('app/schema', 'The encoding is UTF-8. No BOM.') . "\n" ?>
+              <?= Yii::t('app/schema', 'The encoding is UTF-8. No BOM (Byte Order Mark). It may contains out-of-ASCII characters such as Japanese text.') . "\n" ?>
             </li>
             <li>
               <?= Yii::t('app/schema', 'The new-line code is one of CR+LF or LF.') . "\n" ?>
