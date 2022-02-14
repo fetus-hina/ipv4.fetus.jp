@@ -15,7 +15,7 @@ MESSAGE_DEST_FILES := $(MESSAGE_SRC_FILES:.po=.mo)
 all: init $(JS_DEST_FILES) $(CSS_DEST_FILES) $(MESSAGE_DEST_FILES) messages
 
 .PHONY: init
-init: node_modules vendor $(CONFIG_FILES) web/favicon.ico
+init: node_modules vendor $(CONFIG_FILES) web/favicon web/favicon.ico
 
 .PHONY: clean
 clean:
@@ -31,6 +31,7 @@ clean:
 		resources/css/_bootstrap-icons.* \
 		vendor \
 		web/assets/* \
+		web/favicon \
 		web/favicon.ico
 
 .PHONY: test
@@ -112,5 +113,8 @@ messages: vendor
 %.mo: %.po
 	msgfmt -o $@ $<
 
-web/favicon.ico:
-	curl -o $@ -fsSL https://fetus.jp/favicon.ico
+web/favicon: node_modules
+	cp -r $</@fetus-hina/fetus.css/dist/favicon/ $@/
+
+web/favicon.ico: web/favicon
+	cp $</favicon.ico $@

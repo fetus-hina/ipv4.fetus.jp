@@ -30,16 +30,16 @@ AppAsset::register($this);
       'http-equiv' => 'X-UA-Compatible',
       'content' =>  'IE=edge',
     ]) . "\n" ?>
-    <link type="image/svg+xml" href="https://fetus.jp/images/favicon.svg" rel="icon" sizes="any">
-    <link type="image/png" href="https://fetus.jp/images/apple-touch-icon-57.png" rel="apple-touch-icon" sizes="57x57">
-    <link type="image/png" href="https://fetus.jp/images/apple-touch-icon-60.png" rel="apple-touch-icon" sizes="60x60">
-    <link type="image/png" href="https://fetus.jp/images/apple-touch-icon-72.png" rel="apple-touch-icon" sizes="72x72">
-    <link type="image/png" href="https://fetus.jp/images/apple-touch-icon-76.png" rel="apple-touch-icon" sizes="76x76">
-    <link type="image/png" href="https://fetus.jp/images/apple-touch-icon-114.png" rel="apple-touch-icon" sizes="114x114">
-    <link type="image/png" href="https://fetus.jp/images/apple-touch-icon-120.png" rel="apple-touch-icon" sizes="120x120">
-    <link type="image/png" href="https://fetus.jp/images/apple-touch-icon-144.png" rel="apple-touch-icon" sizes="144x144">
-    <link type="image/png" href="https://fetus.jp/images/apple-touch-icon-152.png" rel="apple-touch-icon" sizes="152x152">
-    <link type="image/png" href="https://fetus.jp/images/apple-touch-icon-180.png" rel="apple-touch-icon" sizes="180x180">
+    <link type="image/svg+xml" href="/favicon/favicon.svg" rel="icon" sizes="any">
+    <link type="image/png" href="/favicon/apple-touch-icon-57.png" rel="apple-touch-icon" sizes="57x57">
+    <link type="image/png" href="/favicon/apple-touch-icon-60.png" rel="apple-touch-icon" sizes="60x60">
+    <link type="image/png" href="/favicon/apple-touch-icon-72.png" rel="apple-touch-icon" sizes="72x72">
+    <link type="image/png" href="/favicon/apple-touch-icon-76.png" rel="apple-touch-icon" sizes="76x76">
+    <link type="image/png" href="/favicon/apple-touch-icon-114.png" rel="apple-touch-icon" sizes="114x114">
+    <link type="image/png" href="/favicon/apple-touch-icon-120.png" rel="apple-touch-icon" sizes="120x120">
+    <link type="image/png" href="/favicon/apple-touch-icon-144.png" rel="apple-touch-icon" sizes="144x144">
+    <link type="image/png" href="/favicon/apple-touch-icon-152.png" rel="apple-touch-icon" sizes="152x152">
+    <link type="image/png" href="/favicon/apple-touch-icon-180.png" rel="apple-touch-icon" sizes="180x180">
     <?php $this->registerCsrfMetaTags(); echo "\n" ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head(); echo "\n" ?>

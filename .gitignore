@@ -22,6 +22,7 @@
 /tests/_support/_generated
 /vendor
 /web/coverage
+/web/favicon
 /web/favicon.ico
 Thumbs.db
 composer.phar
