@@ -99,8 +99,8 @@ msgid "It is installed into {path} for use."
 msgstr "{path}に設置して利用します。"
 
 msgctxt "app"
-msgid "List of IP addresses allocated to {countryEn} [{cc}]"
-msgstr "{countryJa}[{cc}]に割り振りされたIPアドレスの一覧"
+msgid "List of IP addresses allocated to {ri} {countryEn} [{cc}]"
+msgstr "{ri} {countryJa}[{cc}]に割り振りされたIPアドレスの一覧"
 
 msgctxt "app"
 msgid "Merged CIDR"

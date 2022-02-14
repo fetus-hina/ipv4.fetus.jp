@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use app\models\Region;
+use app\models\RegionStat;
 use app\widgets\FlagIcon;
 use app\widgets\SnsWidget;
 use yii\helpers\Html;
@@ -15,13 +16,39 @@ use yii\web\View;
  */
 
 $this->title = vsprintf('%s : %s', [
-  Yii::t('app', 'List of IP addresses allocated to {countryEn} [{cc}]', [
+  Yii::t('app', 'List of IP addresses allocated to {ri} {countryEn} [{cc}]', [
     'cc' => $region->id,
     'countryEn' => $region->name_en,
     'countryJa' => $region->name_ja,
+    'ri' => Yii::$app->formatter->asRegionalIndicator($region->id),
   ]),
   Yii::$app->name,
 ]);
+
+$metas = [];
+if (!Yii::$app->request->isPjax) {
+    $stats = $region->regionStats[0];
+    assert($stats instanceof RegionStat);
+
+    $metas['description'] = implode(' ', [
+        Yii::t('app', 'This is a list of IP addresses allocated to {country}.', [
+            'country' => preg_match('/^ja\b/i', Yii::$app->language)
+                ? $region->name_ja
+                : $region->name_en,
+        ]),
+        Yii::t('app', 'There are {total,number,integer} IP addresses allocated to {country}. This is {totalPct} of the total address space, and {nonReservedPct} excluding reserved space.', [
+            'country' => preg_match('/^ja\b/i', Yii::$app->language)
+                ? $region->name_ja
+                : $region->name_en,
+            'total' => $stats->total_address_count,
+            'totalPct' => Yii::$app->formatter->asPercent($stats->total_address_count / (1 << 32), 5),
+            'nonReservedPct' => Yii::$app->formatter->asPercent($stats->total_address_count / ((1 << 32) - 592715776), 5),
+        ]),
+    ]);
+}
+foreach ($metas as $name => $value) {
+    $this->registerMetaTag(['name' => $name, 'content' => $value]);
+}
 
 if (
   Yii::$app->request->isPjax &&

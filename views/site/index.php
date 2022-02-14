@@ -15,6 +15,25 @@ $this->title = Yii::t('app', '{siteName}: IPv4 Address Allocation List for Each 
     'siteName' => Yii::$app->name,
 ]);
 
+$metas = [
+    'description' => strip_tags(Yii::t('app', 'IPv4 Address Allocation List for Each Country/Region')),
+    'keywords' => implode(',', [
+        'IPv4',
+        'IP Address',
+        'IPアドレス',
+        'IPv4 Address',
+        'IPv4 Allocation',
+        'IPv4 Assign',
+        'IPv4アドレス',
+        'IPv4割り振り',
+        'IPv4割り当て',
+        '国別IP',
+    ]),
+];
+foreach ($metas as $name => $value) {
+    $this->registerMetaTag(['name' => $name, 'content' => $value]);
+}
+
 ?>
 <main>
   <h1 class="mb-4">

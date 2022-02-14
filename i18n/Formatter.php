@@ -8,6 +8,7 @@ use DateTimeInterface;
 use LogicException;
 use Yii;
 use app\helpers\TypeHelper;
+use app\helpers\Unicode;
 
 final class Formatter extends \yii\i18n\Formatter
 {
@@ -52,5 +53,11 @@ final class Formatter extends \yii\i18n\Formatter
             },
             default => throw new LogicException(),
         };
+    }
+
+    public function asRegionalIndicator(?string $value): string {
+        return $value === null
+            ? $this->nullDisplay
+            : Unicode::asciiToRegionalIndicator($value);
     }
 }
