@@ -55,7 +55,8 @@ final class Formatter extends \yii\i18n\Formatter
         };
     }
 
-    public function asRegionalIndicator(?string $value): string {
+    public function asRegionalIndicator(?string $value): string
+    {
         return $value === null
             ? $this->nullDisplay
             : Unicode::asciiToRegionalIndicator($value);
