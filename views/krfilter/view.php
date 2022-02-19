@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use ScssPhp\ScssPhp\Compiler as Scss;
+use app\helpers\ApplicationLanguage;
 use app\models\DownloadTemplate;
 use app\models\Krfilter;
 use app\models\Region;
@@ -32,6 +33,8 @@ $this->registerCss(
         ')
         ->getCss()
 );
+
+ApplicationLanguage::registerLink(Yii::$app, ['krfilter/view']);
 
 ?>
 <main>

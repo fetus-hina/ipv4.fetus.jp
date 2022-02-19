@@ -2,8 +2,11 @@
 
 declare(strict_types=1);
 
+use app\helpers\ApplicationLanguage;
 use app\helpers\TypeHelper;
 use yii\helpers\Html;
+
+ApplicationLanguage::registerLink(Yii::$app, ['license/index']);
 
 ?>
 <h2><?= Yii::t('app/license', 'Open Source Licenses') ?></h2>

@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use app\helpers\ApplicationLanguage;
 use app\models\SearchForm;
 use app\widgets\SnsWidget;
 use yii\web\View;
@@ -33,6 +34,8 @@ $metas = [
 foreach ($metas as $name => $value) {
     $this->registerMetaTag(['name' => $name, 'content' => $value]);
 }
+
+ApplicationLanguage::registerLink(Yii::$app, ['site/index']);
 
 ?>
 <main>

@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use app\helpers\ApplicationLanguage;
 use app\helpers\TypeHelper;
 use yii\helpers\Html;
 use yii\web\View;
@@ -10,7 +11,10 @@ use yii\web\View;
  * @var string $title
  * @var stdClass[] $depends
  * @var View $this
+ * @var array $pageUrl
  */
+
+ApplicationLanguage::registerLink(Yii::$app, $pageUrl);
 
 $id = fn (string $name): string => vsprintf('pkg-%s-%s', [
   trim(

@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use app\helpers\ApplicationLanguage;
 use app\helpers\TypeHelper;
 use app\models\AllocationCidr;
 use app\models\SearchForm;
@@ -19,6 +20,9 @@ use yii\widgets\DetailView;
  */
 
 $this->title = Yii::t('app/search', 'Search Results') . ' : ' . Yii::$app->name;
+
+ApplicationLanguage::registerLink(Yii::$app, ['search/index', 'query' => $form->normalizedIP]);
+
 ?>
 <main>
   <h1 class="mb-4">

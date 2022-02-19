@@ -17,6 +17,7 @@ final class LicenseAction extends Action
     public string $view = '//license/license';
     public string $title = 'Licenses';
     public string $directory;
+    public array $pageUrl;
 
     /**
      * @return string
@@ -25,6 +26,7 @@ final class LicenseAction extends Action
     {
         return $this->controller->render($this->view, [
             'depends' => $this->loadDepends(),
+            'pageUrl' => $this->pageUrl,
             'title' => $this->title,
         ]);
     }

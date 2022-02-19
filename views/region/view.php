@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use app\helpers\ApplicationLanguage;
 use app\models\Region;
 use app\models\RegionStat;
 use app\widgets\FlagIcon;
@@ -24,6 +25,8 @@ $this->title = vsprintf('%s : %s', [
   ]),
   Yii::$app->name,
 ]);
+
+ApplicationLanguage::registerLink(Yii::$app, ['region/view', 'cc' => $region->id]);
 
 $metas = [];
 if (!Yii::$app->request->isPjax) {

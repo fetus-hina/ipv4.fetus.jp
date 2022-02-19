@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use ScssPhp\ScssPhp\Compiler as Scss;
+use app\helpers\ApplicationLanguage;
 use app\widgets\SnsWidget;
 use yii\helpers\Html;
 use yii\web\View;
@@ -37,6 +38,9 @@ $this->registerCss(
         ')
         ->getCss()
 );
+
+ApplicationLanguage::registerLink(Yii::$app, ['site/schema']);
+
 ?>
 <main>
   <h1 class="mb-4">
