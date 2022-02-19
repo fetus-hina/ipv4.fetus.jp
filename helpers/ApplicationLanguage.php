@@ -6,6 +6,7 @@ namespace app\helpers;
 
 use DeviceDetector\DeviceDetector;
 use Throwable;
+use Yii;
 use yii\base\BootstrapInterface;
 use yii\web\Application;
 
@@ -43,6 +44,13 @@ final class ApplicationLanguage implements BootstrapInterface
             array_keys(self::getValidLanguages()),
             true,
         );
+    }
+
+    public static function isAutoDetect(?Application $app = null): bool
+    {
+        $request = ($app ?? Yii::$app)->request;
+        $cookie = $request->cookies->getValue(self::COOKIE_NAME);
+        return !is_string($cookie) || !self::isValidLanguageCode($cookie);
     }
 
     /** @inheritdoc */

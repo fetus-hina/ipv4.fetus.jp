@@ -88,7 +88,10 @@ final class LanguageButton extends Widget
     private function renderAutoDetectItem(): string
     {
         return Html::a(
-            Yii::t('app', 'Auto Detect'),
+            implode(' ', [
+                $this->bi(ApplicationLanguage::isAutoDetect() ? 'check2-square' : 'square'),
+                Yii::t('app', 'Auto Detect'),
+            ]),
             'javascript:;',
             [
                 'class' => [
