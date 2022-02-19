@@ -18,7 +18,7 @@ jobs:
             experimental: false
 
           - php: '8.1'
-            experimental: true
+            experimental: false
 
     runs-on: 'ubuntu-20.04'
 
@@ -111,25 +111,41 @@ jobs:
         run: 'vendor/bin/phpstan analyze --memory-limit=1G'
 
   phpTest:
-    name: 'PHP test (PHP ${{ matrix.env.php }}, PgSQL ${{ matrix.env.pgsql }})'
+    name: 'PHP test (${{ matrix.env.php.label }}, ${{ matrix.env.pgsql.label }})'
 
     strategy:
       matrix:
         env:
-          - php: '8.0'
-            pgsql: '9.6-bullseye' # EL8 default
+          - php:
+              label: 'PHP 8.0'
+              version: '8.0'
+            pgsql:
+              label: 'PgSQL 9.6'
+              version: '9.6-bullseye'
             experimental: false
 
-          - php: '8.0'
-            pgsql: '13-bullseye' # Current production
+          - php:
+              label: 'PHP 8.0'
+              version: '8.0'
+            pgsql: # Current production
+              label: 'PgSQL 13'
+              version: '13-bullseye'
             experimental: false
 
-          - php: '8.0'
-            pgsql: 'bullseye' # Latest
+          - php:
+              label: 'PHP 8.0'
+              version: '8.0'
+            pgsql:
+              label: 'Latest PgSQL'
+              version: 'bullseye'
             experimental: false
 
-          - php: '8.1'
-            pgsql: 'bullseye' # Latest
+          - php:
+              label: 'PHP 8.1'
+              version: '8.1'
+            pgsql:
+              label: 'Latest PgSQL'
+              version: 'bullseye'
             experimental: false
 
     runs-on: 'ubuntu-20.04'
@@ -140,7 +156,7 @@ jobs:
 
     services:
       pgsql:
-        image: "postgres:${{ matrix.env.pgsql }}"
+        image: "postgres:${{ matrix.env.pgsql.version }}"
 
         ports:
           - '5432:5432'
@@ -176,10 +192,10 @@ jobs:
             node_modules
           key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
 
-      - name: 'Set up PHP ${{ matrix.env.php }}'
+      - name: 'Set up ${{ matrix.env.php.label }}'
         uses: 'shivammathur/setup-php@v2'
         with:
-          php-version: '${{ matrix.env.php }}'
+          php-version: '${{ matrix.env.php.version }}'
 
       - name: 'Set up application'
         run: |
