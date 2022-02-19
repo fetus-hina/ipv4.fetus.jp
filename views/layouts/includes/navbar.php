@@ -2,15 +2,13 @@
 
 declare(strict_types=1);
 
-use app\assets\BootstrapIconsAsset;
-use app\helpers\ApplicationLanguage;
+use app\widgets\LanguageButton;
 use yii\bootstrap5\BootstrapPluginAsset;
 use yii\helpers\Html;
 use yii\web\View;
 
 /** @var View $this */
 
-BootstrapIconsAsset::register($this);
 BootstrapPluginAsset::register($this);
 
 ?>
@@ -49,62 +47,7 @@ BootstrapPluginAsset::register($this);
       </ul>
       <ul class="navbar-nav ms-auto">
         <li class="nav-item dropdown">
-          <?= Html::a(
-            implode(' ', [
-              Html::tag('span', '', ['class' => 'bi bi-translate']),
-              Html::encode('Language'),
-            ]),
-            'javascript:;',
-            [
-              'aria' => [
-                'expanded' => 'false',
-              ],
-              'class' => [
-                'btn',
-                'btn-outline-light',
-                'dropdown-toggle',
-              ],
-              'data' => [
-                'bs-toggle' => 'dropdown',
-              ],
-              'id' => 'navbar-language-dropdown',
-              'role' => 'button',
-            ]
-          ) . "\n" ?>
-          <ul class="dropdown-menu" aria-labelledby="navbar-language-dropdown">
-            <li>
-              <?= Html::a(
-                Yii::t('app', 'Auto Detect'),
-                'javascript:;',
-                [
-                  'class' => 'dropdown-item language-switcher',
-                  'data' => [
-                    'language' => 'default',
-                  ],
-                ],
-              ) . "\n" ?>
-            </li>
-            <li><hr class="dropdown-divider"></li>
-<?php foreach (ApplicationLanguage::getValidLanguages() as $langCode => $langName) { ?>
-            <li>
-              <?= Html::a(
-                implode(' ', [
-                  preg_match('/^' . preg_quote($langCode) . '\b/i', Yii::$app->language)
-                    ? '<span class="bi bi-record-circle-fill"></span>'
-                    : '<span class="bi bi-circle"></span>',
-                  Html::encode($langName),
-                ]),
-                'javascript:;',
-                [
-                  'class' => 'dropdown-item language-switcher',
-                  'data' => [
-                    'language' => $langCode,
-                  ],
-                ],
-              ) . "\n" ?>
-            </li>
-<?php } ?>
-          </ul>
+          <?= LanguageButton::widget() . "\n" ?>
         </li>
       </ul>
     </div>
