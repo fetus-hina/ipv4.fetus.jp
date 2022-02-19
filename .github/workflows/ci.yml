@@ -20,6 +20,9 @@ jobs:
           - php: '8.1'
             experimental: false
 
+          - php: '8.2'
+            experimental: true
+
     runs-on: 'ubuntu-20.04'
 
     steps:
@@ -147,6 +150,14 @@ jobs:
               label: 'Latest PgSQL'
               version: 'bullseye'
             experimental: false
+
+          - php:
+              label: 'PHP 8.2'
+              version: '8.2'
+            pgsql:
+              label: 'Latest PgSQL'
+              version: 'bullseye'
+            experimental: true
 
     runs-on: 'ubuntu-20.04'
 
