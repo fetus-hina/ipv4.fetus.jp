@@ -2,11 +2,17 @@
 
 declare(strict_types=1);
 
+use app\helpers\FileHelper;
+
 return (function (): array {
-    $load = function (string $fileName, $defVal = null) {
-        $path = __DIR__ . '/params/' . $fileName;
-        return file_exists($path) ? require($path) : $defVal;
-    };
+    $load = fn (string $fileName, mixed $defVal = null): mixed => FileHelper::requireIfExists(
+        implode(DIRECTORY_SEPARATOR, [
+            __DIR__,
+            'params',
+            $fileName,
+        ]),
+        $defVal,
+    );
 
     return [
         'copyrightYear' => '2014-2022',

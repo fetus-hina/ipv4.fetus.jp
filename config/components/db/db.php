@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use app\helpers\FileHelper;
 use yii\db\Connection;
 
 return (function (): array {
@@ -9,9 +10,10 @@ return (function (): array {
         'class' => Connection::class,
         'dsn' => 'pgsql:host=localhost;dbname=ipv4app2',
         'username' => 'ipv4app2',
-        'password' => file_exists(__DIR__ . '/password.php')
-            ? require(__DIR__ . '/password.php')
-            : 'ipv4app2',
+        'password' => FileHelper::requireIfExists(
+            __DIR__ . '/password.php',
+            'ipv4app2', // default password
+        ),
         'charset' => 'utf8',
     ];
 
