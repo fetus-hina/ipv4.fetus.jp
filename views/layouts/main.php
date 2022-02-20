@@ -44,7 +44,7 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head(); echo "\n" ?>
   </head>
-  <body class="h-100">
+  <body class="h-100 back-to-top-auto">
 <?php $this->beginBody() ?>
     <div class="d-flex justify-content-start flex-column h-100">
       <div class="mb-4">

@@ -14,6 +14,7 @@ final class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $depends = [
+        BackToTopAsset::class,
         BootstrapAsset::class,
         CardShadowAsset::class,
         DropdownToggleAsset::class,
