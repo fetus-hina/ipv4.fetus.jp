@@ -53,6 +53,7 @@ final class LicenseAction extends Action
     {
         $basedir = TypeHelper::shouldBeString(Yii::getAlias($directory));
         $ret = [];
+        /** @var iterable<RecursiveDirectoryIterator> */
         $it = new RecursiveIteratorIterator(
             new RecursiveDirectoryIterator($basedir)
         );

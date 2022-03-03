@@ -470,6 +470,7 @@ class Generator extends BaseGenerator
     private function findTraits(): array
     {
         $basePath = TypeHelper::shouldBeString(Yii::getAlias('@app/models/traits'));
+        /** @var iterable<RecursiveDirectoryIterator> */
         $it = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($basePath));
 
         $results = [];
