@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use app\assets\BootstrapIconsAsset;
+use app\widgets\Tooltip;
 use yii\helpers\Html;
 use yii\web\View;
 
@@ -26,22 +27,28 @@ BootstrapIconsAsset::register($this);
         ]),
         Yii::$app->params['authorTwitter'] ?? null
           ? Html::a(
-            Html::tag('span', '', ['class' => 'bi bi-twitter']),
+            Tooltip::widget([
+              'content' => Html::tag('span', '', ['class' => 'bi bi-twitter']),
+              'format' => 'raw',
+              'title' => sprintf('Twitter @%s', Yii::$app->params['authorTwitter']),
+            ]),
             sprintf('https://twitter.com/%s', Yii::$app->params['authorTwitter']),
             [
               'target' => '_blank',
-              'title' => sprintf('Twitter @%s', Yii::$app->params['authorTwitter']),
               'rel' => 'external noopener noreferrer',
             ]
           )
           : '',
         Yii::$app->params['authorGitHub'] ?? null
           ? Html::a(
-            Html::tag('span', '', ['class' => 'bi bi-github']),
+            Tooltip::widget([
+              'content' => Html::tag('span', '', ['class' => 'bi bi-github']),
+              'format' => 'raw',
+              'title' => sprintf('GitHub @%s', Yii::$app->params['authorGitHub']),
+            ]),
             sprintf('https://github.com/%s', Yii::$app->params['authorGitHub']),
             [
               'target' => '_blank',
-              'title' => sprintf('GitHub @%s', Yii::$app->params['authorGitHub']),
               'rel' => 'external noopener noreferrer',
             ]
           )

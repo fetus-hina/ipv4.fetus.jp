@@ -39,6 +39,9 @@
       "browser": true,
       "jquery": true
     },
+    "globals": [
+      "bootstrap"
+    ],
     "ignore": [
       "node_modules/",
       "runtime/",

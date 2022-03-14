@@ -10,6 +10,7 @@ use app\models\Region;
 use app\widgets\FlagIcon;
 use app\widgets\KrfilterTargetListWidget;
 use app\widgets\SnsWidget;
+use app\widgets\Tooltip;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\View;
@@ -109,7 +110,9 @@ ApplicationLanguage::registerLink(Yii::$app, ['krfilter/view']);
             <?= Yii::t('app/krfilter', 'Consolidated list for<br>{list}', [
               'list' => implode(' ', array_map(
                 fn (Region $model): string => implode('', [
-                  Html::tag('span', FlagIcon::widget(['cc' => $model->id]), [
+                  Tooltip::widget([
+                    'content' => FlagIcon::widget(['cc' => $model->id]),
+                    'format' => 'raw',
                     'title' => $model->formattedName,
                   ]),
                   Html::tag(
