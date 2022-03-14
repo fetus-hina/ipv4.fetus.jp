@@ -5,6 +5,7 @@ declare(strict_types=1);
 use app\helpers\ApplicationLanguage;
 use app\models\Region;
 use app\models\RegionStat;
+use app\widgets\EuIsNotUnifiedWarning;
 use app\widgets\FlagIcon;
 use app\widgets\Krfilter;
 use app\widgets\Rufilter;
@@ -98,31 +99,7 @@ if (
     <?= Rufilter::widget(['region' => $region]) . "\n" ?>
 
     <div class="col-12 col-lg-8">
-<?php if ($region->id === 'eu') { ?>
-      <aside class="mb-4">
-        <div class="card border-danger">
-          <div class="card-header bg-danger text-white">
-            <?= Yii::t('app', 'Attention') . "\n" ?>
-          </div>
-          <div class="card-body">
-            <p>
-              <?= Yii::t('app', 'This list is NOT a complete list of IP addresses allocated to the entire European region.') . "\n" ?>
-            </p>
-            <p>
-              <?= Yii::t('app', 'Most IP addresses in the European region are allocated to individual countries.') . "\n" ?>
-            </p>
-            <p class="mb-0">
-              <?= Yii::t('app', 'Refer to {eufilter} if you need the whole integrated list.', [
-                'eufilter' => Html::a(
-                  'eufilter',
-                  ['krfilter/view'],
-                ),
-              ]) . "\n" ?>
-            </p>
-          </div>
-        </div>
-      </aside>
-<?php } ?>
+      <?= EuIsNotUnifiedWarning::widget(['region' => $region]) . "\n" ?>
       <div class="mb-4">
         <?= $this->render('//region/view/list', ['region' => $region]) . "\n" ?>
       </div>
