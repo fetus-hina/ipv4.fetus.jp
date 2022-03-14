@@ -27,6 +27,10 @@ msgid "Access-Control Templates"
 msgstr "アクセス制御用ひな型"
 
 msgctxt "app"
+msgid "Add this page to Hatena Bookmark"
+msgstr "このエントリーをはてなブックマークに追加"
+
+msgctxt "app"
 msgid "Alloc Date"
 msgstr "割り振り日"
 
@@ -221,6 +225,10 @@ msgstr "{country}に割り振りされたIPアドレスの一覧です。"
 msgctxt "app"
 msgid "This list is NOT a complete list of IP addresses allocated to the entire European region."
 msgstr "このリストは、欧州地域全体に割り振られたIPアドレスの一覧ではありません。"
+
+msgctxt "app"
+msgid "Tweet"
+msgstr "ツイート"
 
 msgctxt "app"
 msgid "Use for access control."
