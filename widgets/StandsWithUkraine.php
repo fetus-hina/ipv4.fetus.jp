@@ -14,6 +14,8 @@ final class StandsWithUkraine extends Widget
     private const UKRAINE_BLUE = '#0057b7';
     private const UKRAINE_YELLOW = '#ffd700';
 
+    public string $marginClass = 'mb-3';
+
     public function run(): string
     {
         return Html::tag(
@@ -28,7 +30,7 @@ final class StandsWithUkraine extends Widget
                     'flex-row',
                     'align-items-center',
                     'lh-1',
-                    'mb-3',
+                    $this->marginClass,
                 ],
             ],
         );
