@@ -6,6 +6,8 @@ use app\helpers\ApplicationLanguage;
 use app\models\Region;
 use app\models\RegionStat;
 use app\widgets\FlagIcon;
+use app\widgets\Krfilter;
+use app\widgets\Rufilter;
 use app\widgets\SnsWidget;
 use yii\helpers\Html;
 use yii\web\Controller;
@@ -91,28 +93,10 @@ if (
       <?= $this->render('//layouts/ads/side') . "\n" ?>
     </div>
     <?= $this->render('//layouts/ads/sp-rect') . "\n" ?>
-<?php if ($region->getKrfilters()->exists()) { ?>
-    <aside class="col-12 mb-4">
-      <div class="card border-info">
-        <div class="card-header bg-info text-white">
-          krfilter / eufilter
-        </div>
-        <div class="card-body">
-          <p>
-            <?= Yii::t('app', 'We have a list of countries that we think are frequently used for denied access lists.') . "\n" ?>
-          </p>
-          <?= Html::tag(
-            'p',
-            Html::a(
-              Yii::t('app', 'For more information, please click here.'),
-              ['krfilter/view']
-            ),
-            ['class' => 'mb-0']
-          ) . "\n" ?>
-        </div>
-      </div>
-    </aside>
-<?php } ?>
+
+    <?= Krfilter::widget(['region' => $region]) . "\n" ?>
+    <?= Rufilter::widget(['region' => $region]) . "\n" ?>
+
     <div class="col-12 col-lg-8">
 <?php if ($region->id === 'eu') { ?>
       <aside class="mb-4">
