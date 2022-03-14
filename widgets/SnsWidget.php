@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace app\widgets;
 
+use Yii;
 use yii\base\Widget;
 use yii\helpers\Html;
 use yii\web\View;
 
 final class SnsWidget extends Widget
 {
-    /** @return string */
-    public function run()
+    public function run(): string
     {
         return Html::tag(
             'div',
@@ -57,6 +57,10 @@ final class SnsWidget extends Widget
 
     private function renderHatebu(): string
     {
+        if (!preg_match('/^ja\b/', Yii::$app->language)) {
+            return '';
+        }
+
         if ($this->view instanceof View) {
             $this->view->registerJsFile('https://b.st-hatena.com/js/bookmark_button.js', [
                 'async' => true,
