@@ -9,6 +9,8 @@ use app\models\SearchForm;
 use app\models\SearchResult;
 use app\widgets\FlagIcon;
 use app\widgets\SnsWidget;
+use app\widgets\ads\SideAd;
+use app\widgets\ads\TopAd;
 use yii\helpers\Html;
 use yii\web\View;
 use yii\widgets\DetailView;
@@ -38,15 +40,15 @@ ApplicationLanguage::registerLink(Yii::$app, ['search/index', 'query' => $form->
   <aside class="mb-0">
     <?= SnsWidget::widget() . "\n" ?>
   </aside>
-  <hr> 
-  <?= $this->render('//layouts/ads/top') . "\n" ?>
+  <hr>
+  <?= TopAd::widget() . "\n" ?>
   <div class="row">
     <div class="order-0 order-lg-1 col-12 col-lg-4">
       <aside class="mb-4">
         <?= $this->render('//site/index/search', ['form' => $form]) . "\n" ?>
       </aside>
       <div class="d-none d-lg-block">
-        <?= $this->render('//layouts/ads/side') . "\n" ?>
+        <?= SideAd::widget() . "\n" ?>
       </div>
     </div>
     <div class="order-1 order-lg-0 col-12 col-lg-8">

@@ -5,6 +5,9 @@ declare(strict_types=1);
 use ScssPhp\ScssPhp\Compiler as Scss;
 use app\helpers\ApplicationLanguage;
 use app\widgets\SnsWidget;
+use app\widgets\ads\SideAd;
+use app\widgets\ads\SkyscraperAd;
+use app\widgets\ads\TopAd;
 use yii\helpers\Html;
 use yii\web\View;
 
@@ -37,7 +40,7 @@ ApplicationLanguage::registerLink(Yii::$app, ['site/about']);
     <?= SnsWidget::widget() . "\n" ?>
   </aside>
   <hr>
-  <?= $this->render('//layouts/ads/top') . "\n" ?>
+  <?= TopAd::widget() . "\n" ?>
   <div class="row">
     <div class="col-12 col-lg-8">
       <div class="card border-primary mb-4">
@@ -137,10 +140,10 @@ ApplicationLanguage::registerLink(Yii::$app, ['site/about']);
     </div>
     <div class="col-12 col-lg-4">
       <div class="mb-4">
-        <?= $this->render('//layouts/ads/side') . "\n" ?>
+        <?= SideAd::widget() . "\n" ?>
       </div>
       <div>
-        <?= $this->render('//layouts/ads/side-skyscraper') . "\n" ?>
+        <?= SkyscraperAd::widget() . "\n" ?>
       </div>
     </div>
   </div>

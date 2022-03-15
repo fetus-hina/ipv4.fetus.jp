@@ -10,6 +10,8 @@
   <arg value="s" />
 
   <file>.</file>
+  <exclude-pattern>./.git/</exclude-pattern>
+  <exclude-pattern>./.github/</exclude-pattern>
   <exclude-pattern>./node_modules</exclude-pattern>
   <exclude-pattern>./runtime</exclude-pattern>
   <exclude-pattern>./vendor</exclude-pattern>

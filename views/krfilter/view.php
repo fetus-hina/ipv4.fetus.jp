@@ -11,6 +11,7 @@ use app\widgets\FlagIcon;
 use app\widgets\KrfilterTargetListWidget;
 use app\widgets\SnsWidget;
 use app\widgets\Tooltip;
+use app\widgets\ads\TopAd;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\View;
@@ -46,7 +47,7 @@ ApplicationLanguage::registerLink(Yii::$app, ['krfilter/view']);
     <?= SnsWidget::widget() . "\n" ?>
   </aside>
   <hr>
-  <?= $this->render('//layouts/ads/top') . "\n" ?>
+  <?= TopAd::widget() . "\n" ?>
   <div class="row">
     <div class="col-12 mb-4">
       <div class="card card-primary">

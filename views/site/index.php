@@ -5,6 +5,10 @@ declare(strict_types=1);
 use app\helpers\ApplicationLanguage;
 use app\models\SearchForm;
 use app\widgets\SnsWidget;
+use app\widgets\ads\SideAd;
+use app\widgets\ads\SkyscraperAd;
+use app\widgets\ads\SpRectAd;
+use app\widgets\ads\TopAd;
 use yii\web\View;
 
 /**
@@ -46,14 +50,14 @@ ApplicationLanguage::registerLink(Yii::$app, ['site/index']);
     <?= SnsWidget::widget() . "\n" ?>
   </aside>
   <hr>
-  <?= $this->render('//layouts/ads/top') . "\n" ?>
+  <?= TopAd::widget() . "\n" ?>
   <div class="row">
     <div class="col-12 d-lg-none">
       <aside class="mb-4">
         <?= $this->render('//site/index/search', ['form' => $search]) . "\n" ?>
       </aside>
     </div>
-    <?= $this->render('//layouts/ads/sp-rect') . "\n" ?>
+    <?= SpRectAd::widget() . "\n" ?>
     <div class="col-12 col-lg-8">
       <div class="mb-4">
         <?= $this->render('//site/index/main') . "\n" ?>
@@ -64,11 +68,11 @@ ApplicationLanguage::registerLink(Yii::$app, ['site/index']);
       <aside class="mb-4 d-none d-lg-block">
         <?= $this->render('//site/index/search', ['form' => $search]) . "\n" ?>
       </aside>
-      <?= $this->render('//layouts/ads/side') . "\n" ?>
+      <?= SideAd::widget() . "\n" ?>
       <aside class="mb-4">
         <?= $this->render('//site/index/about') . "\n" ?>
       </aside>
-      <?= $this->render('//layouts/ads/side-skyscraper') . "\n" ?>
+      <?= SkyscraperAd::widget() . "\n" ?>
     </div>
   </div>
 </main>

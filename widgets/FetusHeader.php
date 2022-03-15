@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace app\widgets;
 
 use Yii;
+use app\widgets\ads\BrandAd;
 use yii\base\Widget;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
@@ -60,8 +61,7 @@ final class FetusHeader extends Widget
 
     private function renderAd(): string
     {
-        // FIXME
-        return $this->view->render('//layouts/ads/brand');
+        return BrandAd::widget();
     }
 
     private function getCurrentPageId(): string
