@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use app\assets\AppAsset;
+use app\widgets\Footer;
 use yii\helpers\Html;
 use yii\web\View;
 
@@ -60,9 +61,7 @@ AppAsset::register($this);
           </div>
         </div>
       </div>
-      <div>
-        <?= $this->render('//layouts/includes/footer') . "\n" ?>
-      </div>
+      <?= Html::tag('div', Footer::widget()) . "\n" ?>
     </div>
 <?php $this->endBody() ?>
   </body>
