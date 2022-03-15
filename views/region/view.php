@@ -8,6 +8,7 @@ use app\models\RegionStat;
 use app\widgets\EuIsNotUnifiedWarning;
 use app\widgets\FlagIcon;
 use app\widgets\Krfilter;
+use app\widgets\RegionHeading;
 use app\widgets\Rufilter;
 use app\widgets\SnsWidget;
 use yii\helpers\Html;
@@ -65,22 +66,10 @@ if (
 
 ?>
 <main>
-  <h1><?= vsprintf('%s%s', [
-    FlagIcon::widget(['cc' => $region->id]),
-    preg_match('/^en\b/i', Yii::$app->language)
-      ? Html::encode($region->name_en)
-      : vsprintf('%s %s', [
-        Html::encode($region->name_ja),
-        Html::tag(
-          'small',
-          Html::encode($region->name_en),
-          [
-            'class' => 'text-muted',
-            'lang' => 'en',
-          ],
-        ),
-      ]),
-  ]) ?></h1>
+  <?= RegionHeading::widget([
+    'region' => $region,
+    'options' => ['tag' => 'h1'],
+  ]) . "\n" ?>
   <aside class="mb-0">
     <?= SnsWidget::widget() . "\n" ?>
   </aside>
