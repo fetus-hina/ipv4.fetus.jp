@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use app\helpers\ApplicationLanguage;
 use app\models\SearchForm;
+use app\widgets\SearchCard;
 use app\widgets\SnsWidget;
 use app\widgets\ads\SideAd;
 use app\widgets\ads\SkyscraperAd;
@@ -54,7 +55,7 @@ ApplicationLanguage::registerLink(Yii::$app, ['site/index']);
   <div class="row">
     <div class="col-12 d-lg-none">
       <aside class="mb-4">
-        <?= $this->render('//site/index/search', ['form' => $search]) . "\n" ?>
+        <?= SearchCard::widget(['form' => $search]) . "\n" ?>
       </aside>
     </div>
     <?= SpRectAd::widget() . "\n" ?>
@@ -66,7 +67,7 @@ ApplicationLanguage::registerLink(Yii::$app, ['site/index']);
     <div class="col-12 col-lg-4">
       <?= $this->render('//site/index/stands-with-ukraine') . "\n" ?>
       <aside class="mb-4 d-none d-lg-block">
-        <?= $this->render('//site/index/search', ['form' => $search]) . "\n" ?>
+        <?= SearchCard::widget(['form' => $search]) . "\n" ?>
       </aside>
       <?= SideAd::widget() . "\n" ?>
       <aside class="mb-4">

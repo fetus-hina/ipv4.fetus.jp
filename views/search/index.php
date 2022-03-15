@@ -8,6 +8,7 @@ use app\models\AllocationCidr;
 use app\models\SearchForm;
 use app\models\SearchResult;
 use app\widgets\FlagIcon;
+use app\widgets\SearchCard;
 use app\widgets\SnsWidget;
 use app\widgets\ads\SideAd;
 use app\widgets\ads\TopAd;
@@ -45,7 +46,7 @@ ApplicationLanguage::registerLink(Yii::$app, ['search/index', 'query' => $form->
   <div class="row">
     <div class="order-0 order-lg-1 col-12 col-lg-4">
       <aside class="mb-4">
-        <?= $this->render('//site/index/search', ['form' => $form]) . "\n" ?>
+        <?= SearchCard::widget(['form' => $form]) . "\n" ?>
       </aside>
       <div class="d-none d-lg-block">
         <?= SideAd::widget() . "\n" ?>
