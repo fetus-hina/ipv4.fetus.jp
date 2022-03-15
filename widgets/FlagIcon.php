@@ -6,9 +6,14 @@ namespace app\widgets;
 
 use LogicException;
 use app\assets\FlagIconsAsset;
+use app\helpers\Unicode;
 use yii\base\Widget;
 use yii\helpers\Html;
 use yii\web\View;
+
+use function preg_match;
+use function strtolower;
+use function trim;
 
 final class FlagIcon extends Widget
 {
@@ -28,7 +33,7 @@ final class FlagIcon extends Widget
 
         return Html::tag(
             'span',
-            $this->text($cc),
+            $this->renderContent($cc),
             [
                 'class' => [
                     'flag-icon',
@@ -38,19 +43,15 @@ final class FlagIcon extends Widget
         );
     }
 
-    private function text(string $cc): string
+    private function renderContent(string $cc): string
     {
         return Html::tag(
             'span',
-            implode('', array_map(
-                fn (string $c): string => (string)mb_chr(0x1F1E6 + ord($c) - ord('a'), 'UTF-8'),
-                [
-                    substr($cc, 0, 1),
-                    substr($cc, 1, 1),
-                ]
-            )),
+            Unicode::asciiToRegionalIndicator($cc),
             [
-                'class' => 'visually-hidden',
+                'class' => [
+                    'visually-hidden',
+                ],
             ],
         );
     }
