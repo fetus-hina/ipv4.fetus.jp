@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use app\assets\AppAsset;
+use app\widgets\FetusHeader;
 use app\widgets\Footer;
 use yii\helpers\Html;
 use yii\web\View;
@@ -48,9 +49,7 @@ AppAsset::register($this);
   <body class="h-100 back-to-top-auto">
 <?php $this->beginBody() ?>
     <div class="d-flex justify-content-start flex-column h-100">
-      <div class="mb-4">
-        <?= $this->render('//layouts/includes/fetus-header') . "\n" ?>
-      </div>
+      <?= FetusHeader::widget() . "\n" ?>
       <div class="mb-4">
         <?= $this->render('//layouts/includes/navbar') . "\n" ?>
       </div>
