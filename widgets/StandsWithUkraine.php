@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace app\widgets;
 
+use app\assets\MontserratAsset;
 use yii\base\Widget;
 use yii\helpers\Html;
+use yii\web\View;
 
 final class StandsWithUkraine extends Widget
 {
@@ -18,6 +20,10 @@ final class StandsWithUkraine extends Widget
 
     public function run(): string
     {
+        if (($view = $this->view) instanceof View) {
+            MontserratAsset::register($view);
+        }
+
         return Html::tag(
             'div',
             implode('', [
@@ -31,6 +37,10 @@ final class StandsWithUkraine extends Widget
                     'align-items-center',
                     'lh-1',
                     $this->marginClass,
+                ],
+                'lang' => 'en',
+                'style' => [
+                    'font-family' => 'Montserrat,sans-serif',
                 ],
             ],
         );
