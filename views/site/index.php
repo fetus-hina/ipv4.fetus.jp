@@ -6,6 +6,7 @@ use app\helpers\ApplicationLanguage;
 use app\models\SearchForm;
 use app\widgets\SearchCard;
 use app\widgets\SnsWidget;
+use app\widgets\StandsWithUkraineCard;
 use app\widgets\ads\SideAd;
 use app\widgets\ads\SkyscraperAd;
 use app\widgets\ads\SpRectAd;
@@ -65,7 +66,7 @@ ApplicationLanguage::registerLink(Yii::$app, ['site/index']);
       </div>
     </div>
     <div class="col-12 col-lg-4">
-      <?= $this->render('//site/index/stands-with-ukraine') . "\n" ?>
+      <?= StandsWithUkraineCard::widget() . "\n" ?>
       <aside class="mb-4 d-none d-lg-block">
         <?= SearchCard::widget(['form' => $search]) . "\n" ?>
       </aside>
