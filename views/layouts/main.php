@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use app\assets\AppAsset;
 use app\helpers\FaviconHelper;
+use app\widgets\ContentWrapper;
 use app\widgets\FetusHeader;
 use app\widgets\Footer;
 use app\widgets\Navbar;
@@ -52,19 +53,7 @@ $this->registerMetaTag([
       implode('', [
         FetusHeader::widget(),
         Html::tag('div', Navbar::widget(), ['class' => 'mb-4']),
-        Html::tag(
-          'div',
-          Html::tag(
-            'div',
-            Html::tag(
-              'div',
-              $content,
-              ['class' => 'container'],
-            ),
-            ['class' => 'mb-1'],
-          ),
-          ['class' => 'flex-grow-1'],
-        ),
+        ContentWrapper::widget(['content' => $content]),
         Html::tag('div', Footer::widget()),
       ]),
       [
