@@ -31,6 +31,7 @@ return (function (): array {
             'request' => require __DIR__ . '/components/web/request.php',
             'urlManager' => require __DIR__ . '/components/web/url-manager.php',
             'user' => require __DIR__ . '/components/user.php',
+            'view' => require __DIR__ . '/components/web/view.php',
         ],
         'params' => require __DIR__ . '/params.php',
     ];
