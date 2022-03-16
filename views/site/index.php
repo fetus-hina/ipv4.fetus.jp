@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use app\helpers\ApplicationLanguage;
 use app\models\SearchForm;
+use app\widgets\AboutUsCard;
 use app\widgets\SearchCard;
 use app\widgets\SnsWidget;
 use app\widgets\StandsWithUkraineCard;
@@ -11,6 +12,7 @@ use app\widgets\ads\SideAd;
 use app\widgets\ads\SkyscraperAd;
 use app\widgets\ads\SpRectAd;
 use app\widgets\ads\TopAd;
+use yii\helpers\Html;
 use yii\web\View;
 
 /**
@@ -45,36 +47,45 @@ ApplicationLanguage::registerLink(Yii::$app, ['site/index']);
 
 ?>
 <main>
-  <h1 class="mb-4">
-    <?= Yii::t('app', 'IPv4 Address Allocation List for Each Country/Region') . "\n" ?>
-  </h1>
-  <aside class="mb-0">
-    <?= SnsWidget::widget() . "\n" ?>
-  </aside>
+  <?= Html::tag(
+    'h1',
+    Yii::t('app', 'IPv4 Address Allocation List for Each Country/Region'),
+    ['class' => 'mb-4'],
+  ) . "\n" ?>
+  <?= Html::tag('aside', SnsWidget::widget(), ['class' => 'mb-0']) . "\n" ?>
   <hr>
   <?= TopAd::widget() . "\n" ?>
   <div class="row">
-    <div class="col-12 d-lg-none">
-      <aside class="mb-4">
-        <?= SearchCard::widget(['form' => $search]) . "\n" ?>
-      </aside>
-    </div>
+    <?= Html::tag(
+      'div',
+      Html::tag(
+        'aside',
+        SearchCard::widget(['form' => $search]),
+        ['class' => 'mb-4'],
+      ),
+      ['class' => 'col-12 d-lg-none'],
+    ) . "\n" ?>
     <?= SpRectAd::widget() . "\n" ?>
     <div class="col-12 col-lg-8">
       <div class="mb-4">
         <?= $this->render('//site/index/main') . "\n" ?>
       </div>
     </div>
-    <div class="col-12 col-lg-4">
-      <?= StandsWithUkraineCard::widget() . "\n" ?>
-      <aside class="mb-4 d-none d-lg-block">
-        <?= SearchCard::widget(['form' => $search]) . "\n" ?>
-      </aside>
-      <?= SideAd::widget() . "\n" ?>
-      <aside class="mb-4">
-        <?= $this->render('//site/index/about') . "\n" ?>
-      </aside>
-      <?= SkyscraperAd::widget() . "\n" ?>
-    </div>
+    <?= Html::tag(
+      'div',
+      implode('', [
+        StandsWithUkraineCard::widget(),
+        Html::tag('aside', SearchCard::widget(['form' => $search]), ['class' => 'mb-4 d-none d-lg-block']),
+        SideAd::widget(),
+        Html::tag('aside', AboutUsCard::widget(), ['class' => 'mb-4']),
+        SkyscraperAd::widget(),
+      ]),
+      [
+        'class' => [
+          'col-12',
+          'col-lg-4',
+        ],
+      ],
+    ) . "\n" ?>
   </div>
 </main>

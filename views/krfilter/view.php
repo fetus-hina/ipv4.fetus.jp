@@ -7,6 +7,7 @@ use app\helpers\ApplicationLanguage;
 use app\models\DownloadTemplate;
 use app\models\Krfilter;
 use app\models\Region;
+use app\widgets\DownloadButtons;
 use app\widgets\FlagIcon;
 use app\widgets\KrfilterTargetListWidget;
 use app\widgets\SnsWidget;
@@ -131,60 +132,13 @@ ApplicationLanguage::registerLink(Yii::$app, ['krfilter/view']);
           <?= KrfilterTargetListWidget::widget([
             'filter' => $filter,
           ]) . "\n" ?>
-          <div class="mb-2 d-grid">
-            <?= Html::a(
-              Yii::t('app', 'Plain Text'),
-              ['krfilter/plain', 'id' => $filter->id],
-              [
-                'class' => 'btn btn-primary',
-                'type' => 'text/plain',
-              ]
-            ) . "\n" ?>
-          </div>
-          <div class="dropdown d-grid">
-            <?= Html::tag(
-              'button',
-              Yii::t('app', 'Access-Control Templates'),
-              [
-                'class' => 'btn btn-primary dropdown-toggle',
-                'type' => 'button',
-                'id' => 'download-access-control-' . $filter->id,
-                'data' => [
-                  'bs-toggle' => 'dropdown',
-                ],
-                'aria' => [
-                  'haspopup' => 'true',
-                  'expanded' => 'false',
-                ],
-              ]
-            ) . "\n" ?>
-            <?= Html::tag(
-              'div',
-              implode('', array_map(
-                fn (DownloadTemplate $model): string => Html::a(
-                  Html::encode($model->name),
-                  ['krfilter/plain',
-                    'id' => $filter->id,
-                    'template' => $model->key,
-                  ],
-                  [
-                    'class' => 'dropdown-item',
-                    'type' => 'text/plain',
-                  ]
-                ),
-                DownloadTemplate::find()
-                  ->andWhere(['can_use_in_url' => true])
-                  ->orderBy(['key' => SORT_ASC])
-                  ->all(),
-              )),
-              [
-                'class' => 'dropdown-menu shadow',
-                'aria' => [
-                  'labelledby' => 'download-access-control-' . $filter->id,
-                ],
-              ]
-            ) . "\n" ?>
-          </div>
+          <?= DownloadButtons::widget([
+            'downloadLinkCreator' => fn (?DownloadTemplate $template): array => [
+              'krfilter/plain',
+              'id' => $filter->id,
+              'template' => $template?->key,
+            ],
+          ]) . "\n" ?>
         </div>
       </div>
     </div>
