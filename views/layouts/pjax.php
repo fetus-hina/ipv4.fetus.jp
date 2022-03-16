@@ -13,13 +13,14 @@ use yii\web\View;
 
 AppAsset::register($this);
 
+$this->registerCsrfMetaTags();
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html>
   <head>
     <?= Html::tag('meta', '', ['charset' => Yii::$app->charset]) . "\n" ?>
-    <?php $this->registerCsrfMetaTags(); echo "\n" ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head(); echo "\n" ?>
   </head>
