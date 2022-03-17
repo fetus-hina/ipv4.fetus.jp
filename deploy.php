@@ -82,6 +82,7 @@ task('deploy', [
     'deploy:run_migrations',
     'deploy:build',
     'deploy:vendors_production',
+    'deploy:flush_cache',
     'deploy:symlink',
     'deploy:clear_opcache',
     'deploy:clear_proxy',
@@ -118,7 +119,6 @@ task('deploy:vendors_production', function () {
 task('deploy:run_migrations', function () {
     within('{{release_path}}', function () {
         run('{{bin/php}} ./yii migrate up --interactive=0');
-        run('{{bin/php}} ./yii cache/flush-schema db --interactive=0');
     });
 });
 
@@ -134,6 +134,12 @@ task('deploy:build', function () {
         } else {
             run('make');
         }
+    });
+});
+
+task('deploy:flush_cache', function () {
+    within('{{release_path}}', function () {
+        run('{{bin/php}} ./yii cache/flush-all --interactive=0');
     });
 });
 
