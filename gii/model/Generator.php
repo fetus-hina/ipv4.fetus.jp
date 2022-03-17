@@ -153,7 +153,7 @@ class Generator extends BaseGenerator
                 $results[] = '    BlameableBehavior::class,';
             } else {
                 $results[] = '    [';
-                $results[] = "        '__class' => BlameableBehavior::class,";
+                $results[] = "        'class' => BlameableBehavior::class,";
                 $results[] = vsprintf("        'createdByAttribute' => %s,", [
                     in_array('created_by', $columns, true)
                         ? "'created_by'"
@@ -178,7 +178,7 @@ class Generator extends BaseGenerator
                 $results[] = '    TimestampBehavior::class,';
             } else {
                 $results[] = '    [';
-                $results[] = "        '__class' => TimestampBehavior::class,";
+                $results[] = "        'class' => TimestampBehavior::class,";
                 $results[] = vsprintf("        'createdAtAttribute' => %s,", [
                     in_array('created_at', $columns, true)
                         ? "'created_at'"
