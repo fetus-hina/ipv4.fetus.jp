@@ -22,6 +22,8 @@ final class ApplicationLanguage implements BootstrapInterface
     public const LANGUAGE_ENGLISH = 'en-US';
     public const LANGUAGE_JAPANESE = 'ja-JP';
 
+    private const DEVICE_DETECTOR_CACHE_DURATION = 604800;
+
     public static function getValidLanguages(): array
     {
         static $list = null;
@@ -103,11 +105,19 @@ final class ApplicationLanguage implements BootstrapInterface
 
     private function detectLanguage(Application $app): string
     {
-        return $this->detectLanguageFromUrl($app)
-            ?: $this->returnJapaneseIfRobot($app)
-            ?: $this->detectLanguageFromCookie($app)
-            ?: $this->detectLanguageFromBrowser($app)
-            ?: self::LANGUAGE_ENGLISH;
+        $profiler = new Profiler(
+            'Detect user language',
+            __METHOD__,
+        );
+        try {
+            return $this->detectLanguageFromUrl($app)
+                ?: $this->returnJapaneseIfRobot($app)
+                ?: $this->detectLanguageFromCookie($app)
+                ?: $this->detectLanguageFromBrowser($app)
+                ?: self::LANGUAGE_ENGLISH;
+        } finally {
+            unset($profiler);
+        }
     }
 
     private function detectLanguageFromUrl(Application $app): ?string
@@ -120,24 +130,71 @@ final class ApplicationLanguage implements BootstrapInterface
 
     private function returnJapaneseIfRobot(Application $app): ?string
     {
-        if (!$ua = $app->request->userAgent) {
-            return null;
-        }
-
+        $profiler = new Profiler('Run "returnJapaneseIfRobot"', __METHOD__);
         try {
-            $dd = new DeviceDetector($ua);
-            $dd->parse();
-            if ($dd->isBot()) {
+            $ua = $app->request->userAgent;
+            if (
+                !is_string($ua) ||
+                $ua === '' ||
+                !mb_check_encoding($ua, 'UTF-8')
+            ) {
+                return null;
+            }
+
+            if ($this->isBot($ua)) {
                 $this->vary($app, 'User-Agent');
                 return self::LANGUAGE_JAPANESE;
             }
+
+            return null;
+        } finally {
+            unset($profiler);
+        }
+    }
+
+    /**
+     * @param non-empty-string $userAgent
+     */
+    private function isBot(string $userAgent): bool
+    {
+        $cacheId = sprintf('%s(%s)', __METHOD__, hash('sha256', $userAgent));
+        $profiler = new Profiler("{$cacheId}: {$userAgent}", __METHOD__);
+        try {
+            $value = Yii::$app->cache->get($cacheId);
+            if ($value !== false) {
+                return $value === 1;
+            }
+
+            $isBot = $this->isBotByDeviceDetector($userAgent);
+            Yii::$app->cache->set(
+                $cacheId,
+                $isBot ? 1 : 0,
+                self::DEVICE_DETECTOR_CACHE_DURATION,
+            );
+            return $isBot;
+        } finally {
+            unset($profiler);
+        }
+    }
+
+    /**
+     * @param non-empty-string $userAgent
+     */
+    private function isBotByDeviceDetector(string $userAgent): bool
+    {
+        $profiler = new Profiler('Run device detector', __METHOD__);
+        try {
+            $dd = new DeviceDetector($userAgent);
+            $dd->parse();
+            return $dd->isBot();
         } catch (Throwable $e) {
             if (YII_ENV_DEV) {
                 throw $e;
             }
+            return false;
+        } finally {
+            unset($profiler);
         }
-
-        return null;
     }
 
     private function detectLanguageFromCookie(Application $app): ?string
