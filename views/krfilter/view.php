@@ -9,6 +9,7 @@ use app\models\Krfilter;
 use app\models\Region;
 use app\widgets\DownloadButtons;
 use app\widgets\FlagIcon;
+use app\widgets\KrfilterCard;
 use app\widgets\KrfilterTargetListWidget;
 use app\widgets\SnsWidget;
 use app\widgets\Tooltip;
@@ -38,6 +39,11 @@ $this->registerCss(
 );
 
 ApplicationLanguage::registerLink(Yii::$app, ['krfilter/view']);
+
+$krfilters = Krfilter::find()
+  ->with(['regions'])
+  ->orderBy(['name' => SORT_ASC])
+  ->all();
 
 ?>
 <main>
@@ -94,54 +100,12 @@ ApplicationLanguage::registerLink(Yii::$app, ['krfilter/view']);
       </div>
     </div>
   </div>
-  <div class="row align-items-stretch">
-<?php $query = Krfilter::find()
-  ->with('regions')
-  ->orderBy(['name' => SORT_ASC])
-?>
-<?php foreach ($query->all() as $filter) { ?>
-<?php $regions = $filter->regions ?>
-<?php usort($regions, fn (Region $a, Region $b): int => strcmp($a->id, $b->id)) ?>
-    <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4">
-      <div class="card card-primary h-100">
-        <div class="card-header bg-primary text-white">
-          <?= Html::encode($filter->name) . "\n" ?>
-        </div>
-        <div class="card-body d-flex flex-column">
-          <p class="mb-2 flex-grow-1">
-            <?= Yii::t('app/krfilter', 'Consolidated list for<br>{list}', [
-              'list' => implode(' ', array_map(
-                fn (Region $model): string => implode('', [
-                  Tooltip::widget([
-                    'content' => FlagIcon::widget(['cc' => $model->id]),
-                    'format' => 'raw',
-                    'title' => $model->formattedName,
-                  ]),
-                  Html::tag(
-                    'span',
-                    preg_match('/^ja\b/i', Yii::$app->language)
-                      ? Html::encode("({$model->name_ja}), ")
-                      : Html::encode("({$model->name_en}), "),
-                    ['class' => 'visually-hidden'],
-                  ),
-                ]),
-                $regions,
-              )),
-            ]) . "\n" ?>
-          </p>
-          <?= KrfilterTargetListWidget::widget([
-            'filter' => $filter,
-          ]) . "\n" ?>
-          <?= DownloadButtons::widget([
-            'downloadLinkCreator' => fn (?DownloadTemplate $template): array => [
-              'krfilter/plain',
-              'id' => $filter->id,
-              'template' => $template?->key,
-            ],
-          ]) . "\n" ?>
-        </div>
-      </div>
-    </div>
-<?php } ?>
-  </div>
+  <?= Html::tag(
+    'div',
+    implode('', array_map(
+      fn (Krfilter $model): string => KrfilterCard::widget(['model' => $model]),
+      $krfilters,
+    )),
+    ['class' => 'row align-items-stretch'],
+  ) . "\n" ?>
 </main>
