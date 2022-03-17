@@ -6,7 +6,7 @@ use app\helpers\FileHelper;
 use yii\db\Connection;
 
 return (function (): array {
-    $config = [
+    return [
         'class' => Connection::class,
         'dsn' => 'pgsql:host=localhost;dbname=ipv4app2',
         'username' => 'ipv4app2',
@@ -15,15 +15,8 @@ return (function (): array {
             'ipv4app2', // default password
         ),
         'charset' => 'utf8',
+        'enableSchemaCache' => true,
+        'schemaCacheDuration' => YII_ENV_PROD ? 604800 : 600,
+        'schemaCache' => 'cache',
     ];
-
-    if (YII_ENV_PROD) {
-        $config = array_merge($config, [
-            'enableSchemaCache' => true,
-            'schemaCacheDuration' => 60,
-            'schemaCache' => 'cache',
-        ]);
-    }
-
-    return $config;
 })();
