@@ -80,7 +80,7 @@ if (
   <hr>
   <?= TopAd::widget() . "\n" ?>
   <div class="row">
-    <div class="col-12 col-lg-8 mb-4">
+    <div class="col-12 col-lg-8 mb-4" style="transform:none">
       <?= $this->render('//region/view/download', ['region' => $region]) . "\n" ?>
     </div>
     <div class="d-none d-lg-block col-4 mb-4">

@@ -33,6 +33,9 @@ final class KrfilterCard extends Widget
                     'col-xl-3',
                     'mb-4',
                 ],
+                'style' => [
+                    'transform' => 'none',
+                ],
             ],
         );
     }
