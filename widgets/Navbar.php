@@ -125,9 +125,6 @@ final class Navbar extends Widget
                     'navbar-collapse',
                 ],
                 'id' => $this->getLinksId(),
-                'style' => [
-                    'transform' => 'none',
-                ],
             ],
         );
     }

@@ -2,8 +2,8 @@
   "name": "ipv4.fetus.jp",
   "description": "",
   "dependencies": {
-    "@fetus-hina/fetus.css": "github:fetus-hina/fetus.css#semver:^5.1.8",
-    "@fontsource/montserrat": "^4.5.5",
+    "@fetus-hina/fetus.css": "github:fetus-hina/fetus.css#semver:^5.1.13",
+    "@fontsource/montserrat": "^4.5.7",
     "bootstrap": "^5.1.3",
     "chart.js": "^3.7.1",
     "flag-icons": "^5.0.3",
@@ -26,7 +26,7 @@
     "sass": "^1.49.9",
     "semistandard": "^16.0.1",
     "snazzy": "^9.0.0",
-    "stylelint": "^14.6.0",
+    "stylelint": "^14.6.1",
     "stylelint-config-sass-guidelines": "^9.0.1",
     "terser": "^5.12.1",
     "updates": "^12.2.3"
