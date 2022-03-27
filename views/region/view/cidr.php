@@ -62,7 +62,7 @@ if (
               'label' => 'CIDR',
               'attribute' => 'cidr',
               'contentOptions' => [
-                'class' => 'text-center',
+                'class' => 'text-center font-roboto',
               ],
             ],
           ],

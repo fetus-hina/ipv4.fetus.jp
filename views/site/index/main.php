@@ -43,9 +43,6 @@ SortableTableAsset::register($this);
           'layout' => '{items}',
           'tableOptions' => [
             'class' => 'table table-striped table-borderless table-hover table-sm text-nowrap table-sortable mb-0',
-            'style' => [
-              'font-size' => '14px',
-            ],
           ],
           'headerRowOptions' => [
             'style' => [
@@ -123,7 +120,7 @@ SortableTableAsset::register($this);
               'attribute' => 'total_address_count',
               'format' => 'integer',
               'contentOptions' => fn (RegionStat $model): array => [
-                'class' => 'text-end',
+                'class' => 'text-end font-roboto',
                 'data' => [
                   'sort-value' => $model->total_address_count,
                 ],
@@ -139,7 +136,7 @@ SortableTableAsset::register($this);
               'format' => ['percent', 5],
               'value' => fn (RegionStat $model): int|float => $model->total_address_count / (1 << 32),
               'contentOptions' => fn (RegionStat $model): array => [
-                'class' => 'text-end d-none d-md-table-cell',
+                'class' => 'text-end d-none d-md-table-cell font-roboto',
                 'data' => [
                   'sort-value' => $model->total_address_count,
                 ],
@@ -156,7 +153,7 @@ SortableTableAsset::register($this);
               'format' => ['percent', 5],
               'value' => fn (RegionStat $model): int|float => $model->total_address_count / ((1 << 32) - 592715776),
               'contentOptions' => fn (RegionStat $model): array => [
-                'class' => 'text-end d-none d-md-table-cell',
+                'class' => 'text-end d-none d-md-table-cell font-roboto',
                 'data' => [
                   'sort-value' => $model->total_address_count,
                 ],
@@ -173,7 +170,7 @@ SortableTableAsset::register($this);
               'attribute' => 'last_allocation_date',
               'format' => 'shortDate',
               'contentOptions' => fn (RegionStat $model): array => [
-                'class' => 'text-end d-none d-md-table-cell',
+                'class' => 'text-end d-none d-md-table-cell font-roboto',
                 'data' => [
                   'sort-value' => $model->last_allocation_date ?? '',
                 ],

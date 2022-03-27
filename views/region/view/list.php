@@ -94,7 +94,7 @@ if ($isPjax) {
               'label' => Yii::t('app', 'CIDR'),
               'attribute' => 'cidr',
               'contentOptions' => [
-                'class' => 'text-center',
+                'class' => 'text-center font-roboto',
               ],
             ],
             [
@@ -110,7 +110,7 @@ if ($isPjax) {
                 ]);
               },
               'contentOptions' => [
-                'class' => 'text-center d-none d-md-table-cell',
+                'class' => 'text-center d-none d-md-table-cell font-roboto',
               ],
               'headerOptions' => [
                 'class' => 'd-none d-md-table-cell',
@@ -121,7 +121,7 @@ if ($isPjax) {
               'attribute' => 'block.date',
               'format' => 'shortDate',
               'contentOptions' => [
-                'class' => 'text-center d-none d-md-table-cell',
+                'class' => 'text-center d-none d-md-table-cell font-roboto',
               ],
               'headerOptions' => [
                 'class' => 'd-none d-md-table-cell',

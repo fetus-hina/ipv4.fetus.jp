@@ -22,6 +22,7 @@ final class AppAsset extends AssetBundle
         JqueryAsset::class,
         LanguageSwitcherAsset::class,
         LatinFontAsset::class,
+        SiteResourceAsset::class,
         YiiAsset::class,
     ];
 }

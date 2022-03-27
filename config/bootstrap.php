@@ -29,9 +29,6 @@ Yii::$container->set(GridView::class, [
     ]),
     'tableOptions' => [
         'class' => 'table table-striped table-borderless table-hover table-sm text-nowrap',
-        'style' => [
-            'font-size' => '14px',
-        ],
     ],
     'headerRowOptions' => [
         'class' => 'text-center',
