@@ -7,7 +7,7 @@ namespace app\widgets;
 use yii\base\Widget;
 use yii\helpers\Html;
 
-final class StandsWithUkraineCard extends Widget
+final class StandWithUkraineCard extends Widget
 {
     public function run(): string
     {
@@ -40,7 +40,7 @@ final class StandsWithUkraineCard extends Widget
     {
         return Html::tag(
             'div',
-            StandsWithUkraine::widget([
+            StandWithUkraine::widget([
                 'marginClass' => 'mb-0',
             ]),
             [

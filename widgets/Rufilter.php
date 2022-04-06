@@ -40,7 +40,7 @@ final class Rufilter extends Krfilter
         return Html::tag(
             'div',
             implode('', [
-                StandsWithUkraine::widget(),
+                StandWithUkraine::widget(),
                 $this->getCardBodyTexts(),
             ]),
             [

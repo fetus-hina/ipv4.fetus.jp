@@ -9,7 +9,7 @@ use yii\base\Widget;
 use yii\helpers\Html;
 use yii\web\View;
 
-final class StandsWithUkraine extends Widget
+final class StandWithUkraine extends Widget
 {
     private const CC_UKRAINE = 'ua';
 
@@ -69,7 +69,7 @@ final class StandsWithUkraine extends Widget
         return Html::tag(
             'div',
             implode('', [
-                $this->renderTextStandsWith(),
+                $this->renderTextStandWith(),
                 $this->renderTextUkraine(),
             ]),
             [
@@ -83,10 +83,10 @@ final class StandsWithUkraine extends Widget
         );
     }
 
-    private function renderTextStandsWith(): string
+    private function renderTextStandWith(): string
     {
         return $this->renderTextImpl(
-            '#StandsWith',
+            '#StandWith',
             self::UKRAINE_BLUE,
             self::UKRAINE_YELLOW,
         );

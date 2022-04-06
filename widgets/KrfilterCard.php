@@ -76,7 +76,7 @@ final class KrfilterCard extends Widget
             'div',
             implode('', [
                 preg_match('/^rufilter/i', $model->name)
-                    ? StandsWithUkraine::widget()
+                    ? StandWithUkraine::widget()
                     : '',
                 $this->renderRegionList($model),
                 KrfilterTargetListWidget::widget(['filter' => $model]),

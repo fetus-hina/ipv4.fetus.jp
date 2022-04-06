@@ -7,7 +7,7 @@ use app\models\SearchForm;
 use app\widgets\AboutUsCard;
 use app\widgets\SearchCard;
 use app\widgets\SnsWidget;
-use app\widgets\StandsWithUkraineCard;
+use app\widgets\StandWithUkraineCard;
 use app\widgets\ads\SideAd;
 use app\widgets\ads\SkyscraperAd;
 use app\widgets\ads\SpRectAd;
@@ -74,7 +74,7 @@ ApplicationLanguage::registerLink(Yii::$app, ['site/index']);
     <?= Html::tag(
       'div',
       implode('', [
-        StandsWithUkraineCard::widget(),
+        StandWithUkraineCard::widget(),
         Html::tag('aside', SearchCard::widget(['form' => $search]), ['class' => 'mb-4 d-none d-lg-block']),
         SideAd::widget(),
         Html::tag('aside', AboutUsCard::widget(), ['class' => 'mb-4']),
