@@ -36,8 +36,8 @@ final class FlagIcon extends Widget
             $this->renderContent($cc),
             [
                 'class' => [
-                    'flag-icon',
-                    "flag-icon-{$cc}",
+                    'fi',
+                    "fi-{$cc}",
                 ],
             ],
         );
