@@ -1,0 +1,25 @@
+@charset 'UTF-8';
+@use 'sass:map';
+
+$variations: (
+  (
+    'weight': normal,
+    'woff2': 'montserrat-regular.woff2',
+  ),
+  (
+    'weight': bold,
+    'woff2': 'montserrat-bold.woff2',
+  ),
+);
+
+@each $variation in $variations {
+  @font-face {
+    font-display: swap;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: map.get($variation, 'weight');
+    src: url('#{map.get($variation, 'woff2')}') format('woff2');
+    text-rendering: optimizelegibility;
+    unicode-range: U+D, U+20-7E, U+A9, U+C5, U+E7, U+E9, U+F4, U+FB01-FB02;
+  }
+}

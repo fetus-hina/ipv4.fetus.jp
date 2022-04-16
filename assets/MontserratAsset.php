@@ -8,8 +8,8 @@ use yii\web\AssetBundle;
 
 final class MontserratAsset extends AssetBundle
 {
-    public $sourcePath = '@npm/@fontsource/montserrat';
+    public $sourcePath = '@app/resources/fonts/montserrat/dist/webfont';
     public $css = [
-        'latin.css',
+        'montserrat.min.css',
     ];
 }
