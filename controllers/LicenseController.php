@@ -25,6 +25,11 @@ final class LicenseController extends Controller
                 '@app/data/licenses/composer',
                 ['license/composer'],
             ),
+            'font' => $license(
+                Yii::t('app/license', 'Fonts'),
+                '@app/data/licenses/font',
+                ['license/font'],
+            ),
             'npm' => $license(
                 Yii::t('app/license', 'NPM Packages'),
                 '@app/data/licenses/npm',

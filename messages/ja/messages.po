@@ -503,6 +503,14 @@ msgid "Composer Packages"
 msgstr "Composerパッケージ"
 
 msgctxt "app/license"
+msgid "Fonts"
+msgstr "フォント"
+
+msgctxt "app/license"
+msgid "Many thanks to all involved."
+msgstr "全ての関係者に感謝します。"
+
+msgctxt "app/license"
 msgid "NPM Packages"
 msgstr "NPMパッケージ"
 

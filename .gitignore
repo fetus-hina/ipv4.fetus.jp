@@ -12,7 +12,8 @@
 /config/components/db/password.php
 /config/components/web/request--cookie.php
 /coverage.serialized
-/data/licenses
+/data/licenses/composer
+/data/licenses/npm
 /messages/*/*.mo
 /models/Migration.php
 /node_modules

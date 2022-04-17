@@ -12,6 +12,7 @@ ApplicationLanguage::registerLink(Yii::$app, ['license/index']);
 <h2><?= Yii::t('app/license', 'Open Source Licenses') ?></h2>
 <p>
   <?= Yii::t('app/license', 'This website uses the artifacts of these open source projects.') ?>
+  <?= Yii::t('app/license', 'Many thanks to all involved.') ?>
 </p>
 <ul>
   <li>
@@ -26,10 +27,16 @@ ApplicationLanguage::registerLink(Yii::$app, ['license/index']);
       ['license/npm'],
     ) . "\n" ?>
   </li>
+  <li>
+    <?= Html::a(
+      Yii::t('app/license', 'Fonts'),
+      ['license/font'],
+    ) . "\n" ?>
+  </li>
 </ul>
 <hr>
-<h3><?= Yii::$app->name ?></h3>
-<div class="card ms-4">
+<h3><?= Html::encode(Yii::$app->name) ?></h3>
+<div class="card ms-4 mb-4">
   <div class="card-body">
     <?= Html::tag(
       'pre',
@@ -42,14 +49,12 @@ ApplicationLanguage::registerLink(Yii::$app, ['license/index']);
     ) . "\n" ?>
   </div>
 </div>
-
-<hr>
 <h3>
   <?= Yii::t('app/license', 'Application Template ({name})', [
     'name' => 'yiisoft/yii2-app-basic',
   ]) . "\n" ?>
 </h3>
-<div class="card ms-4">
+<div class="card ms-4 mb-4">
   <div class="card-body">
     <?= Html::tag(
       'pre',
