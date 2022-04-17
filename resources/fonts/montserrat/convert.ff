@@ -3,12 +3,6 @@
 Open($1, 1);
 # CIDFlatten();
 
-# 数字のグリフを old style で置換
-SelectSingletons("zero.osf", "one.osf", "two.osf", "three.osf", "four.osf", "five.osf", "six.osf", "seven.osf", "eight.osf", "nine.osf");
-Copy();
-Select(0u30, 0u39);
-Paste();
-
 # A のグリフを丸いもので置換
 SelectSingletons("A.ss01", "Aring.ss01");
 Copy();
