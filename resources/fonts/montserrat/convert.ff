@@ -2,8 +2,38 @@
 
 Open($1, 1);
 # CIDFlatten();
-SelectNone();
 
+# 数字のグリフを old style で置換
+SelectSingletons("zero.osf", "one.osf", "two.osf", "three.osf", "four.osf", "five.osf", "six.osf", "seven.osf", "eight.osf", "nine.osf");
+Copy();
+Select(0u30, 0u39);
+Paste();
+
+# A のグリフを丸いもので置換
+SelectSingletons("A.ss01", "Aring.ss01");
+Copy();
+SelectSingletons(0u41, 0uc5);
+Paste();
+
+# I のグリフをセリフつきのもので置換
+Select("I.ss01");
+Copy();
+Select(0u49);
+Paste();
+
+# a のグリフを "d"-like のもので置換
+Select("a.ss01");
+Copy();
+Select(0u61);
+Paste();
+
+# l のグリフを右下が曲がったもので置換
+Select("l.ss01");
+Copy();
+Select(0u6c);
+Paste();
+
+SelectNone();
 SelectMore(0u20, 0u7e); # ASCII
 SelectMore(0ua9); # U+00A9 "©"; COPYRIGHT SIGN
 SelectMore(0uc5); # U+00C5 "Å"; LATIN CAPITAL LETTER A WITH RING ABOVE
@@ -11,7 +41,6 @@ SelectMore(0ue7); # U+00E7 "ç"; LATIN SMALL LETTER C WITH CEDILLA
 SelectMore(0ue9); # U+00E9 "é"; LATIN SMALL LETTER E WITH ACUTE
 SelectMore(0uf4); # U+00F4 "ô"; LATIN SMALL LETTER O WITH CIRCUMFLEX
 SelectMore("fi");
-SelectMore("fl");
 
 SelectInvert();
 Clear();

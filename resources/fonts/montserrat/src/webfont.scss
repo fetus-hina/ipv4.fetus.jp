@@ -20,6 +20,6 @@ $variations: (
     font-weight: map.get($variation, 'weight');
     src: url('#{map.get($variation, 'woff2')}') format('woff2');
     text-rendering: optimizelegibility;
-    unicode-range: U+D, U+20-7E, U+A9, U+C5, U+E7, U+E9, U+F4, U+FB01-FB02;
+    unicode-range: U+D, U+20-7E, U+A9, U+C5, U+E7, U+E9, U+F4, U+FB01;
   }
 }
