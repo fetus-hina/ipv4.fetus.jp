@@ -53,6 +53,16 @@ final class ApplicationLanguage implements BootstrapInterface
         );
     }
 
+    public static function isLatin(string $code): bool
+    {
+        return $code === self::LANGUAGE_ENGLISH;
+    }
+
+    public static function isJapanese(string $code): bool
+    {
+        return $code === self::LANGUAGE_JAPANESE;
+    }
+
     public static function isAutoDetect(?Application $app = null): bool
     {
         $request = ($app ?? Yii::$app)->request;

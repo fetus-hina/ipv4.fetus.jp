@@ -6,6 +6,7 @@ namespace app\widgets;
 
 use Yii;
 use app\assets\BootstrapIconsAsset;
+use app\assets\LatinFontAsset;
 use app\helpers\ApplicationLanguage;
 use app\helpers\TypeHelper;
 use yii\base\Widget;
@@ -34,7 +35,7 @@ final class LanguageButton extends Widget
         return Html::a(
             implode(' ', [
                 $this->bi('translate'),
-                Html::encode('Language'),
+                $this->montserrat(Html::encode('Language')),
             ]),
             'javascript:;',
             [
@@ -115,7 +116,7 @@ final class LanguageButton extends Widget
                     preg_match('/^' . preg_quote($langCode) . '\b/i', Yii::$app->language)
                         ? $this->bi('record-circle-fill')
                         : $this->bi('circle'),
-                    Html::encode($langName),
+                    $this->renderLanguageName($langCode, $langName),
                 ]),
                 'javascript:;',
                 [
@@ -131,6 +132,17 @@ final class LanguageButton extends Widget
             array_keys($langs),
             array_values($langs),
         );
+    }
+
+    private function renderLanguageName(string $code, string $name): string
+    {
+        if (ApplicationLanguage::isLatin($code)) {
+            return $this->montserrat(Html::encode($name));
+        } elseif (ApplicationLanguage::isJapanese($code)) {
+            return Html::tag('span', Html::encode($name), ['class' => 'font-japanese']);
+        } else {
+            return Html::encode($name);
+        }
     }
 
     private function getButtonId(): string
@@ -150,5 +162,14 @@ final class LanguageButton extends Widget
                 "bi-{$icon}",
             ],
         ]);
+    }
+
+    private function montserrat(string $html): string
+    {
+        if (($view = $this->view) instanceof View) {
+            LatinFontAsset::register($view);
+        }
+
+        return Html::tag('span', $html, ['class' => 'font-montserrat']);
     }
 }
