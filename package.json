@@ -18,7 +18,7 @@
     "@babel/cli": "^7.17.6",
     "@babel/core": "^7.17.9",
     "@babel/preset-env": "^7.16.11",
-    "autoprefixer": "^10.4.4",
+    "autoprefixer": "^10.4.5",
     "cssnano": "^5.1.7",
     "postcss": "^8.4.12",
     "postcss-cli": "^9.1.0",
@@ -28,7 +28,7 @@
     "stylelint": "^14.7.1",
     "stylelint-config-sass-guidelines": "^9.0.1",
     "terser": "^5.12.1",
-    "ttf2woff2": "^4.0.4",
+    "ttf2woff2": "^4.0.5",
     "updates": "^13.0.5"
   },
   "scripts": {
