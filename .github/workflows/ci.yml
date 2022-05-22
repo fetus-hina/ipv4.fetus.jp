@@ -1,264 +1,246 @@
-name: 'CI'
-
-on:
-  - 'pull_request'
-  - 'push'
-
+name: CI
+'on':
+  - pull_request
+  - push
 env:
-  LANG: 'C'
-
+  LANG: C
 jobs:
   phpSyntaxCheck:
     name: 'PHP Syntax Check (PHP ${{ matrix.env.php }})'
-
     strategy:
       matrix:
         env:
-          - php: '8.0'
+          -
+            php: '8.0'
             experimental: false
-
-          - php: '8.1'
+          -
+            php: '8.1'
             experimental: false
-
-          - php: '8.2'
+          -
+            php: '8.2'
             experimental: true
-
-    runs-on: 'ubuntu-20.04'
-
+    runs-on: ubuntu-20.04
     steps:
-      - uses: 'actions/checkout@v2'
-
-      - name: 'Set up PHP ${{ matrix.env.php }}'
-        uses: 'shivammathur/setup-php@v2'
+      -
+        uses: actions/checkout@v2
+      -
+        name: 'Set up PHP ${{ matrix.env.php }}'
+        uses: shivammathur/setup-php@v2
         with:
           php-version: '${{ matrix.env.php }}'
-
-      - name: 'Syntax check'
+      -
+        name: 'Syntax check'
         continue-on-error: '${{ matrix.env.experimental }}'
         run: |
           find . \( -type d \( -name '.git' -or -name 'vendor' -or -name 'node_modules' -or -name 'runtime' \) -prune \) -or \( -type f -name '*.php' -print \) \
             | sort \
             | xargs -n 1 php -l
-
   makeComposerCache:
     name: 'Make composer cache'
-    runs-on: 'ubuntu-20.04'
+    runs-on: ubuntu-20.04
     steps:
-      - uses: 'actions/checkout@v2'
-
-      - name: 'symlink composer'
+      -
+        uses: actions/checkout@v2
+      -
+        name: 'symlink composer'
         run: |
-            ln -s `which composer` composer.phar
-
-      - uses: 'actions/cache@v2'
+          ln -s `which composer` composer.phar
+      -
+        uses: actions/cache@v2
         with:
           path: |
             ~/.cache/composer/files
             vendor
-          key: ${{ runner.os }}-composer-${{ hashFiles('composer.lock') }}
+          key: '${{ runner.os }}-composer-${{ hashFiles(''composer.lock'') }}'
           restore-keys: |
             ${{ runner.os }}-composer-
-
-      - name: 'Install Composer dependencies'
+      -
+        name: 'Install Composer dependencies'
         run: 'composer install --prefer-dist'
-
   makeNpmCache:
     name: 'Make npm cache'
-    runs-on: 'ubuntu-20.04'
+    runs-on: ubuntu-20.04
     steps:
-      - uses: 'actions/checkout@v2'
-
-      - uses: 'actions/cache@v2'
+      -
+        uses: actions/checkout@v2
+      -
+        uses: actions/cache@v2
         with:
           path: |
             ~/.npm
             node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          key: '${{ runner.os }}-node-${{ hashFiles(''package-lock.json'') }}'
           restore-keys: |
             ${{ runner.os }}-node-
-
-      - name: 'Install NPM dependencies'
+      -
+        name: 'Install NPM dependencies'
         run: 'npm clean-install'
-
   phpStyleCheck:
     name: 'PHP Coding Style'
-    runs-on: 'ubuntu-20.04'
-    needs: 'makeComposerCache'
+    runs-on: ubuntu-20.04
+    needs: makeComposerCache
     steps:
-      - uses: 'actions/checkout@v2'
-
-      - uses: 'actions/cache@v2'
+      -
+        uses: actions/checkout@v2
+      -
+        uses: actions/cache@v2
         with:
           path: |
             ~/.cache/composer/files
             vendor
-          key: ${{ runner.os }}-composer-${{ hashFiles('composer.lock') }}
+          key: '${{ runner.os }}-composer-${{ hashFiles(''composer.lock'') }}'
           restore-keys: |
             ${{ runner.os }}-composer-
-
-      - name: 'Set up PHP 8.0'
-        uses: 'shivammathur/setup-php@v2'
+      -
+        name: 'Set up PHP 8.0'
+        uses: shivammathur/setup-php@v2
         with:
           php-version: '8.0'
-
-      - name: 'Install dependencies'
+      -
+        name: 'Install dependencies'
         run: |
           ln -s `which composer` composer.phar
           make init
-
-      - name: 'Run PHPCS'
-        run: 'vendor/bin/phpcs'
-
-      - name: 'Run PHPStan'
+      -
+        name: 'Run PHPCS'
+        run: vendor/bin/phpcs
+      -
+        name: 'Run PHPStan'
         continue-on-error: true
         run: 'vendor/bin/phpstan analyze --memory-limit=1G'
-
   phpTest:
     name: 'PHP test (${{ matrix.env.php.label }}, ${{ matrix.env.pgsql.label }})'
-
     strategy:
       matrix:
         env:
-          - php:
+          -
+            php:
               label: 'PHP 8.0'
               version: '8.0'
             pgsql:
               label: 'PgSQL 9.6'
-              version: '9.6-bullseye'
+              version: 9.6-bullseye
             experimental: false
-
-          - php:
+          -
+            php:
               label: 'PHP 8.0'
               version: '8.0'
-            pgsql: # Current production
+            pgsql:
               label: 'PgSQL 13'
-              version: '13-bullseye'
+              version: 13-bullseye
             experimental: false
-
-          - php:
+          -
+            php:
               label: 'PHP 8.0'
               version: '8.0'
             pgsql:
               label: 'Latest PgSQL'
-              version: 'bullseye'
+              version: bullseye
             experimental: false
-
-          - php:
+          -
+            php:
               label: 'PHP 8.1'
               version: '8.1'
             pgsql:
               label: 'Latest PgSQL'
-              version: 'bullseye'
+              version: bullseye
             experimental: false
-
-          - php:
+          -
+            php:
               label: 'PHP 8.2'
               version: '8.2'
             pgsql:
               label: 'Latest PgSQL'
-              version: 'bullseye'
+              version: bullseye
             experimental: true
-
-    runs-on: 'ubuntu-20.04'
-
+    runs-on: ubuntu-20.04
     needs:
-      - 'makeComposerCache'
-      - 'makeNpmCache'
-
+      - makeComposerCache
+      - makeNpmCache
     services:
       pgsql:
-        image: "postgres:${{ matrix.env.pgsql.version }}"
-
+        image: 'postgres:${{ matrix.env.pgsql.version }}'
         ports:
           - '5432:5432'
-
         env:
-          POSTGRES_DB: 'ipv4test'
-          POSTGRES_PASSWORD: 'ipv4test'
-          POSTGRES_USER: 'ipv4test'
+          POSTGRES_DB: ipv4test
+          POSTGRES_PASSWORD: ipv4test
+          POSTGRES_USER: ipv4test
           POSTGRES_INITDB_ARGS: '-E UTF-8 --locale=en_US.UTF8 -k'
-
         options: '--health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5'
-
     continue-on-error: '${{ matrix.env.experimental }}'
-
     steps:
-      - name: 'Install additional packages'
+      -
+        name: 'Install additional packages'
         run: |
           sudo apt install -y gettext
-
-      - uses: 'actions/checkout@v2'
-
-      - uses: 'actions/cache@v2'
+      -
+        uses: actions/checkout@v2
+      -
+        uses: actions/cache@v2
         with:
           path: |
             ~/.cache/composer/files
             vendor
-          key: ${{ runner.os }}-composer-${{ hashFiles('composer.lock') }}
-
-      - uses: 'actions/cache@v2'
+          key: '${{ runner.os }}-composer-${{ hashFiles(''composer.lock'') }}'
+      -
+        uses: actions/cache@v2
         with:
           path: |
             ~/.npm
             node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
-
-      - name: 'Set up ${{ matrix.env.php.label }}'
-        uses: 'shivammathur/setup-php@v2'
+          key: '${{ runner.os }}-node-${{ hashFiles(''package-lock.json'') }}'
+      -
+        name: 'Set up ${{ matrix.env.php.label }}'
+        uses: shivammathur/setup-php@v2
         with:
           php-version: '${{ matrix.env.php.version }}'
-
-      - name: 'Set up application'
+      -
+        name: 'Set up application'
         run: |
           ln -s `which composer` composer.phar
           make
-
-      - name: 'Database migration'
+      -
+        name: 'Database migration'
         run: 'tests/bin/yii migrate/up --compact=1 --interactive=0'
-
-      - name: 'Run unit test'
+      -
+        name: 'Run unit test'
         run: 'vendor/bin/codecept run unit'
-
   jsStyleCheck:
     name: 'JS Coding Style'
-
-    runs-on: 'ubuntu-20.04'
-
+    runs-on: ubuntu-20.04
     needs:
-      - 'makeNpmCache'
-
+      - makeNpmCache
     steps:
-      - uses: 'actions/checkout@v2'
-
-      - uses: 'actions/cache@v2'
+      -
+        uses: actions/checkout@v2
+      -
+        uses: actions/cache@v2
         with:
           path: |
             ~/.npm
             node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
-
-      - name: 'Run semistandard'
+          key: '${{ runner.os }}-node-${{ hashFiles(''package-lock.json'') }}'
+      -
+        name: 'Run semistandard'
         run: |
           npx semistandard 'resources/**/*.es' | npx snazzy
-
   cssStyleCheck:
     name: 'CSS Coding Style'
-
-    runs-on: 'ubuntu-20.04'
-
+    runs-on: ubuntu-20.04
     needs:
-      - 'makeNpmCache'
-
+      - makeNpmCache
     steps:
-      - uses: 'actions/checkout@v2'
-
-      - uses: 'actions/cache@v2'
+      -
+        uses: actions/checkout@v2
+      -
+        uses: actions/cache@v2
         with:
           path: |
             ~/.npm
             node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
-
-      - name: 'Run stylelint'
+          key: '${{ runner.os }}-node-${{ hashFiles(''package-lock.json'') }}'
+      -
+        name: 'Run stylelint'
         run: |
           npx stylelint 'resources/**/*.scss'
