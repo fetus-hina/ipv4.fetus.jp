@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       -
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       -
         name: 'Set up PHP ${{ matrix.env.php }}'
         uses: shivammathur/setup-php@v2
@@ -40,7 +40,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       -
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       -
         name: 'symlink composer'
         run: |
@@ -62,7 +62,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       -
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       -
         uses: actions/cache@v2
         with:
@@ -81,7 +81,7 @@ jobs:
     needs: makeComposerCache
     steps:
       -
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       -
         uses: actions/cache@v2
         with:
@@ -175,7 +175,7 @@ jobs:
         run: |
           sudo apt install -y gettext
       -
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       -
         uses: actions/cache@v2
         with:
@@ -213,7 +213,7 @@ jobs:
       - makeNpmCache
     steps:
       -
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       -
         uses: actions/cache@v2
         with:
@@ -232,7 +232,7 @@ jobs:
       - makeNpmCache
     steps:
       -
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       -
         uses: actions/cache@v2
         with:
