@@ -86,6 +86,7 @@ final class KrfilterCard extends Widget
                         'id' => $model->id,
                         'template' => $template?->key,
                     ],
+                    'enableIpv4bycc' => false,
                 ]),
             ]),
             [

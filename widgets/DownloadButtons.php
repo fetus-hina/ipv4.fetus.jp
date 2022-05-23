@@ -26,6 +26,8 @@ final class DownloadButtons extends Widget
      */
     public $downloadLinkCreator = null;
 
+    public bool $enableIpv4bycc = true;
+
     public function run(): string
     {
         return Html::tag(
@@ -120,7 +122,11 @@ final class DownloadButtons extends Widget
                         'type' => 'text/plain',
                     ],
                 ),
-                $this->getAllTemplates(),
+                array_filter(
+                    $this->getAllTemplates(),
+                    fn (DownloadTemplate $model): bool => $this->enableIpv4bycc ||
+                        substr($model->key, 0, 9) !== 'ipv4bycc-',
+                ),
             )),
             [
                 'aria' => [
