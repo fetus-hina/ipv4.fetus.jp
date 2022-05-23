@@ -204,6 +204,12 @@ final class DownloadFormatter
                 $len = strlen('000.000.000.000/32');
                 return substr($value . str_repeat(' ', $len), 0, $len);
 
+            case 'lower':
+                return strtolower($value);
+
+            case 'upper':
+                return strtoupper($value);
+
             case 'xml':
                 return htmlspecialchars($value, ENT_QUOTES | ENT_XML1, 'UTF-8');
         }

@@ -326,6 +326,36 @@ ApplicationLanguage::registerLink(Yii::$app, ['site/schema']);
       </div>
       <div class="card border-primary mb-4">
         <div class="card-header bg-primary text-white">
+          ipv4bycc compat.
+        </div>
+        <div class="card-body">
+          <ul>
+            <li>
+              <?= Yii::t(
+                'app',
+                'The output is in the format compatible with <a href="{url}" target="_blank" rel="nofollow noopener">this web site</a>.',
+                [
+                  'url' => 'http://nami.jp/ipv4bycc/',
+                ],
+              ) . "\n" ?>
+            </li>
+            <li>
+              <?= Yii::t(
+                'app',
+                'However, the output includes comment lines and it is output separately for each country/region.',
+              ) . "\n" ?>
+            </li>
+            <li>
+              <?= $this->render('//site/schema/hash-comment') . "\n" ?>
+            </li>
+            <li>
+              <?= $this->render('//site/schema/blank-line') . "\n" ?>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="card border-primary mb-4">
+        <div class="card-header bg-primary text-white">
           Nginx
         </div>
         <div class="card-body">

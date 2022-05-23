@@ -83,6 +83,10 @@ msgid "For more information, please click here."
 msgstr "詳しくはこちらをご覧ください。"
 
 msgctxt "app"
+msgid "However, the output includes comment lines and it is output separately for each country/region."
+msgstr "しかし、出力は国・地域ごとに分けられ、また、コメント行（下記参照）を含みます。"
+
+msgctxt "app"
 msgid "IP Address"
 msgstr "IPアドレス"
 
@@ -197,6 +201,10 @@ msgstr "出力は常に{format}形式となります。"
 msgctxt "app"
 msgid "The output is in data format for use with {command}, etc."
 msgstr "{command}等で利用する形式のデータが出力されます。"
+
+msgctxt "app"
+msgid "The output is in the format compatible with <a href=\"{url}\" target=\"_blank\" rel=\"nofollow noopener\">this web site</a>."
+msgstr "<a href=\"{url}\" target=\"_blank\" rel=\"nofollow noopener\">「世界の国別 IPv4 アドレス割り当てリスト」</a>と互換性のある形式を出力します。"
 
 msgctxt "app"
 msgid "The output is well-formed XML."
