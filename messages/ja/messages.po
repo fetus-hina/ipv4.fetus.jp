@@ -434,6 +434,18 @@ msgctxt "app/cclist"
 msgid "Non Reserved"
 msgstr "除予約領域"
 
+msgctxt "app/ipv4bycc"
+msgid "CIDR format"
+msgstr "CIDR形式"
+
+msgctxt "app/ipv4bycc"
+msgid "Subnet Mask format"
+msgstr "サブネットマスク形式"
+
+msgctxt "app/ipv4bycc"
+msgid "ipv4bycc Compatible Format Data"
+msgstr "ipv4bycc互換形式データ"
+
 msgctxt "app/krfilter"
 msgid "About This"
 msgstr "このペ―ジについて"

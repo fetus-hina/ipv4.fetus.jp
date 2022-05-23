@@ -12,6 +12,8 @@ return [
         'krfilter' => 'krfilter/view',
         'krfilter.<id:[0-9]+>.<template:[a-z0-9-]+>.txt' => 'krfilter/plain',
         'krfilter.<id:[0-9]+>.txt' => 'krfilter/plain',
+        'ipv4bycc-cidr.txt' => 'ipv4bycc/cidr',
+        'ipv4bycc-mask.txt' => 'ipv4bycc/mask',
         'search' => 'search/index',
         'search/<query:[0-9.]+>' => 'search/compat',
         'robots.txt' => 'site/robots',
