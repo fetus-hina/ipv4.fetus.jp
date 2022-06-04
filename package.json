@@ -19,17 +19,17 @@
     "@babel/core": "^7.18.2",
     "@babel/preset-env": "^7.18.2",
     "autoprefixer": "^10.4.7",
-    "cssnano": "^5.1.10",
+    "cssnano": "^5.1.11",
     "postcss": "^8.4.14",
     "postcss-cli": "^9.1.0",
-    "sass": "^1.52.1",
+    "sass": "^1.52.2",
     "semistandard": "^16.0.1",
     "snazzy": "^9.0.0",
     "stylelint": "^14.8.5",
     "stylelint-config-sass-guidelines": "^9.0.1",
     "terser": "^5.14.0",
     "ttf2woff2": "^4.0.5",
-    "updates": "^13.0.5"
+    "updates": "^13.1.0"
   },
   "scripts": {
     "postinstall": "bin/npm-postinstall.sh"
