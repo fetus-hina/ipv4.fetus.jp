@@ -25,10 +25,12 @@ add('shared_files', [
 ]);
 add('shared_dirs', [
     'runtime',
+    'web/ipv4bycc',
 ]);
 add('writable_dirs', [
     'runtime',
     'web/assets',
+    'web/ipv4bycc',
 ]);
 set('writable_mode', 'chmod');
 set('writable_chmod_recursive', false);

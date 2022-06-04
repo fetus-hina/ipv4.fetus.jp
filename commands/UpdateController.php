@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace app\commands;
 
+use DateTimeImmutable;
+use DateTimeZone;
 use Exception;
 use Throwable;
 use Yii;
 use app\helpers\CountToCidr;
+use app\helpers\Ipv4byccDumper;
 use app\helpers\TypeHelper;
 use app\models\AllocationBlock;
 use app\models\AllocationCidr;
@@ -19,6 +22,7 @@ use app\models\RegionStat;
 use yii\console\Controller;
 use yii\console\ExitCode;
 use yii\db\Connection;
+use yii\helpers\FileHelper;
 use yii\httpclient\Client as HttpClient;
 
 class UpdateController extends Controller
@@ -35,12 +39,6 @@ class UpdateController extends Controller
     // private const URL_IANA    = 'http://ftp.apnic.net/stats/iana/delegated-iana-latest';
     private const URL_LACNIC  = 'http://ftp.lacnic.net/pub/stats/lacnic/delegated-lacnic-extended-latest';
     private const URL_RIPENCC = 'http://ftp.ripe.net/pub/stats/ripencc/delegated-ripencc-extended-latest';
-
-    // const KRFILTER_PATH = 'application.data.krfilter';
-    // const KRFILTER_1 = 'cn,kr,kp';
-    // const KRFILTER_2 = 'cn,hk,id,in,kp,kr,tw';
-    // const KRFILTER_3 = 'cn,hk,id,in,kp,kr,ru,tw';
-    // const KRFILTER_4 = 'eu,at,ax,be,bg,cy,cz,de,dk,ee,es,fi,fr,gb,gf,gi,gp,gr,hr,hu,ie,it,li,lt,lu,lv,mf,mq,mt,nl,no,pl,pt,re,ro,se,si,sk,uk,yt';
 
     /** @var array<string, int> */
     private array $checkedCountries = [];
@@ -98,6 +96,7 @@ class UpdateController extends Controller
             $this->actionStat();
         }
         $this->actionKrfilter();
+        $this->actionIpv4bycc();
         $updateFinishAt = microtime(true);
 
         if ($status !== ExitCode::OK) {
@@ -513,6 +512,76 @@ class UpdateController extends Controller
                 ->batchInsert(KrfilterCidr::tableName(), ['krfilter_id', 'cidr'], $values)
                 ->execute();
         });
+    }
+
+    public function actionIpv4bycc(): int
+    {
+        $method = __METHOD__;
+        $now = new DateTimeImmutable('now', new DateTimeZone('Asia/Tokyo'));
+        return Yii::$app->db->transaction(function () use ($method, $now): int {
+            Yii::info('Ipv4bycc互換形式ファイルを作成します', $method);
+
+            $pathCidr = vsprintf('@app/web/ipv4bycc/cidr/%s/%s-cidr.txt', [
+                $now->format('Y-m'),
+                $now->format('Ymd'),
+            ]);
+            $pathMask = vsprintf('@app/web/ipv4bycc/mask/%s/%s-mask.txt', [
+                $now->format('Y-m'),
+                $now->format('Ymd'),
+            ]);
+
+            $tasks = [
+                $pathCidr => fn () => Ipv4byccDumper::dumpCidr(),
+                $pathMask => fn () => Ipv4byccDumper::dumpMask(),
+            ];
+
+            foreach ($tasks as $path => $dumper) {
+                if (!$this->saveIpv4bycc($path, $dumper)) {
+                    return ExitCode::UNSPECIFIED_ERROR;
+                }
+            }
+
+            return ExitCode::OK;
+        });
+    }
+
+    /**
+     * @param callable(): \Generator<string> $dumper
+     */
+    private function saveIpv4bycc(string $path, callable $dumper): bool
+    {
+        $path = (string)Yii::getAlias($path);
+        Yii::info('Create ' . basename($path), __METHOD__);
+
+        if (file_exists($path) && filesize($path) > 0) {
+            Yii::info(basename($path) . ' is exists. skip.', __METHOD__);
+            return true;
+        }
+
+        try {
+            if (!FileHelper::createDirectory(dirname($path), 0755, true)) {
+                Yii::error('Failed to create directory ' . dirname($path), __METHOD__);
+                return false;
+            }
+        } catch (Throwable $e) {
+            Yii::error('Failed to create directory ' . dirname($path), __METHOD__);
+            return false;
+        }
+
+        $tmpPath = $path . '.tmp';
+        if (file_exists($tmpPath)) {
+            @unlink($tmpPath);
+        }
+
+        if (!$fh = fopen($tmpPath, 'wt')) {
+            return false;
+        }
+        foreach ($dumper() as $row) {
+            fwrite($fh, $row);
+        }
+        fclose($fh);
+        rename($tmpPath, $path);
+        return true;
     }
 
     private function saveTimeRecord(float $startAt, float $finishAt): void

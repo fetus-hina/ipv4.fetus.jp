@@ -27,6 +27,7 @@ return (function (): array {
             'formatter' => require __DIR__ . '/components/formatter.php',
             'i18n' => require __DIR__ . '/components/i18n.php',
             'log' => require __DIR__ . '/components/log.php',
+            'urlManager' => require __DIR__ . '/components/console/url-manager.php',
         ],
         'params' => require __DIR__ . '/params.php',
     ];

@@ -16,7 +16,7 @@ return [
         'assetManager' => require(__DIR__ . '/components/console/asset-manager.php'),
         'db' => require(__DIR__ . '/components/db/test.php'),
         'request' => require(__DIR__ . '/components/console/request.php'),
-        'urlManager' => require(__DIR__ . '/components/console/url-manager.php'),
+        'urlManager' => require(__DIR__ . '/components/test/url-manager.php'),
         'user' => require(__DIR__ . '/components/user.php'),
     ],
     'params' => require(__DIR__ . '/params.php'),
