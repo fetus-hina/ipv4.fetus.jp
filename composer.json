@@ -70,7 +70,7 @@
         },
         "process-timeout": 1800,
         "platform": {
-            "php": "8.0.19"
+            "php": "8.0.20"
         }
     },
     "extra": {
