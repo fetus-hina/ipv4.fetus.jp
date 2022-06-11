@@ -218,16 +218,16 @@
         },
         {
             "name": "matomo/device-detector",
-            "version": "6.0.0",
+            "version": "6.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/matomo-org/device-detector.git",
-                "reference": "7fc2af3af62bd69e6e3404d561e371a83c112be9"
+                "reference": "a745aed40656e54d877f4b89754107a0b12a2a9d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/matomo-org/device-detector/zipball/7fc2af3af62bd69e6e3404d561e371a83c112be9",
-                "reference": "7fc2af3af62bd69e6e3404d561e371a83c112be9",
+                "url": "https://api.github.com/repos/matomo-org/device-detector/zipball/a745aed40656e54d877f4b89754107a0b12a2a9d",
+                "reference": "a745aed40656e54d877f4b89754107a0b12a2a9d",
                 "shasum": ""
             },
             "require": {
@@ -283,7 +283,7 @@
                 "source": "https://github.com/matomo-org/matomo",
                 "wiki": "https://dev.matomo.org/"
             },
-            "time": "2022-04-11T09:58:17+00:00"
+            "time": "2022-06-10T08:32:53+00:00"
         },
         {
             "name": "mustangostang/spyc",
@@ -2484,16 +2484,16 @@
         },
         {
             "name": "phpstan/phpdoc-parser",
-            "version": "1.6.0",
+            "version": "1.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "3cb62d10845338136ff4ba299ab0986bbf84ba77"
+                "reference": "76150ae7512439b4e6903db834e4a327596b617d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/3cb62d10845338136ff4ba299ab0986bbf84ba77",
-                "reference": "3cb62d10845338136ff4ba299ab0986bbf84ba77",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/76150ae7512439b4e6903db834e4a327596b617d",
+                "reference": "76150ae7512439b4e6903db834e4a327596b617d",
                 "shasum": ""
             },
             "require": {
@@ -2503,6 +2503,7 @@
                 "php-parallel-lint/php-parallel-lint": "^1.2",
                 "phpstan/extension-installer": "^1.0",
                 "phpstan/phpstan": "^1.5",
+                "phpstan/phpstan-phpunit": "^1.1",
                 "phpstan/phpstan-strict-rules": "^1.0",
                 "phpunit/phpunit": "^9.5",
                 "symfony/process": "^5.2"
@@ -2522,9 +2523,9 @@
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
             "support": {
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.6.0"
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.6.2"
             },
-            "time": "2022-06-09T09:45:59+00:00"
+            "time": "2022-06-10T09:29:33+00:00"
         },
         {
             "name": "phpstan/phpstan",
