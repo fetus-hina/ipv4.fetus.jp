@@ -19,7 +19,7 @@
     "@babel/core": "^7.18.5",
     "@babel/preset-env": "^7.18.2",
     "autoprefixer": "^10.4.7",
-    "cssnano": "^5.1.11",
+    "cssnano": "^5.1.12",
     "postcss": "^8.4.14",
     "postcss-cli": "^9.1.0",
     "sass": "^1.52.3",
