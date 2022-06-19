@@ -47,11 +47,11 @@
         "proget-hq/phpstan-yii2": "*",
         "sirbrillig/phpcs-import-detection": "^1.3.2",
         "sirbrillig/phpcs-variable-analysis": "^2.11.2",
+        "slevomat/coding-standard": "^8.0",
         "squizlabs/php_codesniffer": "*",
         "symfony/browser-kit": "*",
         "yiisoft/yii2-debug": "*",
-        "yiisoft/yii2-gii": "*",
-        "slevomat/coding-standard": "^7.0"
+        "yiisoft/yii2-gii": "*"
     },
     "replace": {
         "bower-asset/bootstrap": "*",
