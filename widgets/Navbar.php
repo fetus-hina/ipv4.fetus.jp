@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace app\widgets;
 
 use Yii;
+use app\assets\MontserratAsset;
 use yii\base\Widget;
 use yii\bootstrap5\BootstrapPluginAsset;
 use yii\helpers\Html;
@@ -65,11 +66,16 @@ final class Navbar extends Widget
 
     private function renderBrand(): string
     {
+        if (($view = $this->view) instanceof View) {
+            MontserratAsset::register($view);
+        }
+
         return Html::a(
             Html::encode(Yii::$app->name),
             ['site/index'],
             [
                 'class' => [
+                    'font-montserrat',
                     'navbar-brand',
                 ],
             ],
