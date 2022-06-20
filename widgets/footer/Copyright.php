@@ -14,20 +14,13 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\web\View;
 
-use function array_filter;
-use function implode;
-use function is_array;
-use function is_string;
-use function sprintf;
-use function vsprintf;
-
 final class Copyright extends Widget
 {
     public function run(): string
     {
         return Html::tag(
             'div',
-            implode(' ', array_filter(
+            \implode(' ', \array_filter(
                 [
                     $this->renderCopyright(),
                     $this->renderTwitterLink(),
@@ -41,7 +34,7 @@ final class Copyright extends Widget
 
     private function renderCopyright(): string
     {
-        return vsprintf('Copyright © %s %s.', [
+        return \vsprintf('Copyright © %s %s.', [
             Html::encode($this->getCopyrightYear()),
             $this->getCopyrightHolder(),
         ]);
@@ -50,7 +43,7 @@ final class Copyright extends Widget
     private function getCopyrightYear(): string
     {
         $value = ArrayHelper::getValue(Yii::$app->params, 'copyrightYear');
-        return is_string($value) && $value !== ''
+        return \is_string($value) && $value !== ''
             ? $value
             : (new DateTimeImmutable('now', new DateTimeZone(Yii::$app->timeZone ?? 'Asia/Tokyo')))
                 ->format('Y');
@@ -63,11 +56,11 @@ final class Copyright extends Widget
 
         return Html::a(
             Html::encode(
-                is_string($holder) && $holder !== ''
+                \is_string($holder) && $holder !== ''
                     ? $holder
                     : 'the Author',
             ),
-            is_string($website) || is_array($website)
+            \is_string($website) || \is_array($website)
                 ? $website
                 : ['site/index'],
             [
@@ -80,7 +73,7 @@ final class Copyright extends Widget
     private function renderTwitterLink(): ?string
     {
         $value = ArrayHelper::getValue(Yii::$app->params, 'authorTwitter');
-        if (!is_string($value) || $value === '') {
+        if (!\is_string($value) || $value === '') {
             return null;
         }
 
@@ -99,9 +92,9 @@ final class Copyright extends Widget
                     ],
                 ),
                 'format' => 'raw',
-                'title' => sprintf('Twitter @%s', $value),
+                'title' => \sprintf('Twitter @%s', $value),
             ]),
-            sprintf('https://twitter.com/%s', $value),
+            \sprintf('https://twitter.com/%s', $value),
             [
                 'target' => '_blank',
                 'rel' => 'external noopener noreferrer',
@@ -112,7 +105,7 @@ final class Copyright extends Widget
     private function renderGithubLink(): ?string
     {
         $value = ArrayHelper::getValue(Yii::$app->params, 'authorGitHub');
-        if (!is_string($value) || $value === '') {
+        if (!\is_string($value) || $value === '') {
             return null;
         }
 
@@ -131,9 +124,9 @@ final class Copyright extends Widget
                     ],
                 ),
                 'format' => 'raw',
-                'title' => sprintf('GitHub @%s', $value),
+                'title' => \sprintf('GitHub @%s', $value),
             ]),
-            sprintf('https://github.com/%s', $value),
+            \sprintf('https://github.com/%s', $value),
             [
                 'target' => '_blank',
                 'rel' => 'external noopener noreferrer',

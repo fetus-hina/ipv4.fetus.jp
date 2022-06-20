@@ -16,7 +16,7 @@ final class SnsWidget extends Widget
     {
         return Html::tag(
             'div',
-            implode('', [
+            \implode('', [
                 Twitter::widget(),
                 $this->renderHatebu(),
             ]),
@@ -34,7 +34,7 @@ final class SnsWidget extends Widget
 
     private function renderHatebu(): string
     {
-        if (!preg_match('/^ja\b/', Yii::$app->language)) {
+        if (!\preg_match('/^ja\b/', Yii::$app->language)) {
             return '';
         }
 

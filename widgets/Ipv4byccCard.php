@@ -20,7 +20,7 @@ final class Ipv4byccCard extends Widget
 
         return Html::tag(
             'div',
-            implode('', [
+            \implode('', [
                 $this->renderCardHeader(),
                 $this->renderCardBody(),
             ]),
@@ -51,7 +51,7 @@ final class Ipv4byccCard extends Widget
     {
         return Html::tag(
             'div',
-            implode('', [
+            \implode('', [
                 // phpcs:disable Generic.Files.LineLength.TooLong
                 Html::tag(
                     'p',
@@ -67,7 +67,7 @@ final class Ipv4byccCard extends Widget
                 Html::tag(
                     'div',
                     Html::a(
-                        implode(' ', [
+                        \implode(' ', [
                             Html::encode(Yii::t('app/ipv4bycc', 'CIDR format')),
                             Html::tag('span', '', ['class' => 'bi bi-download']),
                         ]),
@@ -86,7 +86,7 @@ final class Ipv4byccCard extends Widget
                 Html::tag(
                     'div',
                     Html::a(
-                        implode(' ', [
+                        \implode(' ', [
                             Html::encode(Yii::t('app/ipv4bycc', 'Subnet Mask format')),
                             Html::tag('span', '', ['class' => 'bi bi-download']),
                         ]),
@@ -114,13 +114,13 @@ final class Ipv4byccCard extends Widget
     private function getParagraphs(): array
     {
         // 日本語ではそのまま結合、その他（英語）ではスペース区切り
-        $joiner = preg_match('/^ja\b/i', Yii::$app->language)
+        $joiner = \preg_match('/^ja\b/i', Yii::$app->language)
             ? ''
             : ' ';
 
         // phpcs:disable Generic.Files.LineLength.TooLong
         return [
-            implode($joiner, [
+            \implode($joiner, [
                 Yii::t(
                     'app/about',
                     'Information is not guaranteed.',

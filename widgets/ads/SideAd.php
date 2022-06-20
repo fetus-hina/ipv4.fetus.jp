@@ -19,7 +19,7 @@ final class SideAd extends Widget
 
         return Html::tag(
             'aside',
-            implode('', [
+            \implode('', [
                 Html::tag(
                     'div',
                     AdSenseWidget::widget([

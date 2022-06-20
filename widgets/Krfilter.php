@@ -66,7 +66,7 @@ class Krfilter extends Widget
     {
         return Html::tag(
             'div',
-            implode('', [
+            \implode('', [
                 $this->renderCardHeader(),
                 $this->renderCardBody(),
             ]),
@@ -107,7 +107,7 @@ class Krfilter extends Widget
 
     protected function getCardBodyTexts(): string
     {
-        return implode('', [
+        return \implode('', [
             Html::tag(
                 'p',
                 Yii::t(

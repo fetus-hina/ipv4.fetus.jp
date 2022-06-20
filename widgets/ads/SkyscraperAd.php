@@ -22,7 +22,7 @@ final class SkyscraperAd extends Widget
 
         return Html::tag(
             'aside',
-            implode('', [
+            \implode('', [
                 Html::tag(
                     'div',
                     AdSenseWidget::widget([

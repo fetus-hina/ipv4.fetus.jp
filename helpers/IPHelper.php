@@ -25,12 +25,12 @@ class IPHelper
         while ($count > 0) {
             for ($bitNum = self::MINIMUM_SPLIT_BITLEN; $bitNum <= 32; ++$bitNum) {
                 $tmpBlockMask = static::bitmask($bitNum);
-                assert($tmpBlockMask !== null);
+                \assert($tmpBlockMask !== null);
                 $tmpBlockSize = (0xffffffff & ~$tmpBlockMask) + 1;
                 $tmpEndAddress = $startAddress + $tmpBlockSize - 1;
                 if ($tmpEndAddress <= $endAddress) {
                     if (($startAddress & $tmpBlockMask) === ($tmpEndAddress & $tmpBlockMask)) {
-                        $result[] = sprintf('%s/%d', long2ip($startAddress), $bitNum);
+                        $result[] = \sprintf('%s/%d', \long2ip($startAddress), $bitNum);
                         $startAddress += $tmpBlockSize;
                         $count -= $tmpBlockSize;
                         break;

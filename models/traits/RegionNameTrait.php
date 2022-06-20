@@ -18,8 +18,8 @@ trait RegionNameTrait
 {
     public function getFormattedName(): string
     {
-        return preg_match('/^ja\b/i', Yii::$app->language)
-            ? sprintf('%s (%s)', $this->name_ja, $this->name_en)
+        return \preg_match('/^ja\b/i', Yii::$app->language)
+            ? \sprintf('%s (%s)', $this->name_ja, $this->name_en)
             : $this->name_en;
     }
 }

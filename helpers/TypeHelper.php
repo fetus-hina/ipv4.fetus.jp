@@ -21,7 +21,7 @@ final class TypeHelper
      */
     public static function shouldBeArray(mixed $value, int $type = self::ARRAY_DONTCARE): array
     {
-        if (!is_array($value)) {
+        if (!\is_array($value)) {
             throw self::error('array', $value);
         }
 
@@ -66,19 +66,19 @@ final class TypeHelper
      */
     public static function shouldBeInstanceOf(mixed $value, string $fqcn): object
     {
-        return is_object($value) && ($value instanceof $fqcn)
+        return \is_object($value) && ($value instanceof $fqcn)
             ? $value
             : throw self::error($fqcn, $value);
     }
 
     public static function shouldBeInteger(mixed $value): int
     {
-        return is_int($value) ? $value : throw self::error('integer', $value);
+        return \is_int($value) ? $value : throw self::error('integer', $value);
     }
 
     public static function shouldBeString(mixed $value): string
     {
-        return is_string($value) ? $value : throw self::error('string', $value);
+        return \is_string($value) ? $value : throw self::error('string', $value);
     }
 
     /** @return never */
@@ -86,11 +86,11 @@ final class TypeHelper
     {
         throw new TypeError(
             $putActualValue
-                ? vsprintf('Type Error: argument type should be "%s", but it is "%s"', [
+                ? \vsprintf('Type Error: argument type should be "%s", but it is "%s"', [
                     $typeName,
                     self::getType($value),
                 ])
-                : vsprintf('Type Error: argument type should be "%s"', [
+                : \vsprintf('Type Error: argument type should be "%s"', [
                     $typeName,
                 ])
         );
@@ -99,13 +99,13 @@ final class TypeHelper
     private static function getType(mixed $value): string
     {
         switch (true) {
-            case is_object($value):
+            case \is_object($value):
                 return $value::class;
 
-            case is_resource($value):
-                return get_resource_type($value);
+            case \is_resource($value):
+                return \get_resource_type($value);
         }
 
-        return gettype($value);
+        return \gettype($value);
     }
 }

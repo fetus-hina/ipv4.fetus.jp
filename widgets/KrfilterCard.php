@@ -41,7 +41,7 @@ final class KrfilterCard extends Widget
     {
         return Html::tag(
             'div',
-            implode('', [
+            \implode('', [
                 $this->renderCardHeader($model),
                 $this->renderCardBody($model),
             ]),
@@ -74,8 +74,8 @@ final class KrfilterCard extends Widget
     {
         return Html::tag(
             'div',
-            implode('', [
-                preg_match('/^rufilter/i', $model->name)
+            \implode('', [
+                \preg_match('/^rufilter/i', $model->name)
                     ? StandWithUkraine::widget()
                     : '',
                 $this->renderRegionList($model),
@@ -104,8 +104,8 @@ final class KrfilterCard extends Widget
         return Html::tag(
             'p',
             Yii::t('app/krfilter', 'Consolidated list for<br>{list}', [
-                'list' => implode(' ', array_map(
-                    fn (Region $region): string => implode('', [
+                'list' => \implode(' ', \array_map(
+                    fn (Region $region): string => \implode('', [
                         Tooltip::widget([
                             'content' => FlagIcon::widget(['cc' => $region->id]),
                             'format' => 'raw',
@@ -113,7 +113,7 @@ final class KrfilterCard extends Widget
                         ]),
                         Html::tag(
                             'span',
-                            preg_match('/^ja\b/i', Yii::$app->language)
+                            \preg_match('/^ja\b/i', Yii::$app->language)
                                 ? Html::encode("({$region->name_ja}), ")
                                 : Html::encode("({$region->name_en}), "),
                             [
@@ -141,9 +141,9 @@ final class KrfilterCard extends Widget
     private function getRegionList(Krfilter $model): array
     {
         $regions = $model->regions;
-        usort(
+        \usort(
             $regions,
-            fn (Region $a, Region $b): int => strcmp($a->id, $b->id),
+            fn (Region $a, Region $b): int => \strcmp($a->id, $b->id),
         );
         return $regions;
     }

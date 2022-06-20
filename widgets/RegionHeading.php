@@ -11,10 +11,6 @@ use yii\base\Widget;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
-use function implode;
-use function is_string;
-use function preg_match;
-
 final class RegionHeading extends Widget
 {
     private const PADDING = 'me-2';
@@ -35,8 +31,8 @@ final class RegionHeading extends Widget
         $tag = ArrayHelper::remove($options, 'tag', null);
 
         return Html::tag(
-            is_string($tag) ? $tag : 'div',
-            implode('', [
+            \is_string($tag) ? $tag : 'div',
+            \implode('', [
                 $this->renderFlag($region),
                 $this->renderName($region),
             ]),
@@ -59,7 +55,7 @@ final class RegionHeading extends Widget
 
     private function renderName(Region $region): string
     {
-        return preg_match('/^ja\b/i', Yii::$app->language)
+        return \preg_match('/^ja\b/i', Yii::$app->language)
             ? $this->renderNameJa($region)
             : $this->renderNameEn($region);
     }
@@ -71,7 +67,7 @@ final class RegionHeading extends Widget
 
     private function renderNameJa(Region $region): string
     {
-        return implode('', [
+        return \implode('', [
             Html::tag(
                 'span',
                 Html::encode($region->name_ja),

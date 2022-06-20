@@ -22,7 +22,7 @@ final class BootstrapIconsController extends Controller
         $json = TypeHelper::shouldBeArray(
             Json::decode(
                 TypeHelper::shouldBeString(
-                    file_get_contents(
+                    \file_get_contents(
                         TypeHelper::shouldBeString(
                             Yii::getAlias(self::JSON_PATH),
                         ),
@@ -32,7 +32,7 @@ final class BootstrapIconsController extends Controller
             TypeHelper::ARRAY_ASSOC,
         );
 
-        ksort($json, SORT_NATURAL | SORT_FLAG_CASE);
+        \ksort($json, SORT_NATURAL | SORT_FLAG_CASE);
 
         echo "@charset 'UTF-8';\n";
         echo "\n";
@@ -40,10 +40,10 @@ final class BootstrapIconsController extends Controller
         echo "\n";
         foreach ($json as $name => $codepoint) {
             $name = (string)$name;
-            vprintf("\$bi-%s: '%s';\n", [
+            \vprintf("\$bi-%s: '%s';\n", [
                 (string)$name,
-                is_int($codepoint)
-                    ? mb_chr($codepoint, 'UTF-8')
+                \is_int($codepoint)
+                    ? \mb_chr($codepoint, 'UTF-8')
                     : throw new Exception('Unexpected codepoint value for ' . $name),
             ]);
         }

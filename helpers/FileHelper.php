@@ -11,8 +11,8 @@ final class FileHelper extends BaseFileHelper
 {
     public static function requireIfExists(string $path, mixed $defaultValue = null, bool $once = false): mixed
     {
-        if (@file_exists($path)) {
-            if (!@is_file($path) || !@is_readable($path)) {
+        if (@\file_exists($path)) {
+            if (!@\is_file($path) || !@\is_readable($path)) {
                 throw new Exception("The file \"$path\" exists, but it is not readable");
             }
 

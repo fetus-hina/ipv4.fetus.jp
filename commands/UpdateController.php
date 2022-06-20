@@ -47,7 +47,7 @@ class UpdateController extends Controller
     public function init()
     {
         parent::init();
-        ini_set('memory_limit', '1G');
+        \ini_set('memory_limit', '1G');
     }
 
     public function actionIndex(bool $skipUpdate = false): int
@@ -63,7 +63,7 @@ class UpdateController extends Controller
 
         if (!$skipUpdate) {
             try {
-                $updateStartAt = microtime(true);
+                $updateStartAt = \microtime(true);
 
                 Yii::$app->db->transaction(function (): void {
                     Yii::info('Deleting allocation_cidr', __METHOD__);
@@ -97,7 +97,7 @@ class UpdateController extends Controller
         }
         $this->actionKrfilter();
         $this->actionIpv4bycc();
-        $updateFinishAt = microtime(true);
+        $updateFinishAt = \microtime(true);
 
         if ($status !== ExitCode::OK) {
             return ExitCode::UNSPECIFIED_ERROR;
@@ -148,7 +148,7 @@ class UpdateController extends Controller
         $debugCategory = __METHOD__;
         Yii::$app->db->transaction(function (Connection $db) use ($debugCategory, $list, $tag): void {
             Yii::info("Deleting allocation_cidr ({$tag})", $debugCategory);
-            $sql = implode(' ', [
+            $sql = \implode(' ', [
                 'DELETE FROM {{%allocation_cidr}}',
                 'USING {{%allocation_block}}',
                 'WHERE {{%allocation_cidr}}.[[block_id]] = {{%allocation_block}}.[[id]]',
@@ -192,10 +192,10 @@ class UpdateController extends Controller
                 'region_id' => $info['cc'],
                 'date' => $info['date'] === '00000000'
                     ? null
-                    : vsprintf('%04d-%02d-%02d', [
-                        (int)substr($info['date'], 0, 4),
-                        (int)substr($info['date'], 4, 2),
-                        (int)substr($info['date'], 6, 2),
+                    : \vsprintf('%04d-%02d-%02d', [
+                        (int)\substr($info['date'], 0, 4),
+                        (int)\substr($info['date'], 4, 2),
+                        (int)\substr($info['date'], 6, 2),
                     ]),
             ]);
             if (!$block->save()) {
@@ -207,10 +207,10 @@ class UpdateController extends Controller
         } else {
             $dbdate = $info['date'] === '00000000'
                 ? null
-                : vsprintf('%04d-%02d-%02d', [
-                    (int)substr($info['date'], 0, 4),
-                    (int)substr($info['date'], 4, 2),
-                    (int)substr($info['date'], 6, 2),
+                : \vsprintf('%04d-%02d-%02d', [
+                    (int)\substr($info['date'], 0, 4),
+                    (int)\substr($info['date'], 4, 2),
+                    (int)\substr($info['date'], 6, 2),
                 ]);
             if (
                 $block->start_address !== $info['start'] ||
@@ -261,32 +261,32 @@ class UpdateController extends Controller
     private function downloadAndParse(string $tag, string $url): ?array
     {
         Yii::info("Starting download from {$url}", __METHOD__);
-        $t1 = microtime(true);
+        $t1 = \microtime(true);
         $text = $this->download($url);
         if ($text === null) {
             Yii::error("ダウンロードに失敗しました: {$url}", __METHOD__);
             return null;
         }
-        $t = microtime(true) - $t1;
-        Yii::info(sprintf('  %.1f KiB in %.3f sec', strlen($text) / 1024, $t), __METHOD__);
+        $t = \microtime(true) - $t1;
+        Yii::info(\sprintf('  %.1f KiB in %.3f sec', \strlen($text) / 1024, $t), __METHOD__);
 
         Yii::info('解析を開始します', __METHOD__);
         $ret = [];
         $offset = 0;
         $recordRegex = self::getRirStatisticsExchangeRecordFormatRegex();
-        while (preg_match('/(.*?)(?:\x0d\x0a|\x0d|\x0a)/', $text, $match, 0, $offset)) {
-            $offset += strlen($match[0]);
-            $line = trim($match[1]);
+        while (\preg_match('/(.*?)(?:\x0d\x0a|\x0d|\x0a)/', $text, $match, 0, $offset)) {
+            $offset += \strlen($match[0]);
+            $line = \trim($match[1]);
             if ($line === '' || $line[0] === '#') {
                 continue;
             }
-            if (!preg_match($recordRegex, $line, $info)) {
+            if (!\preg_match($recordRegex, $line, $info)) {
                 continue;
             }
 
             $ret[] = [
                 'registry'  => $info['registry'],
-                'cc'        => strtolower($info['cc']),
+                'cc'        => \strtolower($info['cc']),
                 'start'     => $info['start'],
                 'count'     => (int)$info['count'],
                 'date'      => $info['date'],
@@ -299,7 +299,7 @@ class UpdateController extends Controller
             return null;
         }
 
-        Yii::info(sprintf('  %d 個のレコード', count($ret)), __METHOD__);
+        Yii::info(\sprintf('  %d 個のレコード', \count($ret)), __METHOD__);
         return $ret;
     }
 
@@ -333,7 +333,7 @@ class UpdateController extends Controller
 
     private static function formatRecord(array $info): string
     {
-        return implode('|', [
+        return \implode('|', [
             $info['registry'],
             $info['cc'],
             $info['start'],
@@ -368,8 +368,8 @@ class UpdateController extends Controller
             return;
         }
 
-        $cmdline = vsprintf('/usr/bin/env %s', [
-            escapeshellarg(
+        $cmdline = \vsprintf('/usr/bin/env %s', [
+            \escapeshellarg(
                 TypeHelper::shouldBeString(Yii::getAlias('@app/bin/filter-merge-cidr')),
             ),
         ]);
@@ -377,7 +377,7 @@ class UpdateController extends Controller
             ['pipe', 'r'],
             ['pipe', 'w'],
         ];
-        if (!$process = @proc_open($cmdline, $descriptorspec, $pipes)) {
+        if (!$process = @\proc_open($cmdline, $descriptorspec, $pipes)) {
             throw new Exception('子プロセスが作成できません: ' . $cmdline);
         }
 
@@ -394,16 +394,16 @@ class UpdateController extends Controller
                 ]);
             foreach ($query->asArray()->each(100) as $row) {
                 ++$inCount;
-                fwrite(
+                \fwrite(
                     $pipes[0],
                     TypeHelper::shouldBeArray($row)['cidr'] . "\n",
                 );
             }
-            fclose($pipes[0]);
+            \fclose($pipes[0]);
 
-            while (!feof($pipes[1])) {
-                $line = trim((string)fgets($pipes[1]));
-                if (preg_match('!^\d+\.\d+\.\d+\.\d+/\d+$!', $line)) {
+            while (!\feof($pipes[1])) {
+                $line = \trim((string)\fgets($pipes[1]));
+                if (\preg_match('!^\d+\.\d+\.\d+\.\d+/\d+$!', $line)) {
                     ++$outCount;
                     $merged = Yii::createObject([
                         'class' => MergedCidr::class,
@@ -415,13 +415,13 @@ class UpdateController extends Controller
                     }
                 }
             }
-            fclose($pipes[1]);
-            proc_close($process);
+            \fclose($pipes[1]);
+            \proc_close($process);
             Yii::info("  {$region->id}: i:{$inCount}, o:{$outCount}", __METHOD__);
         } catch (Throwable $e) {
-            @fclose($pipes[0]);
-            @fclose($pipes[1]);
-            @proc_close($process);
+            @\fclose($pipes[0]);
+            @\fclose($pipes[1]);
+            @\proc_close($process);
             throw $e;
         }
     }
@@ -434,10 +434,10 @@ class UpdateController extends Controller
 
             RegionStat::deleteAll('1 = 1');
 
-            $sql = implode(' ', [
+            $sql = \implode(' ', [
                 'INSERT INTO {{%region_stat}}',
                 '([[region_id]], [[total_address_count]], [[last_allocation_date]])',
-                'SELECT ' . implode(', ', [
+                'SELECT ' . \implode(', ', [
                     '{{%allocation_block}}.[[region_id]] AS [[region_id]]',
                     'SUM({{%allocation_block}}.[[count]]) AS [[total_address_count]]',
                     'MAX({{%allocation_block}}.[[date]]) AS [[last_allocation_date]]',
@@ -469,8 +469,8 @@ class UpdateController extends Controller
     private function createKrfilter(Krfilter $krfilter, array $regions): void
     {
         Yii::$app->db->transaction(function (Connection $db) use ($krfilter, $regions): void {
-            $cmdline = vsprintf('/usr/bin/env %s', [
-                escapeshellarg(
+            $cmdline = \vsprintf('/usr/bin/env %s', [
+                \escapeshellarg(
                     TypeHelper::shouldBeString(Yii::getAlias('@app/bin/filter-merge-cidr')),
                 ),
             ]);
@@ -478,7 +478,7 @@ class UpdateController extends Controller
                 ['pipe', 'r'],
                 ['pipe', 'w'],
             ];
-            if (!$process = @proc_open($cmdline, $descriptorspec, $pipes)) {
+            if (!$process = @\proc_open($cmdline, $descriptorspec, $pipes)) {
                 throw new Exception('子プロセスが作成できません: ' . $cmdline);
             }
 
@@ -486,24 +486,24 @@ class UpdateController extends Controller
                 $query = $region->getMergedCidrs()
                     ->orderBy(['cidr' => SORT_ASC]);
                 foreach ($query->asArray()->each(200) as $cidr) {
-                    fwrite(
+                    \fwrite(
                         $pipes[0],
                         TypeHelper::shouldBeArray($cidr)['cidr'] . "\n",
                     );
                 }
             }
-            fclose($pipes[0]);
+            \fclose($pipes[0]);
 
             KrfilterCidr::deleteAll(['krfilter_id' => $krfilter->id]);
             $values = [];
-            while (!feof($pipes[1])) {
-                $line = trim((string)fgets($pipes[1]));
-                if (preg_match('!^\d+\.\d+\.\d+\.\d+/\d+$!', $line)) {
+            while (!\feof($pipes[1])) {
+                $line = \trim((string)\fgets($pipes[1]));
+                if (\preg_match('!^\d+\.\d+\.\d+\.\d+/\d+$!', $line)) {
                     $values[] = [(int)$krfilter->id, $line];
                 }
             }
-            fclose($pipes[1]);
-            $status = proc_close($process);
+            \fclose($pipes[1]);
+            $status = \proc_close($process);
             if ($status !== 0) {
                 throw new Exception('CIDR統合プロセスが異常終了: ' . $status . ' / ' . $cmdline);
             }
@@ -521,11 +521,11 @@ class UpdateController extends Controller
         return Yii::$app->db->transaction(function () use ($method, $now): int {
             Yii::info('Ipv4bycc互換形式ファイルを作成します', $method);
 
-            $pathCidr = vsprintf('@app/web/ipv4bycc/cidr/%s/%s-cidr.txt', [
+            $pathCidr = \vsprintf('@app/web/ipv4bycc/cidr/%s/%s-cidr.txt', [
                 $now->format('Y-m'),
                 $now->format('Ymd'),
             ]);
-            $pathMask = vsprintf('@app/web/ipv4bycc/mask/%s/%s-mask.txt', [
+            $pathMask = \vsprintf('@app/web/ipv4bycc/mask/%s/%s-mask.txt', [
                 $now->format('Y-m'),
                 $now->format('Ymd'),
             ]);
@@ -551,58 +551,58 @@ class UpdateController extends Controller
     private function saveIpv4bycc(string $path, callable $dumper): bool
     {
         $path = (string)Yii::getAlias($path);
-        Yii::info('Create ' . basename($path), __METHOD__);
+        Yii::info('Create ' . \basename($path), __METHOD__);
 
-        if (file_exists($path) && filesize($path) > 0) {
-            Yii::info(basename($path) . ' is exists. skip.', __METHOD__);
+        if (\file_exists($path) && \filesize($path) > 0) {
+            Yii::info(\basename($path) . ' is exists. skip.', __METHOD__);
             return true;
         }
 
         try {
-            if (!FileHelper::createDirectory(dirname($path), 0755, true)) {
-                Yii::error('Failed to create directory ' . dirname($path), __METHOD__);
+            if (!FileHelper::createDirectory(\dirname($path), 0755, true)) {
+                Yii::error('Failed to create directory ' . \dirname($path), __METHOD__);
                 return false;
             }
         } catch (Throwable $e) {
-            Yii::error('Failed to create directory ' . dirname($path), __METHOD__);
+            Yii::error('Failed to create directory ' . \dirname($path), __METHOD__);
             return false;
         }
 
         $tmpPath = $path . '.tmp';
-        if (file_exists($tmpPath)) {
-            @unlink($tmpPath);
+        if (\file_exists($tmpPath)) {
+            @\unlink($tmpPath);
         }
 
-        if (!$fh = fopen($tmpPath, 'wt')) {
+        if (!$fh = \fopen($tmpPath, 'wt')) {
             return false;
         }
         foreach ($dumper() as $row) {
-            fwrite($fh, $row);
+            \fwrite($fh, $row);
         }
-        fclose($fh);
-        rename($tmpPath, $path);
+        \fclose($fh);
+        \rename($tmpPath, $path);
         return true;
     }
 
     private function saveTimeRecord(float $startAt, float $finishAt): void
     {
-        file_put_contents(
+        \file_put_contents(
             TypeHelper::shouldBeString(
                 Yii::getAlias('@app/config/params/database-update-timestamp.php'),
             ),
-            implode("\n", [
+            \implode("\n", [
                 '<?php',
                 '',
                 'declare(strict_types=1);',
                 '',
                 'return [',
-                vsprintf("    'startAt' => new DateTimeImmutable('@%d'),", [
-                    (int)floor($startAt),
+                \vsprintf("    'startAt' => new DateTimeImmutable('@%d'),", [
+                    (int)\floor($startAt),
                 ]),
-                vsprintf("    'finishAt' => new DateTimeImmutable('@%d'),", [
-                    (int)floor($finishAt),
+                \vsprintf("    'finishAt' => new DateTimeImmutable('@%d'),", [
+                    (int)\floor($finishAt),
                 ]),
-                vsprintf("    'took' => %f,", [
+                \vsprintf("    'took' => %f,", [
                     $finishAt - $startAt,
                 ]),
                 '];',

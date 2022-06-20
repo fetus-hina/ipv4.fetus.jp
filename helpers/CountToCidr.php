@@ -12,7 +12,7 @@ class CountToCidr
             return null;
         }
 
-        $iplong = @ip2long($startAddress);
+        $iplong = @\ip2long($startAddress);
         if ($iplong !== false) {
             return IPHelper::splitBlock($iplong, (int)$count);
         }

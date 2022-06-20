@@ -37,9 +37,9 @@ final class Formatter extends \yii\i18n\Formatter
 
     private function dateFormat(string $type): string
     {
-        $locale = trim(Yii::$app->language);
-        $lang = strtolower(
-            TypeHelper::shouldBeString(preg_replace('/^([a-z]+).*/i', '$1', $locale))
+        $locale = \trim(Yii::$app->language);
+        $lang = \strtolower(
+            TypeHelper::shouldBeString(\preg_replace('/^([a-z]+).*/i', '$1', $locale))
         );
 
         return match ($type) {

@@ -23,10 +23,10 @@ class JSLoaderAsset extends AssetBundle
         parent::init();
 
         $params = Yii::$app->params['adsense'];
-        if (is_array($params)) {
-            $this->js[] = vsprintf('%s?%s', [
+        if (\is_array($params)) {
+            $this->js[] = \vsprintf('%s?%s', [
                 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js',
-                http_build_query(
+                \http_build_query(
                     [
                         'client' => $params['client'],
                     ],

@@ -73,7 +73,7 @@ class SiteController extends Controller
         $resp->charset = 'UTF-8';
         $resp->headers->set('Content-Type', 'text/plain');
         $resp->content = YII_ENV_PROD
-            ? implode("\n", [
+            ? \implode("\n", [
                 'user-agent: *',
                 'allow: /',
                 '',
@@ -81,7 +81,7 @@ class SiteController extends Controller
                 'crawl-delay: 20',
                 '',
             ])
-            : implode("\n", [
+            : \implode("\n", [
                 'user-agent: *',
                 'disallow: /',
                 '',
@@ -104,11 +104,11 @@ class SiteController extends Controller
         $lang = $req->post('language');
         if ($lang === 'default') {
             $r->cookies->remove(ApplicationLanguage::COOKIE_NAME);
-        } elseif (is_string($lang) && ApplicationLanguage::isValidLanguageCode($lang)) {
+        } elseif (\is_string($lang) && ApplicationLanguage::isValidLanguageCode($lang)) {
             $r->cookies->add(
                 Yii::createObject([
                     'class' => Cookie::class,
-                    'expire' => strtotime('2100-01-01T00:00:00+00:00'),
+                    'expire' => \strtotime('2100-01-01T00:00:00+00:00'),
                     'httpOnly' => true,
                     'name' => ApplicationLanguage::COOKIE_NAME,
                     'sameSite' => Cookie::SAME_SITE_STRICT,
@@ -130,8 +130,8 @@ class SiteController extends Controller
         $r->format = Response::FORMAT_RAW;
         $r->headers->set('Content-Type', 'text/plain; charset=UTF-8');
 
-        if (function_exists('opcache_reset')) {
-            opcache_reset();
+        if (\function_exists('opcache_reset')) {
+            \opcache_reset();
             return 'ok';
         }
 

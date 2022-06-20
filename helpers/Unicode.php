@@ -15,18 +15,18 @@ final class Unicode
 
     public static function asciiToRegionalIndicator(string $cc): string
     {
-        if (!preg_match('/\A[a-wyz][a-z]\z/ui', $cc)) {
+        if (!\preg_match('/\A[a-wyz][a-z]\z/ui', $cc)) {
             throw new InvalidArgumentException("{$cc} is not a valid country code");
         }
 
-        $cc = strtolower($cc);
-        return implode('', array_map(
-            fn (string $c): string => TypeHelper::shouldBeString(mb_chr(
-                self::CODEPOINT_REGIONAL_INDICATOR_A + ord($c) - self::CODEPOINT_LATIN_SMALL_A,
+        $cc = \strtolower($cc);
+        return \implode('', \array_map(
+            fn (string $c): string => TypeHelper::shouldBeString(\mb_chr(
+                self::CODEPOINT_REGIONAL_INDICATOR_A + \ord($c) - self::CODEPOINT_LATIN_SMALL_A,
                 'UTF-8'
             )),
             TypeHelper::shouldBeArray(
-                preg_split('//', $cc, -1, PREG_SPLIT_NO_EMPTY),
+                \preg_split('//', $cc, -1, PREG_SPLIT_NO_EMPTY),
                 TypeHelper::ARRAY_DONTCARE,
             ),
         ));

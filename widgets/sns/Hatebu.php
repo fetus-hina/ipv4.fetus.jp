@@ -39,7 +39,7 @@ final class Hatebu extends Widget
                     'title' => Yii::t('app', 'Add this page to Hatena Bookmark'),
                     'data' => [
                         'hatena-bookmark-layout' => 'basic-label-counter',
-                        'hatena-bookmark-lang' => preg_match('/^ja\b/', Yii::$app->language)
+                        'hatena-bookmark-lang' => \preg_match('/^ja\b/', Yii::$app->language)
                             ? 'ja'
                             : 'en',
                     ],

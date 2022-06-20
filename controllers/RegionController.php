@@ -64,7 +64,7 @@ final class RegionController extends Controller
             $resp->charset = 'UTF-8';
             $resp->headers->set('Content-Type', 'text/plain');
             $resp->stream = fn (): Generator => DownloadFormatter::format(
-                vsprintf('[%s] %s (%s)', [
+                \vsprintf('[%s] %s (%s)', [
                     $region->id,
                     $region->name_ja,
                     $region->name_en,

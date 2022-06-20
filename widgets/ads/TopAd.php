@@ -19,7 +19,7 @@ final class TopAd extends Widget
 
         return Html::tag(
             'div',
-            implode('', [
+            \implode('', [
                 Html::tag(
                     'div',
                     AdSenseWidget::widget([

@@ -14,7 +14,7 @@ final class AboutUsCard extends Widget
     {
         return Html::tag(
             'div',
-            implode('', [
+            \implode('', [
                 $this->renderCardHeader(),
                 $this->renderCardBody(),
             ]),
@@ -47,7 +47,7 @@ final class AboutUsCard extends Widget
 
         return Html::tag(
             'div',
-            implode('', array_map(
+            \implode('', \array_map(
                 fn (string $html, int $index, int $lastIndex) => Html::tag(
                     'p',
                     $html,
@@ -59,9 +59,9 @@ final class AboutUsCard extends Widget
                             : [],
                     ],
                 ),
-                array_values($paragraphs),
-                range(0, count($paragraphs) - 1, 1),
-                array_fill(0, count($paragraphs), count($paragraphs) - 1),
+                \array_values($paragraphs),
+                \range(0, \count($paragraphs) - 1, 1),
+                \array_fill(0, \count($paragraphs), \count($paragraphs) - 1),
             )),
             [
                 'class' => [
@@ -74,13 +74,13 @@ final class AboutUsCard extends Widget
     private function getParagraphs(): array
     {
         // 日本語ではそのまま結合、その他（英語）ではスペース区切り
-        $joiner = preg_match('/^ja\b/i', Yii::$app->language)
+        $joiner = \preg_match('/^ja\b/i', Yii::$app->language)
             ? ''
             : ' ';
 
         // phpcs:disable Generic.Files.LineLength.TooLong
         return [
-            implode($joiner, [
+            \implode($joiner, [
                 Yii::t(
                     'app/about',
                     'Information is not guaranteed.',

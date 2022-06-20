@@ -24,7 +24,7 @@ final class LanguageButton extends Widget
             BootstrapPluginAsset::register($view);
         }
 
-        return implode('', [
+        return \implode('', [
             $this->renderButton(),
             $this->renderDropdown(),
         ]);
@@ -33,7 +33,7 @@ final class LanguageButton extends Widget
     private function renderButton(): string
     {
         return Html::a(
-            implode(' ', [
+            \implode(' ', [
                 $this->bi('translate'),
                 $this->montserrat(Html::encode('Language')),
             ]),
@@ -60,12 +60,12 @@ final class LanguageButton extends Widget
     {
         return Html::tag(
             'ul',
-            implode('', array_merge(
+            \implode('', \array_merge(
                 [
                     Html::tag('li', $this->renderAutoDetectItem()),
                     Html::tag('li', $this->renderDivider()),
                 ],
-                array_map(
+                \array_map(
                     fn (string $html): string => Html::tag('li', $html),
                     $this->renderLanguageItems(),
                 ),
@@ -89,7 +89,7 @@ final class LanguageButton extends Widget
     private function renderAutoDetectItem(): string
     {
         return Html::a(
-            implode(' ', [
+            \implode(' ', [
                 $this->bi(ApplicationLanguage::isAutoDetect() ? 'check2-square' : 'square'),
                 Yii::t('app', 'Auto Detect'),
             ]),
@@ -110,10 +110,10 @@ final class LanguageButton extends Widget
     private function renderLanguageItems(): array
     {
         $langs = ApplicationLanguage::getValidLanguages();
-        return array_map(
+        return \array_map(
             fn (string $langCode, string $langName): string => Html::a(
-                implode(' ', [
-                    preg_match('/^' . preg_quote($langCode) . '\b/i', Yii::$app->language)
+                \implode(' ', [
+                    \preg_match('/^' . \preg_quote($langCode) . '\b/i', Yii::$app->language)
                         ? $this->bi('record-circle-fill')
                         : $this->bi('circle'),
                     $this->renderLanguageName($langCode, $langName),
@@ -129,8 +129,8 @@ final class LanguageButton extends Widget
                     ],
                 ],
             ),
-            array_keys($langs),
-            array_values($langs),
+            \array_keys($langs),
+            \array_values($langs),
         );
     }
 

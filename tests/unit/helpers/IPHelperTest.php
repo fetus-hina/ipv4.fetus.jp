@@ -28,7 +28,7 @@ class IPHelperTest extends Unit
         $this->assertEquals(
             $cidrs,
             IPHelper::splitBlock(
-                ip2long($startIP),
+                \ip2long($startIP),
                 $count
             )
         );

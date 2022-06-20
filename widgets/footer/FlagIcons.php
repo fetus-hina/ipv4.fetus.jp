@@ -14,7 +14,7 @@ final class FlagIcons extends Widget
     {
         return Html::tag(
             'div',
-            implode(' ', [
+            \implode(' ', [
                 Yii::t('app', 'National flags of the countries are displayed using {source}.', [
                     'source' => Html::a(
                         Html::encode('flag-icons'),

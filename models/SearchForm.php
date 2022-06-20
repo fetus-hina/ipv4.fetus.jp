@@ -52,7 +52,7 @@ final class SearchForm extends Model
     public function getNormalizedIP(): ?string
     {
         if (
-            !preg_match(
+            !\preg_match(
                 '/^((2([0-4][0-9]|5[0-5])|[0-1]?[0-9]?[0-9])\.){3}((2([0-4][0-9]|5[0-5])|[0-1]?[0-9]?[0-9]))$/',
                 (string)$this->query
             )
@@ -60,9 +60,9 @@ final class SearchForm extends Model
             return $this->query;
         }
 
-        return implode('.', array_map(
-            fn (string $v): string => (string)intval($v, 10),
-            explode('.', (string)$this->query)
+        return \implode('.', \array_map(
+            fn (string $v): string => (string)\intval($v, 10),
+            \explode('.', (string)$this->query)
         ));
     }
 
@@ -104,7 +104,7 @@ final class SearchForm extends Model
 
     private static function pgInet(string $inet, ?Connection $db = null): DbExpression
     {
-        return new DbExpression(vsprintf('inet %s', [
+        return new DbExpression(\vsprintf('inet %s', [
             ($db ?? Yii::$app->db)->quoteValue($inet),
         ]));
     }

@@ -37,7 +37,7 @@ final class EuIsNotUnifiedWarning extends Widget
     {
         return Html::tag(
             'div',
-            implode('', [
+            \implode('', [
                 $this->renderCardHeader(),
                 $this->renderCardBody(),
             ]),
@@ -90,7 +90,7 @@ final class EuIsNotUnifiedWarning extends Widget
 
         return Html::tag(
             'div',
-            implode('', array_map(
+            \implode('', \array_map(
                 fn (string $html, int $index, int $finalIndex): string => Html::tag(
                     'p',
                     $html,
@@ -100,9 +100,9 @@ final class EuIsNotUnifiedWarning extends Widget
                             : null,
                     ],
                 ),
-                array_values($texts),
-                range(0, count($texts) - 1, 1),
-                array_fill(0, count($texts), count($texts) - 1),
+                \array_values($texts),
+                \range(0, \count($texts) - 1, 1),
+                \array_fill(0, \count($texts), \count($texts) - 1),
             )),
             [
                 'class' => [

@@ -57,6 +57,7 @@
   <rule ref="SlevomatCodingStandard.Functions.ArrowFunctionDeclaration" />
   <rule ref="SlevomatCodingStandard.Functions.UnusedInheritedVariablePassedToClosure" />
   <rule ref="SlevomatCodingStandard.Namespaces.DisallowGroupUse" />
+  <rule ref="SlevomatCodingStandard.Namespaces.FullyQualifiedGlobalFunctions" />
   <rule ref="SlevomatCodingStandard.Namespaces.MultipleUsesPerLine" />
   <rule ref="SlevomatCodingStandard.Namespaces.NamespaceDeclaration" />
   <rule ref="SlevomatCodingStandard.Namespaces.RequireOneNamespaceInFile" />

@@ -19,8 +19,8 @@ final class AllocationSummaryChart extends Widget
 
         if (($v = $this->view) instanceof View) {
             AllocationSummaryAsset::register($v);
-            $v->registerJs(vsprintf('jQuery(%s).chartAllocationSummary();', [
-                Json::encode(vsprintf('#%s-canvas', [
+            $v->registerJs(\vsprintf('jQuery(%s).chartAllocationSummary();', [
+                Json::encode(\vsprintf('#%s-canvas', [
                     $id,
                 ])),
             ]));
@@ -32,7 +32,7 @@ final class AllocationSummaryChart extends Widget
                 'class' => [
                     'w-100',
                 ],
-                'id' => sprintf('%s-canvas', $id),
+                'id' => \sprintf('%s-canvas', $id),
             ]),
             [
                 'class' => [

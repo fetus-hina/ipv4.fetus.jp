@@ -11,19 +11,15 @@ use yii\base\Widget;
 use yii\helpers\Html;
 use yii\web\View;
 
-use function preg_match;
-use function strtolower;
-use function trim;
-
 final class FlagIcon extends Widget
 {
     public string $cc = 'xx';
 
     public function run(): string
     {
-        $cc = trim(strtolower($this->cc));
+        $cc = \trim(\strtolower($this->cc));
 
-        if (!preg_match('/^[a-zA-Z]{2}$/', $cc)) {
+        if (!\preg_match('/^[a-zA-Z]{2}$/', $cc)) {
             throw new LogicException("Invalid CC: {$cc}");
         }
 

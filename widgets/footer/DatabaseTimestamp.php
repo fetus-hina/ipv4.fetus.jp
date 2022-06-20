@@ -12,22 +12,19 @@ use yii\base\Widget;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
-use function is_array;
-use function is_float;
-
 final class DatabaseTimestamp extends Widget
 {
     public function run(): string
     {
         $info = ArrayHelper::getValue(Yii::$app->params, 'dbUpdateTimestamp');
         if (
-            !is_array($info) ||
+            !\is_array($info) ||
             !isset($info['startAt']) ||
             !isset($info['finishAt']) ||
             !isset($info['took']) ||
             !$info['startAt'] instanceof DateTimeInterface ||
             !$info['finishAt'] instanceof DateTimeInterface ||
-            !is_float($info['took'])
+            !\is_float($info['took'])
         ) {
             return '';
         }

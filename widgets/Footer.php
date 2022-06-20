@@ -12,8 +12,6 @@ use app\widgets\footer\RepoLink;
 use yii\base\Widget;
 use yii\helpers\Html;
 
-use function implode;
-
 final class Footer extends Widget
 {
     public function run(): string
@@ -22,7 +20,7 @@ final class Footer extends Widget
             'footer',
             Html::tag(
                 'div',
-                implode('', [
+                \implode('', [
                     Copyright::widget(),
                     RepoLink::widget(),
                     $this->renderLicenseLink(),

@@ -27,7 +27,7 @@ final class KrfilterTargetListWidget extends Widget
 
         return Html::tag(
             'div',
-            implode('', [
+            \implode('', [
                 $this->renderButton(),
                 $this->renderDialog(),
             ]),
@@ -41,7 +41,7 @@ final class KrfilterTargetListWidget extends Widget
             'div',
             Html::tag(
                 'button',
-                implode(' ', [
+                \implode(' ', [
                     Yii::t('app/krfilter', 'List of countries/regions'),
                     Html::tag('span', '', ['class' => 'bi bi-window-stack']),
                 ]),
@@ -69,7 +69,7 @@ final class KrfilterTargetListWidget extends Widget
                 'div',
                 Html::tag(
                     'div',
-                    implode('', [
+                    \implode('', [
                         $this->renderDialogHeader(),
                         $this->renderDialogBody(),
                         $this->renderDialogFooter(),
@@ -97,7 +97,7 @@ final class KrfilterTargetListWidget extends Widget
     {
         return Html::tag(
             'div',
-            implode('', [
+            \implode('', [
                 Html::tag(
                     'h5',
                     Yii::t('app/krfilter', 'Countries/regions for {filter}', [
@@ -124,10 +124,10 @@ final class KrfilterTargetListWidget extends Widget
     {
         return Html::tag(
             'div',
-            implode('', [
+            \implode('', [
                 Html::tag(
                     'button',
-                    implode(' ', [
+                    \implode(' ', [
                         Html::tag('span', '', ['class' => 'bi bi-x-lg']),
                         Yii::t('app', 'Close'),
                     ]),
@@ -150,7 +150,7 @@ final class KrfilterTargetListWidget extends Widget
             'div',
             Html::tag(
                 'div',
-                implode('', array_map(
+                \implode('', \array_map(
                     fn (Region $region): string => Html::a(
                         $this->renderDialogBodyRow($region),
                         ['region/view', 'cc' => $region->id],
@@ -178,7 +178,7 @@ final class KrfilterTargetListWidget extends Widget
     {
         return Html::tag(
             'div',
-            implode('', [
+            \implode('', [
                 Html::tag(
                     'div',
                     FlagIcon::widget(['cc' => $region->id]),
@@ -206,14 +206,14 @@ final class KrfilterTargetListWidget extends Widget
 
     private function getButtonId(): string
     {
-        return vsprintf('%s-btn', [
+        return \vsprintf('%s-btn', [
             TypeHelper::shouldBeString($this->id),
         ]);
     }
 
     private function getDialogId(): string
     {
-        return vsprintf('%s-modal', [
+        return \vsprintf('%s-modal', [
             TypeHelper::shouldBeString($this->id),
         ]);
     }

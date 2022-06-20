@@ -33,11 +33,11 @@ final class ApplicationLanguage implements BootstrapInterface
                 self::LANGUAGE_JAPANESE => '日本語',
             ];
 
-            uksort(
+            \uksort(
                 $list,
                 fn (string $a, string $b): int => self::getPrecedence($a) <=> self::getPrecedence($b)
-                    ?: strcmp($list[$a], $list[$b])
-                    ?: strcmp($a, $b),
+                    ?: \strcmp($list[$a], $list[$b])
+                    ?: \strcmp($a, $b),
             );
         }
 
@@ -46,9 +46,9 @@ final class ApplicationLanguage implements BootstrapInterface
 
     public static function isValidLanguageCode(string $code): bool
     {
-        return in_array(
+        return \in_array(
             $code,
-            array_keys(self::getValidLanguages()),
+            \array_keys(self::getValidLanguages()),
             true,
         );
     }
@@ -67,7 +67,7 @@ final class ApplicationLanguage implements BootstrapInterface
     {
         $request = ($app ?? Yii::$app)->request;
         $cookie = $request->cookies->getValue(self::COOKIE_NAME);
-        return !is_string($cookie) || !self::isValidLanguageCode($cookie);
+        return !\is_string($cookie) || !self::isValidLanguageCode($cookie);
     }
 
     public static function registerLink(BaseApplication $app, array $url): void
@@ -88,10 +88,10 @@ final class ApplicationLanguage implements BootstrapInterface
             'rel' => 'canonical',
             'type' => 'text/html',
         ]);
-        foreach (array_keys(self::getValidLanguages()) as $lang) {
+        foreach (\array_keys(self::getValidLanguages()) as $lang) {
             $view->registerLinkTag([
                 'href' => Url::to(
-                    array_merge($url, [
+                    \array_merge($url, [
                         self::URL_PARAM => $lang,
                     ]),
                     true,
@@ -133,7 +133,7 @@ final class ApplicationLanguage implements BootstrapInterface
     private function detectLanguageFromUrl(Application $app): ?string
     {
         $value = $app->request->get(self::URL_PARAM);
-        return is_string($value) && self::isValidLanguageCode($value)
+        return \is_string($value) && self::isValidLanguageCode($value)
             ? $value
             : null;
     }
@@ -144,9 +144,9 @@ final class ApplicationLanguage implements BootstrapInterface
         try {
             $ua = $app->request->userAgent;
             if (
-                !is_string($ua) ||
+                !\is_string($ua) ||
                 $ua === '' ||
-                !mb_check_encoding($ua, 'UTF-8')
+                !\mb_check_encoding($ua, 'UTF-8')
             ) {
                 return null;
             }
@@ -167,7 +167,7 @@ final class ApplicationLanguage implements BootstrapInterface
      */
     private function isBot(string $userAgent): bool
     {
-        $cacheId = sprintf('%s(%s)', __METHOD__, hash('sha256', $userAgent));
+        $cacheId = \sprintf('%s(%s)', __METHOD__, \hash('sha256', $userAgent));
         $profiler = new Profiler("{$cacheId}: {$userAgent}", __METHOD__);
         try {
             $value = Yii::$app->cache->get($cacheId);
@@ -211,7 +211,7 @@ final class ApplicationLanguage implements BootstrapInterface
     {
         $request = $app->request;
         $cookie = $request->cookies->getValue(self::COOKIE_NAME);
-        if (is_string($cookie) && self::isValidLanguageCode($cookie)) {
+        if (\is_string($cookie) && self::isValidLanguageCode($cookie)) {
             $this->vary($app, 'Cookie');
             return $cookie;
         }
@@ -224,7 +224,7 @@ final class ApplicationLanguage implements BootstrapInterface
         $this->vary($app, 'Accept-Language');
         $request = $app->request;
         return $request->getPreferredLanguage(
-            array_keys($this->getValidLanguages())
+            \array_keys($this->getValidLanguages())
         );
     }
 
@@ -244,19 +244,19 @@ final class ApplicationLanguage implements BootstrapInterface
 
     private static function removeGenericCountry(string $code): string
     {
-        if (preg_match('/^([a-z]+)-([a-z0-9]+)/i', $code, $match)) {
+        if (\preg_match('/^([a-z]+)-([a-z0-9]+)/i', $code, $match)) {
             // 言語コードと国コードが同じ
-            if (strtolower($match[1]) === strtolower($match[2])) {
+            if (\strtolower($match[1]) === \strtolower($match[2])) {
                 return $match[1];
             }
 
             // 特定の組み合わせだと generic だとみなす
-            $mainCountry = match (strtolower($match[1])) {
+            $mainCountry = match (\strtolower($match[1])) {
                 'en' => 'us',
                 'ja' => 'jp',
                 default => null,
             };
-            if (strtolower($match[2]) === $mainCountry) {
+            if (\strtolower($match[2]) === $mainCountry) {
                 return $match[1];
             }
         }
