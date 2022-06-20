@@ -98,7 +98,7 @@ SortableTableAsset::register($this);
               'label' => Yii::t('app/cclist', 'Country/Region'),
               'format' => 'raw',
               'value' => fn (RegionStat $model): string => Html::a(
-                Html::encode($model->region?->formattedName ?? ''),
+                $model->region?->formattedHtmlName ?? '',
                 ['region/view', 'cc' => $model->region_id]
               ),
               'contentOptions' => fn (RegionStat $model): array => [
