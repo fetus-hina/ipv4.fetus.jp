@@ -17,6 +17,8 @@ use function preg_match;
 
 final class RegionHeading extends Widget
 {
+    private const PADDING = 'me-2';
+
     public ?Region $region = null;
 
     public array $options = [
@@ -50,9 +52,7 @@ final class RegionHeading extends Widget
                 'cc' => $region->id,
             ]),
             [
-                'class' => [
-                    'mr-1',
-                ],
+                'class' => self::PADDING,
             ],
         );
     }
@@ -71,15 +71,19 @@ final class RegionHeading extends Widget
 
     private function renderNameJa(Region $region): string
     {
-        return implode(' ', [
-            Html::encode($region->name_ja),
+        return implode('', [
+            Html::tag(
+                'span',
+                Html::encode($region->name_ja),
+                [
+                    'class' => self::PADDING,
+                ],
+            ),
             Html::tag(
                 'small',
                 Html::encode($region->name_en),
                 [
-                    'class' => [
-                        'text-muted',
-                    ],
+                    'class' => 'text-muted',
                     'lang' => 'en',
                 ],
             ),
