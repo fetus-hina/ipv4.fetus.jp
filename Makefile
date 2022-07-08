@@ -118,3 +118,8 @@ web/favicon: node_modules
 
 web/favicon.ico: web/favicon
 	cp $</favicon.ico $@
+
+bin/dep: bin/dep.sha1sum.txt
+	curl -fsSL -o $@ 'https://deployer.org/releases/v6.8.0/deployer.phar'
+	chmod +x $@
+	cd $(dir $@) && sha1sum -c $(notdir $<)
