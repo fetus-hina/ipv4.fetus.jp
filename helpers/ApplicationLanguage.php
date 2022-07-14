@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace app\helpers;
 
+use DeviceDetector\ClientHints as MatomoCH;
 use DeviceDetector\DeviceDetector;
 use Throwable;
 use Yii;
@@ -167,7 +168,16 @@ final class ApplicationLanguage implements BootstrapInterface
      */
     private function isBot(string $userAgent): bool
     {
-        $cacheId = \sprintf('%s(%s)', __METHOD__, \hash('sha256', $userAgent));
+        $ch = ClientHints::factory();
+        $cacheId = \vsprintf('%s(%s)', [
+            __METHOD__,
+            \hash_hmac(
+                'sha256',
+                $userAgent,
+                ClientHints::getCacheId($ch),
+            ),
+        ]);
+
         $profiler = new Profiler("{$cacheId}: {$userAgent}", __METHOD__);
         try {
             $value = Yii::$app->cache->get($cacheId);
@@ -175,7 +185,7 @@ final class ApplicationLanguage implements BootstrapInterface
                 return $value === 1;
             }
 
-            $isBot = $this->isBotByDeviceDetector($userAgent);
+            $isBot = $this->isBotByDeviceDetector($userAgent, $ch);
             Yii::$app->cache->set(
                 $cacheId,
                 $isBot ? 1 : 0,
@@ -190,11 +200,11 @@ final class ApplicationLanguage implements BootstrapInterface
     /**
      * @param non-empty-string $userAgent
      */
-    private function isBotByDeviceDetector(string $userAgent): bool
+    private function isBotByDeviceDetector(string $userAgent, MatomoCH $ch): bool
     {
         $profiler = new Profiler('Run device detector', __METHOD__);
         try {
-            $dd = new DeviceDetector($userAgent);
+            $dd = new DeviceDetector($userAgent, $ch);
             $dd->parse();
             return $dd->isBot();
         } catch (Throwable $e) {
