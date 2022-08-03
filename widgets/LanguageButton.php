@@ -9,6 +9,7 @@ use app\assets\BootstrapIconsAsset;
 use app\assets\LatinFontAsset;
 use app\helpers\ApplicationLanguage;
 use app\helpers\TypeHelper;
+use app\models\Language;
 use yii\base\Widget;
 use yii\bootstrap5\BootstrapAsset;
 use yii\bootstrap5\BootstrapPluginAsset;
@@ -109,14 +110,14 @@ final class LanguageButton extends Widget
     /** @return string[] */
     private function renderLanguageItems(): array
     {
-        $langs = ApplicationLanguage::getValidLanguages();
+        $langs = ApplicationLanguage::getValidLanguagesEx();
         return \array_map(
-            fn (string $langCode, string $langName): string => Html::a(
+            fn (Language $language): string => Html::a(
                 \implode(' ', [
-                    \preg_match('/^' . \preg_quote($langCode) . '\b/i', Yii::$app->language)
+                    \preg_match('/^' . \preg_quote($language->id) . '\b/i', Yii::$app->language)
                         ? $this->bi('record-circle-fill')
                         : $this->bi('circle'),
-                    $this->renderLanguageName($langCode, $langName),
+                    $this->renderLanguageName($language),
                 ]),
                 'javascript:;',
                 [
@@ -125,24 +126,40 @@ final class LanguageButton extends Widget
                         'language-switcher',
                     ],
                     'data' => [
-                        'language' => $langCode,
+                        'language' => $language->id,
                     ],
                 ],
             ),
-            \array_keys($langs),
-            \array_values($langs),
+            $langs,
         );
     }
 
-    private function renderLanguageName(string $code, string $name): string
+    private function renderLanguageName(Language $lang): string
     {
-        if (ApplicationLanguage::isLatin($code)) {
-            return $this->montserrat(Html::encode($name));
-        } elseif (ApplicationLanguage::isJapanese($code)) {
-            return Html::tag('span', Html::encode($name), ['class' => 'font-japanese']);
-        } else {
-            return Html::encode($name);
-        }
+        $nativeName = match (true) {
+            ApplicationLanguage::isLatin($lang->id) => $this->montserrat(
+                Html::encode($lang->native_name),
+            ),
+            ApplicationLanguage::isJapanese($lang->id) => Html::tag(
+                'span',
+                Html::encode($lang->native_name),
+                ['class' => 'font-japanese'],
+            ),
+            default => Html::encode($lang->native_name),
+        };
+
+        return $lang->native_name === $lang->english_name
+            ? $nativeName
+            : \vsprintf('%s %s', [
+                $nativeName,
+                $this->montserrat(
+                    Html::tag(
+                        'span',
+                        Html::encode("({$lang->english_name})"),
+                        ['class' => 'small text-muted'],
+                    ),
+                ),
+            ]);
     }
 
     private function getButtonId(): string

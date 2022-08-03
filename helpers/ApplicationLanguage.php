@@ -8,8 +8,10 @@ use DeviceDetector\ClientHints as MatomoCH;
 use DeviceDetector\DeviceDetector;
 use Throwable;
 use Yii;
+use app\models\Language;
 use yii\base\Application as BaseApplication;
 use yii\base\BootstrapInterface;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use yii\web\Application;
 use yii\web\View;
@@ -25,43 +27,55 @@ final class ApplicationLanguage implements BootstrapInterface
 
     private const DEVICE_DETECTOR_CACHE_DURATION = 604800;
 
+    /**
+     * @return array<string, string>
+     */
     public static function getValidLanguages(): array
     {
-        static $list = null;
-        if ($list === null) {
-            $list = [
-                self::LANGUAGE_ENGLISH => 'English',
-                self::LANGUAGE_JAPANESE => '日本語',
-            ];
+        return \array_map(
+            fn (Language $model): string => $model->native_name,
+            self::getValidLanguagesEx(),
+        );
+    }
 
-            \uksort(
-                $list,
-                fn (string $a, string $b): int => self::getPrecedence($a) <=> self::getPrecedence($b)
-                    ?: \strcmp($list[$a], $list[$b])
-                    ?: \strcmp($a, $b),
+    /**
+     * @return array<string, Language>
+     */
+    public static function getValidLanguagesEx(): array
+    {
+        static $cache = null;
+        if ($cache === null) {
+            $cache = ArrayHelper::map(
+                Language::find()->orderBy(['sort' => SORT_ASC, 'id' => SORT_ASC])->all(),
+                'id',
+                fn (Language $model): Language => $model,
             );
         }
-
-        return $list;
+        return $cache;
     }
 
     public static function isValidLanguageCode(string $code): bool
     {
-        return \in_array(
-            $code,
-            \array_keys(self::getValidLanguages()),
-            true,
-        );
+        return Language::find()
+            ->andWhere(['id' => $code])
+            ->exists();
     }
 
     public static function isLatin(string $code): bool
     {
-        return $code === self::LANGUAGE_ENGLISH;
+        return self::isMatchCharacterCategory($code, 'latin');
     }
 
     public static function isJapanese(string $code): bool
     {
-        return $code === self::LANGUAGE_JAPANESE;
+        return self::isMatchCharacterCategory($code, 'japanese');
+    }
+
+    private static function isMatchCharacterCategory(string $code, string $categoryKey): bool
+    {
+        return Language::findOne(['id' => $code])
+            ?->character
+            ?->key === $categoryKey;
     }
 
     public static function isAutoDetect(?Application $app = null): bool
@@ -89,15 +103,16 @@ final class ApplicationLanguage implements BootstrapInterface
             'rel' => 'canonical',
             'type' => 'text/html',
         ]);
-        foreach (\array_keys(self::getValidLanguages()) as $lang) {
+
+        foreach (self::getValidLanguagesEx() as $lang) {
             $view->registerLinkTag([
                 'href' => Url::to(
                     \array_merge($url, [
-                        self::URL_PARAM => $lang,
+                        self::URL_PARAM => $lang->id,
                     ]),
                     true,
                 ),
-                'hreflang' => self::removeGenericCountry($lang),
+                'hreflang' => $lang->hreflang ?: $lang->id,
                 'rel' => 'alternate',
                 'type' => 'text/html',
             ]);
@@ -125,6 +140,7 @@ final class ApplicationLanguage implements BootstrapInterface
                 ?: $this->returnJapaneseIfRobot($app)
                 ?: $this->detectLanguageFromCookie($app)
                 ?: $this->detectLanguageFromBrowser($app)
+                ?: $this->getDefaultLanguage($app)
                 ?: self::LANGUAGE_ENGLISH;
         } finally {
             unset($profiler);
@@ -238,39 +254,18 @@ final class ApplicationLanguage implements BootstrapInterface
         );
     }
 
-    private static function getPrecedence(string $lang): int
-    {
-        return match ($lang) {
-            self::LANGUAGE_ENGLISH => 1, // 英語が最優先
-            self::LANGUAGE_JAPANESE => 2, // 日本語が次点
-            default => 3, // その他の言語が生えることがあったらまとめて「その他」
-        };
-    }
-
     private function vary(Application $app, string $value): void
     {
         $app->response->headers->add('Vary', $value);
     }
 
-    private static function removeGenericCountry(string $code): string
+    private function getDefaultLanguage(Application $app): ?string
     {
-        if (\preg_match('/^([a-z]+)-([a-z0-9]+)/i', $code, $match)) {
-            // 言語コードと国コードが同じ
-            if (\strtolower($match[1]) === \strtolower($match[2])) {
-                return $match[1];
-            }
-
-            // 特定の組み合わせだと generic だとみなす
-            $mainCountry = match (\strtolower($match[1])) {
-                'en' => 'us',
-                'ja' => 'jp',
-                default => null,
-            };
-            if (\strtolower($match[2]) === $mainCountry) {
-                return $match[1];
-            }
-        }
-
-        return $code;
+        $model = Language::find()
+            ->andWhere(['is_default' => true])
+            ->orderBy(['sort' => SORT_ASC])
+            ->limit(1)
+            ->one();
+        return $model?->id;
     }
 }
