@@ -5,9 +5,9 @@
     "@fetus-hina/fetus.css": "github:fetus-hina/fetus.css#semver:^5.2.0",
     "bootstrap": "^5.2.0",
     "chart.js": "^3.9.1",
-    "flag-icons": "^6.6.4",
+    "flag-icons": "^6.6.6",
     "inputmask": "^5.0.7",
-    "jquery": "^3.6.0",
+    "jquery": "^3.6.1",
     "license-checker-rseidelsohn": "^3.1.0",
     "patternomaly": "^1.3.2",
     "punycode": "^2.1.1",
@@ -16,20 +16,20 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.18.10",
-    "@babel/core": "^7.18.10",
+    "@babel/core": "^7.18.13",
     "@babel/preset-env": "^7.18.10",
     "autoprefixer": "^10.4.8",
     "cssnano": "^5.1.13",
     "postcss": "^8.4.16",
     "postcss-cli": "^10.0.0",
-    "sass": "^1.54.4",
+    "sass": "^1.54.5",
     "semistandard": "^16.0.1",
     "snazzy": "^9.0.0",
-    "stylelint": "^14.10.0",
+    "stylelint": "^14.11.0",
     "stylelint-config-sass-guidelines": "^9.0.1",
-    "terser": "^5.14.2",
+    "terser": "^5.15.0",
     "ttf2woff2": "^4.0.5",
-    "updates": "^13.1.4"
+    "updates": "^13.1.5"
   },
   "scripts": {
     "postinstall": "bin/npm-postinstall.sh"
