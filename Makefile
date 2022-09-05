@@ -11,8 +11,30 @@ CSS_DEST_FILES := $(patsubst %.scss,%.min.css,$(CSS_SRC_FILES))
 MESSAGE_SRC_FILES := $(shell find messages -type f -name '*.po')
 MESSAGE_DEST_FILES := $(MESSAGE_SRC_FILES:.po=.mo)
 
+YII2_JS_SRC_BASENAMES := yii.activeForm.js yii.captcha.js yii.gridView.js yii.js yii.validation.js
+YII2_JS_SRC_FILES := $(addprefix vendor/yiisoft/yii2/assets/,$(YII2_JS_SRC_BASENAMES))
+YII2_JS_DEST_FILES := $(patsubst %.js,%.min.js,$(YII2_JS_SRC_FILES))
+
+EXT_JS_SRC_FILES := node_modules/patternomaly/dist/patternomaly.js
+EXT_JS_DEST_FILES := $(patsubst %.js,%.min.js,$(EXT_JS_SRC_FILES))
+
+GZIP_DEST_FILES := \
+	$(patsubst %.css,%.css.gz,$(CSS_DEST_FILES)) \
+	$(patsubst %.js,%.js.gz,$(EXT_JS_DEST_FILES)) \
+	$(patsubst %.js,%.js.gz,$(JS_DEST_FILES)) \
+	$(patsubst %.js,%.js.gz,$(YII2_JS_DEST_FILES)) \
+	$(patsubst %.js,%.js.gz,$(YII2_JS_SRC_FILES))
+
 .PHONY: all
-all: init $(JS_DEST_FILES) $(CSS_DEST_FILES) $(MESSAGE_DEST_FILES) messages
+all: \
+	init \
+	$(JS_DEST_FILES) \
+	$(CSS_DEST_FILES) \
+	$(MESSAGE_DEST_FILES) \
+	$(YII2_JS_DEST_FILES) \
+	$(EXT_JS_DEST_FILES) \
+	$(GZIP_DEST_FILES) \
+	messages
 
 .PHONY: init
 init: node_modules vendor $(CONFIG_FILES) web/favicon web/favicon.ico
@@ -22,9 +44,12 @@ clean:
 	rm -rf \
 		$(CSS_DEST_FILES) \
 		$(CSS_DEST_FILES:%.min.css=%.css) \
+		$(EXT_JS_DEST_FILES) \
+		$(GZIP_DEST_FILES) \
 		$(JS_DEST_FILES) \
 		$(JS_DEST_FILES:%.min.js=%.js) \
 		$(MESSAGE_DEST_FILES) \
+		$(YII2_JS_DEST_FILES) \
 		composer.phar \
 		coverage.serialized \
 		node_modules \
@@ -98,6 +123,9 @@ config/params/git-revision.php:
 %.css: %.scss node_modules
 	npx sass $< | npx postcss --no-map --use autoprefixer -o $@
 	@touch $@
+
+%.gz: %
+	gzip --stdout --keep --no-name --quiet --best $< > $@
 
 resources/css/dropdown-toggle.css: resources/css/dropdown-toggle.scss resources/css/_bootstrap-icons.scss node_modules
 

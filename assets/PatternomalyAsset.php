@@ -10,6 +10,6 @@ final class PatternomalyAsset extends AssetBundle
 {
     public $sourcePath = '@npm/patternomaly/dist';
     public $js = [
-        'patternomaly.js',
+        'patternomaly.min.js',
     ];
 }
