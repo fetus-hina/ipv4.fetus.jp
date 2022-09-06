@@ -15,6 +15,8 @@ use yii\web\View;
 
 SortableTableAsset::register($this);
 
+$rowNumber = 0;
+
 ?>
 <div class="card border-primary">
   <div class="card-header bg-primary text-white">
@@ -65,7 +67,12 @@ SortableTableAsset::register($this);
             [
               'label' => '',
               'attribute' => 'region_id',
-              'format' => fn (string $t): string => FlagIcon::widget(['cc' => $t]),
+              'format' => function (string $t) use (&$rowNumber): string {
+                return FlagIcon::widget([
+                  'cc' => $t,
+                  'useImg' => (++$rowNumber <= 30),
+                ]);
+              },
               'contentOptions' => fn (RegionStat $model): array => [
                 'class' => 'text-center',
                 'data' => [

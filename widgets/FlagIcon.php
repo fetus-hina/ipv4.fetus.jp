@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace app\widgets;
 
 use LogicException;
+use Yii;
 use app\assets\FlagIconsAsset;
+use app\assets\InlineFlagIconsAsset;
 use app\helpers\Unicode;
 use yii\base\Widget;
 use yii\helpers\Html;
@@ -14,6 +16,7 @@ use yii\web\View;
 final class FlagIcon extends Widget
 {
     public string $cc = 'xx';
+    public bool $useImg = false;
 
     public function run(): string
     {
@@ -23,13 +26,19 @@ final class FlagIcon extends Widget
             throw new LogicException("Invalid CC: {$cc}");
         }
 
+        if ($this->useImg) {
+            if ($content = $this->renderImgTag($cc)) {
+                return $content;
+            }
+        }
+
         if (($view = $this->view) instanceof View) {
             FlagIconsAsset::register($view);
         }
 
         return Html::tag(
             'span',
-            $this->renderContent($cc),
+            $this->renderCss($cc),
             [
                 'class' => [
                     'fi',
@@ -39,7 +48,7 @@ final class FlagIcon extends Widget
         );
     }
 
-    private function renderContent(string $cc): string
+    private function renderCss(string $cc): string
     {
         return Html::tag(
             'span',
@@ -50,5 +59,42 @@ final class FlagIcon extends Widget
                 ],
             ],
         );
+    }
+
+    private function renderImgTag(string $cc): ?string
+    {
+        $svgPath = Yii::getAlias("@npm/flag-icons/flags/4x3/{$cc}.svg");
+        if (
+            !$svgPath ||
+            !@\file_exists($svgPath) ||
+            !($dataUri = $this->createDataUri($svgPath))
+        ) {
+            return null;
+        }
+
+        if (($view = $this->view) instanceof View) {
+            InlineFlagIconsAsset::register($view);
+        }
+
+        return Html::img($dataUri, [
+            'alt' => Unicode::asciiToRegionalIndicator($cc),
+            'class' => 'inline-flag-icons',
+        ]);
+    }
+
+    private function createDataUri(string $svgPath): ?string
+    {
+        if (!$content = @\file_get_contents($svgPath)) {
+            return null;
+        }
+
+        $b64 = \base64_encode($content);
+        $hex = \rawurlencode($content);
+        $useB64 = \strlen($b64) < \strlen($hex);
+
+        return \vsprintf('data:image/svg+xml%s,%s', [
+            $useB64 ? ';base64' : '',
+            $useB64 ? $b64 : $hex,
+        ]);
     }
 }
