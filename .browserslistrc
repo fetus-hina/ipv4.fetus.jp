@@ -1,9 +1,19 @@
 >= 0.5%
+>= 0.5% in JP
 last 2 major versions
+
+not chrome >= 1
+not edge >= 1
+not firefox >= 1
+not kaios >= 1
+not op_mini all
+not op_mob >= 1
 not dead
-Chrome >= 60
-Firefox >= 60
+
+last 4 chrome versions
+last 4 firefox versions
+last 2 edge versions
 Firefox ESR
-iOS >= 12
-Safari >= 12
+iOS >= 14
+Safari >= 14
 not Explorer <= 11
