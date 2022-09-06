@@ -34,6 +34,7 @@ all: \
 	$(YII2_JS_DEST_FILES) \
 	$(EXT_JS_DEST_FILES) \
 	$(GZIP_DEST_FILES) \
+	flag-icons \
 	messages
 
 .PHONY: init
@@ -131,6 +132,11 @@ resources/css/dropdown-toggle.css: resources/css/dropdown-toggle.scss resources/
 
 resources/css/_bootstrap-icons.scss: vendor
 	./yii bootstrap-icons/convert > $@
+
+.PHONY: flag-icons
+flag-icons: node_modules
+	find node_modules/flag-icons/flags -type f -name '*.svg' -size +100c | \
+		xargs gzip --keep --no-name --quiet --best --force
 
 .PHONY: messages
 messages: vendor
