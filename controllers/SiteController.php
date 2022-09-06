@@ -49,11 +49,14 @@ class SiteController extends Controller
         ];
     }
 
-    public function actionIndex(): string
+    public function actionIndex(): Response
     {
-        return $this->render('index', [
+        $resp = Yii::$app->response;
+        $resp->format = 'compressive-html';
+        $resp->data = $this->render('index', [
             'search' => Yii::createObject(SearchForm::class),
         ]);
+        return $resp;
     }
 
     public function actionAbout(): string

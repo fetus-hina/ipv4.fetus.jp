@@ -29,6 +29,7 @@ return (function (): array {
             'i18n' => require __DIR__ . '/components/i18n.php',
             'log' => require __DIR__ . '/components/log.php',
             'request' => require __DIR__ . '/components/web/request.php',
+            'response' => require __DIR__ . '/components/web/response.php',
             'urlManager' => require __DIR__ . '/components/web/url-manager.php',
             'user' => require __DIR__ . '/components/user.php',
             'view' => require __DIR__ . '/components/web/view.php',
