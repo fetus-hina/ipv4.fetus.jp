@@ -2334,16 +2334,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.8.4",
+            "version": "1.8.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "eed4c9da531f6ebb4787235b6fb486e2c20f34e5"
+                "reference": "f6598a5ff12ca4499a836815e08b4d77a2ddeb20"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/eed4c9da531f6ebb4787235b6fb486e2c20f34e5",
-                "reference": "eed4c9da531f6ebb4787235b6fb486e2c20f34e5",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/f6598a5ff12ca4499a836815e08b4d77a2ddeb20",
+                "reference": "f6598a5ff12ca4499a836815e08b4d77a2ddeb20",
                 "shasum": ""
             },
             "require": {
@@ -2373,7 +2373,7 @@
             ],
             "support": {
                 "issues": "https://github.com/phpstan/phpstan/issues",
-                "source": "https://github.com/phpstan/phpstan/tree/1.8.4"
+                "source": "https://github.com/phpstan/phpstan/tree/1.8.5"
             },
             "funding": [
                 {
@@ -2389,7 +2389,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-09-03T13:08:04+00:00"
+            "time": "2022-09-07T16:05:32+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -5759,16 +5759,16 @@
         },
         {
             "name": "yiisoft/yii2-debug",
-            "version": "2.1.20",
+            "version": "2.1.21",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-debug.git",
-                "reference": "9ca499a9c623d72736954ff9a7a8d13cccee2082"
+                "reference": "fa9fa02e242c1b744eb68045ee8e9d698134836d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/9ca499a9c623d72736954ff9a7a8d13cccee2082",
-                "reference": "9ca499a9c623d72736954ff9a7a8d13cccee2082",
+                "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/fa9fa02e242c1b744eb68045ee8e9d698134836d",
+                "reference": "fa9fa02e242c1b744eb68045ee8e9d698134836d",
                 "shasum": ""
             },
             "require": {
@@ -5845,7 +5845,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-09-04T09:43:35+00:00"
+            "time": "2022-09-06T17:40:08+00:00"
         },
         {
             "name": "yiisoft/yii2-gii",
