@@ -3,7 +3,7 @@
   "description": "",
   "dependencies": {
     "@fetus-hina/fetus.css": "github:fetus-hina/fetus.css#semver:^5.2.0",
-    "bootstrap": "^5.2.1",
+    "bootstrap": "^5.2.2",
     "chart.js": "^3.9.1",
     "flag-icons": "^6.6.6",
     "inputmask": "^5.0.7",
