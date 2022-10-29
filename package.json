@@ -2,7 +2,7 @@
   "name": "ipv4.fetus.jp",
   "description": "",
   "dependencies": {
-    "@fetus-hina/fetus.css": "github:fetus-hina/fetus.css#semver:^5.2.0",
+    "@fetus-hina/fetus.css": "github:fetus-hina/fetus.css#semver:^5.2.3",
     "bootstrap": "^5.2.2",
     "chart.js": "^3.9.1",
     "flag-icons": "^6.6.6",
@@ -29,7 +29,7 @@
     "stylelint-config-sass-guidelines": "^9.0.1",
     "terser": "^5.15.1",
     "ttf2woff2": "^4.0.5",
-    "updates": "^13.1.8"
+    "updates": "^13.1.13"
   },
   "scripts": {
     "postinstall": "bin/npm-postinstall.sh"
