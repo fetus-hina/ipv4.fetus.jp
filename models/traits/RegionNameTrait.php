@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace app\models\traits;
 
 use Yii;
-use app\assets\MontserratAsset;
 use app\attributes\InjectTo;
 use app\models\Region;
 use yii\helpers\Html;
@@ -22,21 +21,7 @@ trait RegionNameTrait
 {
     public function getFormattedHtmlName(): string
     {
-        if (!$this->isJapaneseName()) {
-            return Html::encode($this->name_en);
-        }
-
-        $this->prepareMontserrat();
-        return \implode(' ', [
-            Html::encode($this->name_ja),
-            Html::tag(
-                'span',
-                Html::encode(
-                    \sprintf('(%s)', $this->name_en),
-                ),
-                ['class' => 'font-montserrat'],
-            ),
-        ]);
+        return Html::encode($this->getFormattedName());
     }
 
     public function getFormattedName(): string
@@ -49,17 +34,5 @@ trait RegionNameTrait
     private function isJapaneseName(): bool
     {
         return (bool)\preg_match('/^ja\b/i', Yii::$app->language);
-    }
-
-    private function prepareMontserrat(): void
-    {
-        static $loaded = false;
-        if (!$loaded) {
-            $view = Yii::$app->view;
-            if ($view instanceof View) {
-                MontserratAsset::register($view);
-                $loaded = true;
-            }
-        }
     }
 }
