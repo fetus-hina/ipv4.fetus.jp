@@ -8,7 +8,6 @@ use Yii;
 use app\attributes\InjectTo;
 use app\models\Region;
 use yii\helpers\Html;
-use yii\web\View;
 
 /**
  * @property-read string $formattedHtmlName
