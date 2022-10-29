@@ -25,7 +25,7 @@
     "sass": "^1.55.0",
     "semistandard": "^16.0.1",
     "snazzy": "^9.0.0",
-    "stylelint": "^14.13.0",
+    "stylelint": "^14.14.0",
     "stylelint-config-sass-guidelines": "^9.0.1",
     "terser": "^5.15.1",
     "ttf2woff2": "^4.0.5",
