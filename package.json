@@ -22,7 +22,7 @@
     "cssnano": "^5.1.14",
     "postcss": "^8.4.19",
     "postcss-cli": "^10.0.0",
-    "sass": "^1.55.0",
+    "sass": "^1.56.1",
     "semistandard": "^16.0.1",
     "snazzy": "^9.0.0",
     "stylelint": "^14.14.0",
