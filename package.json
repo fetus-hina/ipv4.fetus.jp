@@ -12,7 +12,7 @@
     "patternomaly": "^1.3.2",
     "punycode": "^2.1.1",
     "stupid-table-plugin": "^1.1.3",
-    "yii2-pjax": "^2.0.7"
+    "yii2-pjax": "^2.0.8"
   },
   "devDependencies": {
     "@babel/cli": "^7.19.3",
