@@ -19,6 +19,7 @@ return [
         'robots.txt' => 'site/robots',
         'about' => 'site/about',
         'schema' => 'site/schema',
+        'index.json' => 'api/index-json',
         '' => 'site/index',
     ],
 ];
