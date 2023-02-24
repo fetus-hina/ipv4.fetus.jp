@@ -110,40 +110,4 @@ final class Ipv4byccCard extends Widget
             ],
         );
     }
-
-    private function getParagraphs(): array
-    {
-        // 日本語ではそのまま結合、その他（英語）ではスペース区切り
-        $joiner = \preg_match('/^ja\b/i', Yii::$app->language)
-            ? ''
-            : ' ';
-
-        // phpcs:disable Generic.Files.LineLength.TooLong
-        return [
-            \implode($joiner, [
-                Yii::t(
-                    'app/about',
-                    'Information is not guaranteed.',
-                ),
-                Yii::t(
-                    'app/about',
-                    'We are not responsible for any damage caused by the use of the information on this site.',
-                ),
-            ]),
-            Yii::t(
-                'app/about',
-                'The information is updated automatically every day by retrieving it from the Regional Internet Registry.',
-            ),
-            Html::a(
-                Yii::t('app/about', 'Click here for more information.'),
-                ['site/about'],
-            ),
-            Yii::t('app/about', 'For automated access, see the page above.'),
-            Html::a(
-                Yii::t('app/about', 'For specifications about downloadable formats, please click here.'),
-                ['site/schema'],
-            ),
-        ];
-        // phpcs:enable Generic.Files.LineLength.TooLong
-    }
 }
