@@ -34,35 +34,13 @@ add('writable_dirs', [
 ]);
 set('writable_mode', 'chmod');
 set('writable_chmod_recursive', false);
-set('softwarecollections', []);
-
-set('bin/php', function () {
-    if ($scl = get('softwarecollections')) {
-        return vsprintf('scl enable %s -- php', [
-            implode(' ', array_map(
-                'escapeshellarg',
-                $scl
-            )),
-        ]);
-    }
-
-    return locateBinaryPath('php');
-});
-
-set('bin/npm', function () {
-    if ($scl = get('softwarecollections')) {
-        return vsprintf('scl enable %s -- npm', [
-            implode(' ', array_map(
-                'escapeshellarg',
-                $scl
-            )),
-        ]);
-    }
-
-    return locateBinaryPath('npm');
-});
+set('keep_releases', 2);
+set('github_keys', ['github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl']);
 
 set('bin/composer', fn (): string => sprintf('%s/composer.phar', get('release_path')));
+set('bin/make', fn () => locateBinaryPath('make'));
+set('bin/npm', fn () => locateBinaryPath('npm'));
+set('bin/php', fn () => locateBinaryPath('php'));
 
 host('2401:2500:102:1206:133:242:147:83')
     ->user('ipv4')
@@ -73,6 +51,7 @@ host('2401:2500:102:1206:133:242:147:83')
 task('deploy', [
     'deploy:info',
     'deploy:prepare',
+    'deploy:ssh_config',
     'deploy:git_config',
     'deploy:lock',
     'deploy:release',
@@ -92,8 +71,31 @@ task('deploy', [
     'cleanup',
 ])->desc('Deploy the project');
 
+task('deploy:ssh_config', function () {
+    run(sprintf('mkdir -p --mode=%s %s', '700', '~/.ssh'));
+    run('touch ~/.ssh/known_hosts');
+    run('chmod 600 ~/.ssh/known_hosts');
+    run(sprintf('ssh-keygen -R %s', escapeshellarg('github.com')));
+    foreach (get('github_keys') as $line) {
+        run(
+            vsprintf('echo %s >> ~/.ssh/known_hosts', [
+                escapeshellarg($line),
+            ]),
+        );
+    }
+    run('ssh-keygen -H');
+    run('rm -f ~/.ssh/known_hosts.old');
+});
+
 task('deploy:git_config', function () {
     run('git config --global advice.detachedHead false');
+    run(
+        vsprintf('git config --global core.sshCommand %s', [
+            escapeshellarg(
+                'ssh -o HostKeyAlgorithms=ssh-ed25519 -o KexAlgorithms=curve25519-sha256,curve25519-sha256@libssh.org',
+            ),
+        ]),
+    );
 });
 
 task('deploy:production', function () {
@@ -126,16 +128,7 @@ task('deploy:run_migrations', function () {
 
 task('deploy:build', function () {
     within('{{release_path}}', function () {
-        if ($scl = get('softwarecollections')) {
-            run(vsprintf('scl enable %s -- make', [
-                implode(' ', array_map(
-                    'escapeshellarg',
-                    $scl
-                )),
-            ]));
-        } else {
-            run('make');
-        }
+        run('{{bin/make}}');
     });
 });
 
