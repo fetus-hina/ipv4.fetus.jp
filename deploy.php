@@ -42,7 +42,7 @@ set('bin/make', fn () => locateBinaryPath('make'));
 set('bin/npm', fn () => locateBinaryPath('npm'));
 set('bin/php', fn () => locateBinaryPath('php'));
 
-host('2401:2500:102:1206:133:242:147:83')
+host('2403:3a00:202:1127:49:212:205:127')
     ->user('ipv4')
     ->stage('production')
     ->roles('app')
