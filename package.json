@@ -16,20 +16,20 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.21.0",
-    "@babel/core": "^7.21.3",
-    "@babel/preset-env": "^7.20.2",
+    "@babel/core": "^7.21.4",
+    "@babel/preset-env": "^7.21.4",
     "autoprefixer": "^10.4.14",
-    "cssnano": "^5.1.15",
+    "cssnano": "^6.0.0",
     "postcss": "^8.4.21",
     "postcss-cli": "^10.1.0",
     "sass": "^1.60.0",
     "semistandard": "^16.0.1",
     "snazzy": "^9.0.0",
-    "stylelint": "^14.16.1",
-    "stylelint-config-sass-guidelines": "^9.0.1",
+    "stylelint": "^15.4.0",
+    "stylelint-config-sass-guidelines": "^10.0.0",
     "terser": "^5.16.8",
     "ttf2woff2": "^5.0.0",
-    "updates": "^13.2.9"
+    "updates": "^13.4.0"
   },
   "scripts": {
     "postinstall": "bin/npm-postinstall.sh"
