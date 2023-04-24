@@ -29,9 +29,11 @@ use yii\helpers\FileHelper;
 use yii\httpclient\Client as HttpClient;
 
 use function basename;
+use function chdir;
 use function count;
 use function dirname;
 use function escapeshellarg;
+use function exec;
 use function fclose;
 use function feof;
 use function fgets;
@@ -41,6 +43,7 @@ use function filesize;
 use function floor;
 use function fopen;
 use function fwrite;
+use function getcwd;
 use function implode;
 use function ini_set;
 use function microtime;
@@ -768,12 +771,12 @@ class UpdateController extends Controller
     {
         $oldcwd = getcwd();
         if ($oldcwd === false) {
-            throw new \Exception("Failed to get current working directory");
+            throw new Exception('Failed to get current working directory');
         }
 
         try {
             if (!chdir($dirname)) {
-                throw new \Exception("Failed to switch working directory to $dirname");
+                throw new Exception("Failed to switch working directory to $dirname");
             }
 
             return $callback();
