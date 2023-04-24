@@ -62,8 +62,7 @@ clean:
 
 .PHONY: test
 test: vendor
-	# ./tests/bin/yii migrate/up --compact=1 --interactive=0
-	/usr/bin/env XDEBUG_MODE=coverage vendor/bin/codecept run unit --coverage --coverage-html=./web/coverage
+	/usr/bin/env XDEBUG_MODE=coverage vendor/bin/codecept run unit
 
 .PHONY: check-style
 check-style: check-style-php check-style-js check-style-css
