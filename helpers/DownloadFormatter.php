@@ -53,7 +53,8 @@ final class DownloadFormatter
         DownloadTemplate $template,
         bool $isAllow,
         iterable $cidrList,
-        ?string $note
+        ?string $note,
+        bool $outputHeaders = true,
     ): Generator {
         $newline = static::getNewLineCode($template->newline);
 
@@ -62,11 +63,13 @@ final class DownloadFormatter
             yield $newline;
         }
 
-        foreach (static::generateHeaders($name, $thisUrl, $pageUrl, $template, $note) as $row) {
-            yield $row . $newline;
-        }
+        if ($outputHeaders) {
+            foreach (static::generateHeaders($name, $thisUrl, $pageUrl, $template, $note) as $row) {
+                yield $row . $newline;
+            }
 
-        yield $newline;
+            yield $newline;
+        }
 
         if ($template->list_begin !== null && $template->list_begin !== '') {
             yield static::fillPlaceholder($template->list_begin, $template, $cc, null, $isAllow) . $newline;

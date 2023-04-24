@@ -11,10 +11,12 @@ use Generator;
 use Throwable;
 use Yii;
 use app\helpers\CountToCidr;
+use app\helpers\DownloadFormatter;
 use app\helpers\Ipv4byccDumper;
 use app\helpers\TypeHelper;
 use app\models\AllocationBlock;
 use app\models\AllocationCidr;
+use app\models\DownloadTemplate;
 use app\models\Krfilter;
 use app\models\KrfilterCidr;
 use app\models\MergedCidr;
@@ -129,6 +131,8 @@ class UpdateController extends Controller
         $this->actionKrfilter();
         $this->actionIpv4bycc();
         $updateFinishAt = microtime(true);
+
+        $this->actionPreformattedGitRepo();
 
         if ($status !== ExitCode::OK) {
             return ExitCode::UNSPECIFIED_ERROR;
@@ -577,6 +581,88 @@ class UpdateController extends Controller
         });
     }
 
+    public function actionPreformattedGitRepo(): int
+    {
+        $baseDir = TypeHelper::shouldBeString(Yii::getAlias('@app/runtime/preformatted'));
+        if (!FileHelper::createDirectory($baseDir, 0755, true)) {
+            return ExitCode::UNSPECIFIED_ERROR;
+        }
+
+        $enableGit = file_exists($baseDir . '/.git');
+        if ($enableGit) {
+            $success = self::within(
+                $baseDir,
+                fn (): bool => self::exec('/usr/bin/env git fetch origin --prune') === 0 &&
+                    self::exec('/usr/bin/env git merge --ff-only origin/master') === 0,
+            );
+            if (!$success) {
+                return ExitCode::UNSPECIFIED_ERROR;
+            }
+        }
+
+        $regions = Region::find()->orderBy(['id' => SORT_ASC])->all();
+        $templates = DownloadTemplate::find()
+            ->with(['commentStyle', 'newline'])
+            ->orderBy(['key' => SORT_ASC])
+            ->all();
+        foreach ($templates as $template) {
+            $outDir = $baseDir . '/countries/' . $template->key;
+
+            FileHelper::removeDirectory($outDir);
+            if (!FileHelper::createDirectory($outDir, 0755, true)) {
+                return ExitCode::UNSPECIFIED_ERROR;
+            }
+
+            echo $template->key . "\n";
+            foreach ($regions as $region) {
+                echo '.';
+                $path = $outDir . '/' . $region->id . '.txt';
+                if (!$this->savePreformatted($path, $region, $template)) {
+                    return ExitCode::UNSPECIFIED_ERROR;
+                }
+            }
+            echo "\n";
+        }
+
+        if ($enableGit) {
+            $success = self::within(
+                $baseDir,
+                function (): bool {
+                    if (self::exec('/usr/bin/env git add .') !== 0) {
+                        return false;
+                    }
+
+                    if (self::exec('/usr/bin/env git update-index -q --refresh') !== 0) {
+                        return false;
+                    }
+
+                    echo "Checking something changed...\n";
+                    exec('/usr/bin/env git diff-index --name-only HEAD --', $lines, $status);
+                    if ($status !== 0) {
+                        return false;
+                    }
+
+                    if (strlen(trim(implode('', $lines))) === 0) {
+                        echo "Nothing changed.\n";
+                        return true;
+                    }
+
+                    echo "changed\n";
+
+                    $cmdline = vsprintf('/usr/bin/env git commit -am %s', [
+                        escapeshellarg('update list'),
+                    ]);
+                    return self::exec($cmdline) === 0 && self::exec('/usr/bin/env git push origin master') === 0;
+                },
+            );
+            if (!$success) {
+                return ExitCode::UNSPECIFIED_ERROR;
+            }
+        }
+
+        return ExitCode::OK;
+    }
+
     /**
      * @param callable(): Generator<string> $dumper
      */
@@ -616,6 +702,42 @@ class UpdateController extends Controller
         return true;
     }
 
+    private function savePreformatted(string $path, Region $region, DownloadTemplate $template): bool
+    {
+        $cidrReader = function (Region $region): Generator {
+            $it = MergedCidr::find()
+                ->andWhere(['region_id' => $region->id])
+                ->orderBy(['cidr' => SORT_ASC])
+                ->each(200);
+            foreach ($it as $entry) {
+                yield TypeHelper::shouldBeInstanceOf($entry, MergedCidr::class)->cidr;
+            }
+        };
+
+        $renderer = DownloadFormatter::format(
+            name: '',
+            cc: $region->id,
+            thisUrl: '',
+            pageUrl: '',
+            template: $template,
+            isAllow: false,
+            cidrList: $cidrReader($region),
+            note: null,
+            outputHeaders: false,
+        );
+
+        if (!$fh = fopen($path, 'w')) {
+            return false;
+        }
+
+        foreach ($renderer as $line) {
+            fwrite($fh, TypeHelper::shouldBeString($line));
+        }
+        fclose($fh);
+
+        return true;
+    }
+
     private function saveTimeRecord(float $startAt, float $finishAt): void
     {
         file_put_contents(
@@ -640,5 +762,30 @@ class UpdateController extends Controller
                 '];',
             ]) . "\n",
         );
+    }
+
+    private static function within(string $dirname, callable $callback): mixed
+    {
+        $oldcwd = getcwd();
+        if ($oldcwd === false) {
+            throw new \Exception("Failed to get current working directory");
+        }
+
+        try {
+            if (!chdir($dirname)) {
+                throw new \Exception("Failed to switch working directory to $dirname");
+            }
+
+            return $callback();
+        } finally {
+            chdir($oldcwd);
+        }
+    }
+
+    private static function exec(string $cmdline): int
+    {
+        echo "Run $cmdline\n";
+        exec($cmdline, $lines, $status);
+        return $status;
     }
 }
