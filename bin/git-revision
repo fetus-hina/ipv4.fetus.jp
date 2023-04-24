@@ -67,10 +67,8 @@ __halt_compiler();
 
 declare(strict_types=1);
 
-return (function (): array {
-    return [
-        'hash' => '{hash}',
-        'short' => '{short}',
-        'version' => '{version}',
-    ];
-})();
+return [
+    'hash' => '{hash}',
+    'short' => '{short}',
+    'version' => '{version}',
+];
