@@ -6,7 +6,6 @@ use app\helpers\ApplicationLanguage;
 use app\models\Region;
 use app\models\RegionStat;
 use app\widgets\EuIsNotUnifiedWarning;
-use app\widgets\FlagIcon;
 use app\widgets\Krfilter;
 use app\widgets\RegionHeading;
 use app\widgets\Rufilter;
@@ -15,7 +14,6 @@ use app\widgets\ads\SideAd;
 use app\widgets\ads\SkyscraperAd;
 use app\widgets\ads\SpRectAd;
 use app\widgets\ads\TopAd;
-use yii\helpers\Html;
 use yii\web\Controller;
 use yii\web\View;
 
@@ -25,13 +23,13 @@ use yii\web\View;
  */
 
 $this->title = vsprintf('%s : %s', [
-  Yii::t('app', 'List of IP addresses allocated to {ri} {countryEn} [{cc}]', [
-    'cc' => $region->id,
-    'countryEn' => $region->name_en,
-    'countryJa' => $region->name_ja,
-    'ri' => Yii::$app->formatter->asRegionalIndicator($region->id),
-  ]),
-  Yii::$app->name,
+    Yii::t('app', 'List of IP addresses allocated to {ri} {countryEn} [{cc}]', [
+        'cc' => $region->id,
+        'countryEn' => $region->name_en,
+        'countryJa' => $region->name_ja,
+        'ri' => Yii::$app->formatter->asRegionalIndicator($region->id),
+    ]),
+    Yii::$app->name,
 ]);
 
 ApplicationLanguage::registerLink(Yii::$app, ['region/view', 'cc' => $region->id]);
@@ -62,10 +60,10 @@ foreach ($metas as $name => $value) {
 }
 
 if (
-  Yii::$app->request->isPjax &&
-  $this->context instanceof Controller
+    Yii::$app->request->isPjax &&
+    $this->context instanceof Controller
 ) {
-  $this->context->layout = 'pjax';
+    $this->context->layout = 'pjax';
 }
 
 ?>
@@ -73,7 +71,7 @@ if (
   <?= RegionHeading::widget([
     'region' => $region,
     'options' => ['tag' => 'h1'],
-  ]) . "\n" ?>
+]) . "\n" ?>
   <aside class="mb-0">
     <?= SnsWidget::widget() . "\n" ?>
   </aside>

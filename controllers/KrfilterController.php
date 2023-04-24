@@ -15,6 +15,18 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
 
+use function array_map;
+use function array_slice;
+use function count;
+use function floor;
+use function implode;
+use function sprintf;
+use function strcmp;
+use function strlen;
+use function usort;
+
+use const SORT_ASC;
+
 class KrfilterController extends Controller
 {
     public function actionView(): string
@@ -48,7 +60,7 @@ class KrfilterController extends Controller
             $resp->headers->set('Content-Type', 'text/plain');
             $resp->stream = fn (): Generator => DownloadFormatter::format(
                 $krfilter->name,
-                \sprintf('krfilter_%d', $krfilter->id),
+                sprintf('krfilter_%d', $krfilter->id),
                 ['krfilter/plain', 'id' => $krfilter->id, 'template' => $template],
                 ['krfilter/view'],
                 $templateModel,
@@ -70,17 +82,17 @@ class KrfilterController extends Controller
                     $lines = ['次の国や地域が統合されて出力されています:'];
 
                     $regions = $krfilter->regions;
-                    \usort($regions, fn (Region $a, Region $b): int => \strcmp($a->id, $b->id));
-                    $perLine = (int)\floor(
-                        (72 + \strlen(', ') - (\strlen('# ') + 2)) / \strlen('kr, ')
+                    usort($regions, fn (Region $a, Region $b): int => strcmp($a->id, $b->id));
+                    $perLine = (int)floor(
+                        (72 + strlen(', ') - (strlen('# ') + 2)) / strlen('kr, '),
                     );
-                    for ($i = 0; $i < \count($regions); $i += $perLine) {
-                        $lines[] = '  ' . \implode(', ', \array_map(
+                    for ($i = 0; $i < count($regions); $i += $perLine) {
+                        $lines[] = '  ' . implode(', ', array_map(
                             fn (Region $region): string => $region->id,
-                            \array_slice($regions, $i, $perLine),
+                            array_slice($regions, $i, $perLine),
                         ));
                     }
-                    return \implode("\n", $lines);
+                    return implode("\n", $lines);
                 })(),
             );
         });

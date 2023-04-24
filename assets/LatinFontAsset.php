@@ -9,10 +9,21 @@ use yii\web\AssetBundle;
 
 final class LatinFontAsset extends AssetBundle
 {
+    /**
+     * @var string
+     */
     public $sourcePath = '@app/resources';
+
+    /**
+     * @var string[]
+     */
     public $css = [
         'css/latin-font.min.css',
     ];
+
+    /**
+     * @var class-string[]
+     */
     public $depends = [
         BootstrapAsset::class,
         MontserratAsset::class,

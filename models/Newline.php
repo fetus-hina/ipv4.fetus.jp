@@ -24,6 +24,7 @@ final class Newline extends ActiveRecord
     }
 
     /**
+     * @inheritdoc
      * @return array[]
      */
     public function rules()

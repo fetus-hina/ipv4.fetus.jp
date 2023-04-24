@@ -10,6 +10,9 @@ use yii\base\Widget;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
+use function implode;
+use function vsprintf;
+
 final class FetusHeader extends Widget
 {
     public function run(): string
@@ -23,7 +26,7 @@ final class FetusHeader extends Widget
             'header',
             Html::tag(
                 'div',
-                \implode('', [
+                implode('', [
                     $this->renderHeading($authorWebsite),
                     $this->renderAd(),
                 ]),
@@ -64,7 +67,7 @@ final class FetusHeader extends Widget
     private function getCurrentPageId(): string
     {
         $controller = Yii::$app->controller;
-        return \vsprintf('%s/%s', [
+        return vsprintf('%s/%s', [
             $controller->id,
             $controller->action->id ?? 'UNKNOWN',
         ]);

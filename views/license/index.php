@@ -17,20 +17,20 @@ ApplicationLanguage::registerLink(Yii::$app, ['license/index']);
 <ul>
   <li>
     <?= Html::a(
-      Yii::t('app/license', 'Composer Packages'),
-      ['license/composer'],
+        Yii::t('app/license', 'Composer Packages'),
+        ['license/composer'],
     ) . "\n" ?>
   </li>
   <li>
     <?= Html::a(
-      Yii::t('app/license', 'NPM Packages'),
-      ['license/npm'],
+        Yii::t('app/license', 'NPM Packages'),
+        ['license/npm'],
     ) . "\n" ?>
   </li>
   <li>
     <?= Html::a(
-      Yii::t('app/license', 'Fonts'),
-      ['license/font'],
+        Yii::t('app/license', 'Fonts'),
+        ['license/font'],
     ) . "\n" ?>
   </li>
 </ul>
@@ -39,31 +39,31 @@ ApplicationLanguage::registerLink(Yii::$app, ['license/index']);
 <div class="card ms-4 mb-4">
   <div class="card-body">
     <?= Html::tag(
-      'pre',
-      Html::encode(
-        (string)@file_get_contents(
-          TypeHelper::shouldBeString(Yii::getAlias('@app/LICENSE')),
+        'pre',
+        Html::encode(
+            (string)@file_get_contents(
+                TypeHelper::shouldBeString(Yii::getAlias('@app/LICENSE')),
+            ),
         ),
-      ),
-      ['class' => 'm-0 fs-6 lh-sm']
+        ['class' => 'm-0 fs-6 lh-sm'],
     ) . "\n" ?>
   </div>
 </div>
 <h3>
   <?= Yii::t('app/license', 'Application Template ({name})', [
     'name' => 'yiisoft/yii2-app-basic',
-  ]) . "\n" ?>
+]) . "\n" ?>
 </h3>
 <div class="card ms-4 mb-4">
   <div class="card-body">
     <?= Html::tag(
-      'pre',
-      Html::encode(
-        (string)@file_get_contents(
-          TypeHelper::shouldBeString(Yii::getAlias('@app/LICENSE.app-template.md')),
+        'pre',
+        Html::encode(
+            (string)@file_get_contents(
+                TypeHelper::shouldBeString(Yii::getAlias('@app/LICENSE.app-template.md')),
+            ),
         ),
-      ),
-      ['class' => 'm-0 fs-6 lh-sm']
+        ['class' => 'm-0 fs-6 lh-sm'],
     ) . "\n" ?>
   </div>
 </div>

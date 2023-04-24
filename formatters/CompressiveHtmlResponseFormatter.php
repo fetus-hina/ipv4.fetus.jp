@@ -7,6 +7,11 @@ namespace app\formatters;
 use Yii;
 use yii\web\HtmlResponseFormatter;
 
+use function array_keys;
+use function gzencode;
+use function in_array;
+use function is_string;
+
 final class CompressiveHtmlResponseFormatter extends HtmlResponseFormatter
 {
     /**
@@ -16,10 +21,10 @@ final class CompressiveHtmlResponseFormatter extends HtmlResponseFormatter
     public function format($response)
     {
         if (
-            \is_string($response->data) &&
+            is_string($response->data) &&
             $this->isGzipAcceptable()
         ) {
-            if ($compressed = \gzencode($response->data, 9)) {
+            if ($compressed = gzencode($response->data, 9)) {
                 $response->headers->set('Content-Encoding', 'gzip');
                 $response->headers->add('Vary', 'Accept-Encoding');
                 $response->content = $compressed;
@@ -32,16 +37,19 @@ final class CompressiveHtmlResponseFormatter extends HtmlResponseFormatter
 
     private function isGzipAcceptable(): bool
     {
-        return \in_array('gzip', $this->getAcceptEncodings(), true);
+        return in_array('gzip', $this->getAcceptEncodings(), true);
     }
 
+    /**
+     * @return string[]
+     */
     private function getAcceptEncodings(): array
     {
         $request = Yii::$app->request;
-        return \array_keys(
+        return array_keys(
             $request->parseAcceptHeader(
-                $request->getHeaders()->get('Accept-Encoding')
-            )
+                $request->getHeaders()->get('Accept-Encoding'),
+            ),
         );
     }
 }

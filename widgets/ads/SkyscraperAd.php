@@ -9,6 +9,8 @@ use app\widgets\AdSenseWidget;
 use yii\base\Widget;
 use yii\helpers\Html;
 
+use function implode;
+
 final class SkyscraperAd extends Widget
 {
     public function run(): string
@@ -22,7 +24,7 @@ final class SkyscraperAd extends Widget
 
         return Html::tag(
             'aside',
-            \implode('', [
+            implode('', [
                 Html::tag(
                     'div',
                     AdSenseWidget::widget([

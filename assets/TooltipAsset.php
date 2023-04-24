@@ -10,10 +10,21 @@ use yii\web\JqueryAsset;
 
 final class TooltipAsset extends AssetBundle
 {
+    /**
+     * @var string
+     */
     public $sourcePath = '@app/resources';
+
+    /**
+     * @var string[]
+     */
     public $js = [
         'js/tooltip.min.js',
     ];
+
+    /**
+     * @var class-string[]
+     */
     public $depends = [
         BootstrapPluginAsset::class,
         JqueryAsset::class,

@@ -27,6 +27,7 @@ final class CommentStyle extends ActiveRecord
     }
 
     /**
+     * @inheritdoc
      * @return array[]
      */
     public function rules()

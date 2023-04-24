@@ -6,6 +6,9 @@ use yii\db\Migration;
 
 final class m210423_090412_blocks extends Migration
 {
+    /**
+     * @inheritdoc
+     */
     public function safeUp()
     {
         foreach ($this->getTables() as $tableName => $tableDef) {
@@ -14,6 +17,9 @@ final class m210423_090412_blocks extends Migration
         return true;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function safeDown()
     {
         $tables = array_reverse(array_keys($this->getTables()));
@@ -23,6 +29,7 @@ final class m210423_090412_blocks extends Migration
         return true;
     }
 
+    // phpcs:ignore SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification
     private function getTables(): array
     {
         return [

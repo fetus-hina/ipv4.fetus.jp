@@ -24,6 +24,7 @@ final class RegionStat extends ActiveRecord
     }
 
     /**
+     * @inheritdoc
      * @return array[]
      */
     public function rules()

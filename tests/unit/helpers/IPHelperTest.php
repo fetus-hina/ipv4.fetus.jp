@@ -7,6 +7,8 @@ namespace tests\unit\helpers;
 use Codeception\Test\Unit;
 use app\helpers\IPHelper;
 
+use function ip2long;
+
 class IPHelperTest extends Unit
 {
     public function testBitmask(): void
@@ -28,9 +30,9 @@ class IPHelperTest extends Unit
         $this->assertEquals(
             $cidrs,
             IPHelper::splitBlock(
-                \ip2long($startIP),
-                $count
-            )
+                ip2long($startIP),
+                $count,
+            ),
         );
     }
 

@@ -11,8 +11,19 @@ use yii\web\YiiAsset;
 
 final class AppAsset extends AssetBundle
 {
+    /**
+     * @var string
+     */
     public $basePath = '@webroot';
+
+    /**
+     * @var string
+     */
     public $baseUrl = '@web';
+
+    /**
+     * @var class-string[]
+     */
     public $depends = [
         BackToTopAsset::class,
         BootstrapAsset::class,

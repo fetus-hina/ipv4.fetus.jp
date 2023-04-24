@@ -6,6 +6,9 @@ use yii\db\Migration;
 
 final class m210424_235937_krfilter extends Migration
 {
+    /**
+     * @inheritdoc
+     */
     public function safeUp()
     {
         $this->createTable('{{%krfilter}}', [
@@ -98,6 +101,9 @@ final class m210424_235937_krfilter extends Migration
         return true;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function safeDown()
     {
         $this->dropTable('{{%krfilter_cidr}}');

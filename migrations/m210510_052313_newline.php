@@ -6,6 +6,9 @@ use yii\db\Migration;
 
 final class m210510_052313_newline extends Migration
 {
+    /**
+     * @inheritdoc
+     */
     public function safeUp()
     {
         $this->createTable('{{%newline}}', [
@@ -22,18 +25,21 @@ final class m210510_052313_newline extends Migration
         $this->addColumn(
             '{{%download_template}}',
             'newline_id',
-            (string)$this->integer()->null()->append('REFERENCES {{%newline}}([[id]])')
+            (string)$this->integer()->null()->append('REFERENCES {{%newline}}([[id]])'),
         );
 
         $this->update(
             '{{%download_template}}',
             ['newline_id' => 2],
-            ['key' => 'csv']
+            ['key' => 'csv'],
         );
 
         return true;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function safeDown()
     {
         $this->dropColumn('{{%download_template}}', 'newline_id');

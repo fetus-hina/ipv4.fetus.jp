@@ -14,6 +14,31 @@ use app\models\DownloadTemplate;
 use app\models\Newline;
 use yii\helpers\Url;
 
+use function assert;
+use function chr;
+use function explode;
+use function htmlspecialchars;
+use function implode;
+use function ip2long;
+use function is_int;
+use function long2ip;
+use function ltrim;
+use function preg_match;
+use function preg_replace_callback;
+use function str_contains;
+use function str_repeat;
+use function str_replace;
+use function strlen;
+use function strtolower;
+use function strtoupper;
+use function substr;
+use function time;
+use function trim;
+use function vsprintf;
+
+use const ENT_QUOTES;
+use const ENT_XML1;
+
 final class DownloadFormatter
 {
     /**
@@ -23,8 +48,8 @@ final class DownloadFormatter
     public static function format(
         string $name, // e.g., "[jp] 日本 (Japan)"
         string $cc, // "jp" or "krfilter_1"
-        $thisUrl,
-        $pageUrl,
+        string|array $thisUrl,
+        string|array $pageUrl,
         DownloadTemplate $template,
         bool $isAllow,
         iterable $cidrList,
@@ -68,7 +93,7 @@ final class DownloadFormatter
         bool $isAllow
     ): string {
         return TypeHelper::shouldBeString(
-            \preg_replace_callback(
+            preg_replace_callback(
                 '/\{([a-zA-Z0-9_]+)((?::[A-Za-z0-9]+)+)?\}/',
                 function (array $match) use ($template, $cc, $cidr, $isAllow): string {
                     switch ($match[1]) {
@@ -78,17 +103,17 @@ final class DownloadFormatter
                             }
                             return static::formatPlaceholder(
                                 static::calcBroadcastAddress($cidr),
-                                \explode(':', \ltrim($match[2] ?? '', ':')),
+                                explode(':', ltrim($match[2] ?? '', ':')),
                             );
 
                         case 'cc':
-                            return static::formatPlaceholder($cc, \explode(':', \ltrim($match[2] ?? '', ':')));
+                            return static::formatPlaceholder($cc, explode(':', ltrim($match[2] ?? '', ':')));
 
                         case 'cidr':
                             if ($cidr === null) {
                                 throw new Exception('Unexpected {cidr} in download template');
                             }
-                            return static::formatPlaceholder($cidr, \explode(':', \ltrim($match[2] ?? '', ':')));
+                            return static::formatPlaceholder($cidr, explode(':', ltrim($match[2] ?? '', ':')));
 
                         case 'control':
                             if ($template->allow === null || $template->deny === null) {
@@ -96,7 +121,7 @@ final class DownloadFormatter
                             }
                             return static::formatPlaceholder(
                                 $isAllow ? $template->allow : $template->deny,
-                                \explode(':', \ltrim($match[2] ?? '', ':')),
+                                explode(':', ltrim($match[2] ?? '', ':')),
                             );
 
                         case 'control_not':
@@ -105,7 +130,7 @@ final class DownloadFormatter
                             }
                             return static::formatPlaceholder(
                                 !$isAllow ? $template->allow : $template->deny,
-                                \explode(':', \ltrim($match[2] ?? '', ':')),
+                                explode(':', ltrim($match[2] ?? '', ':')),
                             );
 
                         case 'network':
@@ -113,8 +138,8 @@ final class DownloadFormatter
                                 throw new Exception('Unexpected {network} in download template');
                             }
                             return static::formatPlaceholder(
-                                \explode('/', $cidr)[0],
-                                \explode(':', \ltrim($match[2] ?? '', ':')),
+                                explode('/', $cidr)[0],
+                                explode(':', ltrim($match[2] ?? '', ':')),
                             );
 
                         case 'prefix':
@@ -122,8 +147,8 @@ final class DownloadFormatter
                                 throw new Exception('Unexpected {prefix} in download template');
                             }
                             return static::formatPlaceholder(
-                                (string)(int)\explode('/', $cidr)[1],
-                                \explode(':', \ltrim($match[2] ?? '', ':')),
+                                (string)(int)explode('/', $cidr)[1],
+                                explode(':', ltrim($match[2] ?? '', ':')),
                             );
 
                         case 'subnet':
@@ -131,14 +156,14 @@ final class DownloadFormatter
                                 throw new Exception('Unexpected {subnet} in download template');
                             }
                             return static::formatPlaceholder(
-                                static::prefixToSubnetMask((int)\explode('/', $cidr)[1]),
-                                \explode(':', \ltrim($match[2] ?? '', ':')),
+                                static::prefixToSubnetMask((int)explode('/', $cidr)[1]),
+                                explode(':', ltrim($match[2] ?? '', ':')),
                             );
                     }
                     return $match[0];
                 },
                 $text,
-            )
+            ),
         );
     }
 
@@ -150,17 +175,17 @@ final class DownloadFormatter
 
         // phpcs:ignore SlevomatCodingStandard.PHP.UselessParentheses.UselessParentheses
         $maskBin = (0xffffffff << (32 - $prefix)) & 0xffffffff;
-        return TypeHelper::shouldBeString(\long2ip($maskBin));
+        return TypeHelper::shouldBeString(long2ip($maskBin));
     }
 
     private static function calcBroadcastAddress(string $cidr): string
     {
-        if (!\preg_match('#^([0-9.]+)/([0-9]+)$#', $cidr, $match)) {
+        if (!preg_match('#^([0-9.]+)/([0-9]+)$#', $cidr, $match)) {
             throw new Exception('Invalid CIDR: ' . $cidr);
         }
 
-        $network = @\ip2long($match[1]);
-        if (!\is_int($network)) {
+        $network = @ip2long($match[1]);
+        if (!is_int($network)) {
             throw new Exception('ip2long failed');
         }
 
@@ -172,7 +197,7 @@ final class DownloadFormatter
         // phpcs:ignore SlevomatCodingStandard.PHP.UselessParentheses.UselessParentheses
         $subnetMask = (0xffffffff << (32 - $prefix)) & 0xffffffff;
         $broadcast = $network | ($subnetMask ^ 0xffffffff);
-        return TypeHelper::shouldBeString(\long2ip($broadcast));
+        return TypeHelper::shouldBeString(long2ip($broadcast));
     }
 
     private static function formatPlaceholder(string $value, array $modifiers): string
@@ -185,70 +210,65 @@ final class DownloadFormatter
 
     private static function applyModifier(string $value, string $modifier): string
     {
-        switch ((string)\trim($modifier)) {
+        switch ((string)trim($modifier)) {
             case '':
                 return $value;
 
             case 'csv':
                 if (
-                    !\str_contains($value, ',') &&
-                    !\str_contains($value, '"') &&
-                    !\str_contains($value, "\n") &&
-                    !\str_contains($value, "\r")
+                    !str_contains($value, ',') &&
+                    !str_contains($value, '"') &&
+                    !str_contains($value, "\n") &&
+                    !str_contains($value, "\r")
                 ) {
                     return $value;
                 }
-                return '"' . \str_replace('"', '""', $value) . '"';
+                return '"' . str_replace('"', '""', $value) . '"';
 
             case 'fillSpace':
-                $len = \strlen('000.000.000.000/32');
-                return \substr($value . \str_repeat(' ', $len), 0, $len);
+                $len = strlen('000.000.000.000/32');
+                return substr($value . str_repeat(' ', $len), 0, $len);
 
             case 'lower':
-                return \strtolower($value);
+                return strtolower($value);
 
             case 'upper':
-                return \strtoupper($value);
+                return strtoupper($value);
 
             case 'xml':
-                return \htmlspecialchars($value, ENT_QUOTES | ENT_XML1, 'UTF-8');
+                return htmlspecialchars($value, ENT_QUOTES | ENT_XML1, 'UTF-8');
         }
 
         throw new Exception('Unknown modifier: ' . $modifier);
     }
 
-    /**
-     * @param string|array $thisUrl
-     * @param string|array $pageUrl
-     */
     private static function generateHeaders(
         string $name,
-        $thisUrl,
-        $pageUrl,
+        string|array $thisUrl,
+        string|array $pageUrl,
         DownloadTemplate $template,
         ?string $note
     ): Generator {
         $comment = $template->commentStyle;
-        \assert($comment !== null);
+        assert($comment !== null);
 
-        $row = function (string $text) use ($comment): string {
-            return \implode('', [
-                $comment->line_begin !== null && $comment->line_begin !== ''
+        $row = fn (string $text): string => implode('', [
+            $comment->line_begin !== null && $comment->line_begin !== ''
                     ? $comment->line_begin . ' '
                     : '',
-                $text,
-                $comment->line_end !== null && $comment->line_end !== ''
+            $text,
+            $comment->line_end !== null && $comment->line_end !== ''
                     ? $comment->line_end . ' '
                     : '',
-            ]);
-        };
+        ]);
 
         if ($comment->block_begin !== null && $comment->block_begin !== '') {
             yield $comment->block_begin;
         }
 
         $time = (new DateTimeImmutable())
-            ->setTimestamp((int)($_SERVER['REQUEST_TIME'] ?? \time()))
+            // phpcs:ignore SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable.DisallowedSuperGlobalVariable
+            ->setTimestamp((int)($_SERVER['REQUEST_TIME'] ?? time()))
             ->setTimezone(new DateTimeZone(Yii::$app->timeZone));
 
         yield $row('');
@@ -256,14 +276,14 @@ final class DownloadFormatter
         yield $row(' ' . Url::to($pageUrl, true));
         yield $row('');
         yield $row(Url::to($thisUrl, true));
-        yield $row(\vsprintf(' 出力日時: %s (%s)', [
+        yield $row(vsprintf(' 出力日時: %s (%s)', [
             $time->format('Y-m-d H:i:s T'),
             $time->setTimeZone(new DateTimeZone('Etc/UTC'))->format(DateTime::ATOM),
         ]));
 
         if ($note !== null) {
             yield $row('');
-            foreach (\explode("\n", $note) as $item) {
+            foreach (explode("\n", $note) as $item) {
                 yield $row($item);
             }
         }
@@ -271,7 +291,7 @@ final class DownloadFormatter
         if ($template->usage !== null && $template->usage !== '') {
             yield $row('');
             yield $row('Usage:');
-            foreach (\explode("\n", $template->usage) as $item) {
+            foreach (explode("\n", $template->usage) as $item) {
                 yield $row(' ' . $item);
             }
         }
@@ -289,8 +309,8 @@ final class DownloadFormatter
     private static function getNewLineCode(?Newline $newline): string
     {
         return match ($newline?->key) {
-            'unix' => \chr(0x0a),
-            'win' => \chr(0x0d) . \chr(0x0a),
+            'unix' => chr(0x0a),
+            'win' => chr(0x0d) . chr(0x0a),
             default => "\n",
         };
     }

@@ -1,9 +1,11 @@
-<?php
+<?php // phpcs:disable SlevomatCodingStandard.Commenting.InlineDocCommentDeclaration.MissingVariable
 
 declare(strict_types=1);
 
+use omnilight\scheduling\Schedule;
+
 /**
- * @var \omnilight\scheduling\Schedule $schedule
+ * @var Schedule $schedule
  */
 
 $schedule

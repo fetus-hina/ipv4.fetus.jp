@@ -31,6 +31,7 @@ final class Region extends ActiveRecord
     }
 
     /**
+     * @inheritdoc
      * @return array[]
      */
     public function rules()

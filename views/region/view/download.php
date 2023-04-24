@@ -3,11 +3,8 @@
 declare(strict_types=1);
 
 use app\models\DownloadTemplate;
-use app\models\MergedCidr;
 use app\models\Region;
 use app\widgets\DownloadButtons;
-use yii\data\ActiveDataProvider;
-use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\web\View;
 
@@ -17,7 +14,7 @@ use yii\web\View;
  */
 
 if (Yii::$app->request->isPjax) {
-  return;
+    return;
 }
 
 ?>
@@ -33,17 +30,17 @@ if (Yii::$app->request->isPjax) {
       </p>
       <p class="mb-2">
         <?= Html::a(
-          Yii::t('app', 'Please read this notice when you want to automate the process.'),
-          ['site/about', '#' => 'automation'],
+            Yii::t('app', 'Please read this notice when you want to automate the process.'),
+            ['site/about', '#' => 'automation'],
         ) . "\n" ?>
       </p>
     </div>
     <?= DownloadButtons::widget([
-        'downloadLinkCreator' => fn (?DownloadTemplate $template) => [
-            'region/plain',
-            'cc' => $region->id,
-            'template' => $template?->key,
-        ],
-    ]) . "\n" ?>
+    'downloadLinkCreator' => fn (?DownloadTemplate $template) => [
+        'region/plain',
+        'cc' => $region->id,
+        'template' => $template?->key,
+    ],
+]) . "\n" ?>
   </div>
 </aside>

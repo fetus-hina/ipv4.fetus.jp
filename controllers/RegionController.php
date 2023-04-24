@@ -14,6 +14,10 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
 
+use function vsprintf;
+
+use const SORT_ASC;
+
 final class RegionController extends Controller
 {
     public function actionView(string $cc): string
@@ -64,7 +68,7 @@ final class RegionController extends Controller
             $resp->charset = 'UTF-8';
             $resp->headers->set('Content-Type', 'text/plain');
             $resp->stream = fn (): Generator => DownloadFormatter::format(
-                \vsprintf('[%s] %s (%s)', [
+                vsprintf('[%s] %s (%s)', [
                     $region->id,
                     $region->name_ja,
                     $region->name_en,
@@ -85,7 +89,7 @@ final class RegionController extends Controller
                             TypeHelper::shouldBeArray(
                                 $row,
                                 TypeHelper::ARRAY_ASSOC,
-                            )['cidr']
+                            )['cidr'],
                         );
                     }
                 })(),

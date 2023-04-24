@@ -11,6 +11,9 @@ use yii\bootstrap5\BootstrapPluginAsset;
 use yii\helpers\Html;
 use yii\web\View;
 
+use function implode;
+use function sprintf;
+
 final class Navbar extends Widget
 {
     /**
@@ -44,7 +47,7 @@ final class Navbar extends Widget
     {
         return Html::tag(
             'nav',
-            \implode('', [
+            implode('', [
                 $this->renderBrand(),
                 $this->renderToggler(),
                 $this->renderLinks(),
@@ -96,11 +99,11 @@ final class Navbar extends Widget
                     'navbar-toggler',
                 ],
                 'data' => [
-                    'bs-target' => \sprintf('#%s', $this->getLinksId()),
+                    'bs-target' => sprintf('#%s', $this->getLinksId()),
                     'bs-toggle' => 'collapse',
                 ],
                 'type' => 'button',
-            ]
+            ],
         );
     }
 
@@ -121,7 +124,7 @@ final class Navbar extends Widget
     {
         return Html::tag(
             'div',
-            \implode('', [
+            implode('', [
                 $this->renderLinksLeft(),
                 $this->renderLinksRight(),
             ]),
@@ -139,7 +142,7 @@ final class Navbar extends Widget
     {
         return Html::tag(
             'ul',
-            \implode('', [
+            implode('', [
                 Html::tag(
                     'li',
                     Html::a(
@@ -211,6 +214,6 @@ final class Navbar extends Widget
 
     private function getLinksId(): string
     {
-        return \sprintf('%s-links', (string)$this->id);
+        return sprintf('%s-links', (string)$this->id);
     }
 }

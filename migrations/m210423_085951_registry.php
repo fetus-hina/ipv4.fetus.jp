@@ -7,6 +7,9 @@ use yii\db\Migration;
 
 final class m210423_085951_registry extends Migration
 {
+    /**
+     * @inheritdoc
+     */
     public function safeUp()
     {
         $this->createTable('{{%registry}}', [
@@ -29,6 +32,9 @@ final class m210423_085951_registry extends Migration
         return true;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function safeDown()
     {
         $this->dropTable('{{%registry}}');

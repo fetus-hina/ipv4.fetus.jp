@@ -16,5 +16,8 @@ final class LicenseController extends Controller
 {
     use LicenseExtractTrait;
 
+    /**
+     * @var string
+     */
     public $defaultAction = 'extract';
 }

@@ -23,6 +23,7 @@ final class Registry extends ActiveRecord
     }
 
     /**
+     * @inheritdoc
      * @return array[]
      */
     public function rules()

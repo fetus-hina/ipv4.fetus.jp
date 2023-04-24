@@ -10,13 +10,16 @@ use app\widgets\sns\Twitter;
 use yii\base\Widget;
 use yii\helpers\Html;
 
+use function implode;
+use function preg_match;
+
 final class SnsWidget extends Widget
 {
     public function run(): string
     {
         return Html::tag(
             'div',
-            \implode('', [
+            implode('', [
                 Twitter::widget(),
                 $this->renderHatebu(),
             ]),
@@ -28,13 +31,13 @@ final class SnsWidget extends Widget
                     'line-height' => '1px',
                     'height' => '20px',
                 ],
-            ]
+            ],
         );
     }
 
     private function renderHatebu(): string
     {
-        if (!\preg_match('/^ja\b/', Yii::$app->language)) {
+        if (!preg_match('/^ja\b/', Yii::$app->language)) {
             return '';
         }
 

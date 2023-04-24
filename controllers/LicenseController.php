@@ -10,6 +10,9 @@ use yii\web\Controller;
 
 final class LicenseController extends Controller
 {
+    /**
+     * @inheritdoc
+     */
     public function actions()
     {
         $license = fn (string $title, string $dir, array $pageUrl): array => [

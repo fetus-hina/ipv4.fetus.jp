@@ -25,6 +25,7 @@ final class Krfilter extends ActiveRecord
     }
 
     /**
+     * @inheritdoc
      * @return array[]
      */
     public function rules()

@@ -24,6 +24,7 @@ final class MergedCidr extends ActiveRecord
     }
 
     /**
+     * @inheritdoc
      * @return array[]
      */
     public function rules()

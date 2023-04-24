@@ -6,6 +6,9 @@ use yii\db\Migration;
 
 final class m210508_221508_csv extends Migration
 {
+    /**
+     * @inheritdoc
+     */
     public function safeUp()
     {
         $this->insert('{{%download_template}}', [
@@ -38,6 +41,9 @@ final class m210508_221508_csv extends Migration
         return true;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function safeDown()
     {
         $this->delete('{{%download_template}}', ['key' => 'csv']);

@@ -140,6 +140,7 @@ final class <?= $className . "\n" ?>
 <?php } ?>
 
     /**
+     * @inheritdoc
      * @return array[]
      */
     public function rules()

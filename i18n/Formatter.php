@@ -10,11 +10,18 @@ use Yii;
 use app\helpers\TypeHelper;
 use app\helpers\Unicode;
 
+use function preg_replace;
+use function strtolower;
+use function trim;
+
 final class Formatter extends \yii\i18n\Formatter
 {
     private const DATE_FORMAT_LONG = 'long';
     private const DATE_FORMAT_SHORT = 'short';
 
+    /**
+     * @var string|null
+     */
     public $nullDisplay = '';
 
     public function asLongDate(
@@ -37,9 +44,9 @@ final class Formatter extends \yii\i18n\Formatter
 
     private function dateFormat(string $type): string
     {
-        $locale = \trim(Yii::$app->language);
-        $lang = \strtolower(
-            TypeHelper::shouldBeString(\preg_replace('/^([a-z]+).*/i', '$1', $locale))
+        $locale = trim(Yii::$app->language);
+        $lang = strtolower(
+            TypeHelper::shouldBeString(preg_replace('/^([a-z]+).*/i', '$1', $locale)),
         );
 
         return match ($type) {

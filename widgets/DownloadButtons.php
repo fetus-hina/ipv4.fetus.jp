@@ -13,6 +13,14 @@ use yii\bootstrap5\BootstrapPluginAsset;
 use yii\helpers\Html;
 use yii\web\View;
 
+use function array_filter;
+use function array_map;
+use function call_user_func;
+use function implode;
+use function is_array;
+use function sprintf;
+use function substr;
+
 use const SORT_ASC;
 
 final class DownloadButtons extends Widget
@@ -28,7 +36,7 @@ final class DownloadButtons extends Widget
     {
         return Html::tag(
             'nav',
-            \implode('', [
+            implode('', [
                 $this->renderPlainText(),
                 $this->renderTemplates(),
             ]),
@@ -63,7 +71,7 @@ final class DownloadButtons extends Widget
     {
         return Html::tag(
             'div',
-            \implode('', [
+            implode('', [
                 $this->renderTemplateButton(),
                 $this->renderTemplateDropdown(),
             ]),
@@ -107,7 +115,7 @@ final class DownloadButtons extends Widget
     {
         return Html::tag(
             'div',
-            \implode('', \array_map(
+            implode('', array_map(
                 fn (DownloadTemplate $model): string => Html::a(
                     Html::encode($model->name),
                     $this->callLinkCreator($model),
@@ -118,10 +126,10 @@ final class DownloadButtons extends Widget
                         'type' => 'text/plain',
                     ],
                 ),
-                \array_filter(
+                array_filter(
                     $this->getAllTemplates(),
                     fn (DownloadTemplate $model): bool => $this->enableIpv4bycc ||
-                        \substr($model->key, 0, 9) !== 'ipv4bycc-',
+                        substr($model->key, 0, 9) !== 'ipv4bycc-',
                 ),
             )),
             [
@@ -156,20 +164,21 @@ final class DownloadButtons extends Widget
         return self::$templates;
     }
 
+    // phpcs:ignore SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification
     private function callLinkCreator(?DownloadTemplate $template): array
     {
         if (($callable = $this->downloadLinkCreator) === null) {
             throw new LogicException();
         }
 
-        $value = \call_user_func($callable, $template);
-        return \is_array($value)
+        $value = call_user_func($callable, $template);
+        return is_array($value)
             ? $value
             : throw new RuntimeException();
     }
 
     private function getTemplateButtonId(): string
     {
-        return \sprintf('%s-btn-template', (string)$this->id);
+        return sprintf('%s-btn-template', (string)$this->id);
     }
 }

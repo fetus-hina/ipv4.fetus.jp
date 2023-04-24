@@ -29,6 +29,7 @@ final class Language extends ActiveRecord
     }
 
     /**
+     * @inheritdoc
      * @return array[]
      */
     public function rules()

@@ -24,6 +24,7 @@ final class CharacterCategory extends ActiveRecord
     }
 
     /**
+     * @inheritdoc
      * @return array[]
      */
     public function rules()

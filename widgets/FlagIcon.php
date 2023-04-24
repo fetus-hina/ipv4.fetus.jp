@@ -13,6 +13,16 @@ use yii\base\Widget;
 use yii\helpers\Html;
 use yii\web\View;
 
+use function base64_encode;
+use function file_exists;
+use function file_get_contents;
+use function preg_match;
+use function rawurlencode;
+use function strlen;
+use function strtolower;
+use function trim;
+use function vsprintf;
+
 final class FlagIcon extends Widget
 {
     public string $cc = 'xx';
@@ -20,9 +30,9 @@ final class FlagIcon extends Widget
 
     public function run(): string
     {
-        $cc = \trim(\strtolower($this->cc));
+        $cc = trim(strtolower($this->cc));
 
-        if (!\preg_match('/^[a-zA-Z]{2}$/', $cc)) {
+        if (!preg_match('/^[a-zA-Z]{2}$/', $cc)) {
             throw new LogicException("Invalid CC: {$cc}");
         }
 
@@ -66,7 +76,7 @@ final class FlagIcon extends Widget
         $svgPath = Yii::getAlias("@npm/flag-icons/flags/4x3/{$cc}.svg");
         if (
             !$svgPath ||
-            !@\file_exists($svgPath) ||
+            !@file_exists($svgPath) ||
             !($dataUri = $this->createDataUri($svgPath))
         ) {
             return null;
@@ -84,15 +94,15 @@ final class FlagIcon extends Widget
 
     private function createDataUri(string $svgPath): ?string
     {
-        if (!$content = @\file_get_contents($svgPath)) {
+        if (!$content = @file_get_contents($svgPath)) {
             return null;
         }
 
-        $b64 = \base64_encode($content);
-        $hex = \rawurlencode($content);
-        $useB64 = \strlen($b64) < \strlen($hex);
+        $b64 = base64_encode($content);
+        $hex = rawurlencode($content);
+        $useB64 = strlen($b64) < strlen($hex);
 
-        return \vsprintf('data:image/svg+xml%s,%s', [
+        return vsprintf('data:image/svg+xml%s,%s', [
             $useB64 ? ';base64' : '',
             $useB64 ? $b64 : $hex,
         ]);

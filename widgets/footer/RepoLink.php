@@ -9,24 +9,30 @@ use yii\base\Widget;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
+use function array_filter;
+use function array_map;
+use function implode;
+use function is_array;
+use function is_string;
+
 final class RepoLink extends Widget
 {
     public function run(): string
     {
         $repoUrl = ArrayHelper::getValue(Yii::$app->params, 'repository');
-        if (!\is_string($repoUrl) && !\is_array($repoUrl)) {
+        if (!is_string($repoUrl) && !is_array($repoUrl)) {
             return '';
         }
 
         $gitInfo = ArrayHelper::getValue(Yii::$app->params, 'gitRevision');
         if (
-            !\is_array($gitInfo) ||
+            !is_array($gitInfo) ||
             !isset($gitInfo['hash']) ||
             !isset($gitInfo['short']) ||
             !isset($gitInfo['version']) ||
-            !\is_string($gitInfo['hash']) ||
-            !\is_string($gitInfo['short']) ||
-            !\is_string($gitInfo['version'])
+            !is_string($gitInfo['hash']) ||
+            !is_string($gitInfo['short']) ||
+            !is_string($gitInfo['version'])
         ) {
             $gitInfo = null;
         }
@@ -38,7 +44,7 @@ final class RepoLink extends Widget
     {
         return Html::tag(
             'div',
-            \implode(', ', \array_map(
+            implode(', ', array_map(
                 fn (string $html): string => Html::tag(
                     'span',
                     $html,
@@ -48,7 +54,7 @@ final class RepoLink extends Widget
                         ],
                     ],
                 ),
-                \array_filter(
+                array_filter(
                     [
                         $this->renderRepoLink($repoUrl),
                         $this->renderVersion($gitInfo),

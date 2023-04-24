@@ -12,6 +12,8 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\web\View;
 
+use function is_string;
+
 final class Tooltip extends Widget
 {
     public const PLACEMENT_BOTTOM = 'bottom';
@@ -48,7 +50,7 @@ final class Tooltip extends Widget
         $options = $this->options;
         $tag = ArrayHelper::remove($options, 'tag');
         return Html::tag(
-            \is_string($tag) ? $tag : 'span',
+            is_string($tag) ? $tag : 'span',
             Yii::$app->formatter->format($this->content, $this->format),
             ArrayHelper::merge(
                 $options,

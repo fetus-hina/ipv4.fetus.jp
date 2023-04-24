@@ -10,6 +10,9 @@ use yii\web\Controller;
 
 final class ApiController extends Controller
 {
+    /**
+     * @inheritdoc
+     */
     public function actions()
     {
         return [

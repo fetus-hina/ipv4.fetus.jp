@@ -9,6 +9,15 @@ use yii\base\InvalidArgumentException;
 use yii\db\Connection as DbConnection;
 use yii\helpers\ArrayHelper;
 
+use function get_resource_type;
+use function gettype;
+use function is_array;
+use function is_int;
+use function is_object;
+use function is_resource;
+use function is_string;
+use function vsprintf;
+
 final class TypeHelper
 {
     public const ARRAY_DONTCARE = 0;
@@ -19,9 +28,10 @@ final class TypeHelper
     /**
      * @param self::ARRAY_DONTCARE|self::ARRAY_INDEXED|self::ARRAY_INT_KEYS|self::ARRAY_ASSOC $type
      */
+    // phpcs:ignore SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification
     public static function shouldBeArray(mixed $value, int $type = self::ARRAY_DONTCARE): array
     {
-        if (!\is_array($value)) {
+        if (!is_array($value)) {
             throw self::error('array', $value);
         }
 
@@ -66,46 +76,45 @@ final class TypeHelper
      */
     public static function shouldBeInstanceOf(mixed $value, string $fqcn): object
     {
-        return \is_object($value) && ($value instanceof $fqcn)
+        return is_object($value) && ($value instanceof $fqcn)
             ? $value
             : throw self::error($fqcn, $value);
     }
 
     public static function shouldBeInteger(mixed $value): int
     {
-        return \is_int($value) ? $value : throw self::error('integer', $value);
+        return is_int($value) ? $value : throw self::error('integer', $value);
     }
 
     public static function shouldBeString(mixed $value): string
     {
-        return \is_string($value) ? $value : throw self::error('string', $value);
+        return is_string($value) ? $value : throw self::error('string', $value);
     }
 
-    /** @return never */
-    private static function error(string $typeName, mixed $value, bool $putActualValue = true): void
+    private static function error(string $typeName, mixed $value, bool $putActualValue = true): never
     {
         throw new TypeError(
             $putActualValue
-                ? \vsprintf('Type Error: argument type should be "%s", but it is "%s"', [
+                ? vsprintf('Type Error: argument type should be "%s", but it is "%s"', [
                     $typeName,
                     self::getType($value),
                 ])
-                : \vsprintf('Type Error: argument type should be "%s"', [
+                : vsprintf('Type Error: argument type should be "%s"', [
                     $typeName,
-                ])
+                ]),
         );
     }
 
     private static function getType(mixed $value): string
     {
         switch (true) {
-            case \is_object($value):
+            case is_object($value):
                 return $value::class;
 
-            case \is_resource($value):
-                return \get_resource_type($value);
+            case is_resource($value):
+                return get_resource_type($value);
         }
 
-        return \gettype($value);
+        return gettype($value);
     }
 }

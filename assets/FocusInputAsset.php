@@ -9,10 +9,21 @@ use yii\web\JqueryAsset;
 
 final class FocusInputAsset extends AssetBundle
 {
+    /**
+     * @var string
+     */
     public $sourcePath = '@app/resources';
+
+    /**
+     * @var string[]
+     */
     public $js = [
         'js/focus-input.min.js',
     ];
+
+    /**
+     * @var class-string[]
+     */
     public $depends = [
         JqueryAsset::class,
     ];

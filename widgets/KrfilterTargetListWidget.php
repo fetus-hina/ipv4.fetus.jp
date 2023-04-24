@@ -14,6 +14,10 @@ use yii\bootstrap5\BootstrapAsset;
 use yii\bootstrap5\BootstrapPluginAsset;
 use yii\helpers\Html;
 
+use function array_map;
+use function implode;
+use function vsprintf;
+
 final class KrfilterTargetListWidget extends Widget
 {
     public Krfilter $filter;
@@ -27,11 +31,11 @@ final class KrfilterTargetListWidget extends Widget
 
         return Html::tag(
             'div',
-            \implode('', [
+            implode('', [
                 $this->renderButton(),
                 $this->renderDialog(),
             ]),
-            ['id' => $this->id]
+            ['id' => $this->id],
         );
     }
 
@@ -41,7 +45,7 @@ final class KrfilterTargetListWidget extends Widget
             'div',
             Html::tag(
                 'button',
-                \implode(' ', [
+                implode(' ', [
                     Yii::t('app/krfilter', 'List of countries/regions'),
                     Html::tag('span', '', ['class' => 'bi bi-window-stack']),
                 ]),
@@ -53,11 +57,11 @@ final class KrfilterTargetListWidget extends Widget
                     ],
                     'id' => $this->getButtonId(),
                     'type' => 'button',
-                ]
+                ],
             ),
             [
                 'class' => 'mb-2 d-grid',
-            ]
+            ],
         );
     }
 
@@ -69,14 +73,14 @@ final class KrfilterTargetListWidget extends Widget
                 'div',
                 Html::tag(
                     'div',
-                    \implode('', [
+                    implode('', [
                         $this->renderDialogHeader(),
                         $this->renderDialogBody(),
                         $this->renderDialogFooter(),
                     ]),
-                    ['class' => 'modal-content']
+                    ['class' => 'modal-content'],
                 ),
-                ['class' => 'modal-dialog modal-dialog-scrollable']
+                ['class' => 'modal-dialog modal-dialog-scrollable'],
             ),
             [
                 'aria' => [
@@ -89,7 +93,7 @@ final class KrfilterTargetListWidget extends Widget
                 ],
                 'id' => $this->getDialogId(),
                 'tabindex' => '-1',
-            ]
+            ],
         );
     }
 
@@ -97,13 +101,13 @@ final class KrfilterTargetListWidget extends Widget
     {
         return Html::tag(
             'div',
-            \implode('', [
+            implode('', [
                 Html::tag(
                     'h5',
                     Yii::t('app/krfilter', 'Countries/regions for {filter}', [
                         'filter' => $this->filter->name,
                     ]),
-                    ['class' => 'modal-title']
+                    ['class' => 'modal-title'],
                 ),
                 Html::tag('button', '', [
                     'aria' => [
@@ -116,7 +120,7 @@ final class KrfilterTargetListWidget extends Widget
                     'type' => 'button',
                 ]),
             ]),
-            ['class' => 'modal-header']
+            ['class' => 'modal-header'],
         );
     }
 
@@ -124,10 +128,10 @@ final class KrfilterTargetListWidget extends Widget
     {
         return Html::tag(
             'div',
-            \implode('', [
+            implode('', [
                 Html::tag(
                     'button',
-                    \implode(' ', [
+                    implode(' ', [
                         Html::tag('span', '', ['class' => 'bi bi-x-lg']),
                         Yii::t('app', 'Close'),
                     ]),
@@ -137,10 +141,10 @@ final class KrfilterTargetListWidget extends Widget
                             'bs-dismiss' => 'modal',
                         ],
                         'type' => 'button',
-                    ]
+                    ],
                 ),
             ]),
-            ['class' => 'modal-footer']
+            ['class' => 'modal-footer'],
         );
     }
 
@@ -150,7 +154,7 @@ final class KrfilterTargetListWidget extends Widget
             'div',
             Html::tag(
                 'div',
-                \implode('', \array_map(
+                implode('', array_map(
                     fn (Region $region): string => Html::a(
                         $this->renderDialogBodyRow($region),
                         ['region/view', 'cc' => $region->id],
@@ -170,7 +174,7 @@ final class KrfilterTargetListWidget extends Widget
                     ],
                 ],
             ),
-            ['class' => 'modal-body p-0']
+            ['class' => 'modal-body p-0'],
         );
     }
 
@@ -178,16 +182,16 @@ final class KrfilterTargetListWidget extends Widget
     {
         return Html::tag(
             'div',
-            \implode('', [
+            implode('', [
                 Html::tag(
                     'div',
                     FlagIcon::widget(['cc' => $region->id]),
-                    ['class' => 'me-2']
+                    ['class' => 'me-2'],
                 ),
                 Html::tag(
                     'div',
                     Html::tag('code', Html::encode($region->id)),
-                    ['class' => 'me-2']
+                    ['class' => 'me-2'],
                 ),
                 Html::tag(
                     'div',
@@ -200,20 +204,20 @@ final class KrfilterTargetListWidget extends Widget
                     [],
                 ),
             ]),
-            ['class' => 'd-flex']
+            ['class' => 'd-flex'],
         );
     }
 
     private function getButtonId(): string
     {
-        return \vsprintf('%s-btn', [
+        return vsprintf('%s-btn', [
             TypeHelper::shouldBeString($this->id),
         ]);
     }
 
     private function getDialogId(): string
     {
-        return \vsprintf('%s-modal', [
+        return vsprintf('%s-modal', [
             TypeHelper::shouldBeString($this->id),
         ]);
     }

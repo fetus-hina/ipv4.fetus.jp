@@ -10,7 +10,7 @@ return [
     'basePath' => dirname(__DIR__),
     'aliases' => [
         '@bower' => '@app/node_modules',
-        '@npm'   => '@app/node_modules',
+        '@npm' => '@app/node_modules',
     ],
     'components' => [
         'assetManager' => require(__DIR__ . '/components/console/asset-manager.php'),

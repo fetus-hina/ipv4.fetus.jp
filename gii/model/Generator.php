@@ -22,6 +22,42 @@ use yii\db\TableSchema;
 use yii\gii\generators\model\Generator as BaseGenerator;
 use yii\helpers\ArrayHelper;
 
+use function array_filter;
+use function array_keys;
+use function array_map;
+use function array_merge;
+use function array_slice;
+use function array_unique;
+use function array_values;
+use function count;
+use function gettype;
+use function implode;
+use function in_array;
+use function is_array;
+use function is_bool;
+use function is_float;
+use function is_int;
+use function is_iterable;
+use function is_object;
+use function is_string;
+use function ltrim;
+use function method_exists;
+use function preg_match;
+use function sort;
+use function sprintf;
+use function str_repeat;
+use function str_replace;
+use function strcmp;
+use function strlen;
+use function strnatcasecmp;
+use function substr;
+use function uksort;
+use function usort;
+use function vsprintf;
+
+use const SORT_REGULAR;
+use const SORT_STRING;
+
 class Generator extends BaseGenerator
 {
     private const LINE_WIDTH_LIMIT = 120 - 4 * 4;
@@ -44,12 +80,12 @@ class Generator extends BaseGenerator
     public function generateProperties(/*TableSchema*/ $table) //: array
     {
         $list = parent::generateProperties($table);
-        \uksort(
+        uksort(
             $list,
             // phpcs:ignore Generic.Files.LineLength.TooLong
             fn (string $columnA, string $columnB): int => $this->propertySortGroup($columnA) <=> $this->propertySortGroup($columnB)
-                ?: \strnatcasecmp($columnA, $columnB)
-                ?: \strcmp($columnA, $columnB)
+                ?: strnatcasecmp($columnA, $columnB)
+                ?: strcmp($columnA, $columnB)
         );
         return $list;
     }
@@ -57,12 +93,12 @@ class Generator extends BaseGenerator
     public function generateLabels(/*TableSchema*/ $table) //: array
     {
         $list = parent::generateLabels($table);
-        \uksort(
+        uksort(
             $list,
             // phpcs:ignore Generic.Files.LineLength.TooLong
             fn (string $columnA, string $columnB): int => $this->propertySortGroup($columnA) <=> $this->propertySortGroup($columnB)
-                ?: \strnatcasecmp($columnA, $columnB)
-                ?: \strcmp($columnA, $columnB)
+                ?: strnatcasecmp($columnA, $columnB)
+                ?: strcmp($columnA, $columnB)
         );
         return $list;
     }
@@ -82,7 +118,7 @@ class Generator extends BaseGenerator
     public function generateUses(string $tableName): array
     {
         $use = [
-            \ltrim($this->baseClass, '\\'),
+            ltrim($this->baseClass, '\\'),
         ];
 
         if ($this->db !== 'db') {
@@ -99,7 +135,7 @@ class Generator extends BaseGenerator
             $db->getTableSchema($tableName),
             TableSchema::class,
         );
-        foreach (\array_keys($schema->columns) as $columnName) {
+        foreach (array_keys($schema->columns) as $columnName) {
             switch ($columnName) {
                 case 'created_at':
                 case 'updated_at':
@@ -120,47 +156,47 @@ class Generator extends BaseGenerator
             }
         }
 
-        \sort($use, SORT_STRING);
-        return \array_values(\array_unique($use));
+        sort($use, SORT_STRING);
+        return array_values(array_unique($use));
     }
 
     public function generateBehaviors(string $tableName, int $indentCount = 8): ?string
     {
         $db = TypeHelper::shouldBeDb($this->getDbConnection());
         $schema = TypeHelper::shouldBeInstanceOf($db->getTableSchema($tableName), TableSchema::class);
-        $columns = \array_keys($schema->columns);
+        $columns = array_keys($schema->columns);
 
         if (
-            !\in_array('created_at', $columns, true) &&
-            !\in_array('created_by', $columns, true) &&
-            !\in_array('updated_at', $columns, true) &&
-            !\in_array('updated_by', $columns, true)
+            !in_array('created_at', $columns, true) &&
+            !in_array('created_by', $columns, true) &&
+            !in_array('updated_at', $columns, true) &&
+            !in_array('updated_by', $columns, true)
         ) {
             return null;
         }
 
-        $indent = \str_repeat(' ', $indentCount);
+        $indent = str_repeat(' ', $indentCount);
         $results = [];
         $results[] = 'return [';
         if (
-            \in_array('created_by', $columns, true) ||
-            \in_array('updated_by', $columns, true)
+            in_array('created_by', $columns, true) ||
+            in_array('updated_by', $columns, true)
         ) {
             if (
-                \in_array('created_by', $columns, true) &&
-                \in_array('updated_by', $columns, true)
+                in_array('created_by', $columns, true) &&
+                in_array('updated_by', $columns, true)
             ) {
                 $results[] = '    BlameableBehavior::class,';
             } else {
                 $results[] = '    [';
                 $results[] = "        'class' => BlameableBehavior::class,";
-                $results[] = \vsprintf("        'createdByAttribute' => %s,", [
-                    \in_array('created_by', $columns, true)
+                $results[] = vsprintf("        'createdByAttribute' => %s,", [
+                    in_array('created_by', $columns, true)
                         ? "'created_by'"
                         : 'false',
                 ]);
-                $results[] = \vsprintf("        'updatedByAttribute' => %s,", [
-                    \in_array('updated_by', $columns, true)
+                $results[] = vsprintf("        'updatedByAttribute' => %s,", [
+                    in_array('updated_by', $columns, true)
                         ? "'updated_by'"
                         : 'false',
                 ]);
@@ -168,24 +204,24 @@ class Generator extends BaseGenerator
             }
         }
         if (
-            \in_array('created_at', $columns, true) ||
-            \in_array('updated_at', $columns, true)
+            in_array('created_at', $columns, true) ||
+            in_array('updated_at', $columns, true)
         ) {
             if (
-                \in_array('created_at', $columns, true) &&
-                \in_array('updated_at', $columns, true)
+                in_array('created_at', $columns, true) &&
+                in_array('updated_at', $columns, true)
             ) {
                 $results[] = '    TimestampBehavior::class,';
             } else {
                 $results[] = '    [';
                 $results[] = "        'class' => TimestampBehavior::class,";
-                $results[] = \vsprintf("        'createdAtAttribute' => %s,", [
-                    \in_array('created_at', $columns, true)
+                $results[] = vsprintf("        'createdAtAttribute' => %s,", [
+                    in_array('created_at', $columns, true)
                         ? "'created_at'"
                         : 'false',
                 ]);
-                $results[] = \vsprintf("        'updatedAtAttribute' => %s,", [
-                    \in_array('updated_at', $columns, true)
+                $results[] = vsprintf("        'updatedAtAttribute' => %s,", [
+                    in_array('updated_at', $columns, true)
                         ? "'updated_at'"
                         : 'false',
                 ]);
@@ -194,7 +230,7 @@ class Generator extends BaseGenerator
         }
         $results[] = '];';
 
-        return \implode("\n{$indent}", $results);
+        return implode("\n{$indent}", $results);
     }
 
     // public function generateRules(TableSchema $table): array
@@ -211,7 +247,7 @@ class Generator extends BaseGenerator
             if (
                 !$column->allowNull &&
                 $column->defaultValue === null &&
-                !\in_array($column->name, ['created_at', 'updated_at', 'created_by', 'updated_by'], true)
+                !in_array($column->name, ['created_at', 'updated_at', 'created_by', 'updated_by'], true)
             ) {
                 $types['required'][] = $column->name;
             }
@@ -249,7 +285,7 @@ class Generator extends BaseGenerator
                     } else {
                         $types['string'][] = $column->name;
                     }
-                    if ($column->name === 'url' || \preg_match('/_url$/i', $column->name)) {
+                    if ($column->name === 'url' || preg_match('/_url$/i', $column->name)) {
                         $urls[] = $column->name;
                     }
                     break;
@@ -278,15 +314,15 @@ class Generator extends BaseGenerator
 
         // Unique indexes rules
         try {
-            $uniqueIndexes = \array_merge(
+            $uniqueIndexes = array_merge(
                 $db->getSchema()->findUniqueIndexes($table),
-                [$table->primaryKey]
+                [$table->primaryKey],
             );
-            $uniqueIndexes = \array_unique($uniqueIndexes, SORT_REGULAR);
+            $uniqueIndexes = array_unique($uniqueIndexes, SORT_REGULAR);
             foreach ($uniqueIndexes as $uniqueColumns) {
                 // Avoid validating auto incremental columns
                 if (!$this->isColumnAutoIncremental($table, $uniqueColumns)) {
-                    $attributesCount = \count($uniqueColumns);
+                    $attributesCount = count($uniqueColumns);
 
                     if ($attributesCount === 1) {
                         $attrs = [
@@ -300,7 +336,7 @@ class Generator extends BaseGenerator
                         $attrs = [
                             'skipOnEmpty' => true,
                             'skipOnError' => true,
-                            'targetAttribute' => \array_map(
+                            'targetAttribute' => array_map(
                                 fn ($v): string => (string)$v,
                                 $uniqueColumns,
                             ),
@@ -328,13 +364,13 @@ class Generator extends BaseGenerator
 
             $attrs = [
                 'skipOnError' => true,
-                'targetClass' => new Expression(\sprintf('%s::class', $refClassName)),
-                'targetAttribute' => \array_map(
+                'targetClass' => new Expression(sprintf('%s::class', $refClassName)),
+                'targetAttribute' => array_map(
                     fn ($v): string => (string)$v,
                     $refs,
                 ),
             ];
-            foreach ($this->formatRule(\array_keys($refs), 'exist', $attrs) as $rule) {
+            foreach ($this->formatRule(array_keys($refs), 'exist', $attrs) as $rule) {
                 $rules[] = $rule;
             }
         }
@@ -351,8 +387,8 @@ class Generator extends BaseGenerator
         if (!$attributes) {
             $results = [];
             if ($doNotSplit) {
-                $results[] = \vsprintf('[[%s], %s],', [
-                    \implode(', ', \array_map(
+                $results[] = vsprintf('[[%s], %s],', [
+                    implode(', ', array_map(
                         fn (string $v): string => $this->quote($v),
                         $columns,
                     )),
@@ -360,17 +396,17 @@ class Generator extends BaseGenerator
                 ]);
             } else {
                 while ($columns) {
-                    for ($i = \count($columns);; --$i) {
-                        $rule = \vsprintf('[[%s], %s],', [
-                            \implode(', ', \array_map(
+                    for ($i = count($columns);; --$i) {
+                        $rule = vsprintf('[[%s], %s],', [
+                            implode(', ', array_map(
                                 fn (string $v): string => $this->quote($v),
-                                \array_slice($columns, 0, $i),
+                                array_slice($columns, 0, $i),
                             )),
                             $this->quote($type),
                         ]);
-                        if ($i === 1 || \strlen($rule) <= self::LINE_WIDTH_LIMIT) {
+                        if ($i === 1 || strlen($rule) <= self::LINE_WIDTH_LIMIT) {
                             $results[] = $rule;
-                            $columns = \array_slice($columns, $i);
+                            $columns = array_slice($columns, $i);
                             break; // for
                         }
                     }
@@ -381,8 +417,8 @@ class Generator extends BaseGenerator
 
         $results = [];
         if ($doNotSplit) {
-            $columnsLine = \vsprintf('[%s], %s,', [
-                \implode(', ', \array_map(
+            $columnsLine = vsprintf('[%s], %s,', [
+                implode(', ', array_map(
                     fn (string $v): string => $this->quote($v),
                     $columns,
                 )),
@@ -390,7 +426,7 @@ class Generator extends BaseGenerator
             ]);
             $results[] = "[{$columnsLine}";
             foreach ($attributes as $attrName => $attrValue) {
-                $results[] = \vsprintf('    %s => %s,', [
+                $results[] = vsprintf('    %s => %s,', [
                     $this->quote((string)$attrName),
                     $this->autoQuote($attrValue, 8),
                 ]);
@@ -398,24 +434,24 @@ class Generator extends BaseGenerator
             $results[] = '],';
         } else {
             while ($columns) {
-                for ($i = \count($columns);; --$i) {
-                    $columnsLine = \vsprintf('[%s], %s,', [
-                        \implode(', ', \array_map(
+                for ($i = count($columns);; --$i) {
+                    $columnsLine = vsprintf('[%s], %s,', [
+                        implode(', ', array_map(
                             fn (string $v): string => $this->quote($v),
-                            \array_slice($columns, 0, $i),
+                            array_slice($columns, 0, $i),
                         )),
                         $this->quote($type),
                     ]);
-                    if ($i === 1 || \strlen($columnsLine) <= self::LINE_WIDTH_LIMIT - 5) {
+                    if ($i === 1 || strlen($columnsLine) <= self::LINE_WIDTH_LIMIT - 5) {
                         $results[] = "[{$columnsLine}";
                         foreach ($attributes as $attrName => $attrValue) {
-                            $results[] = \vsprintf('    %s => %s,', [
+                            $results[] = vsprintf('    %s => %s,', [
                                 $this->quote((string)$attrName),
                                 $this->autoQuote($attrValue, 8),
                             ]);
                         }
                         $results[] = '],';
-                        $columns = \array_slice($columns, $i);
+                        $columns = array_slice($columns, $i);
                         break; // for
                     }
                 }
@@ -426,49 +462,48 @@ class Generator extends BaseGenerator
 
     private function quote(string $text): string
     {
-        return \sprintf("'%s'", \str_replace(
+        return sprintf("'%s'", str_replace(
             ['\\', "'"],
             ['\\\\', "\\'"],
-            $text
+            $text,
         ));
     }
 
-    /** @param mixed $value */
-    private function autoQuote($value, int $indentWidth = 0): string
+    private function autoQuote(mixed $value, int $indentWidth = 0): string
     {
         if ($value === null) {
             return 'null';
-        } elseif (\is_string($value)) {
+        } elseif (is_string($value)) {
             return $this->quote($value);
-        } elseif (\is_int($value) || \is_float($value)) {
+        } elseif (is_int($value) || is_float($value)) {
             return (string)$value;
-        } elseif (\is_bool($value)) {
+        } elseif (is_bool($value)) {
             return $value ? 'true' : 'false';
         } elseif (
-            \is_object($value) &&
+            is_object($value) &&
             ($value instanceof ExpressionInterface) &&
-            \method_exists($value, '__toString')
+            method_exists($value, '__toString')
         ) {
             return (string)$value;
-        } elseif (\is_iterable($value)) {
+        } elseif (is_iterable($value)) {
             $result = "[\n";
-            if (\is_array($value) && ArrayHelper::isIndexed($value)) {
+            if (is_array($value) && ArrayHelper::isIndexed($value)) {
                 foreach ($value as $v) {
-                    $result .= \str_repeat(' ', $indentWidth + 4) . $this->autoQuote($v, $indentWidth + 4) . ",\n";
+                    $result .= str_repeat(' ', $indentWidth + 4) . $this->autoQuote($v, $indentWidth + 4) . ",\n";
                 }
             } else {
                 foreach ($value as $k => $v) {
-                    $result .= \vsprintf("%s%s => %s,\n", [
-                        \str_repeat(' ', $indentWidth + 4),
-                        \is_int($k) ? (string)$k : $this->quote((string)$k),
+                    $result .= vsprintf("%s%s => %s,\n", [
+                        str_repeat(' ', $indentWidth + 4),
+                        is_int($k) ? (string)$k : $this->quote((string)$k),
                         $this->autoQuote($v, $indentWidth + 4),
                     ]);
                 }
             }
-            return $result . \str_repeat(' ', $indentWidth) . ']';
+            return $result . str_repeat(' ', $indentWidth) . ']';
         }
 
-        throw new NotSupportedException('Unknown or unsupported type: ' . \gettype($value));
+        throw new NotSupportedException('Unknown or unsupported type: ' . gettype($value));
     }
 
     private function findTraits(): array
@@ -485,10 +520,10 @@ class Generator extends BaseGenerator
             ) {
                 /** @var class-string */
                 $fqcn = 'app\models\traits' .
-                    \str_replace(
+                    str_replace(
                         '/',
                         '\\',
-                        \substr($entry->getPath(), \strlen($basePath))
+                        substr($entry->getPath(), strlen($basePath)),
                     ) .
                     '\\' .
                     $entry->getBasename('.php');
@@ -519,9 +554,9 @@ class Generator extends BaseGenerator
                 }
             }
         }
-        \usort(
+        usort(
             $results,
-            fn (array $a, array $b): int => \strcmp($a['fqcn'], $b['fqcn'])
+            fn (array $a, array $b): int => strcmp($a['fqcn'], $b['fqcn'])
         );
         return $results;
     }
@@ -529,9 +564,9 @@ class Generator extends BaseGenerator
     public function getInjectedTraits(string $tableName): array
     {
         $genClass = $this->ns . '\\' . $this->generateClassName($tableName);
-        return \array_filter(
+        return array_filter(
             $this->traits,
-            fn (array $info): bool => \in_array(
+            fn (array $info): bool => in_array(
                 $genClass,
                 $info['injectTo'],
                 true,
@@ -543,9 +578,9 @@ class Generator extends BaseGenerator
     {
         $results = [];
         foreach ($this->getInjectedTraits($tableName) as $trait) {
-            $results = \array_merge($results, $trait['interfaces']);
+            $results = array_merge($results, $trait['interfaces']);
         }
-        \sort($results, SORT_STRING);
+        sort($results, SORT_STRING);
         return $results;
     }
 }

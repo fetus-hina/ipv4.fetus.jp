@@ -9,6 +9,11 @@ use app\assets\AdSenseAsset;
 use yii\base\Widget;
 use yii\helpers\Html;
 
+use function implode;
+use function is_array;
+use function preg_match;
+use function vsprintf;
+
 final class AdSenseWidget extends Widget
 {
     public const SIZE_728_90 = '728x90';
@@ -23,7 +28,7 @@ final class AdSenseWidget extends Widget
     public function run()
     {
         $params = Yii::$app->params['adsense'];
-        if (!\is_array($params)) {
+        if (!is_array($params)) {
             return '';
         }
 
@@ -33,7 +38,7 @@ final class AdSenseWidget extends Widget
 
         if (YII_ENV_PROD) {
             AdSenseAsset::register($this->view);
-            return \implode('', [
+            return implode('', [
                 Html::tag('ins', '', [
                     'class' => 'adsbygoogle',
                     'data' => [
@@ -55,9 +60,12 @@ final class AdSenseWidget extends Widget
         }
     }
 
+    /**
+     * @return array<string, string>|null
+     */
     private function makeStyles(string $sizeTag): ?array
     {
-        if (\preg_match('/^(\d+)x(\d+)$/', $sizeTag, $match)) {
+        if (preg_match('/^(\d+)x(\d+)$/', $sizeTag, $match)) {
             return [
                 'display' => 'inline-block',
                 'width' => "{$match[1]}px",
@@ -70,8 +78,8 @@ final class AdSenseWidget extends Widget
 
     private function makePlaceholder(string $sizeTag): string
     {
-        if (\preg_match('/^(\d+)x(\d+)$/', $sizeTag, $match)) {
-            return \vsprintf('https://placehold.jp/%dx%d.png', [
+        if (preg_match('/^(\d+)x(\d+)$/', $sizeTag, $match)) {
+            return vsprintf('https://placehold.jp/%dx%d.png', [
                 (int)$match[1],
                 (int)$match[2],
             ]);

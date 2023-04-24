@@ -11,6 +11,8 @@ use app\models\Region;
 use yii\base\Widget;
 use yii\helpers\Html;
 
+use function implode;
+
 class Krfilter extends Widget
 {
     protected const RUFILTER_ID = 5; // FIXME: constant
@@ -66,7 +68,7 @@ class Krfilter extends Widget
     {
         return Html::tag(
             'div',
-            \implode('', [
+            implode('', [
                 $this->renderCardHeader(),
                 $this->renderCardBody(),
             ]),
@@ -107,7 +109,7 @@ class Krfilter extends Widget
 
     protected function getCardBodyTexts(): string
     {
-        return \implode('', [
+        return implode('', [
             Html::tag(
                 'p',
                 Yii::t(
@@ -119,7 +121,7 @@ class Krfilter extends Widget
                 'p',
                 Html::a(
                     Yii::t('app', 'For more information, please click here.'),
-                    ['krfilter/view']
+                    ['krfilter/view'],
                 ),
                 [
                     'class' => [

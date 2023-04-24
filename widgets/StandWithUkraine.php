@@ -9,6 +9,8 @@ use yii\base\Widget;
 use yii\helpers\Html;
 use yii\web\View;
 
+use function implode;
+
 final class StandWithUkraine extends Widget
 {
     private const CC_UKRAINE = 'ua';
@@ -26,7 +28,7 @@ final class StandWithUkraine extends Widget
 
         return Html::tag(
             'div',
-            \implode('', [
+            implode('', [
                 $this->renderFlag(),
                 $this->renderText(),
             ]),
@@ -68,7 +70,7 @@ final class StandWithUkraine extends Widget
     {
         return Html::tag(
             'div',
-            \implode('', [
+            implode('', [
                 $this->renderTextStandWith(),
                 $this->renderTextUkraine(),
             ]),

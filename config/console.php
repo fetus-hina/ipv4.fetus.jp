@@ -18,7 +18,7 @@ return (function (): array {
         'controllerNamespace' => 'app\commands',
         'aliases' => [
             '@bower' => '@app/node_modules',
-            '@npm'   => '@app/node_modules',
+            '@npm' => '@app/node_modules',
             '@tests' => '@app/tests',
         ],
         'components' => [

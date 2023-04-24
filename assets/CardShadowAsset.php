@@ -9,10 +9,21 @@ use yii\web\AssetBundle;
 
 final class CardShadowAsset extends AssetBundle
 {
+    /**
+     * @var string
+     */
     public $sourcePath = '@app/resources';
+
+    /**
+     * @var string[]
+     */
     public $css = [
         'css/card-shadow.min.css',
     ];
+
+    /**
+     * @var class-string[]
+     */
     public $depends = [
         BootstrapAsset::class,
     ];

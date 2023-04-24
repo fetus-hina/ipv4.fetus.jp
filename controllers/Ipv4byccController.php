@@ -7,10 +7,16 @@ namespace app\controllers;
 use DateInterval;
 use DateTimeImmutable;
 use DateTimeZone;
+use Generator;
 use Yii;
 use app\helpers\Ipv4byccDumper;
 use yii\web\Controller;
 use yii\web\Response;
+
+use function file_exists;
+use function filesize;
+use function preg_replace;
+use function vsprintf;
 
 final class Ipv4byccController extends Controller
 {
@@ -22,11 +28,11 @@ final class Ipv4byccController extends Controller
 
         return $this->proc(
             [
-                \vsprintf('@web/ipv4bycc/cidr/%s/%s-cidr.txt', [
+                vsprintf('@web/ipv4bycc/cidr/%s/%s-cidr.txt', [
                     $today->format('Y-m'),
                     $today->format('Ymd'),
                 ]),
-                \vsprintf('@web/ipv4bycc/cidr/%s/%s-cidr.txt', [
+                vsprintf('@web/ipv4bycc/cidr/%s/%s-cidr.txt', [
                     $yesterday->format('Y-m'),
                     $yesterday->format('Ymd'),
                 ]),
@@ -43,11 +49,11 @@ final class Ipv4byccController extends Controller
 
         return $this->proc(
             [
-                \vsprintf('@web/ipv4bycc/mask/%s/%s-mask.txt', [
+                vsprintf('@web/ipv4bycc/mask/%s/%s-mask.txt', [
                     $today->format('Y-m'),
                     $today->format('Ymd'),
                 ]),
-                \vsprintf('@web/ipv4bycc/mask/%s/%s-mask.txt', [
+                vsprintf('@web/ipv4bycc/mask/%s/%s-mask.txt', [
                     $yesterday->format('Y-m'),
                     $yesterday->format('Ymd'),
                 ]),
@@ -58,13 +64,13 @@ final class Ipv4byccController extends Controller
 
     /**
      * @param string[] $paths
-     * @param callable(): \Generator $dumper
+     * @param callable(): Generator $dumper
      */
     private function proc(array $paths, callable $dumper): Response
     {
         foreach ($paths as $path) {
-            $localPath = (string)Yii::getAlias((string)\preg_replace('!^@web/!', '@app/web/', $path));
-            if (\file_exists($localPath) && \filesize($localPath)) {
+            $localPath = (string)Yii::getAlias((string)preg_replace('!^@web/!', '@app/web/', $path));
+            if (file_exists($localPath) && filesize($localPath)) {
                 return $this->redirect($path);
             }
         }

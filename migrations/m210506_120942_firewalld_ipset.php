@@ -6,6 +6,9 @@ use yii\db\Migration;
 
 final class m210506_120942_firewalld_ipset extends Migration
 {
+    /**
+     * @inheritdoc
+     */
     public function safeUp()
     {
         $this->insert('{{%download_template}}', [
@@ -25,6 +28,9 @@ final class m210506_120942_firewalld_ipset extends Migration
         return true;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function safeDown()
     {
         $this->delete('{{%download_template}}', ['key' => 'firewalld-ipset']);

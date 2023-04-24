@@ -12,6 +12,18 @@ use stdClass;
 use yii\base\Action;
 use yii\helpers\Html;
 
+use function call_user_func;
+use function file_get_contents;
+use function ltrim;
+use function preg_match;
+use function preg_replace;
+use function strcmp;
+use function strlen;
+use function strnatcasecmp;
+use function substr;
+use function trim;
+use function usort;
+
 final class LicenseAction extends Action
 {
     public string $view = '//license/license';
@@ -31,31 +43,37 @@ final class LicenseAction extends Action
         ]);
     }
 
+    /**
+     * @return stdClass[]
+     */
     private function loadDepends(): array
     {
         $ret = $this->loadFiles($this->directory);
-        \usort(
+        usort(
             $ret,
             function (stdClass $a, stdClass $b): int {
-                $aName = \trim(\preg_replace('/[^0-9A-Za-z]+/', ' ', $a->name));
-                $aName2 = \ltrim($aName, '@');
-                $bName = \trim(\preg_replace('/[^0-9A-Za-z]+/', ' ', $b->name));
-                $bName2 = \ltrim($bName, '@');
-                return \strnatcasecmp($aName2, $bName2)
-                    ?: \strnatcasecmp($aName, $bName)
-                    ?: \strcmp($aName, $bName);
-            }
+                $aName = trim(preg_replace('/[^0-9A-Za-z]+/', ' ', $a->name));
+                $aName2 = ltrim($aName, '@');
+                $bName = trim(preg_replace('/[^0-9A-Za-z]+/', ' ', $b->name));
+                $bName2 = ltrim($bName, '@');
+                return strnatcasecmp($aName2, $bName2)
+                    ?: strnatcasecmp($aName, $bName)
+                    ?: strcmp($aName, $bName);
+            },
         );
         return $ret;
     }
 
+    /**
+     * @return stdClass[]
+     */
     private function loadFiles(string $directory): array
     {
         $basedir = TypeHelper::shouldBeString(Yii::getAlias($directory));
         $ret = [];
-        /** @var iterable<RecursiveDirectoryIterator> */
+        /** @var iterable<RecursiveDirectoryIterator> $it */
         $it = new RecursiveIteratorIterator(
-            new RecursiveDirectoryIterator($basedir)
+            new RecursiveDirectoryIterator($basedir),
         );
         foreach ($it as $entry) {
             if (!$entry->isFile()) {
@@ -63,24 +81,24 @@ final class LicenseAction extends Action
             }
 
             $pathname = $entry->getPathname();
-            if (\substr($pathname, 0, \strlen($basedir)) !== $basedir) {
+            if (substr($pathname, 0, strlen($basedir)) !== $basedir) {
                 continue;
             }
 
-            if (\substr($pathname, -12) !== '-LICENSE.txt') {
+            if (substr($pathname, -12) !== '-LICENSE.txt') {
                 continue;
             }
 
-            $basename = \substr($pathname, \strlen($basedir));
+            $basename = substr($pathname, strlen($basedir));
             $html = $this->loadPlain(
                 $entry->getPathname(),
                 fn (string $t): bool => (bool)TypeHelper::shouldBeInteger(
-                    \preg_match('/copyright|licen[cs]e/i', $t),
+                    preg_match('/copyright|licen[cs]e/i', $t),
                 ),
             );
             if ($html) {
                 $ret[] = (object)[
-                    'name' => \ltrim(\substr($basename, 0, \strlen($basename) - 12), '/'),
+                    'name' => ltrim(substr($basename, 0, strlen($basename) - 12), '/'),
                     'html' => $html,
                 ];
             }
@@ -99,8 +117,8 @@ final class LicenseAction extends Action
 
     private function loadFile(string $path, ?callable $checker): ?string
     {
-        $text = TypeHelper::shouldBeString(\file_get_contents($path, false));
-        if ($checker && !\call_user_func($checker, $text)) {
+        $text = TypeHelper::shouldBeString(file_get_contents($path, false));
+        if ($checker && !call_user_func($checker, $text)) {
             return null;
         }
         return $text;

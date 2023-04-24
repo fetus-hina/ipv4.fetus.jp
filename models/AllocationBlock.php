@@ -29,6 +29,7 @@ final class AllocationBlock extends ActiveRecord
     }
 
     /**
+     * @inheritdoc
      * @return array[]
      */
     public function rules()

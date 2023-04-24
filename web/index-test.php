@@ -1,4 +1,4 @@
-<?php
+<?php // phpcs:disable PSR1.Files.SideEffects.FoundWithSymbols
 
 declare(strict_types=1);
 
@@ -6,6 +6,7 @@ use yii\web\Application;
 
 if (
     file_exists(__DIR__ . '/../.production') ||
+    // phpcs:ignore SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable.DisallowedSuperGlobalVariable
     !in_array($_SERVER['REMOTE_ADDR'] ?? '', ['127.0.0.1', '::1'], true)
 ) {
     die('You are not allowed to access this file.');

@@ -10,10 +10,21 @@ use yii\web\YiiAsset;
 
 final class LanguageSwitcherAsset extends AssetBundle
 {
+    /**
+     * @var string
+     */
     public $sourcePath = '@app/resources';
+
+    /**
+     * @var string[]
+     */
     public $js = [
         'js/language-switcher.min.js',
     ];
+
+    /**
+     * @var class-string[]
+     */
     public $depends = [
         JqueryAsset::class,
         YiiAsset::class,

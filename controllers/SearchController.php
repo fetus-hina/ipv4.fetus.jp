@@ -8,13 +8,14 @@ use Throwable;
 use Yii;
 use app\helpers\TypeHelper;
 use app\models\SearchForm;
+use app\models\SearchResult;
 use yii\web\Controller;
 
 class SearchController extends Controller
 {
     public function actionIndex(): string
     {
-        /** @var ?\app\models\SearchResult */
+        /** @var ?SearchResult $result */
         $result = null;
         $form = Yii::createObject(SearchForm::class);
         try {
@@ -23,7 +24,7 @@ class SearchController extends Controller
                     TypeHelper::shouldBeArray(
                         Yii::$app->request->get(),
                         TypeHelper::ARRAY_ASSOC,
-                    )
+                    ),
                 ) &&
                 $form->validate()
             ) {

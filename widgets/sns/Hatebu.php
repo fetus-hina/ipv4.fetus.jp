@@ -9,6 +9,8 @@ use yii\base\Widget;
 use yii\helpers\Html;
 use yii\web\View;
 
+use function preg_match;
+
 final class Hatebu extends Widget
 {
     public function run(): string
@@ -39,11 +41,11 @@ final class Hatebu extends Widget
                     'title' => Yii::t('app', 'Add this page to Hatena Bookmark'),
                     'data' => [
                         'hatena-bookmark-layout' => 'basic-label-counter',
-                        'hatena-bookmark-lang' => \preg_match('/^ja\b/', Yii::$app->language)
+                        'hatena-bookmark-lang' => preg_match('/^ja\b/', Yii::$app->language)
                             ? 'ja'
                             : 'en',
                     ],
-                ]
+                ],
             ),
             [
                 'class' => [

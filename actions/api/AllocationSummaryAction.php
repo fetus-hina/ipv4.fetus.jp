@@ -10,6 +10,17 @@ use app\models\RegionStat;
 use yii\base\Action;
 use yii\web\Response;
 
+use function array_map;
+use function array_merge;
+use function array_reduce;
+use function array_values;
+use function filter_var;
+use function floor;
+
+use const FILTER_VALIDATE_INT;
+use const SORT_ASC;
+use const SORT_DESC;
+
 final class AllocationSummaryAction extends Action
 {
     private const TOTAL_ADDRESS_SPACE = 1 << 32;
@@ -27,19 +38,20 @@ final class AllocationSummaryAction extends Action
         return $resp;
     }
 
+    // phpcs:ignore SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification
     private function createJson(): array
     {
         // 割り振りの多い国のリスト
         $manyAllocCountries = $this->getManyAllocCountries(
-            (int)\floor(self::TOTAL_ADDRESS_SPACE * 0.02) // 2%
+            (int)floor(self::TOTAL_ADDRESS_SPACE * 0.02), // 2%
         );
 
         // 全割り振り数
         $totalAlloc = $this->getAllocatedAddressCount();
 
         // 「割り振りの多い国のリスト」の合計割り振り数
-        $manyAlloc = \array_reduce(
-            \array_map(
+        $manyAlloc = array_reduce(
+            array_map(
                 fn (RegionStat $model): int => $model->total_address_count,
                 $manyAllocCountries,
             ),
@@ -47,16 +59,16 @@ final class AllocationSummaryAction extends Action
             0,
         );
 
-        return \array_values(
-            \array_map(
-                fn (array $data) => \array_merge(
+        return array_values(
+            array_map(
+                fn (array $data) => array_merge(
                     $data,
                     [
                         'rate' => (float)$data['count'] / (float)self::TOTAL_ADDRESS_SPACE,
                     ],
                 ),
-                \array_merge(
-                    \array_map(
+                array_merge(
+                    array_map(
                         fn (RegionStat $model): array => [
                             'cc' => $model->region_id,
                             'name' => $model->region?->formattedName ?? $model->region_id,
@@ -111,7 +123,7 @@ final class AllocationSummaryAction extends Action
         static $cache = null;
         if ($cache === null) {
             $cache = TypeHelper::shouldBeInteger(
-                \filter_var(
+                filter_var(
                     RegionStat::find()->sum('total_address_count'),
                     FILTER_VALIDATE_INT,
                 ),

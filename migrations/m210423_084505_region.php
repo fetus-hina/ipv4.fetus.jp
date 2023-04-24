@@ -7,6 +7,9 @@ use yii\db\Migration;
 
 final class m210423_084505_region extends Migration
 {
+    /**
+     * @inheritdoc
+     */
     public function safeUp()
     {
         $this->createTable('{{%region}}', [
@@ -274,6 +277,9 @@ final class m210423_084505_region extends Migration
         return true;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function safeDown()
     {
         $this->dropTable('{{%region}}');

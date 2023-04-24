@@ -8,7 +8,14 @@ use yii\web\AssetBundle;
 
 final class ChartJsAsset extends AssetBundle
 {
+    /**
+     * @var string
+     */
     public $sourcePath = '@npm/chart.js/dist';
+
+    /**
+     * @var string[]
+     */
     public $js = [
         'chart.umd.js',
     ];

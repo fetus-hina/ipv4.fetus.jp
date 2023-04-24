@@ -8,13 +8,15 @@ use Yii;
 use yii\base\Widget;
 use yii\helpers\Html;
 
+use function implode;
+
 final class FlagIcons extends Widget
 {
     public function run(): string
     {
         return Html::tag(
             'div',
-            \implode(' ', [
+            implode(' ', [
                 Yii::t('app', 'National flags of the countries are displayed using {source}.', [
                     'source' => Html::a(
                         Html::encode('flag-icons'),

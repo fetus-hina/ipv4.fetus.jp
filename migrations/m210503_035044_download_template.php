@@ -6,6 +6,9 @@ use yii\db\Migration;
 
 final class m210503_035044_download_template extends Migration
 {
+    /**
+     * @inheritdoc
+     */
     public function safeUp()
     {
         $this->createTable('{{%comment_style}}', [
@@ -157,11 +160,14 @@ final class m210503_035044_download_template extends Migration
                     'smtpd_client_restrictions などに「check_client_access cidr:/path/to/file」のように指定します',
                     true,
                 ],
-            ]
+            ],
         );
         return true;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function safeDown()
     {
         $this->dropTable('{{%download_template}}');

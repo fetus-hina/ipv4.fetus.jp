@@ -6,11 +6,17 @@ use yii\db\Migration;
 
 final class m210509_081223_update_country_name extends Migration
 {
+    /**
+     * @inheritdoc
+     */
     public function safeUp()
     {
         return $this->doUpdate('new');
     }
 
+    /**
+     * @inheritdoc
+     */
     public function safeDown()
     {
         return $this->doUpdate('old');
@@ -27,13 +33,14 @@ final class m210509_081223_update_country_name extends Migration
                 ],
                 [
                     'id' => $cc,
-                ]
+                ],
             );
         }
 
         return true;
     }
 
+    // phpcs:ignore SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification
     private function getData(): array
     {
         return [

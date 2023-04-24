@@ -10,6 +10,8 @@ use yii\base\Widget;
 use yii\helpers\Html;
 use yii\web\View;
 
+use function implode;
+
 final class Ipv4byccCard extends Widget
 {
     public function run(): string
@@ -20,7 +22,7 @@ final class Ipv4byccCard extends Widget
 
         return Html::tag(
             'div',
-            \implode('', [
+            implode('', [
                 $this->renderCardHeader(),
                 $this->renderCardBody(),
             ]),
@@ -51,7 +53,7 @@ final class Ipv4byccCard extends Widget
     {
         return Html::tag(
             'div',
-            \implode('', [
+            implode('', [
                 // phpcs:disable Generic.Files.LineLength.TooLong
                 Html::tag(
                     'p',
@@ -67,7 +69,7 @@ final class Ipv4byccCard extends Widget
                 Html::tag(
                     'div',
                     Html::a(
-                        \implode(' ', [
+                        implode(' ', [
                             Html::encode(Yii::t('app/ipv4bycc', 'CIDR format')),
                             Html::tag('span', '', ['class' => 'bi bi-download']),
                         ]),
@@ -86,7 +88,7 @@ final class Ipv4byccCard extends Widget
                 Html::tag(
                     'div',
                     Html::a(
-                        \implode(' ', [
+                        implode(' ', [
                             Html::encode(Yii::t('app/ipv4bycc', 'Subnet Mask format')),
                             Html::tag('span', '', ['class' => 'bi bi-download']),
                         ]),

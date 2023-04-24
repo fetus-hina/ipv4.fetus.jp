@@ -6,6 +6,9 @@ use yii\db\Migration;
 
 class m210427_090529_index extends Migration
 {
+    /**
+     * @inheritdoc
+     */
     public function safeUp()
     {
         $this->createIndex('allocation_block__region_id__idx', '{{%allocation_block}}', ['region_id'], false);
@@ -14,14 +17,17 @@ class m210427_090529_index extends Migration
         $this->createIndex('krfilter_cidr__krfilter_id__idx', '{{%krfilter_cidr}}', ['krfilter_id', 'cidr'], true);
 
         $this->execute(
-            'CREATE INDEX [[allocation_cidr__cidr__idx]] ON {{%allocation_cidr}} USING gist ([[cidr]] inet_ops)'
+            'CREATE INDEX [[allocation_cidr__cidr__idx]] ON {{%allocation_cidr}} USING gist ([[cidr]] inet_ops)',
         );
         $this->execute(
-            'CREATE INDEX [[merged_cidr__cidr__idx]] ON {{%merged_cidr}} USING gist ([[cidr]] inet_ops)'
+            'CREATE INDEX [[merged_cidr__cidr__idx]] ON {{%merged_cidr}} USING gist ([[cidr]] inet_ops)',
         );
         return true;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function safeDown()
     {
         $this->dropIndex('merged_cidr__cidr__idx', '{{%merged_cidr}}');

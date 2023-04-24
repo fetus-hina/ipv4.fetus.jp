@@ -24,6 +24,7 @@ final class LanguageMatch extends ActiveRecord
     }
 
     /**
+     * @inheritdoc
      * @return array[]
      */
     public function rules()

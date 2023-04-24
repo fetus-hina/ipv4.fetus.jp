@@ -9,6 +9,13 @@ use yii\base\Model;
 use yii\db\Connection;
 use yii\db\Expression as DbExpression;
 
+use function array_map;
+use function explode;
+use function implode;
+use function intval;
+use function preg_match;
+use function vsprintf;
+
 /**
  * @property-read ?string $normalizedIP
  */
@@ -16,12 +23,16 @@ final class SearchForm extends Model
 {
     public ?string $query = null;
 
+    /**
+     * @inheritdoc
+     */
     public function formName()
     {
         return '';
     }
 
     /**
+     * @inheritdoc
      * @return array[]
      */
     public function rules()
@@ -52,17 +63,17 @@ final class SearchForm extends Model
     public function getNormalizedIP(): ?string
     {
         if (
-            !\preg_match(
+            !preg_match(
                 '/^((2([0-4][0-9]|5[0-5])|[0-1]?[0-9]?[0-9])\.){3}((2([0-4][0-9]|5[0-5])|[0-1]?[0-9]?[0-9]))$/',
-                (string)$this->query
+                (string)$this->query,
             )
         ) {
             return $this->query;
         }
 
-        return \implode('.', \array_map(
-            fn (string $v): string => (string)\intval($v, 10),
-            \explode('.', (string)$this->query)
+        return implode('.', array_map(
+            fn (string $v): string => (string)intval($v, 10),
+            explode('.', (string)$this->query),
         ));
     }
 
@@ -104,7 +115,7 @@ final class SearchForm extends Model
 
     private static function pgInet(string $inet, ?Connection $db = null): DbExpression
     {
-        return new DbExpression(\vsprintf('inet %s', [
+        return new DbExpression(vsprintf('inet %s', [
             ($db ?? Yii::$app->db)->quoteValue($inet),
         ]));
     }

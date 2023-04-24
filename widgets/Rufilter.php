@@ -8,6 +8,8 @@ use app\models\KrfilterRegion;
 use app\models\Region;
 use yii\helpers\Html;
 
+use function implode;
+
 final class Rufilter extends Krfilter
 {
     protected function shouldBeDisplayed(Region $region): bool
@@ -39,7 +41,7 @@ final class Rufilter extends Krfilter
     {
         return Html::tag(
             'div',
-            \implode('', [
+            implode('', [
                 StandWithUkraine::widget(),
                 $this->getCardBodyTexts(),
             ]),

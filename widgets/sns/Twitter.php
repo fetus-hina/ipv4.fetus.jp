@@ -35,7 +35,7 @@ final class Twitter extends Widget
                     'data' => [
                         'show-count' => 'false',
                     ],
-                ]
+                ],
             ),
             [
                 'class' => [

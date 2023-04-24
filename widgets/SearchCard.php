@@ -14,6 +14,10 @@ use yii\bootstrap5\ActiveForm;
 use yii\helpers\Html;
 use yii\web\View;
 
+use function implode;
+use function ob_get_clean;
+use function ob_start;
+
 final class SearchCard extends Widget
 {
     public ?SearchForm $form = null;
@@ -31,7 +35,7 @@ final class SearchCard extends Widget
     {
         return Html::tag(
             'div',
-            \implode('', [
+            implode('', [
                 $this->renderCardHeader(),
                 $this->renderCardBody($form),
             ]),
@@ -74,9 +78,9 @@ final class SearchCard extends Widget
 
     private function renderForm(SearchForm $form): string
     {
-        \ob_start();
+        ob_start();
         $this->putForm($form);
-        if (($content = \ob_get_clean()) === false) {
+        if (($content = ob_get_clean()) === false) {
             throw new RuntimeException();
         }
         return $content;
@@ -122,7 +126,7 @@ final class SearchCard extends Widget
         }
 
         return Html::submitButton(
-            \implode(' ', [
+            implode(' ', [
                 Html::tag('span', '', ['class' => 'bi bi-search']),
                 Html::encode(Yii::t('app/search', 'Search')),
             ]),

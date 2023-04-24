@@ -14,6 +14,9 @@ use yii\db\Transaction;
 use yii\helpers\ArrayHelper;
 use yii\web\Response;
 
+use function date;
+use function strtotime;
+
 use const SORT_ASC;
 
 final class IndexJsonAction extends Action
@@ -40,9 +43,9 @@ final class IndexJsonAction extends Action
                         'en' => TypeHelper::shouldBeInstanceOf($model->region, Region::class)->name_en,
                     ],
                     'count' => (int)$model->total_address_count,
-                    'updated' => \date(
+                    'updated' => date(
                         'Y-m-d',
-                        (int)\strtotime((string)$model->last_allocation_date),
+                        (int)strtotime((string)$model->last_allocation_date),
                     ),
                 ],
             ),

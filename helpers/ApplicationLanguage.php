@@ -16,6 +16,16 @@ use yii\helpers\Url;
 use yii\web\Application;
 use yii\web\View;
 
+use function array_keys;
+use function array_map;
+use function array_merge;
+use function hash_hmac;
+use function is_string;
+use function mb_check_encoding;
+use function vsprintf;
+
+use const SORT_ASC;
+
 final class ApplicationLanguage implements BootstrapInterface
 {
     public const URL_PARAM = '_lang';
@@ -32,7 +42,7 @@ final class ApplicationLanguage implements BootstrapInterface
      */
     public static function getValidLanguages(): array
     {
-        return \array_map(
+        return array_map(
             fn (Language $model): string => $model->native_name,
             self::getValidLanguagesEx(),
         );
@@ -82,7 +92,7 @@ final class ApplicationLanguage implements BootstrapInterface
     {
         $request = ($app ?? Yii::$app)->request;
         $cookie = $request->cookies->getValue(self::COOKIE_NAME);
-        return !\is_string($cookie) || !self::isValidLanguageCode($cookie);
+        return !is_string($cookie) || !self::isValidLanguageCode($cookie);
     }
 
     public static function registerLink(BaseApplication $app, array $url): void
@@ -107,7 +117,7 @@ final class ApplicationLanguage implements BootstrapInterface
         foreach (self::getValidLanguagesEx() as $lang) {
             $view->registerLinkTag([
                 'href' => Url::to(
-                    \array_merge($url, [
+                    array_merge($url, [
                         self::URL_PARAM => $lang->id,
                     ]),
                     true,
@@ -150,7 +160,7 @@ final class ApplicationLanguage implements BootstrapInterface
     private function detectLanguageFromUrl(Application $app): ?string
     {
         $value = $app->request->get(self::URL_PARAM);
-        return \is_string($value) && self::isValidLanguageCode($value)
+        return is_string($value) && self::isValidLanguageCode($value)
             ? $value
             : null;
     }
@@ -161,9 +171,9 @@ final class ApplicationLanguage implements BootstrapInterface
         try {
             $ua = $app->request->userAgent;
             if (
-                !\is_string($ua) ||
+                !is_string($ua) ||
                 $ua === '' ||
-                !\mb_check_encoding($ua, 'UTF-8')
+                !mb_check_encoding($ua, 'UTF-8')
             ) {
                 return null;
             }
@@ -185,9 +195,9 @@ final class ApplicationLanguage implements BootstrapInterface
     private function isBot(string $userAgent): bool
     {
         $ch = ClientHints::factory();
-        $cacheId = \vsprintf('%s(%s)', [
+        $cacheId = vsprintf('%s(%s)', [
             __METHOD__,
-            \hash_hmac(
+            hash_hmac(
                 'sha256',
                 $userAgent,
                 ClientHints::getCacheId($ch),
@@ -237,7 +247,7 @@ final class ApplicationLanguage implements BootstrapInterface
     {
         $request = $app->request;
         $cookie = $request->cookies->getValue(self::COOKIE_NAME);
-        if (\is_string($cookie) && self::isValidLanguageCode($cookie)) {
+        if (is_string($cookie) && self::isValidLanguageCode($cookie)) {
             $this->vary($app, 'Cookie');
             return $cookie;
         }
@@ -250,7 +260,7 @@ final class ApplicationLanguage implements BootstrapInterface
         $this->vary($app, 'Accept-Language');
         $request = $app->request;
         return $request->getPreferredLanguage(
-            \array_keys($this->getValidLanguages())
+            array_keys($this->getValidLanguages()),
         );
     }
 

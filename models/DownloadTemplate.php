@@ -36,6 +36,7 @@ final class DownloadTemplate extends ActiveRecord
     }
 
     /**
+     * @inheritdoc
      * @return array[]
      */
     public function rules()

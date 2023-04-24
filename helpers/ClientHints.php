@@ -8,6 +8,21 @@ use DeviceDetector\ClientHints as MatomoCH;
 use Yii;
 use yii\helpers\Json;
 
+use function array_filter;
+use function file_exists;
+use function hash_file;
+use function hash_hmac;
+use function is_array;
+use function is_bool;
+use function is_file;
+use function is_readable;
+use function is_string;
+use function method_exists;
+use function preg_match;
+use function str_replace;
+use function strtolower;
+use function trim;
+
 use const ARRAY_FILTER_USE_BOTH;
 use const ARRAY_FILTER_USE_KEY;
 
@@ -29,7 +44,8 @@ final class ClientHints
      */
     public static function getCHHeaders(?array $headers = null): array
     {
-        return self::filterCHHeaders(\is_array($headers) ? $headers : $_SERVER);
+        // phpcs:ignore SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable.DisallowedSuperGlobalVariable
+        return self::filterCHHeaders(is_array($headers) ? $headers : $_SERVER);
     }
 
     /**
@@ -38,11 +54,11 @@ final class ClientHints
      */
     private static function filterCHHeaders(array $headers): array
     {
-        return \array_filter(
+        return array_filter(
             $headers,
             function (string $k): bool {
-                $k = \str_replace('_', '-', \strtolower($k));
-                return (bool)\preg_match('/^http-sec-ua\b/', $k) ||
+                $k = str_replace('_', '-', strtolower($k));
+                return (bool)preg_match('/^http-sec-ua\b/', $k) ||
                     $k === 'http-x-requested-with';
             },
             ARRAY_FILTER_USE_KEY,
@@ -65,22 +81,22 @@ final class ClientHints
                 'operatingSystemVersion' => 'getOperatingSystemVersion',
             ];
 
-            /** @var array<string, bool|non-empty-string|array<non-empty-string, non-empty-string>> */
+            /** @var array<string, bool|non-empty-string|array<non-empty-string, non-empty-string>> $data */
             $data = [];
             foreach ($getters as $k => $getterName) {
-                if (!\method_exists($ch, $getterName)) {
+                if (!method_exists($ch, $getterName)) {
                     continue;
                 }
 
                 $v = $ch->$getterName();
-                if (\is_bool($v)) {
+                if (is_bool($v)) {
                     $data[$k] = $v;
-                } elseif (\is_string($v)) {
-                    $v = \trim($v);
+                } elseif (is_string($v)) {
+                    $v = trim($v);
                     if ($v !== '') {
                         $data[$k] = $v;
                     }
-                } elseif (\is_array($v)) {
+                } elseif (is_array($v)) {
                     $v = self::prepareList($v);
                     if ($v) {
                         $data[$k] = $v;
@@ -88,7 +104,7 @@ final class ClientHints
                 }
             }
 
-            return \hash_hmac('sha256', Json::encode($data), self::getLibraryVersion());
+            return hash_hmac('sha256', Json::encode($data), self::getLibraryVersion());
         } finally {
             unset($profiler);
         }
@@ -99,9 +115,9 @@ final class ClientHints
      */
     private static function prepareList(array $data): array
     {
-        return \array_filter(
+        return array_filter(
             $data,
-            fn ($v, $k): bool => \is_string($k) && \is_string($v) && $k !== '' && $v !== '',
+            fn ($v, $k): bool => is_string($k) && is_string($v) && $k !== '' && $v !== '',
             ARRAY_FILTER_USE_BOTH,
         );
     }
@@ -113,15 +129,15 @@ final class ClientHints
             // FIXME: matomo/device-detector のみのバージョンを取得するようにする
             $lockFile = Yii::getAlias('@app/composer.lock');
             if (
-                !\is_string($lockFile) ||
-                !\file_exists($lockFile) ||
-                !\is_readable($lockFile) ||
-                !\is_file($lockFile)
+                !is_string($lockFile) ||
+                !file_exists($lockFile) ||
+                !is_readable($lockFile) ||
+                !is_file($lockFile)
             ) {
                 return 'UNKNOWN';
             }
 
-            return \hash_file('sha256', $lockFile) ?: 'UNKNOWN';
+            return hash_file('sha256', $lockFile) ?: 'UNKNOWN';
         } finally {
             unset($profiler);
         }
