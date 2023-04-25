@@ -434,6 +434,18 @@ msgctxt "app/cclist"
 msgid "Non Reserved"
 msgstr "除予約領域"
 
+msgctxt "app/git"
+msgid "Get Lists via Git"
+msgstr "Gitで一覧を取得"
+
+msgctxt "app/git"
+msgid "Please refer {repo} if you prefer."
+msgstr "ご希望なら {repo} を参照してください。"
+
+msgctxt "app/git"
+msgid "The information is also placed on GitHub."
+msgstr "情報はGitHubにも置いてあります。"
+
 msgctxt "app/ipv4bycc"
 msgid "CIDR format"
 msgstr "CIDR形式"
