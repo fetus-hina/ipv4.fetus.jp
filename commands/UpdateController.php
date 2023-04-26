@@ -775,7 +775,10 @@ class UpdateController extends Controller
 
         $renderer = DownloadFormatter::format(
             name: '',
-            cc: '',
+            cc: match ($region::class) {
+                Krfilter::class => sprintf('krfilter.%d', $region->id),
+                Region::class => $region->id,
+            },
             thisUrl: '',
             pageUrl: '',
             template: $template,
