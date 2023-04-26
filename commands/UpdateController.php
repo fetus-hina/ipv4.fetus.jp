@@ -626,6 +626,28 @@ class UpdateController extends Controller
             }
             echo "\n";
         }
+        unset($regions);
+
+        $krfilters = Krfilter::find()->orderBy(['id' => SORT_ASC])->all();
+        foreach ($templates as $template) {
+            $outDir = $baseDir . '/krfilter/' . $template->key;
+
+            FileHelper::removeDirectory($outDir);
+            if (!FileHelper::createDirectory($outDir, 0755, true)) {
+                return ExitCode::UNSPECIFIED_ERROR;
+            }
+
+            echo $template->key . "\n";
+            foreach ($krfilters as $krfilter) {
+                echo '.';
+                $path = $outDir . '/krfilter.' . $krfilter->id . '.txt';
+                if (!$this->savePreformatted($path, $krfilter, $template)) {
+                    return ExitCode::UNSPECIFIED_ERROR;
+                }
+            }
+            echo "\n";
+        }
+        unset($krfilters);
 
         if ($enableGit) {
             $success = self::within(
@@ -705,21 +727,37 @@ class UpdateController extends Controller
         return true;
     }
 
-    private function savePreformatted(string $path, Region $region, DownloadTemplate $template): bool
-    {
-        $cidrReader = function (Region $region): Generator {
-            $it = MergedCidr::find()
-                ->andWhere(['region_id' => $region->id])
-                ->orderBy(['cidr' => SORT_ASC])
-                ->each(200);
+    private function savePreformatted(
+        string $path,
+        Krfilter|Region $region,
+        DownloadTemplate $template
+    ): bool {
+        $cidrReader = function (Krfilter|Region $region): Generator {
+            $it = match ($region::class) {
+                Krfilter::class => krfilterCidr::find()
+                    ->andWhere(['krfilter_id' => $region->id])
+                    ->orderBy(['cidr' => SORT_ASC])
+                    ->each(200),
+                Region::class => MergedCidr::find()
+                    ->andWhere(['region_id' => $region->id])
+                    ->orderBy(['cidr' => SORT_ASC])
+                    ->each(200),
+            };
+
             foreach ($it as $entry) {
-                yield TypeHelper::shouldBeInstanceOf($entry, MergedCidr::class)->cidr;
+                yield TypeHelper::shouldBeInstanceOf(
+                    $entry,
+                    match ($region::class) {
+                        Krfilter::class => krfilterCidr::class,
+                        Region::class => MergedCidr::class,
+                    },
+                )->cidr;
             }
         };
 
         $renderer = DownloadFormatter::format(
             name: '',
-            cc: $region->id,
+            cc: '',
             thisUrl: '',
             pageUrl: '',
             template: $template,
