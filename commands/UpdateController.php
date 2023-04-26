@@ -603,11 +603,11 @@ class UpdateController extends Controller
             }
         }
 
-        $regions = Region::find()->orderBy(['id' => SORT_ASC])->all();
         $templates = DownloadTemplate::find()
             ->with(['commentStyle', 'newline'])
             ->orderBy(['key' => SORT_ASC])
             ->all();
+        $regions = Region::find()->orderBy(['id' => SORT_ASC])->all();
         foreach ($templates as $template) {
             $outDir = $baseDir . '/countries/' . $template->key;
 
@@ -648,6 +648,20 @@ class UpdateController extends Controller
             echo "\n";
         }
         unset($krfilters);
+
+        $pathCidr = '@app/runtime/preformatted/ipv4bycc/cidr.txt';
+        $pathMask = '@app/runtime/preformatted/ipv4bycc/mask.txt';
+        $tasks = [
+            $pathCidr => fn () => Ipv4byccDumper::dumpCidr(false),
+            $pathMask => fn () => Ipv4byccDumper::dumpMask(false),
+        ];
+
+        foreach ($tasks as $path => $dumper) {
+            echo $path . "\n";
+            if (!$this->saveIpv4bycc($path, $dumper, true)) {
+                return ExitCode::UNSPECIFIED_ERROR;
+            }
+        }
 
         if ($enableGit) {
             $success = self::within(
@@ -691,14 +705,18 @@ class UpdateController extends Controller
     /**
      * @param callable(): Generator<string> $dumper
      */
-    private function saveIpv4bycc(string $path, callable $dumper): bool
+    private function saveIpv4bycc(string $path, callable $dumper, bool $overwrite = false): bool
     {
         $path = (string)Yii::getAlias($path);
         Yii::info('Create ' . basename($path), __METHOD__);
 
-        if (file_exists($path) && filesize($path) > 0) {
+        if (!$overwrite && file_exists($path) && filesize($path) > 0) {
             Yii::info(basename($path) . ' is exists. skip.', __METHOD__);
             return true;
+        }
+
+        if (file_exists($path)) {
+            @unlink($path);
         }
 
         try {

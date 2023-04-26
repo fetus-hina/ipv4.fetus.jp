@@ -28,15 +28,16 @@ use const SORT_ASC;
 
 final class Ipv4byccDumper
 {
-    public static function dumpCidr(): Generator
+    public static function dumpCidr(bool $header = true): Generator
     {
         return self::proc(
             Url::to(['ipv4bycc/cidr'], true),
             fn (MergedCidr $model): string => $model->cidr,
+            $header,
         );
     }
 
-    public static function dumpMask(): Generator
+    public static function dumpMask(bool $header = true): Generator
     {
         $masks = array_combine(
             range(1, 32),
@@ -59,18 +60,21 @@ final class Ipv4byccDumper
                     $masks[(int)substr($cidr, $pos + 1)],
                 ]);
             },
+            $header,
         );
     }
 
     /**
      * @param callable(MergedCidr): string $formatter
      */
-    private static function proc(string $url, callable $formatter): Generator
+    private static function proc(string $url, callable $formatter, bool $header): Generator
     {
-        foreach (self::getHeaders($url) as $header) {
-            yield rtrim('# ' . $header) . "\n";
+        if ($header) {
+            foreach (self::getHeaders($url) as $header) {
+                yield rtrim('# ' . $header) . "\n";
+            }
+            yield "\n";
         }
-        yield "\n";
 
         $regions = Region::find()->orderBy(['id' => SORT_ASC])->all();
         foreach ($regions as $region) {
