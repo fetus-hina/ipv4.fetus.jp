@@ -630,6 +630,9 @@ class UpdateController extends Controller
 
         $krfilters = Krfilter::find()->orderBy(['id' => SORT_ASC])->all();
         foreach ($templates as $template) {
+            if (str_starts_with($template->key, 'ipv4bycc-')) {
+                continue;
+            }
             $outDir = $baseDir . '/krfilter/' . $template->key;
 
             FileHelper::removeDirectory($outDir);
