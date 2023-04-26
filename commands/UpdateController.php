@@ -52,6 +52,7 @@ use function proc_close;
 use function proc_open;
 use function rename;
 use function sprintf;
+use function str_starts_with;
 use function strlen;
 use function strtolower;
 use function substr;
