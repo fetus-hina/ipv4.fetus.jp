@@ -40,7 +40,8 @@
       "jquery": true
     },
     "globals": [
-      "bootstrap"
+      "bootstrap",
+      "jQuery"
     ],
     "ignore": [
       "node_modules/",
