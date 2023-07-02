@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace app\widgets;
 
 use LogicException;
-use RuntimeException;
 use Yii;
 use app\models\DownloadTemplate;
 use yii\base\Widget;
@@ -17,7 +16,6 @@ use function array_filter;
 use function array_map;
 use function call_user_func;
 use function implode;
-use function is_array;
 use function sprintf;
 use function substr;
 
@@ -171,10 +169,7 @@ final class DownloadButtons extends Widget
             throw new LogicException();
         }
 
-        $value = call_user_func($callable, $template);
-        return is_array($value)
-            ? $value
-            : throw new RuntimeException();
+        return call_user_func($callable, $template);
     }
 
     private function getTemplateButtonId(): string
