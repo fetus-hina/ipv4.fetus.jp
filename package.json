@@ -15,21 +15,21 @@
     "yii2-pjax": "^2.0.8"
   },
   "devDependencies": {
-    "@babel/cli": "^7.22.5",
-    "@babel/core": "^7.22.5",
-    "@babel/preset-env": "^7.22.5",
+    "@babel/cli": "^7.22.6",
+    "@babel/core": "^7.22.8",
+    "@babel/preset-env": "^7.22.7",
     "autoprefixer": "^10.4.14",
     "cssnano": "^6.0.1",
-    "postcss": "^8.4.24",
+    "postcss": "^8.4.25",
     "postcss-cli": "^10.1.0",
     "sass": "^1.63.6",
     "semistandard": "^17.0.0",
     "snazzy": "^9.0.0",
-    "stylelint": "^15.9.0",
+    "stylelint": "^15.10.1",
     "stylelint-config-sass-guidelines": "^10.0.0",
     "terser": "^5.18.2",
     "ttf2woff2": "^5.0.0",
-    "updates": "^14.3.0"
+    "updates": "^14.3.2"
   },
   "scripts": {
     "postinstall": "bin/npm-postinstall.sh"
