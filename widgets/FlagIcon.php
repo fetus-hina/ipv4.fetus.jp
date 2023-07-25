@@ -16,6 +16,7 @@ use yii\web\View;
 use function base64_encode;
 use function file_exists;
 use function file_get_contents;
+use function is_string;
 use function preg_match;
 use function rawurlencode;
 use function strlen;
