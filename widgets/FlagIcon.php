@@ -73,9 +73,10 @@ final class FlagIcon extends Widget
 
     private function renderImgTag(string $cc): ?string
     {
-        $svgPath = Yii::getAlias("@npm/flag-icons/flags/4x3/{$cc}.svg");
+        $svgPath = Yii::getAlias("@vendor/lipis/flag-icons/flags/4x3/{$cc}.svg");
         if (
             !$svgPath ||
+            !is_string($svgPath) ||
             !@file_exists($svgPath) ||
             !($dataUri = $this->createDataUri($svgPath))
         ) {

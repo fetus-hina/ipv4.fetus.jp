@@ -11,7 +11,7 @@ final class FlagIconsAsset extends AssetBundle
     /**
      * @var string
      */
-    public $sourcePath = '@npm/flag-icons';
+    public $sourcePath = '@vendor/lipis/flag-icons';
 
     /**
      * @var string[]

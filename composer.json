@@ -27,6 +27,7 @@
         "ext-pdo_pgsql": "*",
 
         "cweagans/composer-patches": "^1.7",
+        "lipis/flag-icons": "^6.9",
         "matomo/device-detector": "^6.0",
         "omnilight/yii2-scheduling": "^1.1",
         "scssphp/scssphp": "^1.6",

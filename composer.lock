@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f88832fad4b3b0a801328d38b96e006a",
+    "content-hash": "02db7e5f0d4974ad940bb267227d6f91",
     "packages": [
         {
             "name": "cebe/markdown",
@@ -225,6 +225,47 @@
                 "source": "https://github.com/ezyang/htmlpurifier/tree/v4.16.0"
             },
             "time": "2022-09-18T07:06:19+00:00"
+        },
+        {
+            "name": "lipis/flag-icons",
+            "version": "v6.9.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lipis/flag-icons.git",
+                "reference": "2cf1eb221f134d9c62bdab6508a0b78e474f5618"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lipis/flag-icons/zipball/2cf1eb221f134d9c62bdab6508a0b78e474f5618",
+                "reference": "2cf1eb221f134d9c62bdab6508a0b78e474f5618",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Panayiotis Lipiridis",
+                    "email": "lipiridis@gmail.com",
+                    "role": "Lead"
+                }
+            ],
+            "description": "A curated collection of all country flags in SVG — plus the CSS for easier integration.",
+            "homepage": "https://flagicons.lipis.dev",
+            "keywords": [
+                "country",
+                "country-flags",
+                "css",
+                "icon-css",
+                "svg"
+            ],
+            "support": {
+                "issues": "https://github.com/lipis/flag-icons/issues",
+                "source": "https://github.com/lipis/flag-icons/tree/v6.9.0"
+            },
+            "time": "2023-07-25T11:34:10+00:00"
         },
         {
             "name": "matomo/device-detector",
