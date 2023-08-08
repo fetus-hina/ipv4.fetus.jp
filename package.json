@@ -4,7 +4,7 @@
   "dependencies": {
     "@fetus-hina/fetus.css": "github:fetus-hina/fetus.css#semver:^5.3.3",
     "bootstrap": "^5.3.1",
-    "chart.js": "^4.3.2",
+    "chart.js": "^4.3.3",
     "inputmask": "^5.0.8",
     "jquery": "^3.7.0",
     "license-checker-rseidelsohn": "^3.3.0",
