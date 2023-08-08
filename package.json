@@ -30,6 +30,11 @@
     "ttf2woff2": "^5.0.0",
     "updates": "^14.3.5"
   },
+  "overrides": {
+    "license-checker-rseidelsohn": {
+      "read-installed-packages": "^2.0.0"
+    }
+  },
   "scripts": {
     "postinstall": "bin/npm-postinstall.sh"
   },
