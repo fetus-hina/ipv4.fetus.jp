@@ -94,7 +94,7 @@ final class Copyright extends Widget
                     [
                         'class' => [
                             'bi',
-                            'bi-twitter',
+                            'bi-twitter-x',
                         ],
                     ],
                 ),
