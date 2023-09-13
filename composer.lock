@@ -228,16 +228,16 @@
         },
         {
             "name": "lipis/flag-icons",
-            "version": "v6.9.5",
+            "version": "v6.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lipis/flag-icons.git",
-                "reference": "cfe2adba805935298cc0fc7460ad93629dc91586"
+                "reference": "a7b7c3c55560cb39d96e70324876e1bb5b1c625b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lipis/flag-icons/zipball/cfe2adba805935298cc0fc7460ad93629dc91586",
-                "reference": "cfe2adba805935298cc0fc7460ad93629dc91586",
+                "url": "https://api.github.com/repos/lipis/flag-icons/zipball/a7b7c3c55560cb39d96e70324876e1bb5b1c625b",
+                "reference": "a7b7c3c55560cb39d96e70324876e1bb5b1c625b",
                 "shasum": ""
             },
             "type": "library",
@@ -263,9 +263,9 @@
             ],
             "support": {
                 "issues": "https://github.com/lipis/flag-icons/issues",
-                "source": "https://github.com/lipis/flag-icons/tree/v6.9.5"
+                "source": "https://github.com/lipis/flag-icons/tree/v6.11.0"
             },
-            "time": "2023-08-13T09:15:18+00:00"
+            "time": "2023-08-22T17:05:32+00:00"
         },
         {
             "name": "matomo/device-detector",
