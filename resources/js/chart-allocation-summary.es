@@ -1,10 +1,3 @@
-if (!String.prototype.trim) {
-  // eslint-disable-next-line no-extend-native
-  String.prototype.trim = function () {
-    this.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '');
-  };
-}
-
 (($, global) => {
   const { Chart, getChartColors } = global;
 
