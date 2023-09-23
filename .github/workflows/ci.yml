@@ -11,18 +11,21 @@ jobs:
       matrix:
         env:
           -
-            php: '8.0'
-            experimental: false
-          -
             php: '8.1'
             experimental: false
           -
             php: '8.2'
+            experimental: false
+          -
+            php: '8.3'
             experimental: true
-    runs-on: ubuntu-20.04
+          -
+            php: '8.4'
+            experimental: true
+    runs-on: ubuntu-22.04
     steps:
       -
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       -
         name: 'Set up PHP ${{ matrix.env.php }}'
         uses: shivammathur/setup-php@v2
@@ -37,16 +40,16 @@ jobs:
             | xargs -n 1 php -l
   makeComposerCache:
     name: 'Make composer cache'
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       -
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       -
         name: 'symlink composer'
         run: |
           ln -s `which composer` composer.phar
       -
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             ~/.cache/composer/files
@@ -59,12 +62,12 @@ jobs:
         run: 'composer install --prefer-dist'
   makeNpmCache:
     name: 'Make npm cache'
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       -
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       -
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             ~/.npm
@@ -77,13 +80,13 @@ jobs:
         run: 'npm clean-install'
   phpStyleCheck:
     name: 'PHP Coding Style'
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     needs: makeComposerCache
     steps:
       -
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       -
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             ~/.cache/composer/files
@@ -92,10 +95,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-composer-
       -
-        name: 'Set up PHP 8.0'
+        name: 'Set up PHP 8.1'
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.0'
+          php-version: '8.1'
       -
         name: 'Install dependencies'
         run: |
@@ -115,27 +118,19 @@ jobs:
         env:
           -
             php:
-              label: 'PHP 8.0'
-              version: '8.0'
+              label: 'PHP 8.1'
+              version: '8.1'
             pgsql:
               label: 'PgSQL 9.6'
               version: 9.6-bullseye
             experimental: false
           -
             php:
-              label: 'PHP 8.0'
-              version: '8.0'
+              label: 'PHP 8.1'
+              version: '8.1'
             pgsql:
               label: 'PgSQL 13'
               version: 13-bullseye
-            experimental: false
-          -
-            php:
-              label: 'PHP 8.0'
-              version: '8.0'
-            pgsql:
-              label: 'Latest PgSQL'
-              version: bullseye
             experimental: false
           -
             php:
@@ -153,7 +148,23 @@ jobs:
               label: 'Latest PgSQL'
               version: bullseye
             experimental: true
-    runs-on: ubuntu-20.04
+          -
+            php:
+              label: 'PHP 8.3'
+              version: '8.3'
+            pgsql:
+              label: 'Latest PgSQL'
+              version: bullseye
+            experimental: true
+          -
+            php:
+              label: 'PHP 8.4'
+              version: '8.4'
+            pgsql:
+              label: 'Latest PgSQL'
+              version: bullseye
+            experimental: true
+    runs-on: ubuntu-22.04
     needs:
       - makeComposerCache
       - makeNpmCache
@@ -175,16 +186,16 @@ jobs:
         run: |
           sudo apt install -y gettext
       -
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       -
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             ~/.cache/composer/files
             vendor
           key: '${{ runner.os }}-composer-${{ hashFiles(''composer.lock'') }}'
       -
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             ~/.npm
@@ -208,14 +219,14 @@ jobs:
         run: 'vendor/bin/codecept run unit'
   jsStyleCheck:
     name: 'JS Coding Style'
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     needs:
       - makeNpmCache
     steps:
       -
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       -
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             ~/.npm
@@ -227,14 +238,14 @@ jobs:
           npx semistandard 'resources/**/*.es' | npx snazzy
   cssStyleCheck:
     name: 'CSS Coding Style'
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     needs:
       - makeNpmCache
     steps:
       -
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       -
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             ~/.npm

@@ -752,7 +752,7 @@ class UpdateController extends Controller
     private function savePreformatted(
         string $path,
         Krfilter|Region $region,
-        DownloadTemplate $template
+        DownloadTemplate $template,
     ): bool {
         $cidrReader = function (Krfilter|Region $region): Generator {
             $it = match ($region::class) {

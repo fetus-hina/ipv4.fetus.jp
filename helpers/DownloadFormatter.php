@@ -93,7 +93,7 @@ final class DownloadFormatter
         DownloadTemplate $template,
         string $cc,
         ?string $cidr,
-        bool $isAllow
+        bool $isAllow,
     ): string {
         return TypeHelper::shouldBeString(
             preg_replace_callback(
@@ -250,7 +250,7 @@ final class DownloadFormatter
         string|array $thisUrl,
         string|array $pageUrl,
         DownloadTemplate $template,
-        ?string $note
+        ?string $note,
     ): Generator {
         $comment = $template->commentStyle;
         assert($comment !== null);

@@ -35,7 +35,7 @@ final class RegionController extends Controller
     public function actionPlain(
         string $cc,
         ?string $template = null,
-        ?string $control = null
+        ?string $control = null,
     ): void {
         $region = Region::findOne(['id' => $cc]);
         if (!$region || !$region->regionStats) {
