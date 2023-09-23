@@ -1,23 +1,4 @@
 (global => {
-  // polyfill
-  if (!Number.isInteger) {
-    Number.isInteger = v => typeof v === 'number' && isFinite(v) && Math.floor(v) === v;
-  }
-
-  // polyfill : substr negative index
-  if ('ab'.substr(-1) !== 'b') {
-    // eslint-disable-next-line no-extend-native
-    String.prototype.substr = (function (substr) {
-      return function (start, length) {
-        return substr.call(
-          this,
-          start < 0 ? this.length + start : start,
-          length
-        );
-      };
-    }(String.prototype.substr));
-  }
-
   const rgb = function (r, g, b) {
     const conv = function (val) {
       if (!Number.isInteger(val)) {
