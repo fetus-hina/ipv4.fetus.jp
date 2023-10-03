@@ -162,6 +162,15 @@ final class DownloadFormatter
                                 static::prefixToSubnetMask((int)explode('/', $cidr)[1]),
                                 explode(':', ltrim($match[2] ?? '', ':')),
                             );
+
+                        case 'count':
+                            if ($cidr === null) {
+                                throw new Exception('Unexpected {count} in download template');
+                            }
+                            return static::formatPlaceholder(
+                                (string)self::prefixToAddressCount((int)explode('/', $cidr)[1]),
+                                explode(':', ltrim($match[2] ?? '', ':')),
+                            );
                     }
                     return $match[0];
                 },
@@ -201,6 +210,15 @@ final class DownloadFormatter
         $subnetMask = (0xffffffff << (32 - $prefix)) & 0xffffffff;
         $broadcast = $network | ($subnetMask ^ 0xffffffff);
         return TypeHelper::shouldBeString(long2ip($broadcast));
+    }
+
+    private static function prefixToAddressCount(int $prefix): int
+    {
+        if ($prefix < 1 || $prefix > 32) {
+            throw new Exception('Invalid prefix: ' . $prefix);
+        }
+
+        return (int)(2 ** (32 - $prefix));
     }
 
     private static function formatPlaceholder(string $value, array $modifiers): string
@@ -279,7 +297,7 @@ final class DownloadFormatter
         yield $row(' ' . Url::to($pageUrl, true));
         yield $row('');
         yield $row(Url::to($thisUrl, true));
-        yield $row(vsprintf(' 出力日時: %s (%s)', [
+        yield $row(vsprintf(' 出力日時(Output): %s (%s)', [
             $time->format('Y-m-d H:i:s T'),
             $time->setTimeZone(new DateTimeZone('Etc/UTC'))->format(DateTime::ATOM),
         ]));
@@ -300,7 +318,7 @@ final class DownloadFormatter
         }
 
         yield $row('');
-        yield $row('自動化したアクセスについて:');
+        yield $row('自動化したアクセスについて (About automated access):');
         yield $row(' ' . Url::to(['site/about', '#' => 'automation'], true));
         yield $row('');
 
