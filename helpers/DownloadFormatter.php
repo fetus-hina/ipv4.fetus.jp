@@ -14,13 +14,17 @@ use app\models\DownloadTemplate;
 use app\models\Newline;
 use yii\helpers\Url;
 
+use function array_merge;
 use function assert;
 use function chr;
+use function count;
 use function explode;
 use function htmlspecialchars;
 use function implode;
 use function ip2long;
+use function is_array;
 use function is_int;
+use function is_string;
 use function long2ip;
 use function ltrim;
 use function preg_match;
@@ -75,8 +79,49 @@ final class DownloadFormatter
             yield static::fillPlaceholder($template->list_begin, $template, $cc, null, $isAllow) . $newline;
         }
 
-        foreach ($cidrList as $cidr) {
-            yield static::fillPlaceholder($template->template, $template, $cc, $cidr, $isAllow) . $newline;
+        if ($template->line_limit === null) {
+            foreach ($cidrList as $cidr) {
+                yield static::fillPlaceholder($template->template, $template, $cc, $cidr, $isAllow) . $newline;
+            }
+        } else {
+            $currentCidrs = [];
+            foreach ($cidrList as $cidr) {
+                $testLine = self::fillPlaceholder(
+                    $template->template,
+                    $template,
+                    $cc,
+                    array_merge($currentCidrs, [$cidr]),
+                    $isAllow,
+                );
+
+                if (strlen($testLine) > $template->line_limit) {
+                    // オーバーフローしたので、直前のCIDRまでで1行を作成する
+                    yield static::fillPlaceholder(
+                        $template->template,
+                        $template,
+                        $cc,
+                        $currentCidrs,
+                        $isAllow,
+                    ) . $newline;
+
+                    // 現在のCIDRを次の行の先頭にする
+                    $currentCidrs = [$cidr];
+                } else {
+                    // まだオーバーフローしていないので、現在のCIDRを追加する
+                    $currentCidrs[] = $cidr;
+                }
+            }
+
+            // 最後の行を出力する
+            if (count($currentCidrs)) {
+                yield static::fillPlaceholder(
+                    $template->template,
+                    $template,
+                    $cc,
+                    $currentCidrs,
+                    $isAllow,
+                ) . $newline;
+            }
         }
 
         if ($template->list_end !== null && $template->list_end !== '') {
@@ -88,11 +133,14 @@ final class DownloadFormatter
         }
     }
 
+    /**
+     * @param string|string[]|null $cidr
+     */
     private static function fillPlaceholder(
         string $text,
         DownloadTemplate $template,
         string $cc,
-        ?string $cidr,
+        string|array|null $cidr,
         bool $isAllow,
     ): string {
         return TypeHelper::shouldBeString(
@@ -101,7 +149,7 @@ final class DownloadFormatter
                 function (array $match) use ($template, $cc, $cidr, $isAllow): string {
                     switch ($match[1]) {
                         case 'broadcast':
-                            if ($cidr === null) {
+                            if (!is_string($cidr)) {
                                 throw new Exception('Unexpected {broadcast} in download template');
                             }
                             return static::formatPlaceholder(
@@ -113,10 +161,19 @@ final class DownloadFormatter
                             return static::formatPlaceholder($cc, explode(':', ltrim($match[2] ?? '', ':')));
 
                         case 'cidr':
-                            if ($cidr === null) {
+                            if (!is_string($cidr)) {
                                 throw new Exception('Unexpected {cidr} in download template');
                             }
                             return static::formatPlaceholder($cidr, explode(':', ltrim($match[2] ?? '', ':')));
+
+                        case 'cidr_list':
+                            if ($cidr === null || !is_array($cidr)) {
+                                throw new Exception('Unexpected {cidr_list} in download template');
+                            }
+                            return static::formatPlaceholder(
+                                implode(' ', $cidr),
+                                explode(':', ltrim($match[2] ?? '', ':')),
+                            );
 
                         case 'control':
                             if ($template->allow === null || $template->deny === null) {
@@ -137,7 +194,7 @@ final class DownloadFormatter
                             );
 
                         case 'network':
-                            if ($cidr === null) {
+                            if (!is_string($cidr)) {
                                 throw new Exception('Unexpected {network} in download template');
                             }
                             return static::formatPlaceholder(
@@ -146,7 +203,7 @@ final class DownloadFormatter
                             );
 
                         case 'prefix':
-                            if ($cidr === null) {
+                            if (!is_string($cidr)) {
                                 throw new Exception('Unexpected {prefix} in download template');
                             }
                             return static::formatPlaceholder(
@@ -155,7 +212,7 @@ final class DownloadFormatter
                             );
 
                         case 'subnet':
-                            if ($cidr === null) {
+                            if (!is_string($cidr)) {
                                 throw new Exception('Unexpected {subnet} in download template');
                             }
                             return static::formatPlaceholder(
@@ -164,7 +221,7 @@ final class DownloadFormatter
                             );
 
                         case 'count':
-                            if ($cidr === null) {
+                            if (!is_string($cidr)) {
                                 throw new Exception('Unexpected {count} in download template');
                             }
                             return static::formatPlaceholder(

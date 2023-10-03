@@ -651,6 +651,10 @@ msgid "Output Specifications"
 msgstr "出力ファイル仕様"
 
 msgctxt "app/schema"
+msgid "Pack multiple CIDRs into a single line."
+msgstr "複数のCIDRを1行にまとめて出力します。"
+
+msgctxt "app/schema"
 msgid "Prefix"
 msgstr "プレフィックス"
 

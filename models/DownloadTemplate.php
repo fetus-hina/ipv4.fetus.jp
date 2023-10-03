@@ -18,6 +18,7 @@ use yii\db\ActiveRecord;
  * @property string|null $file_begin
  * @property string|null $file_end
  * @property string $key
+ * @property int|null $line_limit
  * @property string|null $list_begin
  * @property string|null $list_end
  * @property string $name
@@ -43,7 +44,7 @@ final class DownloadTemplate extends ActiveRecord
     {
         return [
             [['key', 'name', 'template', 'comment_style_id'], 'required'],
-            [['comment_style_id', 'newline_id'], 'integer'],
+            [['comment_style_id', 'newline_id', 'line_limit'], 'integer'],
             [['file_begin', 'file_end', 'list_begin', 'list_end', 'usage'], 'string'],
             [['can_use_in_url'], 'boolean'],
             [['key'], 'string',
@@ -86,6 +87,7 @@ final class DownloadTemplate extends ActiveRecord
             'file_begin' => 'File Begin',
             'file_end' => 'File End',
             'key' => 'Key',
+            'line_limit' => 'Line Limit',
             'list_begin' => 'List Begin',
             'list_end' => 'List End',
             'name' => 'Name',

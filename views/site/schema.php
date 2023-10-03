@@ -149,6 +149,27 @@ ApplicationLanguage::registerLink(Yii::$app, ['site/schema']);
       </div>
       <div class="card border-primary mb-4">
         <div class="card-header bg-primary text-white">
+          Apache (.htaccess), packed
+        </div>
+        <div class="card-body">
+          <ul>
+            <li>
+              <?= Yii::t('app/schema', 'Apache 2.2 format data is output.') . "\n" ?>
+            </li>
+            <li>
+              <?= Yii::t('app/schema', 'Pack multiple CIDRs into a single line.') . "\n" ?>
+            </li>
+            <li>
+              <?= $this->render('//site/schema/hash-comment') . "\n" ?>
+            </li>
+            <li>
+              <?= $this->render('//site/schema/blank-line') . "\n" ?>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="card border-primary mb-4">
+        <div class="card-header bg-primary text-white">
           Apache 2.4
         </div>
         <div class="card-body">
