@@ -8,6 +8,7 @@ use Generator;
 use Yii;
 use app\helpers\DownloadFormatter;
 use app\helpers\TypeHelper;
+use app\helpers\Unicode;
 use app\models\DownloadTemplate;
 use app\models\Krfilter;
 use app\models\Region;
@@ -24,6 +25,7 @@ use function sprintf;
 use function strcmp;
 use function strlen;
 use function usort;
+use function vsprintf;
 
 use const SORT_ASC;
 
@@ -79,16 +81,22 @@ class KrfilterController extends Controller
                     }
                 })(),
                 (function () use ($krfilter): string {
-                    $lines = ['次の国や地域が統合されて出力されています:'];
+                    $lines = [
+                        '次の国や地域が統合されて出力されています:',
+                        'Merged the following countries and regions:',
+                    ];
 
                     $regions = $krfilter->regions;
                     usort($regions, fn (Region $a, Region $b): int => strcmp($a->id, $b->id));
                     $perLine = (int)floor(
-                        (72 + strlen(', ') - (strlen('# ') + 2)) / strlen('kr, '),
+                        (72 + strlen(', ') - (strlen('# ') + 2)) / strlen('XX kr, '),
                     );
                     for ($i = 0; $i < count($regions); $i += $perLine) {
                         $lines[] = '  ' . implode(', ', array_map(
-                            fn (Region $region): string => $region->id,
+                            fn (Region $region): string => vsprintf('%s %s', [
+                                Unicode::asciiToRegionalIndicator($region->id),
+                                $region->id,
+                            ]),
                             array_slice($regions, $i, $perLine),
                         ));
                     }

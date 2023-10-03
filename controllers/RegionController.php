@@ -8,6 +8,7 @@ use Generator;
 use Yii;
 use app\helpers\DownloadFormatter;
 use app\helpers\TypeHelper;
+use app\helpers\Unicode;
 use app\models\DownloadTemplate;
 use app\models\Region;
 use yii\web\Controller;
@@ -68,8 +69,9 @@ final class RegionController extends Controller
             $resp->charset = 'UTF-8';
             $resp->headers->set('Content-Type', 'text/plain');
             $resp->stream = fn (): Generator => DownloadFormatter::format(
-                vsprintf('[%s] %s (%s)', [
+                vsprintf('[%s] %s %s (%s)', [
                     $region->id,
+                    Unicode::asciiToRegionalIndicator($region->id),
                     $region->name_ja,
                     $region->name_en,
                 ]),
