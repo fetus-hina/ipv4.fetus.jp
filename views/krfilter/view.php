@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use ScssPhp\ScssPhp\Compiler as Scss;
 use app\helpers\ApplicationLanguage;
 use app\models\DownloadTemplate;
 use app\models\Krfilter;
@@ -23,20 +22,6 @@ use yii\web\View;
  */
 
 $this->title = 'krfilter / eufilter : ' . Yii::$app->name;
-
-$this->registerCss(
-    (new Scss())
-        ->compileString('
-            .card-body {
-                .note-list {
-                    li {
-                        margin-bottom: 1rem;
-                    }
-                }
-            }
-        ')
-        ->getCss()
-);
 
 ApplicationLanguage::registerLink(Yii::$app, ['krfilter/view']);
 
@@ -61,7 +46,7 @@ $krfilters = Krfilter::find()
         <div class="card-header bg-primary text-white">
           <?= Yii::t('app/krfilter', 'About This') . "\n" ?>
         </div>
-        <div class="card-body">
+        <div class="card-body pb-0">
           <p>
             <?= Yii::t('app/krfilter', 'This is a list of IP addresses to block access from multiple countries or regions at once.') ?><br>
             <?= Yii::t('app/krfilter', 'The name "krfilter" is a historical term and does not have any meaning at this time.') . "\n" ?>
@@ -69,31 +54,31 @@ $krfilters = Krfilter::find()
           <p>
             <?= Yii::t('app/krfilter', 'This can be used to block all connections from the target countries at once, but please be very careful about the following points.') . "\n" ?>
           </p>
-          <ul class="note-list">
-            <li>
+          <ul>
+            <li class="mb-3">
               <?= implode('<br>', [
                 Yii::t('app/krfilter', 'The contents of this list are not guaranteed.'),
                 Yii::t('app/krfilter', 'Some IP addresses may be missing, or there may be too many.'),
                 Yii::t('app/krfilter', 'Also, it may not always output the latest information.'),
               ]) . "\n" ?>
             </li>
-            <li>
+            <li class="mb-3">
               <?= Yii::t('app/krfilter', 'We are not responsible for any damage caused by the use of this list.') . "\n" ?>
             </li>
-            <li>
+            <li class="mb-3">
               <?= Yii::t('app/krfilter', 'The selection of target countries is based on my own judgment and prejudice. There is no strong meaning.') . "\n" ?>
             </li>
-            <li>
+            <li class="mb-3">
               <?= Yii::t('app/krfilter', 'If you use this list to reject/discard emails, you might encounter unexpected behavior.') ?><br>
               <?= Yii::t('app/krfilter', 'Please use this list with full understanding.') . "\n" ?>
             </li>
-            <li>
+            <li class="mb-3">
               <?= Yii::t('app/krfilter', 'You can automate access to each list, but {link}please check this page beforehand.</a>', [
                 'link' => '<a href="' . Url::to(['site/about', '#' => 'automation']) . '">',
               ]) . "\n" ?>
             </li>
           </ul>
-          <p class="mb-0">
+          <p>
             <?= Yii::t('app/krfilter', 'For individual lists that do not consolidate countries, please refer to the respective country/region page.') . "\n" ?>
           </p>
         </div>

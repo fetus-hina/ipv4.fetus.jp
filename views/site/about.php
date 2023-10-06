@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use ScssPhp\ScssPhp\Compiler as Scss;
 use app\helpers\ApplicationLanguage;
 use app\widgets\SnsWidget;
 use app\widgets\ads\SideAd;
@@ -16,18 +15,6 @@ use yii\web\View;
  */
 
 $this->title = Yii::t('app/about', 'About Us') . ' - ' . Yii::$app->name;
-
-$this->registerCss(
-    (new Scss())
-        ->compileString('
-            #automation {
-                li {
-                    margin-bottom: 1rem;
-                }
-            }
-        ')
-        ->getCss()
-);
 
 ApplicationLanguage::registerLink(Yii::$app, ['site/about']);
 
@@ -47,7 +34,7 @@ ApplicationLanguage::registerLink(Yii::$app, ['site/about']);
         <div class="card-header bg-primary text-white">
           <?= Yii::t('app/about', 'About Us') . "\n" ?>
         </div>
-        <div class="card-body">
+        <div class="card-body pb-0">
           <p>
             <?= Yii::t('app/about', 'This site provides a list of IPv4 addresses allocated to each country or region.') . "\n" ?>
           </p>
@@ -78,7 +65,7 @@ ApplicationLanguage::registerLink(Yii::$app, ['site/about']);
             <?= Yii::t('app/about', 'This site uses the classification as presented by the RIR.') . "\n" ?>
             <?= Yii::t('app/about', 'The Japanese names commonly used in Japan or on the Ministry of Foreign Affairs website, and the English names on Wikipedia and other sites are used.') . "\n" ?>
           </p>
-          <p class="mb-0">
+          <p>
             <?= Yii::t('app', 'National flags of the countries are displayed using {source}.', [
               'source' => Html::a(Html::encode('flag-icons'), 'https://flagicons.lipis.dev/', [
                 'target' => 'blank',
@@ -93,7 +80,7 @@ ApplicationLanguage::registerLink(Yii::$app, ['site/about']);
         <div class="card-header bg-primary text-white">
           <?= Yii::t('app/about', 'About Automated-Access') . "\n" ?>
         </div>
-        <div class="card-body">
+        <div class="card-body pb-0">
           <p>
             <?= Yii::t('app/about', 'The text files that can be displayed or downloaded with "{plainText}" and "{template}" are intended for automated access.', [
               'plainText' => Yii::t('app', 'Plain Text'),
@@ -105,34 +92,34 @@ ApplicationLanguage::registerLink(Yii::$app, ['site/about']);
             <?= Yii::t('app/about', 'However, please keep the following points in mind in order to make effective use of limited computing resources.') . "\n" ?>
           </p>
           <ul>
-            <li>
+            <li class="mb-3">
               <?= Yii::t('app/about', 'We are using Cloudflare as a reverse proxy.') . "\n" ?>
               <?= Yii::t('app/about', 'Your access may be automatically denied by Cloudflare\'s control.') . "\n" ?>
             </li>
-            <li>
+            <li class="mb-3">
               <strong>
                 <?= Yii::t('app/about', 'The database of this site is updated only once a day as a rule.') . "\n" ?>
               </strong>
               <?= Yii::t('app/about', 'Please think carefully about whether the execution interval of the cron job is meaningful.') . "\n" ?>
             </li>
-            <li>
+            <li class="mb-3">
               <strong>
                 <?= Yii::t('app/about', 'There is a high download access rate around 0 minutes every hour.') . "\n" ?>
               </strong>
               <?= Yii::t('app/about', 'Please distribute the traffic appropriately.') . "\n" ?>
               <?= Yii::t('app/about', 'If too many requests are received at the same time, it may take a long time to respond or it may not be possible to respond.') . "\n" ?>
             </li>
-            <li>
+            <li class="mb-3">
               <strong>
                 <?= Yii::t('app/about', 'Please include your contact information in the User-Agent whenever possible when access.') . "\n" ?>
               </strong>
             </li>
-            <li>
+            <li class="mb-3">
               <?= Yii::t('app/about', 'Please check the downloaded file to make sure that the contents are present and in the expected format.') . "\n" ?>
               <?= Yii::t('app/about', 'We have returned empty or half-empty data in the past.') . "\n" ?>
             </li>
           </ul>
-          <p class="mb-0">
+          <p>
             <?= Yii::t('app/about', 'Thanks in advance for your cooperation.') . "\n" ?>
           </p>
         </div>

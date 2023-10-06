@@ -30,7 +30,6 @@
         "lipis/flag-icons": "^6.11.1",
         "matomo/device-detector": "^6.1.6",
         "omnilight/yii2-scheduling": "^1.1.6",
-        "scssphp/scssphp": "^1.11.1",
         "statink/yii2-sortable-table": "^1.0.2",
         "twbs/bootstrap-icons": "^1.11.1",
         "yiisoft/yii2": "~2.0.49",
