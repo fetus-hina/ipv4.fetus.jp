@@ -106,8 +106,8 @@ ApplicationLanguage::registerLink(Yii::$app, ['site/about']);
           </p>
           <ul>
             <li>
-              <?= Yii::t('app/about', 'We are using CloudFlare as a reverse proxy.') . "\n" ?>
-              <?= Yii::t('app/about', 'Your access may be automatically denied by CloudFlare\'s control.') . "\n" ?>
+              <?= Yii::t('app/about', 'We are using Cloudflare as a reverse proxy.') . "\n" ?>
+              <?= Yii::t('app/about', 'Your access may be automatically denied by Cloudflare\'s control.') . "\n" ?>
             </li>
             <li>
               <strong>

@@ -391,8 +391,8 @@ msgid "We are not responsible for any damage caused by the use of the informatio
 msgstr "掲載されている情報を利用することで発生したいかなる損害等について当サイトは関知しません。"
 
 msgctxt "app/about"
-msgid "We are using CloudFlare as a reverse proxy."
-msgstr "リバースプロキシとしてCloudFlareが挟まっています。"
+msgid "We are using Cloudflare as a reverse proxy."
+msgstr "リバースプロキシとしてCloudflareが挟まっています。"
 
 msgctxt "app/about"
 msgid "We do not have any political agenda."
@@ -407,8 +407,8 @@ msgid "You should not use the information on this website if you need to guarant
 msgstr "正確性等の保証が欲しい場合はご自分で頑張るか、保証ありのサービスをご利用ください。"
 
 msgctxt "app/about"
-msgid "Your access may be automatically denied by CloudFlare's control."
-msgstr "CloudFlare側の制御で自動的にアクセスが拒否される場合があります。"
+msgid "Your access may be automatically denied by Cloudflare's control."
+msgstr "Cloudflare側の制御で自動的にアクセスが拒否される場合があります。"
 
 msgctxt "app/cclist"
 msgid "Alloc %"
