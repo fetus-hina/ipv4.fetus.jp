@@ -53,7 +53,7 @@ ApplicationLanguage::registerLink(Yii::$app, ['site/about']);
               Yii::$app->params['repository'],
               [
                 'target' => '_blank',
-                'rel' => 'external noopener noreferrer',
+                'rel' => 'external noopener',
               ]
             ) . "\n" ?>
           </p>
@@ -63,13 +63,13 @@ ApplicationLanguage::registerLink(Yii::$app, ['site/about']);
             <?= Yii::t('app/about', 'We do not have any political agenda.') . "\n" ?>
             <?= Yii::t('app/about', 'As a rule, we do not accept opinions or requests regarding these political domains.') . "\n" ?>
             <?= Yii::t('app/about', 'This site uses the classification as presented by the RIR.') . "\n" ?>
-            <?= Yii::t('app/about', 'The Japanese names commonly used in Japan or on the Ministry of Foreign Affairs website, and the English names on Wikipedia and other sites are used.') . "\n" ?>
+            <?= Yii::t('app/about', 'The Japanese names commonly used in Japan or on the <a href="https://www.mofa.go.jp/" target="_blank" rel="noopener">Ministry of Foreign Affairs</a> website, and the English names on Wikipedia and other sites are used.') . "\n" ?>
           </p>
           <p>
             <?= Yii::t('app', 'National flags of the countries are displayed using {source}.', [
               'source' => Html::a(Html::encode('flag-icons'), 'https://flagicons.lipis.dev/', [
                 'target' => 'blank',
-                'rel' => 'noopener noreferrer',
+                'rel' => 'noopener',
               ]),
             ]) . "\n" ?>
             <?= Yii::t('app', 'You may not see the latest flag, or you may see the incorrect flag.') . "\n" ?>

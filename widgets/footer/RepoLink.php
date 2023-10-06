@@ -78,7 +78,7 @@ final class RepoLink extends Widget
             $repoUrl,
             [
                 'target' => '_blank',
-                'rel' => 'external noopener noreferrer',
+                'rel' => 'external noopener',
             ],
         );
     }

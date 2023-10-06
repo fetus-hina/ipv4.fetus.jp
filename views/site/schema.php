@@ -197,7 +197,7 @@ ApplicationLanguage::registerLink(Yii::$app, ['site/schema']);
                   '<i>mojibake</i>',
                   'https://en.wikipedia.org/wiki/Mojibake',
                   [
-                    'rel' => 'nofollow noopener',
+                    'rel' => 'noopener',
                     'target' => '_blank',
                   ],
                 ),
@@ -331,7 +331,7 @@ ApplicationLanguage::registerLink(Yii::$app, ['site/schema']);
             <li class="mb-3">
               <?= Yii::t(
                 'app',
-                'The output is in the format compatible with <a href="{url}" target="_blank" rel="nofollow noopener">this web site</a>.',
+                'The output is in the format compatible with <a href="{url}" target="_blank" rel="noopener">this web site</a>.',
                 [
                   'url' => 'http://nami.jp/ipv4bycc/',
                 ],
@@ -388,7 +388,7 @@ ApplicationLanguage::registerLink(Yii::$app, ['site/schema']);
                   'nginx_http_geo_module',
                   'http://nginx.org/en/docs/http/ngx_http_geo_module.html',
                   [
-                    'rel' => 'external noopener noreferrer',
+                    'rel' => 'external noopener',
                     'target' => '_blank',
                   ],
                 ),

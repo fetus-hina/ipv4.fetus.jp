@@ -59,7 +59,7 @@ final class Ipv4byccCard extends Widget
                     'p',
                     Yii::t(
                         'app',
-                        'The output is in the format compatible with <a href="{url}" target="_blank" rel="nofollow noopener">this web site</a>.',
+                        'The output is in the format compatible with <a href="{url}" target="_blank" rel="noopener">this web site</a>.',
                         [
                             'url' => 'http://nami.jp/ipv4bycc/',
                         ],

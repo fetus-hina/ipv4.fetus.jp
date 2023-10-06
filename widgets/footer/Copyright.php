@@ -71,7 +71,7 @@ final class Copyright extends Widget
                 ? $website
                 : ['site/index'],
             [
-                'rel' => 'external noopener noreferrer',
+                'rel' => 'external noopener',
                 'target' => '_blank',
             ],
         );
@@ -104,7 +104,7 @@ final class Copyright extends Widget
             sprintf('https://twitter.com/%s', $value),
             [
                 'target' => '_blank',
-                'rel' => 'external noopener noreferrer',
+                'rel' => 'external noopener',
             ],
         );
     }
@@ -136,7 +136,7 @@ final class Copyright extends Widget
             sprintf('https://github.com/%s', $value),
             [
                 'target' => '_blank',
-                'rel' => 'external noopener noreferrer',
+                'rel' => 'external noopener',
             ],
         );
     }

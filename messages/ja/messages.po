@@ -203,8 +203,8 @@ msgid "The output is in data format for use with {command}, etc."
 msgstr "{command}等で利用する形式のデータが出力されます。"
 
 msgctxt "app"
-msgid "The output is in the format compatible with <a href=\"{url}\" target=\"_blank\" rel=\"nofollow noopener\">this web site</a>."
-msgstr "<a href=\"{url}\" target=\"_blank\" rel=\"nofollow noopener\">「世界の国別 IPv4 アドレス割り当てリスト」</a>と互換性のある形式を出力します。"
+msgid "The output is in the format compatible with <a href=\"{url}\" target=\"_blank\" rel=\"noopener\">this web site</a>."
+msgstr "<a href=\"{url}\" target=\"_blank\" rel=\"noopener\">「世界の国別 IPv4 アドレス割り当てリスト」</a>と互換性のある形式を出力します。"
 
 msgctxt "app"
 msgid "The output is well-formed XML."
@@ -343,7 +343,7 @@ msgid "Thanks in advance for your cooperation."
 msgstr "ご協力をお願いします。"
 
 msgctxt "app/about"
-msgid "The Japanese names commonly used in Japan or on the Ministry of Foreign Affairs website, and the English names on Wikipedia and other sites are used."
+msgid "The Japanese names commonly used in Japan or on the <a href=\"https://www.mofa.go.jp/\" target=\"_blank\" rel=\"noopener\">Ministry of Foreign Affairs</a> website, and the English names on Wikipedia and other sites are used."
 msgstr "日本で一般的な、または外務省サイトに掲載されている日本語名称、Wikipedia等に掲載されている英語名称を利用しています。"
 
 msgctxt "app/about"

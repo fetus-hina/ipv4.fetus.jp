@@ -23,7 +23,7 @@ final class FlagIcons extends Widget
                         'https://flagicons.lipis.dev/',
                         [
                             'target' => 'blank',
-                            'rel' => 'noopener noreferrer',
+                            'rel' => 'noopener',
                         ],
                     ),
                 ]),
