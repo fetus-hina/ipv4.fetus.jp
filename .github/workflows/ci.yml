@@ -54,7 +54,7 @@ jobs:
           path: |
             ~/.cache/composer/files
             vendor
-          key: '${{ runner.os }}-composer-${{ hashFiles(''composer.lock'') }}'
+          key: "${{ runner.os }}-composer-${{ hashFiles('composer.lock') }}"
           restore-keys: |
             ${{ runner.os }}-composer-
       -
@@ -72,7 +72,7 @@ jobs:
           path: |
             ~/.npm
             node_modules
-          key: '${{ runner.os }}-node-${{ hashFiles(''package-lock.json'') }}'
+          key: "${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}"
           restore-keys: |
             ${{ runner.os }}-node-
       -
@@ -91,7 +91,7 @@ jobs:
           path: |
             ~/.cache/composer/files
             vendor
-          key: '${{ runner.os }}-composer-${{ hashFiles(''composer.lock'') }}'
+          key: "${{ runner.os }}-composer-${{ hashFiles('composer.lock') }}"
           restore-keys: |
             ${{ runner.os }}-composer-
       -
@@ -193,14 +193,14 @@ jobs:
           path: |
             ~/.cache/composer/files
             vendor
-          key: '${{ runner.os }}-composer-${{ hashFiles(''composer.lock'') }}'
+          key: "${{ runner.os }}-composer-${{ hashFiles('composer.lock') }}"
       -
         uses: actions/cache@v3
         with:
           path: |
             ~/.npm
             node_modules
-          key: '${{ runner.os }}-node-${{ hashFiles(''package-lock.json'') }}'
+          key: "${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}"
       -
         name: 'Set up ${{ matrix.env.php.label }}'
         uses: shivammathur/setup-php@v2
@@ -231,7 +231,7 @@ jobs:
           path: |
             ~/.npm
             node_modules
-          key: '${{ runner.os }}-node-${{ hashFiles(''package-lock.json'') }}'
+          key: "${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}"
       -
         name: 'Run semistandard'
         run: |
@@ -250,7 +250,7 @@ jobs:
           path: |
             ~/.npm
             node_modules
-          key: '${{ runner.os }}-node-${{ hashFiles(''package-lock.json'') }}'
+          key: "${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}"
       -
         name: 'Run stylelint'
         run: |
