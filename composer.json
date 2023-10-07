@@ -32,7 +32,7 @@
         "omnilight/yii2-scheduling": "^1.1.6",
         "statink/yii2-sortable-table": "^1.0.2",
         "twbs/bootstrap-icons": "^1.11.1",
-        "yiisoft/yii2": "~2.0.49",
+        "yiisoft/yii2": "~2.0.49.1",
         "yiisoft/yii2-bootstrap5": "^2.0.4",
         "yiisoft/yii2-httpclient": "^2.0.15"
     },
