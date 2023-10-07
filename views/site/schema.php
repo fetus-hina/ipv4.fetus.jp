@@ -38,7 +38,7 @@ ApplicationLanguage::registerLink(Yii::$app, ['site/schema']);
           <?= Yii::t('app/schema', 'About This') . "\n" ?>
         </div>
         <div class="card-body pb-0">
-          <p class="mb-0">
+          <p>
             <?= Yii::t('app/schema', 'This page defines the format of data files that can be downloaded from "{plainText}" and "{template}" on each page.', [
               'plainText' => Yii::t('app', 'Plain Text'),
               'template' => Yii::t('app', 'Access-Control Templates'),
@@ -227,10 +227,13 @@ ApplicationLanguage::registerLink(Yii::$app, ['site/schema']);
                 <li class="mb-3">
                   <?= Yii::t('app/schema', 'Subnet Mask') . "\n" ?>
                 </li>
+                <li class="mb-3">
+                  <?= Yii::t('app/schema', 'Number of Addresses') . "\n" ?>
+                </li>
               </ul>
               <?= Yii::t('app/schema', 'It may be expanded in the future (when expanded, it will be added to the right side).') ?><br>
               <?= Yii::t('app/schema', 'Do not expect it is exactly {num,number,integer} columns.', [
-                'num' => 5,
+                'num' => 6,
               ]) . "\n" ?>
             </li>
           </ul>

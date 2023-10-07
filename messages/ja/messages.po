@@ -647,6 +647,10 @@ msgid "Never start a comment in the middle of a line."
 msgstr "コメントが行の途中から始まることはありません。"
 
 msgctxt "app/schema"
+msgid "Number of Addresses"
+msgstr "アドレス数"
+
+msgctxt "app/schema"
 msgid "Output Specifications"
 msgstr "出力ファイル仕様"
 
