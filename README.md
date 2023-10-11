@@ -84,15 +84,11 @@ make
 
 ## 定期データ更新（サーバ側）
 
-cronやsystemd timerを使用して *毎分* 次のコマンドを実行してください。
+cronやsystemd timerを使用して、1日1回程度次のコマンドを実行してください。
 
 ```bash
-/path/to/yii schedule/run --schedule-file=@app/config/schedule.php
+/path/to/yii update --interactive=0
 ```
-
-`/path/to/yii` は実際のパスに合わせる必要がありますが、`@app`はそのままでOKです。  
-毎分実行しても実際には`config/schedule.php`ファイル内で指定された時間にタスクが実行されます（デフォルトではローカル時間の6:05）。
-
 
 ## License
 
