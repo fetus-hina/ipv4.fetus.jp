@@ -13,6 +13,7 @@ use Yii;
 use app\helpers\CountToCidr;
 use app\helpers\DownloadFormatter;
 use app\helpers\Ipv4byccDumper;
+use app\helpers\NginxGeoDumper;
 use app\helpers\TypeHelper;
 use app\models\AllocationBlock;
 use app\models\AllocationCidr;
@@ -25,6 +26,7 @@ use app\models\RegionStat;
 use yii\console\Controller;
 use yii\console\ExitCode;
 use yii\db\Connection;
+use yii\db\Transaction;
 use yii\helpers\FileHelper;
 use yii\httpclient\Client as HttpClient;
 
@@ -134,6 +136,7 @@ class UpdateController extends Controller
         }
         $this->actionKrfilter();
         $this->actionIpv4bycc();
+        $this->actionNginxGeo();
         $updateFinishAt = microtime(true);
 
         $this->actionPreformattedGitRepo();
@@ -576,13 +579,33 @@ class UpdateController extends Controller
             ];
 
             foreach ($tasks as $path => $dumper) {
-                if (!$this->saveIpv4bycc($path, $dumper)) {
+                if (!$this->saveGeneratorToFile($path, $dumper)) {
                     return ExitCode::UNSPECIFIED_ERROR;
                 }
             }
 
             return ExitCode::OK;
         });
+    }
+
+    public function actionNginxGeo(): int
+    {
+        $method = __METHOD__;
+        $now = new DateTimeImmutable('now', new DateTimeZone('Asia/Tokyo'));
+        return Yii::$app->db->transaction(
+            function () use ($method, $now): int {
+                Yii::info('Nginxのgeo形式ファイルを作成します', $method);
+                $isSuccess = $this->saveGeneratorToFile(
+                    vsprintf('@app/web/nginx-geo/%s/%s.txt', [
+                        $now->format('Y-m'),
+                        $now->format('Ymd'),
+                    ]),
+                    fn () => NginxGeoDumper::dump(),
+                );
+                return $isSuccess ? ExitCode::OK : ExitCode::UNSPECIFIED_ERROR;
+            },
+            Transaction::REPEATABLE_READ,
+        );
     }
 
     public function actionPreformattedGitRepo(): int
@@ -662,9 +685,15 @@ class UpdateController extends Controller
 
         foreach ($tasks as $path => $dumper) {
             echo $path . "\n";
-            if (!$this->saveIpv4bycc($path, $dumper, true)) {
+            if (!$this->saveGeneratorToFile($path, $dumper, true)) {
                 return ExitCode::UNSPECIFIED_ERROR;
             }
+        }
+
+        $pathNginxGeo = '@app/runtime/preformatted/nginx-geo/nginx-geo.txt';
+        echo $pathNginxGeo . "\n";
+        if (!$this->saveGeneratorToFile($pathNginxGeo, fn () => NginxGeoDumper::dump(), true)) {
+            return ExitCode::UNSPECIFIED_ERROR;
         }
 
         if ($enableGit) {
@@ -709,7 +738,7 @@ class UpdateController extends Controller
     /**
      * @param callable(): Generator<string> $dumper
      */
-    private function saveIpv4bycc(string $path, callable $dumper, bool $overwrite = false): bool
+    private function saveGeneratorToFile(string $path, callable $dumper, bool $overwrite = false): bool
     {
         $path = (string)Yii::getAlias($path);
         Yii::info('Create ' . basename($path), __METHOD__);

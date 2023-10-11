@@ -26,11 +26,13 @@ add('shared_files', [
 add('shared_dirs', [
     'runtime',
     'web/ipv4bycc',
+    'web/nginx-geo',
 ]);
 add('writable_dirs', [
     'runtime',
     'web/assets',
     'web/ipv4bycc',
+    'web/nginx-geo',
 ]);
 set('writable_mode', 'chmod');
 set('writable_chmod_recursive', false);

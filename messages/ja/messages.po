@@ -566,6 +566,14 @@ msgctxt "app/navbar"
 msgid "krfilter / eufilter (for GDPR)"
 msgstr "krfilter / eufilter (for GDPR)"
 
+msgctxt "app/nginx-geo"
+msgid "Entire list for Nginx Geo"
+msgstr "Nginx (Geo)用の全体リスト"
+
+msgctxt "app/nginx-geo"
+msgid "You can determine from which country the visitor is coming."
+msgstr "訪問者がどの国から来たかを判定することができます。"
+
 msgctxt "app/schema"
 msgid "A blank line may be inserted anywhere."
 msgstr "任意の場所に空行が挟まります。"
