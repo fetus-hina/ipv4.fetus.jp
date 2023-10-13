@@ -11,7 +11,9 @@ use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\web\View;
 
-/** @var View $this */
+/**
+ * @var View $this
+ */
 
 SortableTableAsset::register($this);
 
@@ -121,8 +123,7 @@ $rowNumber = 0;
               ],
             ],
             [
-              'label' => Yii::t('app/cclist', 'IP Addresses') .
-                ' <span class="arrow"><span class="bi bi-arrow-down-short"></span></span>',
+              'label' => Yii::t('app/cclist', 'IP Addresses'),
               'encodeLabel' => false,
               'attribute' => 'total_address_count',
               'format' => 'integer',
@@ -135,6 +136,8 @@ $rowNumber = 0;
               'headerOptions' => [
                 'data' => [
                   'sort' => 'int',
+                  'sort-default' => 'desc',
+                  'sort-onload' => 'yes',
                 ],
               ],
             ],
@@ -152,6 +155,7 @@ $rowNumber = 0;
                 'class' => 'd-none d-md-table-cell',
                 'data' => [
                   'sort' => 'int',
+                  'sort-default' => 'desc',
                 ],
               ],
             ],
@@ -169,6 +173,7 @@ $rowNumber = 0;
                 'class' => 'd-none d-md-table-cell',
                 'data' => [
                   'sort' => 'int',
+                  'sort-default' => 'desc',
                 ],
               ],
             ],
@@ -186,6 +191,7 @@ $rowNumber = 0;
                 'class' => 'd-none d-md-table-cell',
                 'data' => [
                   'sort' => 'string',
+                  'sort-default' => 'desc',
                 ],
               ],
             ],

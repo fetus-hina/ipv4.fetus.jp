@@ -7,12 +7,11 @@ namespace app\widgets\footer;
 use DateTimeImmutable;
 use DateTimeZone;
 use Yii;
-use app\assets\BootstrapIconsAsset;
+use app\widgets\Icon;
 use app\widgets\Tooltip;
 use yii\base\Widget;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
-use yii\web\View;
 
 use function array_filter;
 use function implode;
@@ -84,20 +83,9 @@ final class Copyright extends Widget
             return null;
         }
 
-        $this->useBSIcons();
-
         return Html::a(
             Tooltip::widget([
-                'content' => Html::tag(
-                    'span',
-                    '',
-                    [
-                        'class' => [
-                            'bi',
-                            'bi-twitter-x',
-                        ],
-                    ],
-                ),
+                'content' => Icon::twitter(),
                 'format' => 'raw',
                 'title' => sprintf('Twitter @%s', $value),
             ]),
@@ -116,20 +104,9 @@ final class Copyright extends Widget
             return null;
         }
 
-        $this->useBSIcons();
-
         return Html::a(
             Tooltip::widget([
-                'content' => Html::tag(
-                    'span',
-                    '',
-                    [
-                        'class' => [
-                            'bi',
-                            'bi-github',
-                        ],
-                    ],
-                ),
+                'content' => Icon::github(),
                 'format' => 'raw',
                 'title' => sprintf('GitHub @%s', $value),
             ]),
@@ -139,14 +116,5 @@ final class Copyright extends Widget
                 'rel' => 'external noopener',
             ],
         );
-    }
-
-    private function useBSIcons(): void
-    {
-        if (!($view = $this->view) instanceof View) {
-            return;
-        }
-
-        BootstrapIconsAsset::register($view);
     }
 }

@@ -7,12 +7,10 @@ namespace app\widgets;
 use LogicException;
 use RuntimeException;
 use Yii;
-use app\assets\BootstrapIconsAsset;
 use app\models\SearchForm;
 use yii\base\Widget;
 use yii\bootstrap5\ActiveForm;
 use yii\helpers\Html;
-use yii\web\View;
 
 use function implode;
 use function ob_get_clean;
@@ -121,13 +119,9 @@ final class SearchCard extends Widget
 
     private function renderSubmitButton(): string
     {
-        if (($view = $this->view) instanceof View) {
-            BootstrapIconsAsset::register($view);
-        }
-
         return Html::submitButton(
             implode(' ', [
-                Html::tag('span', '', ['class' => 'bi bi-search']),
+                Icon::search(),
                 Html::encode(Yii::t('app/search', 'Search')),
             ]),
             [

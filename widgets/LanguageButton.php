@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace app\widgets;
 
 use Yii;
-use app\assets\BootstrapIconsAsset;
 use app\assets\LatinFontAsset;
 use app\helpers\ApplicationLanguage;
 use app\helpers\TypeHelper;
@@ -42,7 +41,7 @@ final class LanguageButton extends Widget
     {
         return Html::a(
             implode(' ', [
-                $this->bi('translate'),
+                Icon::translate(),
                 $this->montserrat(Html::encode('Language')),
             ]),
             'javascript:;',
@@ -98,7 +97,9 @@ final class LanguageButton extends Widget
     {
         return Html::a(
             implode(' ', [
-                $this->bi(ApplicationLanguage::isAutoDetect() ? 'check2-square' : 'square'),
+                ApplicationLanguage::isAutoDetect()
+                    ? Icon::checkboxChecked()
+                    : Icon::checkboxUnchecked(),
                 Yii::t('app', 'Auto Detect'),
             ]),
             'javascript:;',
@@ -121,9 +122,9 @@ final class LanguageButton extends Widget
         return array_map(
             fn (Language $language): string => Html::a(
                 implode(' ', [
-                    preg_match('/^' . preg_quote($language->id) . '\b/i', Yii::$app->language)
-                        ? $this->bi('record-circle-fill')
-                        : $this->bi('circle'),
+                    preg_match('/^' . preg_quote($language->id, '/') . '\b/i', Yii::$app->language)
+                        ? Icon::radioChecked()
+                        : Icon::radioUnchecked(),
                     $this->renderLanguageName($language),
                 ]),
                 'javascript:;',
@@ -172,20 +173,6 @@ final class LanguageButton extends Widget
     private function getButtonId(): string
     {
         return TypeHelper::shouldBeString($this->id);
-    }
-
-    private function bi(string $icon): string
-    {
-        if (($view = $this->view) instanceof View) {
-            BootstrapIconsAsset::register($view);
-        }
-
-        return Html::tag('span', '', [
-            'class' => [
-                'bi',
-                "bi-{$icon}",
-            ],
-        ]);
     }
 
     private function montserrat(string $html): string

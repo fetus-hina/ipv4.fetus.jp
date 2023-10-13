@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use app\helpers\ApplicationLanguage;
 use app\helpers\TypeHelper;
+use app\widgets\Icon;
 use yii\helpers\Html;
 use yii\web\View;
 
@@ -44,13 +45,13 @@ $breakable = fn (string $text): string => TypeHelper::shouldBeString(
 ?>
 <p class="btn-group">
   <?= Html::a(
-      implode('', [
-          '<span class="bi bi-chevron-left"></span>',
-          ' ',
-          Yii::t('app/license', 'Back'),
-      ]),
-      ['license/index'],
-      ['class' => 'btn btn-outline-primary'],
+    implode('', [
+      Icon::linkBack(),
+      ' ',
+      Yii::t('app/license', 'Back'),
+    ]),
+    ['license/index'],
+    ['class' => 'btn btn-outline-primary'],
   ) . "\n" ?>
 </p>
 <h2><?= Html::encode($title) ?></h2>

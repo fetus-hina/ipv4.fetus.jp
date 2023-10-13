@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use app\widgets\Icon;
 use yii\base\Widget;
 use yii\bootstrap5\LinkPager as BSLinkPager;
 use yii\data\Pagination;
@@ -45,35 +46,19 @@ Yii::$container->set(LinkPager::class, [
         'class' => 'pagination justify-content-center',
     ],
     'nextPageLabel' => implode('', [
-        Html::tag(
-            'span',
-            Html::tag('span', '', ['class' => 'bi bi-chevron-right']),
-            ['aria-hidden' => 'true'],
-        ),
+        Icon::pagerNext(),
         Html::tag('span', Html::encode('Next'), ['class' => 'visually-hidden']),
     ]),
     'prevPageLabel' => implode('', [
-        Html::tag(
-            'span',
-            Html::tag('span', '', ['class' => 'bi bi-chevron-left']),
-            ['aria-hidden' => 'true'],
-        ),
+        Icon::pagerPrev(),
         Html::tag('span', Html::encode('Previous'), ['class' => 'visually-hidden']),
     ]),
     'firstPageLabel' => implode('', [
-        Html::tag(
-            'span',
-            Html::tag('span', '', ['class' => 'bi bi-chevron-double-left']),
-            ['aria-hidden' => 'true'],
-        ),
+        Icon::pagerFirst(),
         Html::tag('span', Html::encode('First'), ['class' => 'visually-hidden']),
     ]),
     'lastPageLabel' => implode('', [
-        Html::tag(
-            'span',
-            Html::tag('span', '', ['class' => 'bi bi-chevron-double-right']),
-            ['aria-hidden' => 'true'],
-        ),
+        Icon::pagerLast(),
         Html::tag('span', Html::encode('Last'), ['class' => 'visually-hidden']),
     ]),
 ]);

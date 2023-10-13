@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace app\widgets;
 
 use Yii;
-use app\assets\BootstrapIconsAsset;
 use app\helpers\TypeHelper;
 use app\models\Krfilter;
 use app\models\Region;
@@ -26,7 +25,6 @@ final class KrfilterTargetListWidget extends Widget
     public function run()
     {
         BootstrapAsset::register($this->view);
-        BootstrapIconsAsset::register($this->view);
         BootstrapPluginAsset::register($this->view);
 
         return Html::tag(
@@ -47,7 +45,7 @@ final class KrfilterTargetListWidget extends Widget
                 'button',
                 implode(' ', [
                     Yii::t('app/krfilter', 'List of countries/regions'),
-                    Html::tag('span', '', ['class' => 'bi bi-window-stack']),
+                    Icon::popupModal(),
                 ]),
                 [
                     'class' => 'btn btn-outline-secondary btn-sm',
@@ -132,7 +130,7 @@ final class KrfilterTargetListWidget extends Widget
                 Html::tag(
                     'button',
                     implode(' ', [
-                        Html::tag('span', '', ['class' => 'bi bi-x-lg']),
+                        Icon::close(),
                         Yii::t('app', 'Close'),
                     ]),
                     [
@@ -200,7 +198,7 @@ final class KrfilterTargetListWidget extends Widget
                 ),
                 Html::tag(
                     'div',
-                    Html::tag('span', '', ['class' => 'bi bi-chevron-right']),
+                    Icon::linkNext(),
                     [],
                 ),
             ]),

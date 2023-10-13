@@ -5,10 +5,8 @@ declare(strict_types=1);
 namespace app\widgets;
 
 use Yii;
-use app\assets\BootstrapIconsAsset;
 use yii\base\Widget;
 use yii\helpers\Html;
-use yii\web\View;
 
 use function implode;
 
@@ -16,10 +14,6 @@ final class NginxGeoCard extends Widget
 {
     public function run(): string
     {
-        if (($view = $this->view) instanceof View) {
-            BootstrapIconsAsset::register($view);
-        }
-
         return Html::tag(
             'div',
             implode('', [
@@ -68,7 +62,7 @@ final class NginxGeoCard extends Widget
                     Html::a(
                         implode(' ', [
                             Html::encode(Yii::t('app', 'Download')),
-                            Html::tag('span', '', ['class' => 'bi bi-download']),
+                            Icon::download(),
                         ]),
                         ['nginx-geo/index'],
                         [

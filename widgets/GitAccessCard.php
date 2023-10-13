@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace app\widgets;
 
 use Yii;
-use app\assets\BootstrapIconsAsset;
 use yii\base\Widget;
 use yii\helpers\Html;
 
@@ -81,14 +80,12 @@ final class GitAccessCard extends Widget
      */
     private function getParagraphs(): array
     {
-        BootstrapIconsAsset::register($this->view);
-
         return [
             Yii::t('app/git', 'The information is also placed on GitHub.'),
             Yii::t('app/git', 'Please refer {repo} if you prefer.', [
                 'repo' => Html::a(
                     implode(' ', [
-                        Html::tag('span', '', ['class' => 'bi bi-github']),
+                        Icon::github(),
                         Html::tag('code', Html::encode('fetus-hina/ipv4.fetus.jp-exports')),
                     ]),
                     'https://github.com/fetus-hina/ipv4.fetus.jp-exports',
