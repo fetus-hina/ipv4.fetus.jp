@@ -42,6 +42,11 @@ ApplicationLanguage::registerLink(Yii::$app, ['site/about']);
             <?= Yii::t('app/about', 'The information is automatically retrieved and updated daily from the Regional Internet Registry (RIR).') . "\n" ?>
           </p>
           <p>
+            <?= Yii::t('app/about', 'It is not always match the information obtained from RIRs does not necessarily match the actual country of use.') . "\n" ?>
+            <?= Yii::t('app/about', 'Determining the actual region accurately requires difficult work, such as identifying routing paths.') . "\n" ?>
+            <?= Yii::t('app/about', 'This site does not do that.') . "\n" ?>
+          </p>
+          <p>
             <?= Yii::t('app/about', 'The information we provide is unguaranteed.') . "\n" ?>
             <?= Yii::t('app/about', 'No responsibility is assumed for any problems that may arise, whether they are caused by Regional Internet Registry, our website, you, or any other communication channels.') . "\n" ?>
             <?= Yii::t('app/about', 'You should not use the information on this website if you need to guarantee its accuracy.') . "\n" ?>

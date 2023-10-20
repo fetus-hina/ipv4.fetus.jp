@@ -295,6 +295,10 @@ msgid "Click here for more information."
 msgstr "詳しくはこちらをご覧ください。"
 
 msgctxt "app/about"
+msgid "Determining the actual region accurately requires difficult work, such as identifying routing paths."
+msgstr "実際に利用されている地域を特定するには、ルーティング経路を特定するなど困難な作業が必要になります。"
+
+msgctxt "app/about"
 msgid "For automated access, see the page above."
 msgstr "自動化したアクセスについても、上記ページをご覧ください。"
 
@@ -317,6 +321,10 @@ msgstr "何か不具合が発生している場合は、こちらへご連絡く
 msgctxt "app/about"
 msgid "Information is not guaranteed."
 msgstr "情報は無保証です。"
+
+msgctxt "app/about"
+msgid "It is not always match the information obtained from RIRs does not necessarily match the actual country of use."
+msgstr "RIRから取得した情報と、実際に利用されている国が必ずしも一致するとは限りません。"
 
 msgctxt "app/about"
 msgid "No responsibility is assumed for any problems that may arise, whether they are caused by Regional Internet Registry, our website, you, or any other communication channels."
@@ -377,6 +385,10 @@ msgstr "毎時0分頃はダウンロードアクセスが集中しています�
 msgctxt "app/about"
 msgid "There is no problem with automated access."
 msgstr "自動化されたアクセスをしても何ら問題ありません。"
+
+msgctxt "app/about"
+msgid "This site does not do that."
+msgstr "このサイトではそのような作業は行っていません。"
 
 msgctxt "app/about"
 msgid "This site provides lists of IPv4 addresses allocated to each country or region."
