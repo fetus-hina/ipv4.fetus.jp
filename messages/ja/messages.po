@@ -247,7 +247,7 @@ msgid "Used as part of a configuration file for {command}, such as {path}."
 msgstr "{path}等の{command}用設定ファイルを編集して利用することになるでしょう。"
 
 msgctxt "app"
-msgid "We have a list of countries that we think are frequently used for denied access lists."
+msgid "We have lists of countries that we think are frequently used for denied access lists."
 msgstr "頻繁にアクセス拒否リストに使用すると思われる国をまとめた一覧があります。"
 
 msgctxt "app"
@@ -379,7 +379,7 @@ msgid "There is no problem with automated access."
 msgstr "自動化されたアクセスをしても何ら問題ありません。"
 
 msgctxt "app/about"
-msgid "This site provides a list of IPv4 addresses allocated to each country or region."
+msgid "This site provides lists of IPv4 addresses allocated to each country or region."
 msgstr "このサイトは、各「国や地域」に割り振りされたIPv4アドレスの一覧を提供するサイトです。"
 
 msgctxt "app/about"
@@ -397,6 +397,10 @@ msgstr "リバースプロキシとしてCloudflareが挟まっています。"
 msgctxt "app/about"
 msgid "We do not have any political agenda."
 msgstr "表示内容について何ら政治的意図をもって記載していません。"
+
+msgctxt "app/about"
+msgid "We do not use this information normally, but there may be situations in which we need to ask you to do some action."
+msgstr "この情報は通常使用しませんが、高負荷など何らかの対応をお願いする可能性があります。ご協力をお願いします。"
 
 msgctxt "app/about"
 msgid "We have returned empty or half-empty data in the past."

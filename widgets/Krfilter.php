@@ -114,7 +114,7 @@ class Krfilter extends Widget
                 'p',
                 Yii::t(
                     'app',
-                    'We have a list of countries that we think are frequently used for denied access lists.',
+                    'We have lists of countries that we think are frequently used for denied access lists.',
                 ),
             ),
             Html::tag(

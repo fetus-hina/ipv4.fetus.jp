@@ -36,7 +36,7 @@ ApplicationLanguage::registerLink(Yii::$app, ['site/about']);
         </div>
         <div class="card-body pb-0">
           <p>
-            <?= Yii::t('app/about', 'This site provides a list of IPv4 addresses allocated to each country or region.') . "\n" ?>
+            <?= Yii::t('app/about', 'This site provides lists of IPv4 addresses allocated to each country or region.') . "\n" ?>
           </p>
           <p>
             <?= Yii::t('app/about', 'The information is automatically retrieved and updated daily from the Regional Internet Registry (RIR).') . "\n" ?>
@@ -112,7 +112,8 @@ ApplicationLanguage::registerLink(Yii::$app, ['site/about']);
             <li class="mb-3">
               <strong>
                 <?= Yii::t('app/about', 'Please include your contact information in the User-Agent whenever possible when access.') . "\n" ?>
-              </strong>
+              </strong><br>
+              <?= Yii::t('app/about', 'We do not use this information normally, but there may be situations in which we need to ask you to do some action.') . "\n" ?>
             </li>
             <li class="mb-3">
               <?= Yii::t('app/about', 'Please check the downloaded file to make sure that the contents are present and in the expected format.') . "\n" ?>
