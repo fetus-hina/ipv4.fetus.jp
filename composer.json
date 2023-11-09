@@ -27,7 +27,7 @@
         "ext-pdo_pgsql": "*",
 
         "cweagans/composer-patches": "^1.7.3",
-        "lipis/flag-icons": "^6.11.1",
+        "lipis/flag-icons": "^6.12.0",
         "matomo/device-detector": "^6.1.6",
         "statink/yii2-sortable-table": "^1.0.2",
         "twbs/bootstrap-icons": "^1.11.1",
