@@ -91,6 +91,7 @@ final class FlagIcon extends Widget
         return Html::img($dataUri, [
             'alt' => Unicode::asciiToRegionalIndicator($cc),
             'class' => 'inline-flag-icons',
+            'draggable' => 'false',
         ]);
     }
 
