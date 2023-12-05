@@ -18,7 +18,7 @@ jobs:
             experimental: false
           -
             php: '8.3'
-            experimental: true
+            experimental: false
           -
             php: '8.4'
             experimental: true
@@ -147,7 +147,7 @@ jobs:
             pgsql:
               label: 'Latest PgSQL'
               version: bullseye
-            experimental: true
+            experimental: false
           -
             php:
               label: 'PHP 8.3'
@@ -155,7 +155,7 @@ jobs:
             pgsql:
               label: 'Latest PgSQL'
               version: bullseye
-            experimental: true
+            experimental: false
           -
             php:
               label: 'PHP 8.4'
