@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d62e1ae96d4a361998db0c02fd62b0a8",
+    "content-hash": "a41c240dab90e88ef0317bea3c6b8cb5",
     "packages": [
         {
             "name": "cebe/markdown",
@@ -181,16 +181,16 @@
         },
         {
             "name": "lipis/flag-icons",
-            "version": "v7.0.2",
+            "version": "v7.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lipis/flag-icons.git",
-                "reference": "42093e73487f4bfcc57ab61de8b1f99eccf49243"
+                "reference": "bf57446752a771ce32b3a37ed198e195484f4c37"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lipis/flag-icons/zipball/42093e73487f4bfcc57ab61de8b1f99eccf49243",
-                "reference": "42093e73487f4bfcc57ab61de8b1f99eccf49243",
+                "url": "https://api.github.com/repos/lipis/flag-icons/zipball/bf57446752a771ce32b3a37ed198e195484f4c37",
+                "reference": "bf57446752a771ce32b3a37ed198e195484f4c37",
                 "shasum": ""
             },
             "type": "library",
@@ -216,9 +216,9 @@
             ],
             "support": {
                 "issues": "https://github.com/lipis/flag-icons/issues",
-                "source": "https://github.com/lipis/flag-icons/tree/v7.0.2"
+                "source": "https://github.com/lipis/flag-icons/tree/v7.1.0"
             },
-            "time": "2023-11-18T09:24:51+00:00"
+            "time": "2023-12-11T18:14:25+00:00"
         },
         {
             "name": "matomo/device-detector",
