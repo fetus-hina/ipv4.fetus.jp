@@ -39,7 +39,7 @@
         "codeception/codeception": "^5.0.13",
         "codeception/module-asserts": "^3.0.0",
         "codeception/module-filesystem": "^3.0.1",
-        "codeception/module-yii2": "^1.1.9",
+        "codeception/module-yii2": "^1.1.10",
         "codeception/specify": "^2.0.0",
         "codeception/verify": "^3.0.0",
         "jp3cki/coding-standard": "^1.0.0",
