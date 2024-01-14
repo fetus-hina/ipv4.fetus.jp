@@ -17,6 +17,10 @@ final class SnsWidget extends Widget
 {
     public function run(): string
     {
+        if (AdSenseWidget::isDisabled()) {
+            return '';
+        }
+
         return Html::tag(
             'div',
             implode('', [

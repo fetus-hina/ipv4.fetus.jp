@@ -15,7 +15,10 @@ final class SideAd extends Widget
 {
     public function run(): string
     {
-        if (!Yii::$app->params['adsense']) {
+        if (
+            AdSenseWidget::isDisabled() ||
+            !Yii::$app->params['adsense']
+        ) {
             return '';
         }
 

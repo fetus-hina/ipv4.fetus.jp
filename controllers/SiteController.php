@@ -136,6 +136,37 @@ class SiteController extends Controller
         return $r;
     }
 
+    public function actionDisableAds(): Response
+    {
+        return $this->manageAds(false);
+    }
+
+    public function actionEnableAds(): Response
+    {
+        return $this->manageAds(true);
+    }
+
+    private function manageAds(bool $enabled): Response
+    {
+        $res = Yii::$app->response;
+        $req = Yii::$app->request;
+        if ($req->isPost) {
+            $res->cookies->add(
+                Yii::createObject([
+                    'class' => Cookie::class,
+                    'expire' => strtotime('2100-01-01T00:00:00+00:00'),
+                    'httpOnly' => true,
+                    'name' => 'ads-config',
+                    'sameSite' => Cookie::SAME_SITE_STRICT,
+                    'secure' => YII_ENV_PROD,
+                    'value' => $enabled ? 'enabled' : 'disabled',
+                ]),
+            );
+        }
+
+        return $res->redirect(['site/index'], 302);
+    }
+
     public function actionClearOpcache(): string
     {
         $r = Yii::$app->response;

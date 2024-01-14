@@ -14,6 +14,7 @@ final class BrandAd extends Widget
     public function run(): string
     {
         if (
+            AdSenseWidget::isDisabled() ||
             !Yii::$app->params['adsense'] ||
             !isset(Yii::$app->params['adsense']['slots']['pc-brand'])
         ) {

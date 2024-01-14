@@ -426,6 +426,38 @@ msgctxt "app/about"
 msgid "Your access may be automatically denied by Cloudflare's control."
 msgstr "Cloudflare側の制御で自動的にアクセスが拒否される場合があります。"
 
+msgctxt "app/ads"
+msgid "Ad-Blocking Tools"
+msgstr "アドブロックツール"
+
+msgctxt "app/ads"
+msgid "Disable Ads"
+msgstr "広告の無効化"
+
+msgctxt "app/ads"
+msgid "Enable Ads"
+msgstr "広告の有効化"
+
+msgctxt "app/ads"
+msgid "However, ad-blocking tools may inhibit necessary access and affect site behavior."
+msgstr "ただし、アドブロックツールを使用すると必要なアクセスが拒否され、サイトの動作に影響する可能性があります。"
+
+msgctxt "app/ads"
+msgid "This website does not change behavior based on whether or not ad-blocking tools are used."
+msgstr "このサイトでは、アドブロックツールの使用の有無によって動作を変えることはありません。"
+
+msgctxt "app/ads"
+msgid "You are free to use the ad-blocking tool."
+msgstr "アドブロックツールの使用は自由です。"
+
+msgctxt "app/ads"
+msgid "You can exclude all ad behavior completely by clicking on the following button."
+msgstr "以下のボタンをクリックすると、広告の挙動を完全に除外できます。"
+
+msgctxt "app/ads"
+msgid "You will have the best experience if you click this button and then stop the ad-blocking tool."
+msgstr "このボタンをクリックしてからアドブロックツールを停止すると、より良い体験が得られます。"
+
 msgctxt "app/cclist"
 msgid "Alloc %"
 msgstr "対全空間"

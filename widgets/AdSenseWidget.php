@@ -11,6 +11,7 @@ use yii\helpers\Html;
 
 use function implode;
 use function is_array;
+use function is_string;
 use function preg_match;
 use function vsprintf;
 
@@ -27,6 +28,10 @@ final class AdSenseWidget extends Widget
     /** @return string */
     public function run()
     {
+        if (self::isDisabled()) {
+            return '';
+        }
+
         $params = Yii::$app->params['adsense'];
         if (!is_array($params)) {
             return '';
@@ -86,5 +91,11 @@ final class AdSenseWidget extends Widget
         }
 
         return 'about:blank';
+    }
+
+    public static function isDisabled(): bool
+    {
+        $config = Yii::$app->request->cookies->getValue('ads-config');
+        return is_string($config) && $config === 'disabled';
     }
 }

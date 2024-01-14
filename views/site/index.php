@@ -5,6 +5,7 @@ declare(strict_types=1);
 use app\helpers\ApplicationLanguage;
 use app\models\SearchForm;
 use app\widgets\AboutUsCard;
+use app\widgets\AdsConfigCard;
 use app\widgets\GitAccessCard;
 use app\widgets\Ipv4byccCard;
 use app\widgets\NginxGeoCard;
@@ -81,6 +82,7 @@ ApplicationLanguage::registerLink(Yii::$app, ['site/index']);
             Html::tag('aside', SearchCard::widget(['form' => $search]), ['class' => 'mb-4 d-none d-lg-block']),
             SideAd::widget(),
             Html::tag('aside', AboutUsCard::widget(), ['class' => 'mb-4']),
+            Html::tag('aside', AdsConfigCard::widget(), ['class' => 'mb-4']),
             Html::tag('aside', GitAccessCard::widget(), ['class' => 'mb-4']),
             Html::tag('aside', Ipv4byccCard::widget(), ['class' => 'mb-4']),
             Html::tag('aside', NginxGeoCard::widget(), ['class' => 'mb-4']),
