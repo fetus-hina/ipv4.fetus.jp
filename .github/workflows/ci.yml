@@ -11,9 +11,6 @@ jobs:
       matrix:
         env:
           -
-            php: '8.1'
-            experimental: false
-          -
             php: '8.2'
             experimental: false
           -
@@ -44,6 +41,11 @@ jobs:
     steps:
       -
         uses: actions/checkout@v4
+      -
+        name: 'Set up PHP 8.2'
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
       -
         name: 'symlink composer'
         run: |
@@ -95,10 +97,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-composer-
       -
-        name: 'Set up PHP 8.1'
+        name: 'Set up PHP 8.2'
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.1'
+          php-version: '8.2'
       -
         name: 'Install dependencies'
         run: |
@@ -118,27 +120,19 @@ jobs:
         env:
           -
             php:
-              label: 'PHP 8.1'
-              version: '8.1'
+              label: 'PHP 8.2'
+              version: '8.2'
             pgsql:
               label: 'PgSQL 9.6'
               version: 9.6-bullseye
             experimental: false
           -
             php:
-              label: 'PHP 8.1'
-              version: '8.1'
+              label: 'PHP 8.2'
+              version: '8.2'
             pgsql:
               label: 'PgSQL 13'
               version: 13-bullseye
-            experimental: false
-          -
-            php:
-              label: 'PHP 8.1'
-              version: '8.1'
-            pgsql:
-              label: 'Latest PgSQL'
-              version: bullseye
             experimental: false
           -
             php:
