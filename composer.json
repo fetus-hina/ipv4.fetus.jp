@@ -1,31 +1,28 @@
 {
     "name": "jp3cki/ipv4.fetus.jp",
     "description": "ipv4.fetus.jp",
-    "homepage": "https://ipv4.fetus.jp/",
-    "type": "project",
     "license": "MIT",
+    "type": "project",
+    "homepage": "https://ipv4.fetus.jp/",
     "support": {
         "issues": "https://github.com/fetus-hina/ipv4.fetus.jp/issues",
         "source": "https://github.com/fetus-hina/ipv4.fetus.jp"
     },
-    "minimum-stability": "stable",
     "require": {
         "php": ">= 8.2",
         "php-64bit": "*",
         "php-ipv6": "*",
-
-        "ext-date": "*",
-        "ext-pcre": "*",
-        "ext-hash": "*",
-        "ext-json": "*",
-        "ext-spl": "*",
-        "ext-session": "*",
         "ext-curl": "*",
-        "ext-mbstring": "*",
+        "ext-date": "*",
+        "ext-hash": "*",
         "ext-intl": "*",
+        "ext-json": "*",
+        "ext-mbstring": "*",
+        "ext-pcre": "*",
         "ext-pdo": "*",
         "ext-pdo_pgsql": "*",
-
+        "ext-session": "*",
+        "ext-spl": "*",
         "cweagans/composer-patches": "^1.7.3",
         "lipis/flag-icons": "^7.1.0",
         "matomo/device-detector": "^6.2.1",
@@ -42,6 +39,7 @@
         "codeception/module-yii2": "^1.1.10",
         "codeception/specify": "^2.0.0",
         "codeception/verify": "^3.0.0",
+        "ergebnis/composer-normalize": "^2.42.0",
         "jp3cki/coding-standard": "^1.0.0",
         "proget-hq/phpstan-yii2": "^0.8.0",
         "squizlabs/php_codesniffer": "^3.8.1",
@@ -67,25 +65,32 @@
         "symfony/polyfill-php80": "*",
         "symfony/polyfill-php81": "*"
     },
-    "config": {
-        "allow-plugins": {
-            "cweagans/composer-patches": true,
-            "dealerdirect/phpcodesniffer-composer-installer": true,
-            "yiisoft/yii2-composer": true
-        },
-        "process-timeout": 1800,
-        "platform": {
-            "php": "8.2.14"
+    "repositories": {
+        "statink": {
+            "type": "composer",
+            "url": "https://satis.stat.ink"
         }
     },
-    "extra": {
-        "patches": {
-        }
-    },
+    "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
             "app\\": "./"
         }
+    },
+    "config": {
+        "allow-plugins": {
+            "cweagans/composer-patches": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "ergebnis/composer-normalize": true,
+            "yiisoft/yii2-composer": true
+        },
+        "platform": {
+            "php": "8.2.14"
+        },
+        "process-timeout": 1800
+    },
+    "extra": {
+        "patches": {}
     },
     "scripts": {
         "post-install-cmd": [
@@ -98,11 +103,5 @@
             "./yii license/clean-extracted",
             "./yii license/extract"
         ]
-    },
-    "repositories": {
-        "statink": {
-            "type": "composer",
-            "url": "https://satis.stat.ink"
-        }
     }
 }

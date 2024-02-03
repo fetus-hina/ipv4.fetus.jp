@@ -80,6 +80,28 @@ jobs:
       -
         name: 'Install NPM dependencies'
         run: 'npm clean-install'
+  composerJson:
+    name: 'composer.json should be normalized'
+    runs-on: ubuntu-22.04
+    needs: makeComposerCache
+    steps:
+      -
+        uses: actions/checkout@v4
+      -
+        name: 'Set up PHP 8.2'
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+      -
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache/composer/files
+            vendor
+          key: "${{ runner.os }}-composer-${{ hashFiles('composer.lock') }}"
+      -
+        name: 'Run checker'
+        run: ./composer.phar normalize --dry-run
   phpStyleCheck:
     name: 'PHP Coding Style'
     runs-on: ubuntu-22.04

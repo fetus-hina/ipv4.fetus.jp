@@ -67,7 +67,11 @@ test: vendor
 check-style: check-style-php check-style-js check-style-css
 
 .PHONY: check-style-php
-check-style-php: check-style-phpcs check-style-phpstan
+check-style-php: check-style-composer check-style-phpcs check-style-phpstan
+
+.PHONY: check-style-composer
+check-style-composer: vendor
+	./composer.phar normalize --dry-run
 
 .PHONY: check-style-phpcs
 check-style-phpcs: vendor
