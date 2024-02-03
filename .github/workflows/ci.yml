@@ -101,7 +101,7 @@ jobs:
           key: "${{ runner.os }}-composer-${{ hashFiles('composer.lock') }}"
       -
         name: 'Run checker'
-        run: ./composer.phar normalize --dry-run
+        run: composer normalize --dry-run
   phpStyleCheck:
     name: 'PHP Coding Style'
     runs-on: ubuntu-22.04
