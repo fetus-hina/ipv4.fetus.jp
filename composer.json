@@ -33,7 +33,7 @@
         "yiisoft/yii2-httpclient": "^2.0.15"
     },
     "require-dev": {
-        "codeception/codeception": "^5.0.13",
+        "codeception/codeception": "^5.1.0",
         "codeception/module-asserts": "^3.0.0",
         "codeception/module-filesystem": "^3.0.1",
         "codeception/module-yii2": "^1.1.10",
