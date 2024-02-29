@@ -15,8 +15,8 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.23.9",
-    "@babel/core": "^7.23.9",
-    "@babel/preset-env": "^7.23.9",
+    "@babel/core": "^7.24.0",
+    "@babel/preset-env": "^7.24.0",
     "autoprefixer": "^10.4.17",
     "cssnano": "^6.0.3",
     "postcss": "^8.4.35",
