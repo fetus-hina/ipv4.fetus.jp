@@ -3,7 +3,8 @@ includes:
 
 parameters:
   level: max
-  checkMissingIterableValueType: false
+  ignoreErrors:
+    - identifier: missingType.iterableValue
 
   paths:
     - ./
