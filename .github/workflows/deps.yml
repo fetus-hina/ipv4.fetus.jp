@@ -29,6 +29,7 @@ jobs:
       -
         name: 'Install dependencies'
         run: |
+          ln -s `which composer` composer.phar
           composer install --prefer-dist
           npm clean-install
       -
