@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4df6ad7e0c125c401ab16c7d05dbe351",
+    "content-hash": "c888981f07d0c8ee93371b86c1821115",
     "packages": [
         {
             "name": "cebe/markdown",
@@ -181,16 +181,16 @@
         },
         {
             "name": "lipis/flag-icons",
-            "version": "v7.2.2",
+            "version": "v7.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lipis/flag-icons.git",
-                "reference": "d26a32c317eaa9dca0fa777a9c3500e0e403da73"
+                "reference": "5667d75be0c0396f29fdc73e2b2e341d0e702843"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lipis/flag-icons/zipball/d26a32c317eaa9dca0fa777a9c3500e0e403da73",
-                "reference": "d26a32c317eaa9dca0fa777a9c3500e0e403da73",
+                "url": "https://api.github.com/repos/lipis/flag-icons/zipball/5667d75be0c0396f29fdc73e2b2e341d0e702843",
+                "reference": "5667d75be0c0396f29fdc73e2b2e341d0e702843",
                 "shasum": ""
             },
             "type": "library",
@@ -216,9 +216,9 @@
             ],
             "support": {
                 "issues": "https://github.com/lipis/flag-icons/issues",
-                "source": "https://github.com/lipis/flag-icons/tree/v7.2.2"
+                "source": "https://github.com/lipis/flag-icons/tree/v7.2.3"
             },
-            "time": "2024-05-21T20:55:41+00:00"
+            "time": "2024-05-29T11:01:19+00:00"
         },
         {
             "name": "matomo/device-detector",
@@ -2827,16 +2827,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.11.3",
+            "version": "1.11.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "e64220a05c1209fc856d58e789c3b7a32c0bb9a5"
+                "reference": "9100a76ce8015b9aa7125b9171ae3a76887b6c82"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/e64220a05c1209fc856d58e789c3b7a32c0bb9a5",
-                "reference": "e64220a05c1209fc856d58e789c3b7a32c0bb9a5",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/9100a76ce8015b9aa7125b9171ae3a76887b6c82",
+                "reference": "9100a76ce8015b9aa7125b9171ae3a76887b6c82",
                 "shasum": ""
             },
             "require": {
@@ -2881,7 +2881,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-05-31T13:53:37+00:00"
+            "time": "2024-06-06T12:19:22+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -6263,7 +6263,7 @@
     },
     "platform-dev": [],
     "platform-overrides": {
-        "php": "8.2.19"
+        "php": "8.2.20"
     },
     "plugin-api-version": "2.6.0"
 }
