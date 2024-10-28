@@ -4,7 +4,7 @@
   "dependencies": {
     "@fetus-hina/fetus.css": "github:fetus-hina/fetus.css#semver:^5.3.4",
     "bootstrap": "^5.3.3",
-    "chart.js": "^4.4.5",
+    "chart.js": "^4.4.6",
     "inputmask": "^5.0.9",
     "jquery": "^3.7.1",
     "license-checker-rseidelsohn": "^4.4.2",
@@ -15,8 +15,8 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.25.9",
-    "@babel/core": "^7.25.9",
-    "@babel/preset-env": "^7.25.9",
+    "@babel/core": "^7.26.0",
+    "@babel/preset-env": "^7.26.0",
     "autoprefixer": "^10.4.20",
     "cssnano": "^7.0.6",
     "postcss": "^8.4.47",
