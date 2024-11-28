@@ -95,7 +95,11 @@
         "process-timeout": 1800
     },
     "extra": {
-        "patches": {}
+        "patches": {
+            "localheinz/diff": {
+                "fix: deprecation implicit nullable PHP 8.4": "data/patches/composer/localheinz/diff/72-8a5d1e5-fix-deprecation-implicit-nullable-php-8.4.patch"
+            }
+        }
     },
     "scripts": {
         "post-install-cmd": [
