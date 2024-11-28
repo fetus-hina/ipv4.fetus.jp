@@ -4,6 +4,7 @@ name: CI
   - push
 env:
   LANG: C
+  CI_OS: 'ubuntu-24.04'
   SYSTEM_PHP_VERSION: '8.4'
 jobs:
   phpSyntaxCheck:
@@ -17,7 +18,7 @@ jobs:
           -
             php: '8.5'
             experimental: true
-    runs-on: ubuntu-22.04
+    runs-on: '${{ env.CI_OS }}'
     steps:
       -
         uses: actions/checkout@v4
@@ -35,7 +36,7 @@ jobs:
             | xargs php -l
   makeComposerCache:
     name: 'Make composer cache'
-    runs-on: ubuntu-22.04
+    runs-on: '${{ env.CI_OS }}'
     steps:
       -
         uses: actions/checkout@v4
@@ -62,7 +63,7 @@ jobs:
         run: 'composer install --prefer-dist'
   makeNpmCache:
     name: 'Make npm cache'
-    runs-on: ubuntu-22.04
+    runs-on: '${{ env.CI_OS }}'
     steps:
       -
         uses: actions/checkout@v4
@@ -80,7 +81,7 @@ jobs:
         run: 'npm clean-install'
   composerJson:
     name: 'composer.json should be normalized'
-    runs-on: ubuntu-22.04
+    runs-on: '${{ env.CI_OS }}'
     needs: makeComposerCache
     steps:
       -
@@ -102,7 +103,7 @@ jobs:
         run: composer normalize --dry-run
   phpStyleCheck:
     name: 'PHP Coding Style'
-    runs-on: ubuntu-22.04
+    runs-on: '${{ env.CI_OS }}'
     needs: makeComposerCache
     steps:
       -
@@ -143,16 +144,16 @@ jobs:
               label: 'PHP 8.4'
               version: '8.4'
             pgsql:
-              label: 'PgSQL 9.6'
-              version: 9.6-bullseye
+              label: 'PgSQL 13' # EL 9 default
+              version: 13-bullseye
             experimental: false
           -
             php:
               label: 'PHP 8.4'
               version: '8.4'
             pgsql:
-              label: 'PgSQL 13'
-              version: 13-bullseye
+              label: 'PgSQL 16' # Current production
+              version: 16-bullseye
             experimental: false
           -
             php:
@@ -170,7 +171,7 @@ jobs:
               label: 'Latest PgSQL'
               version: bullseye
             experimental: true
-    runs-on: ubuntu-22.04
+    runs-on: '${{ env.CI_OS }}'
     needs:
       - makeComposerCache
       - makeNpmCache
@@ -225,7 +226,7 @@ jobs:
         run: 'vendor/bin/codecept run unit'
   jsStyleCheck:
     name: 'JS Coding Style'
-    runs-on: ubuntu-22.04
+    runs-on: '${{ env.CI_OS }}'
     needs:
       - makeNpmCache
     steps:
@@ -244,7 +245,7 @@ jobs:
           npx semistandard 'resources/**/*.es' | npx snazzy
   cssStyleCheck:
     name: 'CSS Coding Style'
-    runs-on: ubuntu-22.04
+    runs-on: '${{ env.CI_OS }}'
     needs:
       - makeNpmCache
     steps:
