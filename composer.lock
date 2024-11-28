@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f5acfea1e727b12084ae17788bcb7dc6",
+    "content-hash": "59c5382266964ed55bd17407025b4442",
     "packages": [
         {
             "name": "cebe/markdown",
@@ -6275,7 +6275,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">= 8.2",
+        "php": ">= 8.4",
         "php-64bit": "*",
         "php-ipv6": "*",
         "ext-curl": "*",
@@ -6292,7 +6292,7 @@
     },
     "platform-dev": {},
     "platform-overrides": {
-        "php": "8.2.26"
+        "php": "8.4.1"
     },
     "plugin-api-version": "2.6.0"
 }

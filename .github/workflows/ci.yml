@@ -4,19 +4,13 @@ name: CI
   - push
 env:
   LANG: C
-  SYSTEM_PHP_VERSION: '8.2'
+  SYSTEM_PHP_VERSION: '8.4'
 jobs:
   phpSyntaxCheck:
     name: 'PHP Syntax Check (PHP ${{ matrix.env.php }})'
     strategy:
       matrix:
         env:
-          -
-            php: '8.2'
-            experimental: false
-          -
-            php: '8.3'
-            experimental: false
           -
             php: '8.4'
             experimental: false
@@ -38,7 +32,7 @@ jobs:
         run: |
           find . \( -type d \( -name '.git' -or -name 'vendor' -or -name 'node_modules' -or -name 'runtime' \) -prune \) -or \( -type f -name '*.php' -print \) \
             | sort \
-            | xargs -n 1 php -l
+            | xargs php -l
   makeComposerCache:
     name: 'Make composer cache'
     runs-on: ubuntu-22.04
@@ -146,35 +140,19 @@ jobs:
         env:
           -
             php:
-              label: 'PHP 8.2'
-              version: '8.2'
+              label: 'PHP 8.4'
+              version: '8.4'
             pgsql:
               label: 'PgSQL 9.6'
               version: 9.6-bullseye
             experimental: false
           -
             php:
-              label: 'PHP 8.2'
-              version: '8.2'
+              label: 'PHP 8.4'
+              version: '8.4'
             pgsql:
               label: 'PgSQL 13'
               version: 13-bullseye
-            experimental: false
-          -
-            php:
-              label: 'PHP 8.2'
-              version: '8.2'
-            pgsql:
-              label: 'Latest PgSQL'
-              version: bullseye
-            experimental: false
-          -
-            php:
-              label: 'PHP 8.3'
-              version: '8.3'
-            pgsql:
-              label: 'Latest PgSQL'
-              version: bullseye
             experimental: false
           -
             php:
