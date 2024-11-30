@@ -45,7 +45,7 @@
         "proget-hq/phpstan-yii2": "^0.8.0",
         "squizlabs/php_codesniffer": "^3.11.1",
         "symfony/browser-kit": "^6.4.13 || ^7.0.0",
-        "symfony/css-selector": "^7.1.6",
+        "symfony/css-selector": "^7.2.0",
         "yiisoft/yii2-debug": "^2.1.25",
         "yiisoft/yii2-gii": "^2.2.6"
     },
