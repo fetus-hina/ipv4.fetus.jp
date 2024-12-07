@@ -14,7 +14,7 @@
     "yii2-pjax": "^2.0.8"
   },
   "devDependencies": {
-    "@babel/cli": "^7.25.9",
+    "@babel/cli": "^7.26.4",
     "@babel/core": "^7.26.0",
     "@babel/preset-env": "^7.26.0",
     "autoprefixer": "^10.4.20",
@@ -26,7 +26,7 @@
     "snazzy": "^9.0.0",
     "stylelint": "^16.11.0",
     "stylelint-config-sass-guidelines": "^12.1.0",
-    "terser": "^5.36.0",
+    "terser": "^5.37.0",
     "ttf2woff2": "^6.0.1",
     "updates": "^16.4.0"
   },
