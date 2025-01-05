@@ -76,7 +76,6 @@ final class DocCommentController extends Controller
         $it = new DirectoryIterator($dir);
         foreach ($it as $entry) {
             if ($entry->isDot()) {
-                echo "dot : " . $entry->getPathname() . "\n";
                 continue;
             }
 
@@ -90,8 +89,6 @@ final class DocCommentController extends Controller
                             '.github',
                             'bin',
                             'data',
-                            'formatters',
-                            'gii',
                             'node_modules',
                             'resources',
                             'runtime',
