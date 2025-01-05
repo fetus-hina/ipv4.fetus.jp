@@ -1,9 +1,16 @@
 <?php
 
+/**
+ * @copyright Copyright (C) 2022-2025 AIZAWA Hina
+ * @license https://github.com/fetus-hina/ipv4.fetus.jp/blob/master/LICENSE MIT
+ * @author AIZAWA Hina <hina@fetus.jp>
+ */
+
 declare(strict_types=1);
 
 namespace app\actions\license;
 
+use Collator;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use Yii;
@@ -17,9 +24,7 @@ use function file_get_contents;
 use function ltrim;
 use function preg_match;
 use function preg_replace;
-use function strcmp;
 use function strlen;
-use function strnatcasecmp;
 use function substr;
 use function trim;
 use function usort;
@@ -48,17 +53,18 @@ final class LicenseAction extends Action
      */
     private function loadDepends(): array
     {
+        $c = TypeHelper::instanceOf(Collator::create('en_US'), Collator::class);
+        $c->setAttribute(Collator::NUMERIC_COLLATION, Collator::ON);
+
         $ret = $this->loadFiles($this->directory);
         usort(
             $ret,
-            function (stdClass $a, stdClass $b): int {
+            function (stdClass $a, stdClass $b) use ($c): int {
                 $aName = trim(preg_replace('/[^0-9A-Za-z]+/', ' ', $a->name));
                 $aName2 = ltrim($aName, '@');
                 $bName = trim(preg_replace('/[^0-9A-Za-z]+/', ' ', $b->name));
                 $bName2 = ltrim($bName, '@');
-                return strnatcasecmp($aName2, $bName2)
-                    ?: strnatcasecmp($aName, $bName)
-                    ?: strcmp($aName, $bName);
+                return $c->compare($aName2, $bName2) ?: $c->compare($aName, $bName) ?: 0;
             },
         );
         return $ret;

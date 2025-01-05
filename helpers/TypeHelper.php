@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * @copyright Copyright (C) 2022-2025 AIZAWA Hina
+ * @license https://github.com/fetus-hina/ipv4.fetus.jp/blob/master/LICENSE MIT
+ * @author AIZAWA Hina <hina@fetus.jp>
+ */
+
 declare(strict_types=1);
 
 namespace app\helpers;
@@ -74,6 +80,16 @@ final class TypeHelper
      * @param class-string<T> $fqcn
      * @return T
      */
+    public static function instanceOf(mixed $value, string $fqcn): object
+    {
+        return self::shouldBeInstanceOf($value, $fqcn);
+    }
+
+    /**
+     * @template T of object
+     * @param class-string<T> $fqcn
+     * @return T
+     */
     public static function shouldBeInstanceOf(mixed $value, string $fqcn): object
     {
         return is_object($value) && ($value instanceof $fqcn)
@@ -84,6 +100,11 @@ final class TypeHelper
     public static function shouldBeInteger(mixed $value): int
     {
         return is_int($value) ? $value : throw self::error('integer', $value);
+    }
+
+    public static function string(mixed $value): string
+    {
+        return self::shouldBeString($value);
     }
 
     public static function shouldBeString(mixed $value): string

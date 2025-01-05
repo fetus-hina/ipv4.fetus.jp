@@ -1,7 +1,8 @@
 <?php
 
 /**
- * @copyright Copyright (C) 2015-2024 AIZAWA Hina
+ * @copyright Copyright (C) 2022-2025 AIZAWA Hina
+ * @license https://github.com/fetus-hina/ipv4.fetus.jp/blob/master/LICENSE MIT
  * @author AIZAWA Hina <hina@fetus.jp>
  */
 
@@ -9,6 +10,7 @@ declare(strict_types=1);
 
 namespace app\commands\license;
 
+use Collator;
 use DirectoryIterator;
 use Yii;
 use app\helpers\TypeHelper;
@@ -29,9 +31,6 @@ use function pathinfo;
 use function preg_match;
 use function preg_replace;
 use function str_replace;
-use function strcasecmp;
-use function strcmp;
-use function strnatcasecmp;
 use function trim;
 use function usort;
 use function vsprintf;
@@ -153,10 +152,15 @@ trait LicenseExtractTrait
             return null;
         }
 
-        usort($files, fn (stdClass $a, stdClass $b): int => $a->precedence <=> $b->precedence
-                ?: strnatcasecmp($a->basename, $b->basename)
-                ?: strcasecmp($a->basename, $b->basename)
-                ?: strcmp($a->basename, $b->basename));
+        $c = TypeHelper::instanceOf(Collator::create('en_US'), Collator::class);
+        $c->setAttribute(Collator::NUMERIC_COLLATION, Collator::ON);
+
+        usort(
+            $files,
+            fn (stdClass $a, stdClass $b): int => $a->precedence <=> $b->precedence
+                ?: $c->compare($a->basename, $b->basename)
+                ?: 0,
+        );
 
         while ($files) {
             $info = array_shift($files);
