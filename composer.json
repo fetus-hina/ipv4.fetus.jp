@@ -24,8 +24,8 @@
         "ext-session": "*",
         "ext-spl": "*",
         "cweagans/composer-patches": "^1.7.3",
-        "lipis/flag-icons": "^7.3.0",
-        "matomo/device-detector": "^6.4.2",
+        "lipis/flag-icons": "^7.3.2",
+        "matomo/device-detector": "^6.4.3",
         "statink/yii2-sortable-table": "^1.0.2",
         "twbs/bootstrap-icons": "^1.11.3",
         "yiisoft/yii2": "^2.0.51",
@@ -90,7 +90,7 @@
             "yiisoft/yii2-composer": true
         },
         "platform": {
-            "php": "8.4.2"
+            "php": "8.4.3"
         },
         "process-timeout": 1800
     },
