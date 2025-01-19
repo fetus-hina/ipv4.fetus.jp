@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "da83c7cf9b0e571b3ef5742d171c1bbb",
+    "content-hash": "059640e067c5f71505ded4fc1d457764",
     "packages": [
         {
             "name": "cebe/markdown",
@@ -181,16 +181,16 @@
         },
         {
             "name": "lipis/flag-icons",
-            "version": "v7.3.0",
+            "version": "v7.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lipis/flag-icons.git",
-                "reference": "2167c970153c0d301f032eea3e381964c8fda86b"
+                "reference": "fe15c16e7463d0c66d6c5730e9d0e832438d98e1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lipis/flag-icons/zipball/2167c970153c0d301f032eea3e381964c8fda86b",
-                "reference": "2167c970153c0d301f032eea3e381964c8fda86b",
+                "url": "https://api.github.com/repos/lipis/flag-icons/zipball/fe15c16e7463d0c66d6c5730e9d0e832438d98e1",
+                "reference": "fe15c16e7463d0c66d6c5730e9d0e832438d98e1",
                 "shasum": ""
             },
             "type": "library",
@@ -216,22 +216,22 @@
             ],
             "support": {
                 "issues": "https://github.com/lipis/flag-icons/issues",
-                "source": "https://github.com/lipis/flag-icons/tree/v7.3.0"
+                "source": "https://github.com/lipis/flag-icons/tree/v7.3.2"
             },
-            "time": "2025-01-16T14:31:06+00:00"
+            "time": "2025-01-17T14:03:50+00:00"
         },
         {
             "name": "matomo/device-detector",
-            "version": "6.4.2",
+            "version": "6.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/matomo-org/device-detector.git",
-                "reference": "806e52d214b05ddead1a1d4304c7592f61f95976"
+                "reference": "aa4586d495a7f59029d46d976f160b13eb769bb0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/matomo-org/device-detector/zipball/806e52d214b05ddead1a1d4304c7592f61f95976",
-                "reference": "806e52d214b05ddead1a1d4304c7592f61f95976",
+                "url": "https://api.github.com/repos/matomo-org/device-detector/zipball/aa4586d495a7f59029d46d976f160b13eb769bb0",
+                "reference": "aa4586d495a7f59029d46d976f160b13eb769bb0",
                 "shasum": ""
             },
             "require": {
@@ -287,7 +287,7 @@
                 "source": "https://github.com/matomo-org/matomo",
                 "wiki": "https://dev.matomo.org/"
             },
-            "time": "2024-12-16T16:38:01+00:00"
+            "time": "2025-01-17T09:59:39+00:00"
         },
         {
             "name": "mustangostang/spyc",
@@ -6493,7 +6493,7 @@
     },
     "platform-dev": {},
     "platform-overrides": {
-        "php": "8.4.2"
+        "php": "8.4.3"
     },
     "plugin-api-version": "2.6.0"
 }
