@@ -43,7 +43,7 @@
         "jp3cki/coding-standard": "^1.0.1",
         "masterminds/html5": "^2.9.0",
         "proget-hq/phpstan-yii2": "^0.8.0",
-        "squizlabs/php_codesniffer": "^3.11.2",
+        "squizlabs/php_codesniffer": "^3.11.3",
         "symfony/browser-kit": "^6.4.13 || ^7.0.0",
         "symfony/css-selector": "^7.2.0",
         "yiisoft/yii2-debug": "^2.1.25",
