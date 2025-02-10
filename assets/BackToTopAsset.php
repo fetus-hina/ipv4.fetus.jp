@@ -19,7 +19,7 @@ final class BackToTopAsset extends AssetBundle
     /**
      * @var string
      */
-    public $sourcePath = '@npm/@fetus-hina/fetus.css/dist';
+    public $sourcePath = '@npm/@jp3cki/fetus.css/dist';
 
     /**
      * @var string[]

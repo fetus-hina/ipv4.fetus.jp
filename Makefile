@@ -145,7 +145,7 @@ messages: vendor
 	msgfmt -o $@ $<
 
 web/favicon: node_modules
-	cp -r $</@fetus-hina/fetus.css/dist/favicon/ $@/
+	cp -r $</@jp3cki/fetus.css/dist/favicon/ $@/
 
 web/favicon.ico: web/favicon
 	cp $</favicon.ico $@

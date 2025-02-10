@@ -9,7 +9,7 @@
 declare(strict_types=1);
 
 return [
-    'sourcePath' => '@npm/@fetus-hina/fetus.css/dist',
+    'sourcePath' => '@npm/@jp3cki/fetus.css/dist',
     'css' => [
         'bootstrap-lineseedjp.min.css',
     ],
