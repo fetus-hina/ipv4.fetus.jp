@@ -64,7 +64,7 @@ test: vendor
 	/usr/bin/env XDEBUG_MODE=coverage vendor/bin/codecept run unit
 
 .PHONY: check-style
-check-style: check-style-php check-style-js check-style-css
+check-style: check-style-php check-style-js check-style-css check-style-ci
 
 .PHONY: check-style-php
 check-style-php: check-style-composer check-style-phpcs check-style-phpstan
@@ -88,6 +88,10 @@ check-style-js: node_modules
 .PHONY: check-style-css
 check-style-css: node_modules
 	npx stylelint 'resources/**/*.scss'
+
+.PHONY: check-style-ci
+check-style-ci:
+	podman run --rm -v .:/repo --workdir /repo docker.io/rhysd/actionlint:latest -color
 
 node_modules: package-lock.json
 	npm clean-install

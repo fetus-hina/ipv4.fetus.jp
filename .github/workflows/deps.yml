@@ -29,7 +29,7 @@ jobs:
       -
         name: 'Install dependencies'
         run: |
-          ln -s `which composer` composer.phar
+          ln -s "$(which composer)" composer.phar
           composer install --prefer-dist
           npm clean-install
       -
@@ -38,8 +38,8 @@ jobs:
       -
         name: 'Set PHP version latest'
         run: |
-          PHP_VERSION=`./yii php/latest-version`
-          composer config platform.php $PHP_VERSION
+          PHP_VERSION=$(./yii php/latest-version)
+          composer config platform.php "$PHP_VERSION"
       -
         name: 'Update composer packages'
         run: |
@@ -58,10 +58,10 @@ jobs:
           git update-index -q --refresh
           if [ -z "$(git diff-index --name-only HEAD --)" ]; then
             echo "Nothing changed"
-            echo "changed=0" >> $GITHUB_ENV
+            echo "changed=0" >> "$GITHUB_ENV"
           else
             echo "Something changed"
-            echo "changed=1" >> $GITHUB_ENV
+            echo "changed=1" >> "$GITHUB_ENV"
           fi
       -
         name: 'Full update JavaScript packages'
@@ -73,7 +73,7 @@ jobs:
       -
         name: 'Create Pull Request'
         if: "${{ env.changed == '1' }}"
-        uses: peter-evans/create-pull-request@v4
+        uses: peter-evans/create-pull-request@v7
         with:
           assignees: fetus-hina
           author: 'AIZAWA Hina <hina@fetus.jp>'
