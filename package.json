@@ -4,7 +4,7 @@
   "dependencies": {
     "@jp3cki/fetus.css": "^5.3.8",
     "bootstrap": "^5.3.3",
-    "chart.js": "^4.4.7",
+    "chart.js": "^4.4.8",
     "inputmask": "^5.0.9",
     "jquery": "^3.7.1",
     "license-checker-rseidelsohn": "^4.4.2",
@@ -19,7 +19,7 @@
     "@babel/preset-env": "^7.26.9",
     "autoprefixer": "^10.4.20",
     "cssnano": "^7.0.6",
-    "postcss": "^8.5.2",
+    "postcss": "^8.5.3",
     "postcss-cli": "^11.0.0",
     "sass": "^1.85.0",
     "semistandard": "^17.0.0",
