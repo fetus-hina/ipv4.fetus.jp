@@ -25,7 +25,7 @@
         "ext-spl": "*",
         "cweagans/composer-patches": "^1.7.3",
         "lipis/flag-icons": "^7.3.2",
-        "matomo/device-detector": "^6.4.3",
+        "matomo/device-detector": "^6.4.5",
         "statink/yii2-sortable-table": "^1.0.2",
         "twbs/bootstrap-icons": "^1.11.3",
         "yiisoft/yii2": "^2.0.52",
@@ -44,7 +44,7 @@
         "masterminds/html5": "^2.9.0",
         "proget-hq/phpstan-yii2": "^0.8.0",
         "squizlabs/php_codesniffer": "^3.11.3",
-        "symfony/browser-kit": "^6.4.13 || ^7.0.0",
+        "symfony/browser-kit": "^6.4.19 || ^7.0.0",
         "symfony/css-selector": "^7.2.0",
         "yiisoft/yii2-debug": "^2.1.26",
         "yiisoft/yii2-gii": "^2.2.7"
