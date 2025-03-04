@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "927846d0ed0e3acdfefd25afcd09d30a",
+    "content-hash": "9391dbf0f7b7acfff1225ad90aabcebd",
     "packages": [
         {
             "name": "cebe/markdown",
@@ -2277,23 +2277,23 @@
         },
         {
             "name": "jp3cki/coding-standard",
-            "version": "v1.0.1",
+            "version": "v1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fetus-hina/php-coding-standard.git",
-                "reference": "759516d37e1f64f7452e6b2aedc2d7b91eccc602"
+                "reference": "2203629d1b6ebf22b839a79d327cb7bba256e010"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fetus-hina/php-coding-standard/zipball/759516d37e1f64f7452e6b2aedc2d7b91eccc602",
-                "reference": "759516d37e1f64f7452e6b2aedc2d7b91eccc602",
+                "url": "https://api.github.com/repos/fetus-hina/php-coding-standard/zipball/2203629d1b6ebf22b839a79d327cb7bba256e010",
+                "reference": "2203629d1b6ebf22b839a79d327cb7bba256e010",
                 "shasum": ""
             },
             "require": {
                 "php": "^8.1",
-                "ramsey/coding-standard": "^2.2",
-                "slevomat/coding-standard": "^8.15.0",
-                "squizlabs/php_codesniffer": "^3.11.1"
+                "ramsey/coding-standard": "^2.3",
+                "slevomat/coding-standard": "^8.16.0",
+                "squizlabs/php_codesniffer": "^3.11.3"
             },
             "require-dev": {
                 "ergebnis/composer-normalize": "^2.45"
@@ -2305,9 +2305,9 @@
             ],
             "support": {
                 "issues": "https://github.com/fetus-hina/php-coding-standard/issues",
-                "source": "https://github.com/fetus-hina/php-coding-standard/tree/v1.0.1"
+                "source": "https://github.com/fetus-hina/php-coding-standard/tree/v1.0.2"
             },
-            "time": "2024-12-05T07:01:48+00:00"
+            "time": "2025-03-04T04:41:43+00:00"
         },
         {
             "name": "justinrainbow/json-schema",

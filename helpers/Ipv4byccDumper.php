@@ -102,7 +102,7 @@ final class Ipv4byccDumper
      */
     private static function getHeaders(string $url): array
     {
-        $now = (new DateTimeImmutable('now', new DateTimeZone(Yii::$app->timeZone)));
+        $now = new DateTimeImmutable('now', new DateTimeZone(Yii::$app->timeZone));
 
         return [
             '',
