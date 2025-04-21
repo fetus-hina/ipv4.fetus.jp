@@ -4,7 +4,7 @@
   "dependencies": {
     "@jp3cki/fetus.css": "^5.3.8",
     "bootstrap": "^5.3.5",
-    "chart.js": "^4.4.8",
+    "chart.js": "^4.4.9",
     "inputmask": "^5.0.9",
     "jquery": "^3.7.1",
     "license-checker-rseidelsohn": "^4.4.2",
@@ -21,7 +21,7 @@
     "cssnano": "^7.0.6",
     "postcss": "^8.5.3",
     "postcss-cli": "^11.0.1",
-    "sass": "^1.86.3",
+    "sass": "^1.87.0",
     "semistandard": "^17.0.0",
     "snazzy": "^9.0.0",
     "stylelint": "^16.18.0",
