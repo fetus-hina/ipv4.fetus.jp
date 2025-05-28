@@ -2,7 +2,7 @@
   "name": "ipv4.fetus.jp",
   "description": "",
   "dependencies": {
-    "@jp3cki/fetus.css": "^5.3.8",
+    "@jp3cki/fetus.css": "^5.3.9",
     "bootstrap": "^5.3.6",
     "chart.js": "^4.4.9",
     "inputmask": "^5.0.9",
@@ -15,7 +15,7 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.27.2",
-    "@babel/core": "^7.27.1",
+    "@babel/core": "^7.27.3",
     "@babel/preset-env": "^7.27.2",
     "autoprefixer": "^10.4.21",
     "cssnano": "^7.0.7",
@@ -26,7 +26,7 @@
     "snazzy": "^9.0.0",
     "stylelint": "^16.19.1",
     "stylelint-config-sass-guidelines": "^12.1.0",
-    "terser": "^5.39.2",
+    "terser": "^5.40.0",
     "ttf2woff2": "^6.0.1",
     "updates": "^16.4.2"
   },
