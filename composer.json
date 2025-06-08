@@ -46,7 +46,7 @@
         "squizlabs/php_codesniffer": "^3.13.0",
         "symfony/browser-kit": "^6.4.19 || ^7.0.0",
         "symfony/css-selector": "^7.3.0",
-        "yiisoft/yii2-debug": "^2.1.26",
+        "yiisoft/yii2-debug": "^2.1.27",
         "yiisoft/yii2-gii": "^2.2.7"
     },
     "replace": {
@@ -90,7 +90,7 @@
             "yiisoft/yii2-composer": true
         },
         "platform": {
-            "php": "8.4.7"
+            "php": "8.4.8"
         },
         "process-timeout": 1800
     },
