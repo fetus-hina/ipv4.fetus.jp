@@ -21,7 +21,7 @@ return (function (): array {
     );
 
     return [
-        'copyrightYear' => '2014-2024',
+        'copyrightYear' => '2014-2025',
         'copyrightHolder' => 'AIZAWA Hina',
 
         'authorWebsite' => 'https://fetus.jp/',
