@@ -27,7 +27,7 @@
     "stylelint": "^16.22.0",
     "stylelint-config-sass-guidelines": "^12.1.0",
     "terser": "^5.43.1",
-    "ttf2woff2": "^6.0.1",
+    "ttf2woff2": "^8.0.0",
     "updates": "^16.4.4"
   },
   "overrides": {
