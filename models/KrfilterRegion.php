@@ -78,11 +78,17 @@ final class KrfilterRegion extends ActiveRecord
         ];
     }
 
+    /**
+     * @return ActiveQuery<Krfilter>
+     */
     public function getKrfilter(): ActiveQuery
     {
         return $this->hasOne(Krfilter::class, ['id' => 'krfilter_id']);
     }
 
+    /**
+     * @return ActiveQuery<Region>
+     */
     public function getRegion(): ActiveQuery
     {
         return $this->hasOne(Region::class, ['id' => 'region_id']);

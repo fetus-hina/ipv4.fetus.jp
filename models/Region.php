@@ -67,27 +67,42 @@ final class Region extends ActiveRecord
         ];
     }
 
+    /**
+     * @return ActiveQuery<AllocationBlock>
+     */
     public function getAllocationBlocks(): ActiveQuery
     {
         return $this->hasMany(AllocationBlock::class, ['region_id' => 'id']);
     }
 
+    /**
+     * @return ActiveQuery<KrfilterRegion>
+     */
     public function getKrfilterRegions(): ActiveQuery
     {
         return $this->hasMany(KrfilterRegion::class, ['region_id' => 'id']);
     }
 
+    /**
+     * @return ActiveQuery<Krfilter>
+     */
     public function getKrfilters(): ActiveQuery
     {
         return $this->hasMany(Krfilter::class, ['id' => 'krfilter_id'])
             ->via('krfilterRegions');
     }
 
+    /**
+     * @return ActiveQuery<MergedCidr>
+     */
     public function getMergedCidrs(): ActiveQuery
     {
         return $this->hasMany(MergedCidr::class, ['region_id' => 'id']);
     }
 
+    /**
+     * @return ActiveQuery<RegionStat>
+     */
     public function getRegionStats(): ActiveQuery
     {
         return $this->hasMany(RegionStat::class, ['region_id' => 'id']);

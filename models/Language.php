@@ -81,11 +81,17 @@ final class Language extends ActiveRecord
         ];
     }
 
+    /**
+     * @return ActiveQuery<CharacterCategory>
+     */
     public function getCharacter(): ActiveQuery
     {
         return $this->hasOne(CharacterCategory::class, ['id' => 'character_id']);
     }
 
+    /**
+     * @return ActiveQuery<LanguageMatch>
+     */
     public function getLanguageMatches(): ActiveQuery
     {
         return $this->hasMany(LanguageMatch::class, ['language_id' => 'id']);

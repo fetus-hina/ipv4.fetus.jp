@@ -64,6 +64,9 @@ final class CommentStyle extends ActiveRecord
         ];
     }
 
+    /**
+     * @return ActiveQuery<DownloadTemplate>
+     */
     public function getDownloadTemplates(): ActiveQuery
     {
         return $this->hasMany(DownloadTemplate::class, ['comment_style_id' => 'id']);

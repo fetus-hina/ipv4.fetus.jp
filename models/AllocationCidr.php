@@ -63,6 +63,9 @@ final class AllocationCidr extends ActiveRecord
         ];
     }
 
+    /**
+     * @return ActiveQuery<AllocationBlock>
+     */
     public function getBlock(): ActiveQuery
     {
         return $this->hasOne(AllocationBlock::class, ['id' => 'block_id']);

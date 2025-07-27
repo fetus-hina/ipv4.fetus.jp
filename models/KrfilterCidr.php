@@ -70,6 +70,9 @@ final class KrfilterCidr extends ActiveRecord
         ];
     }
 
+    /**
+     * @return ActiveQuery<Krfilter>
+     */
     public function getKrfilter(): ActiveQuery
     {
         return $this->hasOne(Krfilter::class, ['id' => 'krfilter_id']);

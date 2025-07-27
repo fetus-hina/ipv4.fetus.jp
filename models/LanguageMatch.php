@@ -66,6 +66,9 @@ final class LanguageMatch extends ActiveRecord
         ];
     }
 
+    /**
+     * @return ActiveQuery<Language>
+     */
     public function getLanguage(): ActiveQuery
     {
         return $this->hasOne(Language::class, ['id' => 'language_id']);

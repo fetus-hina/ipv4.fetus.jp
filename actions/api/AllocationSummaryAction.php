@@ -14,6 +14,7 @@ use Yii;
 use app\helpers\TypeHelper;
 use app\models\RegionStat;
 use yii\base\Action;
+use yii\web\Controller;
 use yii\web\Response;
 
 use function array_map;
@@ -27,6 +28,9 @@ use const FILTER_VALIDATE_INT;
 use const SORT_ASC;
 use const SORT_DESC;
 
+/**
+ * @extends Action<Controller>
+ */
 final class AllocationSummaryAction extends Action
 {
     private const TOTAL_ADDRESS_SPACE = 1 << 32;

@@ -73,6 +73,9 @@ final class MergedCidr extends ActiveRecord
         ];
     }
 
+    /**
+     * @return ActiveQuery<Region>
+     */
     public function getRegion(): ActiveQuery
     {
         return $this->hasOne(Region::class, ['id' => 'region_id']);

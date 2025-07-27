@@ -168,6 +168,9 @@ final class <?= $className . "\n" ?>
     }
 <?php foreach ($relations as $name => $relation) { ?>
 
+    /**
+     * @return ActiveQuery<<?= $relation[1] ?>>
+     */
     public function get<?= $name ?>(): ActiveQuery
     {
         <?= $renderRelation(12, $relation[0]) . "\n" ?>

@@ -57,6 +57,9 @@ final class CharacterCategory extends ActiveRecord
         ];
     }
 
+    /**
+     * @return ActiveQuery<Language>
+     */
     public function getLanguages(): ActiveQuery
     {
         return $this->hasMany(Language::class, ['character_id' => 'id']);

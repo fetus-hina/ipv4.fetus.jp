@@ -59,6 +59,9 @@ final class Registry extends ActiveRecord
         ];
     }
 
+    /**
+     * @return ActiveQuery<AllocationBlock>
+     */
     public function getAllocationBlocks(): ActiveQuery
     {
         return $this->hasMany(AllocationBlock::class, ['registry_id' => 'id']);

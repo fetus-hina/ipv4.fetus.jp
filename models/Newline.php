@@ -59,6 +59,9 @@ final class Newline extends ActiveRecord
         ];
     }
 
+    /**
+     * @return ActiveQuery<DownloadTemplate>
+     */
     public function getDownloadTemplates(): ActiveQuery
     {
         return $this->hasMany(DownloadTemplate::class, ['newline_id' => 'id']);

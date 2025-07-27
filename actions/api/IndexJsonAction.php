@@ -18,6 +18,7 @@ use yii\base\Action;
 use yii\db\Connection;
 use yii\db\Transaction;
 use yii\helpers\ArrayHelper;
+use yii\web\Controller;
 use yii\web\Response;
 
 use function date;
@@ -25,6 +26,9 @@ use function strtotime;
 
 use const SORT_ASC;
 
+/**
+ * @extends Action<Controller>
+ */
 final class IndexJsonAction extends Action
 {
     public function run(): Response

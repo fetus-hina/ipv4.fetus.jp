@@ -58,16 +58,25 @@ final class Krfilter extends ActiveRecord
         ];
     }
 
+    /**
+     * @return ActiveQuery<KrfilterCidr>
+     */
     public function getKrfilterCidrs(): ActiveQuery
     {
         return $this->hasMany(KrfilterCidr::class, ['krfilter_id' => 'id']);
     }
 
+    /**
+     * @return ActiveQuery<KrfilterRegion>
+     */
     public function getKrfilterRegions(): ActiveQuery
     {
         return $this->hasMany(KrfilterRegion::class, ['krfilter_id' => 'id']);
     }
 
+    /**
+     * @return ActiveQuery<Region>
+     */
     public function getRegions(): ActiveQuery
     {
         return $this->hasMany(Region::class, ['id' => 'region_id'])

@@ -36,7 +36,7 @@ final class Tooltip extends Widget
     public bool $titleIsHtml = false;
 
     /**
-     * @var 'bottom'|'left'|'right'|'top' $placement
+     * @var self::PLACEMENT_* $placement
      */
     public $placement = self::PLACEMENT_BOTTOM;
 
@@ -58,6 +58,7 @@ final class Tooltip extends Widget
         return Html::tag(
             is_string($tag) ? $tag : 'span',
             Yii::$app->formatter->format($this->content, $this->format),
+            // @phpstan-ignore-next-line
             ArrayHelper::merge(
                 $options,
                 [

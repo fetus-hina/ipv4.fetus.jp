@@ -85,16 +85,25 @@ final class AllocationBlock extends ActiveRecord
         ];
     }
 
+    /**
+     * @return ActiveQuery<AllocationCidr>
+     */
     public function getAllocationCidrs(): ActiveQuery
     {
         return $this->hasMany(AllocationCidr::class, ['block_id' => 'id']);
     }
 
+    /**
+     * @return ActiveQuery<Region>
+     */
     public function getRegion(): ActiveQuery
     {
         return $this->hasOne(Region::class, ['id' => 'region_id']);
     }
 
+    /**
+     * @return ActiveQuery<Registry>
+     */
     public function getRegistry(): ActiveQuery
     {
         return $this->hasOne(Registry::class, ['id' => 'registry_id']);

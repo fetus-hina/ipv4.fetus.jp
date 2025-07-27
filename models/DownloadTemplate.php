@@ -103,11 +103,17 @@ final class DownloadTemplate extends ActiveRecord
         ];
     }
 
+    /**
+     * @return ActiveQuery<CommentStyle>
+     */
     public function getCommentStyle(): ActiveQuery
     {
         return $this->hasOne(CommentStyle::class, ['id' => 'comment_style_id']);
     }
 
+    /**
+     * @return ActiveQuery<Newline>
+     */
     public function getNewline(): ActiveQuery
     {
         return $this->hasOne(Newline::class, ['id' => 'newline_id']);

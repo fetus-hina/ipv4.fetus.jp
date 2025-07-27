@@ -15,7 +15,9 @@ use yii\web\AssetBundle;
 
 class AdSenseAsset extends AssetBundle
 {
-    /** @var string[] */
+    /**
+     * @var class-string[]
+     */
     public $depends = [
         JSLoaderAsset::class,
     ];
