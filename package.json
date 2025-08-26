@@ -3,7 +3,7 @@
   "description": "",
   "dependencies": {
     "@jp3cki/fetus.css": "^5.3.9",
-    "bootstrap": "^5.3.7",
+    "bootstrap": "^5.3.8",
     "chart.js": "^4.5.0",
     "inputmask": "^5.0.9",
     "jquery": "^3.7.1",
