@@ -4,7 +4,7 @@
   "dependencies": {
     "@jp3cki/fetus.css": "^5.3.9",
     "bootstrap": "^5.3.8",
-    "chart.js": "^4.5.0",
+    "chart.js": "^4.5.1",
     "inputmask": "^5.0.9",
     "jquery": "^3.7.1",
     "license-checker-rseidelsohn": "^4.4.2",
@@ -24,11 +24,11 @@
     "sass": "^1.93.2",
     "semistandard": "^17.0.0",
     "snazzy": "^9.0.0",
-    "stylelint": "^16.24.0",
+    "stylelint": "^16.25.0",
     "stylelint-config-sass-guidelines": "^12.1.0",
     "terser": "^5.44.0",
     "ttf2woff2": "^8.0.0",
-    "updates": "^16.7.4"
+    "updates": "^16.8.1"
   },
   "overrides": {
     "license-checker-rseidelsohn": {
