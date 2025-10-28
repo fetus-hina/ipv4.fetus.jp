@@ -15,8 +15,8 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.28.3",
-    "@babel/core": "^7.28.4",
-    "@babel/preset-env": "^7.28.3",
+    "@babel/core": "^7.28.5",
+    "@babel/preset-env": "^7.28.5",
     "autoprefixer": "^10.4.21",
     "cssnano": "^7.1.1",
     "postcss": "^8.5.6",
@@ -28,7 +28,7 @@
     "stylelint-config-sass-guidelines": "^12.1.0",
     "terser": "^5.44.0",
     "ttf2woff2": "^8.0.0",
-    "updates": "^16.8.1"
+    "updates": "^16.9.1"
   },
   "overrides": {
     "license-checker-rseidelsohn": {
