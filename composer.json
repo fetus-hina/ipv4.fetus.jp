@@ -25,7 +25,7 @@
         "ext-spl": "*",
         "cweagans/composer-patches": "^1.7.3",
         "lipis/flag-icons": "^7.5.0",
-        "matomo/device-detector": "^6.4.7",
+        "matomo/device-detector": "^6.4.8",
         "statink/yii2-sortable-table": "^1.0.2",
         "twbs/bootstrap-icons": "^1.13.1",
         "yiisoft/yii2": "^2.0.53",
@@ -45,7 +45,7 @@
         "proget-hq/phpstan-yii2": "^0.8.0",
         "squizlabs/php_codesniffer": "^3.13.5",
         "symfony/browser-kit": "^6.4.28 || ^7.0.0",
-        "symfony/css-selector": "^7.3.6",
+        "symfony/css-selector": "^7.4.0",
         "yiisoft/yii2-debug": "^2.1.27",
         "yiisoft/yii2-gii": "^2.2.7"
     },
@@ -90,7 +90,7 @@
             "yiisoft/yii2-composer": true
         },
         "platform": {
-            "php": "8.4.14"
+            "php": "8.4.15"
         },
         "process-timeout": 1800
     },
