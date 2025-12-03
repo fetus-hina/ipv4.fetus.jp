@@ -29,7 +29,7 @@
         "statink/yii2-sortable-table": "^1.0.2",
         "twbs/bootstrap-icons": "^1.13.1",
         "yiisoft/yii2": "^2.0.53",
-        "yiisoft/yii2-bootstrap5": "^2.0.50",
+        "yiisoft/yii2-bootstrap5": "^2.0.51",
         "yiisoft/yii2-httpclient": "^2.0.16"
     },
     "require-dev": {
