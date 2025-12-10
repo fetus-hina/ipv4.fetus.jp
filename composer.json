@@ -35,7 +35,7 @@
     "require-dev": {
         "codeception/codeception": "^5.3.2",
         "codeception/module-asserts": "^3.2.1",
-        "codeception/module-filesystem": "^3.0.1",
+        "codeception/module-filesystem": "^3.0.2",
         "codeception/module-yii2": "^1.1.12",
         "codeception/specify": "^2.0.0",
         "codeception/verify": "^3.3.0",
