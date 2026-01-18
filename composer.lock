@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "94fb6ce527ca11088fe8c22599e105f2",
+    "content-hash": "208c8e9d23bc77ff80aaa106c1b6f8d8",
     "packages": [
         {
             "name": "cebe/markdown",
@@ -476,29 +476,29 @@
         },
         {
             "name": "yiisoft/yii2",
-            "version": "2.0.53",
+            "version": "2.0.54",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "6c622fb8243181d7912b62ad80821cc0e1c745db"
+                "reference": "99daebf2de0b031d129706a5db6ce0802c70bac9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/6c622fb8243181d7912b62ad80821cc0e1c745db",
-                "reference": "6c622fb8243181d7912b62ad80821cc0e1c745db",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/99daebf2de0b031d129706a5db6ce0802c70bac9",
+                "reference": "99daebf2de0b031d129706a5db6ce0802c70bac9",
                 "shasum": ""
             },
             "require": {
                 "bower-asset/inputmask": "^5.0.8 ",
                 "bower-asset/jquery": "3.7.*@stable | 3.6.*@stable | 3.5.*@stable | 3.4.*@stable | 3.3.*@stable | 3.2.*@stable | 3.1.*@stable | 2.2.*@stable | 2.1.*@stable | 1.11.*@stable | 1.12.*@stable",
-                "bower-asset/punycode": "^1.4",
+                "bower-asset/punycode": "^2.2",
                 "bower-asset/yii2-pjax": "~2.0.1",
                 "cebe/markdown": "~1.0.0 | ~1.1.0 | ~1.2.0",
                 "ext-ctype": "*",
                 "ext-mbstring": "*",
                 "ezyang/htmlpurifier": "^4.17",
                 "lib-pcre": "*",
-                "php": ">=7.3.0",
+                "php": ">=7.4.0",
                 "yiisoft/yii2-composer": "~2.0.4"
             },
             "bin": [
@@ -593,7 +593,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-06-27T07:42:53+00:00"
+            "time": "2026-01-09T22:24:11+00:00"
         },
         {
             "name": "yiisoft/yii2-bootstrap5",
@@ -923,16 +923,16 @@
         },
         {
             "name": "codeception/codeception",
-            "version": "5.3.3",
+            "version": "5.3.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Codeception/Codeception.git",
-                "reference": "0a3ffdbbb812019c13a6e6b01a2baa346a08962a"
+                "reference": "cb4c200ec0a7fe21964f51872bb403701f53f35b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Codeception/Codeception/zipball/0a3ffdbbb812019c13a6e6b01a2baa346a08962a",
-                "reference": "0a3ffdbbb812019c13a6e6b01a2baa346a08962a",
+                "url": "https://api.github.com/repos/Codeception/Codeception/zipball/cb4c200ec0a7fe21964f51872bb403701f53f35b",
+                "reference": "cb4c200ec0a7fe21964f51872bb403701f53f35b",
                 "shasum": ""
             },
             "require": {
@@ -1038,7 +1038,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Codeception/Codeception/issues",
-                "source": "https://github.com/Codeception/Codeception/tree/5.3.3"
+                "source": "https://github.com/Codeception/Codeception/tree/5.3.4"
             },
             "funding": [
                 {
@@ -1046,7 +1046,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2025-12-17T14:56:15+00:00"
+            "time": "2026-01-14T11:55:19+00:00"
         },
         {
             "name": "codeception/lib-asserts",
@@ -1618,30 +1618,29 @@
         },
         {
             "name": "doctrine/instantiator",
-            "version": "2.0.0",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/instantiator.git",
-                "reference": "c6222283fa3f4ac679f8b9ced9a4e23f163e80d0"
+                "reference": "23da848e1a2308728fe5fdddabf4be17ff9720c7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/c6222283fa3f4ac679f8b9ced9a4e23f163e80d0",
-                "reference": "c6222283fa3f4ac679f8b9ced9a4e23f163e80d0",
+                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/23da848e1a2308728fe5fdddabf4be17ff9720c7",
+                "reference": "23da848e1a2308728fe5fdddabf4be17ff9720c7",
                 "shasum": ""
             },
             "require": {
-                "php": "^8.1"
+                "php": "^8.4"
             },
             "require-dev": {
-                "doctrine/coding-standard": "^11",
+                "doctrine/coding-standard": "^14",
                 "ext-pdo": "*",
                 "ext-phar": "*",
                 "phpbench/phpbench": "^1.2",
-                "phpstan/phpstan": "^1.9.4",
-                "phpstan/phpstan-phpunit": "^1.3",
-                "phpunit/phpunit": "^9.5.27",
-                "vimeo/psalm": "^5.4"
+                "phpstan/phpstan": "^2.1",
+                "phpstan/phpstan-phpunit": "^2.0",
+                "phpunit/phpunit": "^10.5.58"
             },
             "type": "library",
             "autoload": {
@@ -1668,7 +1667,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/instantiator/issues",
-                "source": "https://github.com/doctrine/instantiator/tree/2.0.0"
+                "source": "https://github.com/doctrine/instantiator/tree/2.1.0"
             },
             "funding": [
                 {
@@ -1684,7 +1683,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-12-30T00:23:10+00:00"
+            "time": "2026-01-05T06:47:08+00:00"
         },
         {
             "name": "ergebnis/composer-normalize",
@@ -2302,16 +2301,16 @@
         },
         {
             "name": "justinrainbow/json-schema",
-            "version": "6.6.3",
+            "version": "6.6.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jsonrainbow/json-schema.git",
-                "reference": "134e98916fa2f663afa623970af345cd788e8967"
+                "reference": "2eeb75d21cf73211335888e7f5e6fd7440723ec7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jsonrainbow/json-schema/zipball/134e98916fa2f663afa623970af345cd788e8967",
-                "reference": "134e98916fa2f663afa623970af345cd788e8967",
+                "url": "https://api.github.com/repos/jsonrainbow/json-schema/zipball/2eeb75d21cf73211335888e7f5e6fd7440723ec7",
+                "reference": "2eeb75d21cf73211335888e7f5e6fd7440723ec7",
                 "shasum": ""
             },
             "require": {
@@ -2371,9 +2370,9 @@
             ],
             "support": {
                 "issues": "https://github.com/jsonrainbow/json-schema/issues",
-                "source": "https://github.com/jsonrainbow/json-schema/tree/6.6.3"
+                "source": "https://github.com/jsonrainbow/json-schema/tree/6.6.4"
             },
-            "time": "2025-12-02T10:21:33+00:00"
+            "time": "2025-12-19T15:01:32+00:00"
         },
         {
             "name": "localheinz/diff",
@@ -3017,16 +3016,16 @@
         },
         {
             "name": "phpstan/phpdoc-parser",
-            "version": "2.3.0",
+            "version": "2.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "1e0cd5370df5dd2e556a36b9c62f62e555870495"
+                "reference": "16dbf9937da8d4528ceb2145c9c7c0bd29e26374"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/1e0cd5370df5dd2e556a36b9c62f62e555870495",
-                "reference": "1e0cd5370df5dd2e556a36b9c62f62e555870495",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/16dbf9937da8d4528ceb2145c9c7c0bd29e26374",
+                "reference": "16dbf9937da8d4528ceb2145c9c7c0bd29e26374",
                 "shasum": ""
             },
             "require": {
@@ -3058,9 +3057,9 @@
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
             "support": {
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/2.3.0"
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/2.3.1"
             },
-            "time": "2025-08-30T15:50:23+00:00"
+            "time": "2026-01-12T11:33:04+00:00"
         },
         {
             "name": "phpstan/phpstan",
@@ -6597,7 +6596,7 @@
     },
     "platform-dev": {},
     "platform-overrides": {
-        "php": "8.4.16"
+        "php": "8.4.17"
     },
     "plugin-api-version": "2.9.0"
 }

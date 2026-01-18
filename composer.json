@@ -28,12 +28,12 @@
         "matomo/device-detector": "^6.4.8",
         "statink/yii2-sortable-table": "^1.0.2",
         "twbs/bootstrap-icons": "^1.13.1",
-        "yiisoft/yii2": "^2.0.53",
+        "yiisoft/yii2": "^2.0.54",
         "yiisoft/yii2-bootstrap5": "^2.0.51",
         "yiisoft/yii2-httpclient": "^2.0.16"
     },
     "require-dev": {
-        "codeception/codeception": "^5.3.3",
+        "codeception/codeception": "^5.3.4",
         "codeception/module-asserts": "^3.2.1",
         "codeception/module-filesystem": "^3.0.2",
         "codeception/module-yii2": "^1.1.12",
@@ -90,7 +90,7 @@
             "yiisoft/yii2-composer": true
         },
         "platform": {
-            "php": "8.4.16"
+            "php": "8.4.17"
         },
         "process-timeout": 1800
     },
