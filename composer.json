@@ -25,7 +25,7 @@
         "ext-spl": "*",
         "cweagans/composer-patches": "^1.7.3",
         "lipis/flag-icons": "^7.5.0",
-        "matomo/device-detector": "^6.4.8",
+        "matomo/device-detector": "^6.5.0",
         "statink/yii2-sortable-table": "^1.0.2",
         "twbs/bootstrap-icons": "^1.13.1",
         "yiisoft/yii2": "^2.0.54",
