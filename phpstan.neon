@@ -5,6 +5,16 @@ parameters:
   level: max
   ignoreErrors:
     - identifier: missingType.iterableValue
+    -
+      message: '#^Call to an undefined static method Dom\\HTMLDocument::createFromString\(\)\.$#'
+      identifier: staticMethod.notFound
+      reportUnmatched: false
+      path: commands/PhpController.php
+    -
+      message: '#^Access to an undefined property Dom\\Element::\$textContent\.$#'
+      identifier: property.notFound
+      reportUnmatched: false
+      path: commands/PhpController.php
 
   paths:
     - ./

@@ -10,12 +10,9 @@ declare(strict_types=1);
 
 namespace app\commands;
 
-use DOMElement;
-use DOMNode;
-use DOMNodeList;
-use DOMXPath;
-use Masterminds\HTML5;
-use Symfony\Component\CssSelector\CssSelectorConverter;
+use Dom\Element;
+use Dom\HTMLDocument;
+use Dom\NodeList;
 use Yii;
 use yii\console\Application;
 use yii\console\Controller;
@@ -142,14 +139,11 @@ final class PhpController extends Controller
      */
     private function detectReleasedVersionsFromChangeLog(string $html): array
     {
-        $document = (new HTML5(['disable_html_ns' => true]))->loadHtml($html);
-        $xpath = new DOMXPath($document);
-        $nodes = $xpath->query(
-            (new CssSelectorConverter())->toXPath('section.version[id] > h3'),
-        );
+        $document = HTMLDocument::createFromString($html);
+        $nodes = $document->querySelectorAll('section.version[id] > h3');
         $versions = array_filter(
             array_map(
-                fn (DOMElement $element): ?string => preg_match(
+                fn (Element $element): ?string => preg_match(
                     '/^Version\s+([0-9.]+)$/',
                     trim($element->textContent),
                     $match,
@@ -186,18 +180,15 @@ final class PhpController extends Controller
     }
 
     /**
-     * @param DOMNodeList<DOMNode>|false $nodeList
-     * @return DOMElement[]
+     * @return Element[]
      */
-    private static function extractDOMElements(DOMNodeList|false $nodeList): array
+    private static function extractDOMElements(NodeList $nodeList): array
     {
         return array_values(
-            $nodeList === false
-                ? []
-                : array_filter(
-                    iterator_to_array($nodeList),
-                    fn (mixed $node): bool => $node instanceof DOMElement,
-                ),
+            array_filter(
+                iterator_to_array($nodeList),
+                fn (mixed $node): bool => $node instanceof Element,
+            ),
         );
     }
 }
