@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       -
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       -
         name: 'Set up PHP ${{ matrix.env.php }}'
         uses: shivammathur/setup-php@v2
@@ -38,7 +38,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       -
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       -
         name: 'Set up PHP ${{ env.SYSTEM_PHP_VERSION }}'
         uses: shivammathur/setup-php@v2
@@ -49,7 +49,7 @@ jobs:
         run: |
           ln -s "$(which composer)" composer.phar
       -
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             ~/.cache/composer/files
@@ -65,9 +65,9 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       -
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       -
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             ~/.npm
@@ -84,14 +84,14 @@ jobs:
     needs: makeComposerCache
     steps:
       -
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       -
         name: 'Set up PHP ${{ env.SYSTEM_PHP_VERSION }}'
         uses: shivammathur/setup-php@v2
         with:
           php-version: '${{ env.SYSTEM_PHP_VERSION }}'
       -
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             ~/.cache/composer/files
@@ -106,9 +106,9 @@ jobs:
     needs: makeComposerCache
     steps:
       -
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       -
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             ~/.cache/composer/files
@@ -192,16 +192,16 @@ jobs:
         run: |
           sudo apt install -y gettext
       -
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       -
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             ~/.cache/composer/files
             vendor
           key: "${{ runner.os }}-composer-${{ hashFiles('composer.lock') }}"
       -
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             ~/.npm
@@ -230,9 +230,9 @@ jobs:
       - makeNpmCache
     steps:
       -
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       -
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             ~/.npm
@@ -249,9 +249,9 @@ jobs:
       - makeNpmCache
     steps:
       -
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       -
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             ~/.npm
