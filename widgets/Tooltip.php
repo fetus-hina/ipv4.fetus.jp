@@ -58,7 +58,6 @@ final class Tooltip extends Widget
         return Html::tag(
             is_string($tag) ? $tag : 'span',
             Yii::$app->formatter->format($this->content, $this->format),
-            // @phpstan-ignore-next-line
             ArrayHelper::merge(
                 $options,
                 [
