@@ -12,8 +12,10 @@ namespace app\controllers;
 
 use Yii;
 use app\actions\license\LicenseAction;
+use yii\web\Application;
 use yii\web\Controller;
 
+/** @extends Controller<Application> */
 final class LicenseController extends Controller
 {
     /**

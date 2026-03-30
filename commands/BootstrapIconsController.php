@@ -13,6 +13,7 @@ namespace app\commands;
 use Exception;
 use Yii;
 use app\helpers\TypeHelper;
+use yii\console\Application;
 use yii\console\Controller;
 use yii\console\ExitCode;
 use yii\helpers\Json;
@@ -26,6 +27,7 @@ use function vprintf;
 use const SORT_FLAG_CASE;
 use const SORT_NATURAL;
 
+/** @extends Controller<Application> */
 final class BootstrapIconsController extends Controller
 {
     private const JSON_PATH = '@app/vendor/twbs/bootstrap-icons/font/bootstrap-icons.json';

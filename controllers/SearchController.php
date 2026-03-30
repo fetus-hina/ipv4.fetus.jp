@@ -15,8 +15,10 @@ use Yii;
 use app\helpers\TypeHelper;
 use app\models\SearchForm;
 use app\models\SearchResult;
+use yii\web\Application;
 use yii\web\Controller;
 
+/** @extends Controller<Application> */
 class SearchController extends Controller
 {
     public function actionIndex(): string

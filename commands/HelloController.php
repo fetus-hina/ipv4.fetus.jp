@@ -10,9 +10,11 @@ declare(strict_types=1);
 
 namespace app\commands;
 
+use yii\console\Application;
 use yii\console\Controller;
 use yii\console\ExitCode;
 
+/** @extends Controller<Application> */
 class HelloController extends Controller
 {
     public function actionIndex(string $message = 'hello world'): int

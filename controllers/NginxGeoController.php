@@ -16,6 +16,7 @@ use DateTimeZone;
 use Generator;
 use Yii;
 use app\helpers\NginxGeoDumper;
+use yii\web\Application;
 use yii\web\Controller;
 use yii\web\Response;
 
@@ -24,6 +25,7 @@ use function filesize;
 use function preg_replace;
 use function vsprintf;
 
+/** @extends Controller<Application> */
 final class NginxGeoController extends Controller
 {
     public function actionIndex(): Response

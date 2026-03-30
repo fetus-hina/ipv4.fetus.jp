@@ -14,6 +14,7 @@ use Yii;
 use app\helpers\ApplicationLanguage;
 use app\models\SearchForm;
 use yii\filters\AccessControl;
+use yii\web\Application;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\web\Cookie;
@@ -26,6 +27,7 @@ use function is_string;
 use function opcache_reset;
 use function strtotime;
 
+/** @extends Controller<Application> */
 class SiteController extends Controller
 {
     /**

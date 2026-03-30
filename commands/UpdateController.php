@@ -29,6 +29,7 @@ use app\models\KrfilterCidr;
 use app\models\MergedCidr;
 use app\models\Region;
 use app\models\RegionStat;
+use yii\console\Application;
 use yii\console\Controller;
 use yii\console\ExitCode;
 use yii\db\Connection;
@@ -70,6 +71,7 @@ use function vsprintf;
 
 use const SORT_ASC;
 
+/** @extends Controller<Application> */
 class UpdateController extends Controller
 {
     private const TAG_AFRINIC = 'afrinic';

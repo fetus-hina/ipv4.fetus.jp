@@ -11,8 +11,10 @@ declare(strict_types=1);
 namespace app\commands;
 
 use app\commands\license\LicenseExtractTrait;
+use yii\console\Application;
 use yii\console\Controller;
 
+/** @extends Controller<Application> */
 final class LicenseController extends Controller
 {
     use LicenseExtractTrait;

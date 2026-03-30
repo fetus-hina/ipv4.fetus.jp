@@ -16,6 +16,7 @@ use SebastianBergmann\Diff\Output\UnifiedDiffOutputBuilder;
 use Yii;
 use app\helpers\GitAuthorHelper;
 use app\helpers\TypeHelper;
+use yii\console\Application;
 use yii\console\Controller;
 use yii\console\ExitCode;
 use yii\helpers\Console;
@@ -38,6 +39,7 @@ use function substr;
 use function time;
 use function vsprintf;
 
+/** @extends Controller<Application> */
 final class DocCommentController extends Controller
 {
     /**

@@ -17,6 +17,7 @@ use DOMXPath;
 use Masterminds\HTML5;
 use Symfony\Component\CssSelector\CssSelectorConverter;
 use Yii;
+use yii\console\Application;
 use yii\console\Controller;
 use yii\console\ExitCode;
 use yii\helpers\ArrayHelper;
@@ -51,6 +52,7 @@ use function vsprintf;
 
 use const STDERR;
 
+/** @extends Controller<Application> */
 final class PhpController extends Controller
 {
     public function actionLatestVersion(): int

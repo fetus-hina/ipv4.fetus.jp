@@ -15,6 +15,7 @@ use DeviceDetector\DeviceDetector;
 use Throwable;
 use Yii;
 use app\models\Language;
+use app\models\User;
 use yii\base\Application as BaseApplication;
 use yii\base\BootstrapInterface;
 use yii\helpers\ArrayHelper;
@@ -94,6 +95,7 @@ final class ApplicationLanguage implements BootstrapInterface
             ?->key === $categoryKey;
     }
 
+    /** @phpstan-param Application<User>|null $app */
     public static function isAutoDetect(?Application $app = null): bool
     {
         $request = ($app ?? Yii::$app)->request;
@@ -145,6 +147,7 @@ final class ApplicationLanguage implements BootstrapInterface
         $app->language = $this->detectLanguage($app);
     }
 
+    /** @phpstan-param Application<User> $app */
     private function detectLanguage(Application $app): string
     {
         $profiler = new Profiler(
@@ -163,6 +166,7 @@ final class ApplicationLanguage implements BootstrapInterface
         }
     }
 
+    /** @phpstan-param Application<User> $app */
     private function detectLanguageFromUrl(Application $app): ?string
     {
         $value = $app->request->get(self::URL_PARAM);
@@ -171,6 +175,7 @@ final class ApplicationLanguage implements BootstrapInterface
             : null;
     }
 
+    /** @phpstan-param Application<User> $app */
     private function returnJapaneseIfRobot(Application $app): ?string
     {
         $profiler = new Profiler('Run "returnJapaneseIfRobot"', __METHOD__);
@@ -249,6 +254,7 @@ final class ApplicationLanguage implements BootstrapInterface
         }
     }
 
+    /** @phpstan-param Application<User> $app */
     private function detectLanguageFromCookie(Application $app): ?string
     {
         $request = $app->request;
@@ -261,6 +267,7 @@ final class ApplicationLanguage implements BootstrapInterface
         return null;
     }
 
+    /** @phpstan-param Application<User> $app */
     private function detectLanguageFromBrowser(Application $app): string
     {
         $this->vary($app, 'Accept-Language');
@@ -270,11 +277,13 @@ final class ApplicationLanguage implements BootstrapInterface
         );
     }
 
+    /** @phpstan-param Application<User> $app */
     private function vary(Application $app, string $value): void
     {
         $app->response->headers->add('Vary', $value);
     }
 
+    /** @phpstan-param Application<User> $app */
     private function getDefaultLanguage(Application $app): ?string
     {
         $model = Language::find()

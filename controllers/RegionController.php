@@ -17,6 +17,7 @@ use app\helpers\TypeHelper;
 use app\helpers\Unicode;
 use app\models\DownloadTemplate;
 use app\models\Region;
+use yii\web\Application;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
@@ -25,6 +26,7 @@ use function vsprintf;
 
 use const SORT_ASC;
 
+/** @extends Controller<Application> */
 final class RegionController extends Controller
 {
     public function actionView(string $cc): string
