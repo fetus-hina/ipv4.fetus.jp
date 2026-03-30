@@ -73,6 +73,10 @@ final class FetusHeader extends Widget
     private function getCurrentPageId(): string
     {
         $controller = Yii::$app->controller;
+        if ($controller === null) {
+            return 'UNKNOWN/UNKNOWN';
+        }
+
         return vsprintf('%s/%s', [
             $controller->id,
             $controller->action->id ?? 'UNKNOWN',
