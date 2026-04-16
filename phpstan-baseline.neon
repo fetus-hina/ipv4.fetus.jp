@@ -1,0 +1,631 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Cannot access property \$formattedName on app\\models\\Region\|null\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: actions/api/AllocationSummaryAction.php
+
+		-
+			message: '#^Method app\\actions\\api\\AllocationSummaryAction\:\:getAllocatedAddressCount\(\) should return int but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: actions/api/AllocationSummaryAction.php
+
+		-
+			message: '#^Parameter \#3 \$subject of function preg_replace expects array\<float\|int\|string\>\|string, mixed given\.$#'
+			identifier: argument.type
+			count: 2
+			path: actions/license/LicenseAction.php
+
+		-
+			message: '#^Cannot access offset ''version'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: commands/LicenseController.php
+
+		-
+			message: '#^Cannot cast mixed to string\.$#'
+			identifier: cast.string
+			count: 1
+			path: commands/LicenseController.php
+
+		-
+			message: '#^Part \$info\[''version''\] \(mixed\) of encapsed string cannot be cast to string\.$#'
+			identifier: encapsedStringPart.nonString
+			count: 1
+			path: commands/LicenseController.php
+
+		-
+			message: '#^Method app\\commands\\PhpController\:\:extractDOMElements\(\) has parameter \$nodeList with generic class Dom\\NodeList but does not specify its types\: TNode$#'
+			identifier: missingType.generics
+			count: 1
+			path: commands/PhpController.php
+
+		-
+			message: '#^Parameter \#1 \$string of function trim expects string, string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: commands/PhpController.php
+
+		-
+			message: '#^Property yii\\httpclient\\Client\:\:\$transport \(yii\\httpclient\\Transport\) does not accept string\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: commands/PhpController.php
+
+		-
+			message: '#^Binary operation "\." between mixed and "\\n" results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 2
+			path: commands/UpdateController.php
+
+		-
+			message: '#^Cannot access offset ''registry'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
+			path: commands/UpdateController.php
+
+		-
+			message: '#^Cannot cast mixed to int\.$#'
+			identifier: cast.int
+			count: 3
+			path: commands/UpdateController.php
+
+		-
+			message: '#^Method app\\commands\\UpdateController\:\:actionIpv4bycc\(\) should return int but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: commands/UpdateController.php
+
+		-
+			message: '#^Method app\\commands\\UpdateController\:\:actionMerged\(\) should return int but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: commands/UpdateController.php
+
+		-
+			message: '#^Method app\\commands\\UpdateController\:\:actionNginxGeo\(\) should return int but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: commands/UpdateController.php
+
+		-
+			message: '#^Method app\\commands\\UpdateController\:\:actionStat\(\) should return int but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: commands/UpdateController.php
+
+		-
+			message: '#^Parameter \#1 \$string of function substr expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 6
+			path: commands/UpdateController.php
+
+		-
+			message: '#^Parameter \#1 \$value of method yii\\db\\Connection\:\:quoteValue\(\) expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: commands/UpdateController.php
+
+		-
+			message: '#^Parameter \#2 \$array of function implode expects array\<string\>, array\<int, mixed\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: commands/UpdateController.php
+
+		-
+			message: '#^Parameter \#2 \$info of method app\\commands\\UpdateController\:\:updateRecord\(\) expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: commands/UpdateController.php
+
+		-
+			message: '#^Possibly invalid array key type mixed\.$#'
+			identifier: offsetAccess.invalidOffset
+			count: 1
+			path: commands/UpdateController.php
+
+		-
+			message: '#^Property app\\models\\AllocationBlock\:\:\$region_id \(string\) does not accept mixed\.$#'
+			identifier: assign.propertyType
+			count: 2
+			path: commands/UpdateController.php
+
+		-
+			message: '#^Property app\\models\\AllocationBlock\:\:\$registry_id \(string\) does not accept mixed\.$#'
+			identifier: assign.propertyType
+			count: 2
+			path: commands/UpdateController.php
+
+		-
+			message: '#^Property app\\models\\AllocationBlock\:\:\$start_address \(string\) does not accept mixed\.$#'
+			identifier: assign.propertyType
+			count: 2
+			path: commands/UpdateController.php
+
+		-
+			message: '#^Parameter \#1 \.\.\.\$arrays of function array_merge expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: config/components/console/request.php
+
+		-
+			message: '#^Parameter \#1 \.\.\.\$arrays of function array_merge expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: config/components/console/url-manager.php
+
+		-
+			message: '#^Parameter \#1 \$db of closure expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: config/components/db/test.php
+
+		-
+			message: '#^Parameter \#1 \.\.\.\$arrays of function array_merge expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: config/components/test/url-manager.php
+
+		-
+			message: '#^Binary operation "\." between ''rev\-'' and mixed results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: config/components/web/asset-manager/hash-callback.php
+
+		-
+			message: '#^Binary operation "\." between mixed and ''/'' results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: config/components/web/asset-manager/hash-callback.php
+
+		-
+			message: '#^Cannot access offset ''short'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: config/components/web/asset-manager/hash-callback.php
+
+		-
+			message: '#^Cannot access offset ''version'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: config/components/web/asset-manager/hash-callback.php
+
+		-
+			message: '#^Cannot access offset ''gii'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: config/console.php
+
+		-
+			message: '#^Cannot access offset ''debug'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: config/web.php
+
+		-
+			message: '#^Method app\\controllers\\ApiController\:\:actions\(\) return type with generic class yii\\base\\Action does not specify its types\: T$#'
+			identifier: missingType.generics
+			count: 4
+			path: controllers/ApiController.php
+
+		-
+			message: '#^Method app\\controllers\\LicenseController\:\:actions\(\) return type with generic class yii\\base\\Action does not specify its types\: T$#'
+			identifier: missingType.generics
+			count: 4
+			path: controllers/LicenseController.php
+
+		-
+			message: '#^Method app\\controllers\\SiteController\:\:actions\(\) return type with generic class yii\\base\\Action does not specify its types\: T$#'
+			identifier: missingType.generics
+			count: 4
+			path: controllers/SiteController.php
+
+		-
+			message: '#^Parameter \#1 \$header of method yii\\web\\Request\:\:parseAcceptHeader\(\) expects string, string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: formatters/CompressiveHtmlResponseFormatter.php
+
+		-
+			message: '#^Argument of an invalid type mixed supplied for foreach, only iterables are supported\.$#'
+			identifier: foreach.nonIterable
+			count: 1
+			path: gii/model/Generator.php
+
+		-
+			message: '#^Binary operation "\." between mixed and ''\\\\'' results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: gii/model/Generator.php
+
+		-
+			message: '#^Cannot access offset ''fqcn'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: gii/model/Generator.php
+
+		-
+			message: '#^Cannot access offset ''interfaces'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
+			path: gii/model/Generator.php
+
+		-
+			message: '#^Cannot access offset 0 on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 3
+			path: gii/model/Generator.php
+
+		-
+			message: '#^Cannot cast mixed to string\.$#'
+			identifier: cast.string
+			count: 3
+			path: gii/model/Generator.php
+
+		-
+			message: '#^Parameter \#1 \$array of function array_keys expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: gii/model/Generator.php
+
+		-
+			message: '#^Parameter \#1 \$array of function array_unique expects an array of values castable to string, list given\.$#'
+			identifier: argument.type
+			count: 1
+			path: gii/model/Generator.php
+
+		-
+			message: '#^Parameter \#1 \$array of function sort expects an array of values castable to string, array given\.$#'
+			identifier: argument.type
+			count: 1
+			path: gii/model/Generator.php
+
+		-
+			message: '#^Parameter \#1 \$array of function sort expects an array of values castable to string, list given\.$#'
+			identifier: argument.type
+			count: 1
+			path: gii/model/Generator.php
+
+		-
+			message: '#^Parameter \#1 \$callback of function array_map expects \(callable\(mixed\)\: mixed\)\|null, Closure\(string\)\: string given\.$#'
+			identifier: argument.type
+			count: 4
+			path: gii/model/Generator.php
+
+		-
+			message: '#^Parameter \#1 \$columns of method app\\gii\\model\\Generator\:\:formatRule\(\) expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: gii/model/Generator.php
+
+		-
+			message: '#^Parameter \#1 \$name of method yii\\db\\Connection\:\:getTableSchema\(\) expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: gii/model/Generator.php
+
+		-
+			message: '#^Parameter \#1 \$tableName of method yii\\gii\\generators\\model\\Generator\:\:generateClassName\(\) expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: gii/model/Generator.php
+
+		-
+			message: '#^Parameter \#1 \$value of function count expects array\|Countable, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: gii/model/Generator.php
+
+		-
+			message: '#^Parameter \#2 \$array of function array_map expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 2
+			path: gii/model/Generator.php
+
+		-
+			message: '#^Parameter \#2 \$callback of function array_filter expects \(callable\(mixed\)\: bool\)\|null, Closure\(array\)\: bool given\.$#'
+			identifier: argument.type
+			count: 1
+			path: gii/model/Generator.php
+
+		-
+			message: '#^Parameter \#2 \$columns of method yii\\gii\\generators\\model\\Generator\:\:isColumnAutoIncremental\(\) expects array\<string\>, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: gii/model/Generator.php
+
+		-
+			message: '#^Parameter \#2 \$haystack of function in_array expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: gii/model/Generator.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$arrays of function array_merge expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: gii/model/Generator.php
+
+		-
+			message: '#^Method app\\helpers\\ApplicationLanguage\:\:getValidLanguagesEx\(\) should return array\<string, app\\models\\Language\> but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: helpers/ApplicationLanguage.php
+
+		-
+			message: '#^Parameter \#1 \$headers of static method app\\helpers\\ClientHints\:\:filterCHHeaders\(\) expects array\<string, string\>, array\<mixed\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: helpers/ClientHints.php
+
+		-
+			message: '#^Binary operation "\." between mixed and string results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: helpers/DownloadFormatter.php
+
+		-
+			message: '#^Cannot cast mixed to int\.$#'
+			identifier: cast.int
+			count: 1
+			path: helpers/DownloadFormatter.php
+
+		-
+			message: '#^Parameter \#2 \$modifier of static method app\\helpers\\DownloadFormatter\:\:applyModifier\(\) expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: helpers/DownloadFormatter.php
+
+		-
+			message: '#^Parameter \#4 \$cidr of static method app\\helpers\\DownloadFormatter\:\:fillPlaceholder\(\) expects array\<string\>\|string\|null, list given\.$#'
+			identifier: argument.type
+			count: 3
+			path: helpers/DownloadFormatter.php
+
+		-
+			message: '#^Parameter \#4 \$cidr of static method app\\helpers\\DownloadFormatter\:\:fillPlaceholder\(\) expects array\<string\>\|string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: helpers/DownloadFormatter.php
+
+		-
+			message: '#^Parameter \#1 \$callback of function array_map expects \(callable\(mixed\)\: mixed\)\|null, Closure\(string\)\: string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: helpers/Unicode.php
+
+		-
+			message: '#^Parameter \#2 \$columns of method yii\\db\\Migration\:\:createTable\(\) expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: migrations/m210423_090412_blocks.php
+
+		-
+			message: '#^Cannot access offset ''en'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: migrations/m210509_081223_update_country_name.php
+
+		-
+			message: '#^Cannot access offset ''ja'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: migrations/m210509_081223_update_country_name.php
+
+		-
+			message: '#^Cannot access offset string on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
+			path: migrations/m210509_081223_update_country_name.php
+
+		-
+			message: '#^Cannot access offset ''en'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: migrations/m210512_151254_update_country_name.php
+
+		-
+			message: '#^Cannot access offset ''ja'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: migrations/m210512_151254_update_country_name.php
+
+		-
+			message: '#^Cannot access offset string on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
+			path: migrations/m210512_151254_update_country_name.php
+
+		-
+			message: '#^Cannot access offset string on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: migrations/m220803_054119_language.php
+
+		-
+			message: '#^Method m220803_054119_language\:\:getCharacterCategoryId\(\) should return int but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: migrations/m220803_054119_language.php
+
+		-
+			message: '#^Binary operation "\." between ''    '' and mixed results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: views/gii/model/model.php
+
+		-
+			message: '#^Binary operation "\." between ''''\|''\?'' and mixed results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: views/gii/model/model.php
+
+		-
+			message: '#^Binary operation "\." between ''\\\\'' and mixed results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: views/gii/model/model.php
+
+		-
+			message: '#^Cannot access offset ''class'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: views/gii/model/model.php
+
+		-
+			message: '#^Parameter \#1 \$callback of function array_map expects \(callable\(mixed\)\: mixed\)\|null, Closure\(string\)\: string given\.$#'
+			identifier: argument.type
+			count: 2
+			path: views/gii/model/model.php
+
+		-
+			message: '#^Parameter \#1 \$str of function strtr expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: views/gii/model/model.php
+
+		-
+			message: '#^Parameter \#1 \(mixed\) of echo cannot be converted to string\.$#'
+			identifier: echo.nonString
+			count: 5
+			path: views/gii/model/model.php
+
+		-
+			message: '#^Parameter \#2 \$array of function implode expects array\<string\>, array given\.$#'
+			identifier: argument.type
+			count: 1
+			path: views/gii/model/model.php
+
+		-
+			message: '#^Parameter \#2 \$code of closure expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: views/gii/model/model.php
+
+		-
+			message: '#^Part \$data\[''type''\] \(mixed\) of encapsed string cannot be cast to string\.$#'
+			identifier: encapsedStringPart.nonString
+			count: 1
+			path: views/gii/model/model.php
+
+		-
+			message: '#^Parameter \#1 \$content of static method yii\\helpers\\BaseHtml\:\:encode\(\) expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 2
+			path: views/license/license.php
+
+		-
+			message: '#^Parameter \#1 \$name of closure expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 2
+			path: views/license/license.php
+
+		-
+			message: '#^Parameter \#1 \(mixed\) of echo cannot be converted to string\.$#'
+			identifier: echo.nonString
+			count: 1
+			path: views/license/license.php
+
+		-
+			message: '#^Property yii\\data\\ActiveDataProvider\<mixed,mixed\>\:\:\$key \(\(callable\(mixed\)\: mixed\)\|string\|null\) does not accept Closure\(app\\models\\MergedCidr\)\: non\-falsy\-string\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: views/region/view/cidr.php
+
+		-
+			message: '#^Property yii\\data\\ActiveDataProvider\<mixed,mixed\>\:\:\$key \(\(callable\(mixed\)\: mixed\)\|string\|null\) does not accept Closure\(app\\models\\AllocationCidr\)\: non\-falsy\-string\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: views/region/view/list.php
+
+		-
+			message: '#^Parameter \#2 \$url of static method yii\\helpers\\BaseHtml\:\:a\(\) expects array\|string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: views/site/about.php
+
+		-
+			message: '#^Cannot access property \$formattedHtmlName on app\\models\\Region\|null\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: views/site/index/main.php
+
+		-
+			message: '#^Cannot access property \$formattedName on app\\models\\Region\|null\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: views/site/index/main.php
+
+		-
+			message: '#^Parameter \#1 \$config of class yii\\web\\Application constructor expects array\<string, mixed\>, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: web/index-test.php
+
+		-
+			message: '#^Parameter \#1 \$config of class yii\\web\\Application constructor expects array\<string, mixed\>, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: web/index.php
+
+		-
+			message: '#^Cannot access offset string on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: widgets/AdSenseWidget.php
+
+		-
+			message: '#^Cannot access offset class\-string\<yii\\web\\AssetBundle\> on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
+			path: widgets/Icon.php
+
+		-
+			message: '#^Instanceof between yii\\web\\View and yii\\web\\View will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: widgets/Icon.php
+
+		-
+			message: '#^Cannot access offset ''pc\-brand'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: widgets/ads/BrandAd.php
+
+		-
+			message: '#^Cannot access offset ''slots'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: widgets/ads/BrandAd.php
+
+		-
+			message: '#^Cannot access offset ''pc\-side2'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: widgets/ads/SkyscraperAd.php
+
+		-
+			message: '#^Cannot access offset ''slots'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: widgets/ads/SkyscraperAd.php
+
+		-
+			message: '#^Cannot access offset ''slots'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: widgets/ads/SpRectAd.php
+
+		-
+			message: '#^Cannot access offset ''sp\-rect'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: widgets/ads/SpRectAd.php
+
+		-
+			message: '#^Parameter \#1 \$content of static method yii\\helpers\\BaseHtml\:\:encode\(\) expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 2
+			path: widgets/footer/RepoLink.php

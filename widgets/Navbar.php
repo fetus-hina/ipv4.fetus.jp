@@ -15,7 +15,6 @@ use app\assets\MontserratAsset;
 use yii\base\Widget;
 use yii\bootstrap5\BootstrapPluginAsset;
 use yii\helpers\Html;
-use yii\web\View;
 
 use function implode;
 use function sprintf;
@@ -31,9 +30,7 @@ final class Navbar extends Widget
     {
         parent::init();
 
-        if (($view = $this->view) instanceof View) {
-            BootstrapPluginAsset::register($view);
-        }
+        BootstrapPluginAsset::register($this->view);
     }
 
     public function run(): string
@@ -75,9 +72,7 @@ final class Navbar extends Widget
 
     private function renderBrand(): string
     {
-        if (($view = $this->view) instanceof View) {
-            MontserratAsset::register($view);
-        }
+        MontserratAsset::register($this->view);
 
         return Html::a(
             Html::encode(Yii::$app->name),

@@ -114,7 +114,7 @@ final class m220803_054119_language extends Migration
 
     private function getCharacterCategoryId(string $key): int
     {
-        $cache = null;
+        static $cache = null;
         if ($cache === null) {
             $cache = ArrayHelper::map(
                 (new Query())

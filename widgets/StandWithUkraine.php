@@ -13,7 +13,6 @@ namespace app\widgets;
 use app\assets\MontserratAsset;
 use yii\base\Widget;
 use yii\helpers\Html;
-use yii\web\View;
 
 use function implode;
 
@@ -28,9 +27,7 @@ final class StandWithUkraine extends Widget
 
     public function run(): string
     {
-        if (($view = $this->view) instanceof View) {
-            MontserratAsset::register($view);
-        }
+        MontserratAsset::register($this->view);
 
         return Html::tag(
             'div',

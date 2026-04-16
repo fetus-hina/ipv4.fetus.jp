@@ -16,7 +16,6 @@ use app\models\DownloadTemplate;
 use yii\base\Widget;
 use yii\bootstrap5\BootstrapPluginAsset;
 use yii\helpers\Html;
-use yii\web\View;
 
 use function array_filter;
 use function array_map;
@@ -90,9 +89,7 @@ final class DownloadButtons extends Widget
 
     private function renderTemplateButton(): string
     {
-        if (($view = $this->view) instanceof View) {
-            BootstrapPluginAsset::register($view);
-        }
+        BootstrapPluginAsset::register($this->view);
 
         return Html::button(
             Yii::t('app', 'Access-Control Templates'),

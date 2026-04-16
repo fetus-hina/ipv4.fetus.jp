@@ -10,7 +10,6 @@ declare(strict_types=1);
 
 use app\helpers\ApplicationLanguage;
 use app\models\Region;
-use app\models\RegionStat;
 use app\widgets\EuIsNotUnifiedWarning;
 use app\widgets\Krfilter;
 use app\widgets\RegionHeading;
@@ -43,7 +42,6 @@ ApplicationLanguage::registerLink(Yii::$app, ['region/view', 'cc' => $region->id
 $metas = [];
 if (!Yii::$app->request->isPjax) {
     $stats = $region->regionStats[0];
-    assert($stats instanceof RegionStat);
 
     $metas['description'] = implode(' ', [
         Yii::t('app', 'This is a list of IP addresses allocated to {country}.', [

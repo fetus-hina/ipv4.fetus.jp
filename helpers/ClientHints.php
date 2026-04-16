@@ -135,7 +135,6 @@ final class ClientHints
             // FIXME: matomo/device-detector のみのバージョンを取得するようにする
             $lockFile = Yii::getAlias('@app/composer.lock');
             if (
-                !is_string($lockFile) ||
                 !file_exists($lockFile) ||
                 !is_readable($lockFile) ||
                 !is_file($lockFile)

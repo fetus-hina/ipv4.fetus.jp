@@ -19,13 +19,11 @@ final class Twitter extends Widget
 {
     public function run(): string
     {
-        if ($this->view instanceof View) {
-            $this->view->registerJsFile('https://platform.twitter.com/widgets.js', [
-                'async' => true,
-                'charset' => 'UTF-8',
-                'position' => View::POS_END,
-            ]);
-        }
+        $this->view->registerJsFile('https://platform.twitter.com/widgets.js', [
+            'async' => true,
+            'charset' => 'UTF-8',
+            'position' => View::POS_END,
+        ]);
 
         return Html::tag(
             'span',

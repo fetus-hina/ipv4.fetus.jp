@@ -24,6 +24,7 @@
         "ext-pdo_pgsql": "*",
         "ext-session": "*",
         "ext-spl": "*",
+        "cweagans/composer-patches": "^1.7.3",
         "lipis/flag-icons": "^7.5.0",
         "matomo/device-detector": "^6.5.0",
         "statink/yii2-sortable-table": "^1.0.2",
@@ -40,8 +41,8 @@
         "codeception/specify": "^2.0.0",
         "codeception/verify": "^3.4.0",
         "ergebnis/composer-normalize": "^2.51.0",
+        "erickskrauch/phpstan-yii2": "dev-master",
         "jp3cki/coding-standard": "^2.0.0",
-        "proget-hq/phpstan-yii2": "^0.8.0",
         "squizlabs/php_codesniffer": "^4.0.1",
         "symfony/browser-kit": "^6.4.32 || ^7.0.0 || ^8.0.0",
         "yiisoft/yii2-debug": "^2.1.27",
@@ -82,6 +83,7 @@
     },
     "config": {
         "allow-plugins": {
+            "cweagans/composer-patches": true,
             "dealerdirect/phpcodesniffer-composer-installer": true,
             "ergebnis/composer-normalize": true,
             "yiisoft/yii2-composer": true
@@ -90,6 +92,13 @@
             "php": "8.4.20"
         },
         "process-timeout": 1800
+    },
+    "extra": {
+        "patches": {
+            "erickskrauch/phpstan-yii2": {
+                "fix: ComponentPropertyReflection getReadableType returning mixed on PHPStan 2.x": "data/patches/composer/erickskrauch/phpstan-yii2/fix-component-property-reflection-readable-type.patch"
+            }
+        }
     },
     "scripts": {
         "post-install-cmd": [

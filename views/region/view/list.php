@@ -11,7 +11,6 @@ declare(strict_types=1);
 use app\helpers\TypeHelper;
 use app\models\AllocationCidr;
 use app\models\Region;
-use app\models\RegionStat;
 use yii\bootstrap5\LinkPager;
 use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
@@ -40,7 +39,6 @@ if ($isPjax) {
   <div class="card-body">
 <?php if (!$isPjax) { ?>
 <?php $stats = $region->regionStats[0] ?>
-<?php assert($stats instanceof RegionStat) ?>
     <div class="text-muted">
       <p class="mb-2">
         <?= Yii::t('app', 'This is a list of IP addresses allocated to {country}.', [

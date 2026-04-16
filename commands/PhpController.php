@@ -155,7 +155,7 @@ final class PhpController extends Controller
             fn ($v) => $v !== null,
         );
         usort($versions, fn ($a, $b) => version_compare($b, $a));
-        return array_values($versions);
+        return $versions;
     }
 
     private function detectRequiredPhpSeries(): ?string

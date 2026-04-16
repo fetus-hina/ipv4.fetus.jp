@@ -19,7 +19,6 @@ use yii\base\Widget;
 use yii\bootstrap5\BootstrapAsset;
 use yii\bootstrap5\BootstrapPluginAsset;
 use yii\helpers\Html;
-use yii\web\View;
 
 use function array_map;
 use function array_merge;
@@ -32,10 +31,9 @@ final class LanguageButton extends Widget
 {
     public function run(): string
     {
-        if (($view = $this->view) instanceof View) {
-            BootstrapAsset::register($view);
-            BootstrapPluginAsset::register($view);
-        }
+        $view = $this->view;
+        BootstrapAsset::register($view);
+        BootstrapPluginAsset::register($view);
 
         return implode('', [
             $this->renderButton(),
@@ -183,9 +181,7 @@ final class LanguageButton extends Widget
 
     private function montserrat(string $html): string
     {
-        if (($view = $this->view) instanceof View) {
-            LatinFontAsset::register($view);
-        }
+        LatinFontAsset::register($this->view);
 
         return Html::tag('span', $html, ['class' => 'font-montserrat']);
     }

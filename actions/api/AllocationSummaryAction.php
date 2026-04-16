@@ -81,7 +81,7 @@ final class AllocationSummaryAction extends Action
                     array_map(
                         fn (RegionStat $model): array => [
                             'cc' => $model->region_id,
-                            'name' => $model->region?->formattedName ?? $model->region_id,
+                            'name' => $model->region->formattedName,
                             'count' => $model->total_address_count,
                         ],
                         $manyAllocCountries,

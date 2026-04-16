@@ -155,8 +155,7 @@ class UpdateController extends Controller
 
         if (
             !$skipUpdate &&
-            $updateStartAt !== null &&
-            $updateFinishAt !== null
+            $updateStartAt !== null
         ) {
             $this->saveTimeRecord($updateStartAt, $updateFinishAt);
         }
