@@ -19,16 +19,16 @@
     "@babel/preset-env": "^7.29.2",
     "autoprefixer": "^10.5.0",
     "cssnano": "^7.1.5",
-    "postcss": "^8.5.9",
+    "postcss": "^8.5.10",
     "postcss-cli": "^11.0.1",
     "sass": "^1.99.0",
     "semistandard": "^17.0.0",
     "snazzy": "^9.0.0",
-    "stylelint": "^17.7.0",
+    "stylelint": "^17.8.0",
     "stylelint-config-sass-guidelines": "^13.0.0",
     "terser": "^5.46.1",
     "ttf2woff2": "^8.0.1",
-    "updates": "^17.15.3"
+    "updates": "^17.15.4"
   },
   "overrides": {
     "license-checker-rseidelsohn": {
