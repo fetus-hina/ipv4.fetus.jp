@@ -87,6 +87,7 @@ final class Icon
      */
     private static function prepareAsset(string $fqcn): void
     {
+        /** @var array<class-string<AssetBundle>, true> $registered */
         static $registered = [];
         if (isset($registered[$fqcn])) {
             return;

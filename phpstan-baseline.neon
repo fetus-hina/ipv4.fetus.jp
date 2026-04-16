@@ -1,40 +1,10 @@
 parameters:
 	ignoreErrors:
 		-
-			message: '#^Cannot access property \$formattedName on app\\models\\Region\|null\.$#'
-			identifier: property.nonObject
-			count: 1
-			path: actions/api/AllocationSummaryAction.php
-
-		-
-			message: '#^Method app\\actions\\api\\AllocationSummaryAction\:\:getAllocatedAddressCount\(\) should return int but returns mixed\.$#'
-			identifier: return.type
-			count: 1
-			path: actions/api/AllocationSummaryAction.php
-
-		-
 			message: '#^Parameter \#1 \$packages of method app\\commands\\LicenseController\:\:extractPackages\(\) expects array\<string, mixed\>, array given\.$#'
 			identifier: argument.type
 			count: 1
 			path: commands/LicenseController.php
-
-		-
-			message: '#^Method app\\commands\\PhpController\:\:extractDOMElements\(\) has parameter \$nodeList with generic class Dom\\NodeList but does not specify its types\: TNode$#'
-			identifier: missingType.generics
-			count: 1
-			path: commands/PhpController.php
-
-		-
-			message: '#^Parameter \#1 \$string of function trim expects string, string\|null given\.$#'
-			identifier: argument.type
-			count: 1
-			path: commands/PhpController.php
-
-		-
-			message: '#^Property yii\\httpclient\\Client\:\:\$transport \(yii\\httpclient\\Transport\) does not accept string\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: commands/PhpController.php
 
 		-
 			message: '#^Binary operation "\." between mixed and "\\n" results in an error\.$#'
@@ -121,18 +91,6 @@ parameters:
 			path: views/region/view/list.php
 
 		-
-			message: '#^Cannot access property \$formattedHtmlName on app\\models\\Region\|null\.$#'
-			identifier: property.nonObject
-			count: 1
-			path: views/site/index/main.php
-
-		-
-			message: '#^Cannot access property \$formattedName on app\\models\\Region\|null\.$#'
-			identifier: property.nonObject
-			count: 1
-			path: views/site/index/main.php
-
-		-
 			message: '#^Parameter \#1 \$config of class yii\\web\\Application constructor expects array\<string, mixed\>, array given\.$#'
 			identifier: argument.type
 			count: 1
@@ -143,15 +101,3 @@ parameters:
 			identifier: argument.type
 			count: 1
 			path: web/index.php
-
-		-
-			message: '#^Cannot access offset class\-string\<yii\\web\\AssetBundle\> on mixed\.$#'
-			identifier: offsetAccess.nonOffsetAccessible
-			count: 2
-			path: widgets/Icon.php
-
-		-
-			message: '#^Parameter \#1 \$content of static method yii\\helpers\\BaseHtml\:\:encode\(\) expects string, mixed given\.$#'
-			identifier: argument.type
-			count: 2
-			path: widgets/footer/RepoLink.php

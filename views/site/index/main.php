@@ -113,13 +113,15 @@ $rowNumber = 0;
               'label' => Yii::t('app/cclist', 'Country/Region'),
               'format' => 'raw',
               'value' => fn (RegionStat $model): string => Html::a(
-                $model->region->formattedHtmlName,
+                /** @phpstan-ignore nullsafe.neverNull */
+                $model->region?->formattedHtmlName ?? '',
                 ['region/view', 'cc' => $model->region_id]
               ),
               'contentOptions' => fn (RegionStat $model): array => [
                 'class' => 'text-wrap',
                 'data' => [
-                  'sort-value' => $model->region->formattedName,
+                  /** @phpstan-ignore nullsafe.neverNull */
+                  'sort-value' => $model->region?->formattedName ?? '',
                 ],
               ],
               'headerOptions' => [

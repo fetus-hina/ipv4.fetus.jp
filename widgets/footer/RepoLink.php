@@ -46,6 +46,10 @@ final class RepoLink extends Widget
         return $this->renderMain($repoUrl, $gitInfo);
     }
 
+    /**
+     * @param string|array<int|string, mixed> $repoUrl
+     * @param array{hash: string, short: string, version: string}|null $gitInfo
+     */
     private function renderMain(string|array $repoUrl, ?array $gitInfo): string
     {
         return Html::tag(
@@ -77,6 +81,9 @@ final class RepoLink extends Widget
         );
     }
 
+    /**
+     * @param string|array<int|string, mixed> $repoUrl
+     */
     private function renderRepoLink(string|array $repoUrl): string
     {
         return Html::a(
@@ -89,6 +96,9 @@ final class RepoLink extends Widget
         );
     }
 
+    /**
+     * @param array{hash: string, short: string, version: string}|null $info
+     */
     private function renderVersion(?array $info): ?string
     {
         return $info && $info['version'] !== ''
@@ -96,6 +106,9 @@ final class RepoLink extends Widget
             : null;
     }
 
+    /**
+     * @param array{hash: string, short: string, version: string}|null $info
+     */
     private function renderRevision(?array $info): ?string
     {
         return $info && $info['short'] !== ''
