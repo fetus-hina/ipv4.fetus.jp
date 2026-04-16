@@ -9,15 +9,17 @@
 declare(strict_types=1);
 
 return function (string $path): string {
-    $gitRevision = Yii::$app->params['gitRevision'];
+    $gitRevision = Yii::$app->params['gitRevision'] ?? null;
     $path = is_file($path) ? dirname($path) : $path;
-    if (!$gitRevision) {
+    if (!is_array($gitRevision)) {
         return substr(hash('sha256', $path), 0, 16);
     }
 
-    if ($gitRevision['version']) {
-        return $gitRevision['version'] . '/' . substr(hash('sha256', $path), 0, 16);
+    $version = $gitRevision['version'] ?? null;
+    if (is_string($version) && $version !== '') {
+        return $version . '/' . substr(hash('sha256', $path), 0, 16);
     }
 
-    return 'rev-' . $gitRevision['short'] . '/' . substr(hash('sha256', $path), 0, 16);
+    $short = $gitRevision['short'] ?? '';
+    return 'rev-' . (is_string($short) ? $short : '') . '/' . substr(hash('sha256', $path), 0, 16);
 };

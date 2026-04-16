@@ -169,30 +169,6 @@ parameters:
 			path: config/components/test/url-manager.php
 
 		-
-			message: '#^Binary operation "\." between ''rev\-'' and mixed results in an error\.$#'
-			identifier: binaryOp.invalid
-			count: 1
-			path: config/components/web/asset-manager/hash-callback.php
-
-		-
-			message: '#^Binary operation "\." between mixed and ''/'' results in an error\.$#'
-			identifier: binaryOp.invalid
-			count: 1
-			path: config/components/web/asset-manager/hash-callback.php
-
-		-
-			message: '#^Cannot access offset ''short'' on mixed\.$#'
-			identifier: offsetAccess.nonOffsetAccessible
-			count: 1
-			path: config/components/web/asset-manager/hash-callback.php
-
-		-
-			message: '#^Cannot access offset ''version'' on mixed\.$#'
-			identifier: offsetAccess.nonOffsetAccessible
-			count: 1
-			path: config/components/web/asset-manager/hash-callback.php
-
-		-
 			message: '#^Cannot access offset ''gii'' on mixed\.$#'
 			identifier: offsetAccess.nonOffsetAccessible
 			count: 1
@@ -403,42 +379,6 @@ parameters:
 			path: migrations/m210423_090412_blocks.php
 
 		-
-			message: '#^Cannot access offset ''en'' on mixed\.$#'
-			identifier: offsetAccess.nonOffsetAccessible
-			count: 1
-			path: migrations/m210509_081223_update_country_name.php
-
-		-
-			message: '#^Cannot access offset ''ja'' on mixed\.$#'
-			identifier: offsetAccess.nonOffsetAccessible
-			count: 1
-			path: migrations/m210509_081223_update_country_name.php
-
-		-
-			message: '#^Cannot access offset string on mixed\.$#'
-			identifier: offsetAccess.nonOffsetAccessible
-			count: 2
-			path: migrations/m210509_081223_update_country_name.php
-
-		-
-			message: '#^Cannot access offset ''en'' on mixed\.$#'
-			identifier: offsetAccess.nonOffsetAccessible
-			count: 1
-			path: migrations/m210512_151254_update_country_name.php
-
-		-
-			message: '#^Cannot access offset ''ja'' on mixed\.$#'
-			identifier: offsetAccess.nonOffsetAccessible
-			count: 1
-			path: migrations/m210512_151254_update_country_name.php
-
-		-
-			message: '#^Cannot access offset string on mixed\.$#'
-			identifier: offsetAccess.nonOffsetAccessible
-			count: 2
-			path: migrations/m210512_151254_update_country_name.php
-
-		-
 			message: '#^Cannot access offset string on mixed\.$#'
 			identifier: offsetAccess.nonOffsetAccessible
 			count: 1
@@ -571,58 +511,10 @@ parameters:
 			path: web/index.php
 
 		-
-			message: '#^Cannot access offset string on mixed\.$#'
-			identifier: offsetAccess.nonOffsetAccessible
-			count: 1
-			path: widgets/AdSenseWidget.php
-
-		-
 			message: '#^Cannot access offset class\-string\<yii\\web\\AssetBundle\> on mixed\.$#'
 			identifier: offsetAccess.nonOffsetAccessible
 			count: 2
 			path: widgets/Icon.php
-
-		-
-			message: '#^Instanceof between yii\\web\\View and yii\\web\\View will always evaluate to true\.$#'
-			identifier: instanceof.alwaysTrue
-			count: 1
-			path: widgets/Icon.php
-
-		-
-			message: '#^Cannot access offset ''pc\-brand'' on mixed\.$#'
-			identifier: offsetAccess.nonOffsetAccessible
-			count: 1
-			path: widgets/ads/BrandAd.php
-
-		-
-			message: '#^Cannot access offset ''slots'' on mixed\.$#'
-			identifier: offsetAccess.nonOffsetAccessible
-			count: 1
-			path: widgets/ads/BrandAd.php
-
-		-
-			message: '#^Cannot access offset ''pc\-side2'' on mixed\.$#'
-			identifier: offsetAccess.nonOffsetAccessible
-			count: 1
-			path: widgets/ads/SkyscraperAd.php
-
-		-
-			message: '#^Cannot access offset ''slots'' on mixed\.$#'
-			identifier: offsetAccess.nonOffsetAccessible
-			count: 1
-			path: widgets/ads/SkyscraperAd.php
-
-		-
-			message: '#^Cannot access offset ''slots'' on mixed\.$#'
-			identifier: offsetAccess.nonOffsetAccessible
-			count: 1
-			path: widgets/ads/SpRectAd.php
-
-		-
-			message: '#^Cannot access offset ''sp\-rect'' on mixed\.$#'
-			identifier: offsetAccess.nonOffsetAccessible
-			count: 1
-			path: widgets/ads/SpRectAd.php
 
 		-
 			message: '#^Parameter \#1 \$content of static method yii\\helpers\\BaseHtml\:\:encode\(\) expects string, mixed given\.$#'

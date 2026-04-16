@@ -46,7 +46,9 @@ final class m210509_081223_update_country_name extends Migration
         return true;
     }
 
-    // phpcs:ignore SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification
+    /**
+     * @return array<string, array<string, array<string, string>>>
+     */
     private function getData(): array
     {
         return [

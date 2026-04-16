@@ -15,7 +15,6 @@ use app\assets\BootstrapIconsAsset;
 use yii\base\UnknownMethodException;
 use yii\helpers\Html;
 use yii\web\AssetBundle;
-use yii\web\View;
 
 /**
  * @method static string checkboxChecked()
@@ -93,11 +92,7 @@ final class Icon
             return;
         }
 
-        // @phpstan-ignore-next-line nullsafe.neverNull
-        $view = Yii::$app?->view ?? null;
-        if ($view instanceof View) {
-            $view->registerAssetBundle($fqcn);
-            $registered[$fqcn] = true;
-        }
+        Yii::$app->view->registerAssetBundle($fqcn);
+        $registered[$fqcn] = true;
     }
 }
