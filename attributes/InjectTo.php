@@ -15,8 +15,12 @@ use Attribute;
 #[Attribute(Attribute::TARGET_CLASS)]
 class InjectTo
 {
+    /** @var list<class-string> */
     public array $targetClasses;
 
+    /**
+     * @param list<class-string> $targetClasses
+     */
     public function __construct(array $targetClasses)
     {
         $this->targetClasses = $targetClasses;

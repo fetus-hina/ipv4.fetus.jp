@@ -22,10 +22,10 @@ use yii\web\View;
  * @var string $className
  * @var string $queryClassName
  * @var TableSchema $tableSchema
- * @var string[] $labels
- * @var string[] $rules
- * @var array[] $relations
- * @var array[] $properties
+ * @var array<string, string> $labels
+ * @var list<string> $rules
+ * @var array<string, array{0: string, 1: string, 2: bool}> $relations
+ * @var array<string, array{type: string, comment: string|null}> $properties
  */
 
 $renderRules = function (int $indentWidth, array $rules): string {
@@ -35,14 +35,20 @@ $renderRules = function (int $indentWidth, array $rules): string {
 
     $text = "return [\n";
     foreach ($rules as $rule) {
-        $text .= '    ' . $rule . "\n";
+        $text .= '    ' . TypeHelper::shouldBeString($rule) . "\n";
     }
     $text .= '];';
 
-    $lines = preg_split('/\x0d\x0a|\x0d|\x0a/', $text);
+    $lines = TypeHelper::shouldBeArray(
+        preg_split('/\x0d\x0a|\x0d|\x0a/', $text),
+        TypeHelper::ARRAY_INDEXED,
+    );
     return implode(
         "\n" . str_repeat(' ', $indentWidth),
-        TypeHelper::shouldBeArray($lines, TypeHelper::ARRAY_INDEXED),
+        array_map(
+            fn (mixed $line): string => TypeHelper::shouldBeString($line),
+            $lines,
+        ),
     );
 };
 
@@ -64,7 +70,7 @@ echo "<?php\n";
 
 declare(strict_types=1);
 
-namespace <?= $generator->ns ?>;
+namespace <?= TypeHelper::shouldBeString($generator->ns) ?>;
 
 <?php foreach ($generator->generateUses($tableName) as $useClass) { ?>
 use <?= $useClass ?>;
@@ -130,7 +136,7 @@ final class <?= $className . "\n" ?>
 
     public static function getDb(): \yii\db\Connection
     {
-        return Yii::$app->get('<?= $generator->db ?>');
+        return Yii::$app->get('<?= TypeHelper::shouldBeString($generator->db) ?>');
     }
 <?php } ?>
 <?php $behaviors = $generator->generateBehaviors($tableName); ?>
@@ -177,7 +183,9 @@ final class <?= $className . "\n" ?>
     }
 <?php } ?>
 <?php if ($queryClassName) { ?>
-<?php $queryClassFullName = $generator->ns === $generator->queryNs ? $queryClassName : '\\' . $generator->queryNs . '\\' . $queryClassName; ?>
+<?php $queryClassFullName = $generator->ns === $generator->queryNs
+    ? $queryClassName
+    : '\\' . TypeHelper::shouldBeString($generator->queryNs) . '\\' . $queryClassName; ?>
 
     public static function find(): ActiveQuery
     {

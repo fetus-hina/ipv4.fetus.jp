@@ -15,8 +15,12 @@ use Attribute;
 #[Attribute(Attribute::TARGET_CLASS)]
 class Implement
 {
+    /** @var list<class-string> */
     public array $interfaces;
 
+    /**
+     * @param list<class-string> $interfaces
+     */
     public function __construct(array $interfaces)
     {
         $this->interfaces = $interfaces;
