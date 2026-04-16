@@ -13,26 +13,8 @@ parameters:
 			path: actions/api/AllocationSummaryAction.php
 
 		-
-			message: '#^Parameter \#3 \$subject of function preg_replace expects array\<float\|int\|string\>\|string, mixed given\.$#'
+			message: '#^Parameter \#1 \$packages of method app\\commands\\LicenseController\:\:extractPackages\(\) expects array\<string, mixed\>, array given\.$#'
 			identifier: argument.type
-			count: 2
-			path: actions/license/LicenseAction.php
-
-		-
-			message: '#^Cannot access offset ''version'' on mixed\.$#'
-			identifier: offsetAccess.nonOffsetAccessible
-			count: 1
-			path: commands/LicenseController.php
-
-		-
-			message: '#^Cannot cast mixed to string\.$#'
-			identifier: cast.string
-			count: 1
-			path: commands/LicenseController.php
-
-		-
-			message: '#^Part \$info\[''version''\] \(mixed\) of encapsed string cannot be cast to string\.$#'
-			identifier: encapsedStringPart.nonString
 			count: 1
 			path: commands/LicenseController.php
 
@@ -115,24 +97,6 @@ parameters:
 			path: helpers/DownloadFormatter.php
 
 		-
-			message: '#^Parameter \#2 \$modifier of static method app\\helpers\\DownloadFormatter\:\:applyModifier\(\) expects string, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: helpers/DownloadFormatter.php
-
-		-
-			message: '#^Parameter \#4 \$cidr of static method app\\helpers\\DownloadFormatter\:\:fillPlaceholder\(\) expects array\<string\>\|string\|null, list given\.$#'
-			identifier: argument.type
-			count: 3
-			path: helpers/DownloadFormatter.php
-
-		-
-			message: '#^Parameter \#4 \$cidr of static method app\\helpers\\DownloadFormatter\:\:fillPlaceholder\(\) expects array\<string\>\|string\|null, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: helpers/DownloadFormatter.php
-
-		-
 			message: '#^Method m220803_054119_language\:\:getCharacterCategoryId\(\) should return int but returns mixed\.$#'
 			identifier: return.type
 			count: 1
@@ -143,24 +107,6 @@ parameters:
 			identifier: echo.nonString
 			count: 1
 			path: views/gii/model/model.php
-
-		-
-			message: '#^Parameter \#1 \$content of static method yii\\helpers\\BaseHtml\:\:encode\(\) expects string, mixed given\.$#'
-			identifier: argument.type
-			count: 2
-			path: views/license/license.php
-
-		-
-			message: '#^Parameter \#1 \$name of closure expects string, mixed given\.$#'
-			identifier: argument.type
-			count: 2
-			path: views/license/license.php
-
-		-
-			message: '#^Parameter \#1 \(mixed\) of echo cannot be converted to string\.$#'
-			identifier: echo.nonString
-			count: 1
-			path: views/license/license.php
 
 		-
 			message: '#^Property yii\\data\\ActiveDataProvider\<mixed,mixed\>\:\:\$key \(\(callable\(mixed\)\: mixed\)\|string\|null\) does not accept Closure\(app\\models\\MergedCidr\)\: non\-falsy\-string\.$#'

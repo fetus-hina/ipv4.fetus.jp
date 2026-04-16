@@ -52,8 +52,9 @@ use const ENT_XML1;
 final class DownloadFormatter
 {
     /**
-     * @param string|array $thisUrl このリスト自体のURL
-     * @param string|array $pageUrl このリストを提供するページのURL
+     * @param string|array<int|string, mixed> $thisUrl このリスト自体のURL
+     * @param string|array<int|string, mixed> $pageUrl このリストを提供するページのURL
+     * @param iterable<string> $cidrList
      */
     public static function format(
         string $name, // e.g., "[jp] 日本 (Japan)"
@@ -284,6 +285,9 @@ final class DownloadFormatter
         return (int)(2 ** (32 - $prefix));
     }
 
+    /**
+     * @param list<string> $modifiers
+     */
     private static function formatPlaceholder(string $value, array $modifiers): string
     {
         foreach ($modifiers as $modifier) {

@@ -15,7 +15,6 @@ use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use Yii;
 use app\helpers\TypeHelper;
-use stdClass;
 use yii\base\Action;
 use yii\helpers\Html;
 use yii\web\Controller;
@@ -53,7 +52,7 @@ final class LicenseAction extends Action
     }
 
     /**
-     * @return stdClass[]
+     * @return list<object{name: string, html: string}>
      */
     private function loadDepends(): array
     {
@@ -63,10 +62,10 @@ final class LicenseAction extends Action
         $ret = $this->loadFiles($this->directory);
         usort(
             $ret,
-            function (stdClass $a, stdClass $b) use ($c): int {
-                $aName = trim(preg_replace('/[^0-9A-Za-z]+/', ' ', $a->name));
+            function (object $a, object $b) use ($c): int {
+                $aName = trim(TypeHelper::shouldBeString(preg_replace('/[^0-9A-Za-z]+/', ' ', $a->name)));
                 $aName2 = ltrim($aName, '@');
-                $bName = trim(preg_replace('/[^0-9A-Za-z]+/', ' ', $b->name));
+                $bName = trim(TypeHelper::shouldBeString(preg_replace('/[^0-9A-Za-z]+/', ' ', $b->name)));
                 $bName2 = ltrim($bName, '@');
                 return $c->compare($aName2, $bName2) ?: $c->compare($aName, $bName) ?: 0;
             },
@@ -75,7 +74,7 @@ final class LicenseAction extends Action
     }
 
     /**
-     * @return stdClass[]
+     * @return list<object{name: string, html: string}>
      */
     private function loadFiles(string $directory): array
     {

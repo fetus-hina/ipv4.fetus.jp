@@ -16,9 +16,9 @@ use yii\web\View;
 
 /**
  * @var string $title
- * @var stdClass[] $depends
+ * @var list<object{name: string, html: string}> $depends
  * @var View $this
- * @var array $pageUrl
+ * @var array<int|string, mixed> $pageUrl
  */
 
 ApplicationLanguage::registerLink(Yii::$app, $pageUrl);
@@ -62,7 +62,7 @@ $breakable = fn (string $text): string => TypeHelper::shouldBeString(
 </p>
 <h2><?= Html::encode($title) ?></h2>
 <ul><?= implode('', array_map(
-    fn (stdClass $item): string => Html::tag(
+    fn (object $item): string => Html::tag(
         'li',
         Html::a($breakable(Html::encode($item->name)), '#' . $id($item->name)),
     ),

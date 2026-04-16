@@ -76,14 +76,19 @@ trait LicenseExtractTrait
         );
     }
 
+    /**
+     * @param array<string, mixed> $packages
+     */
     private function extractPackages(array $packages): void
     {
         foreach ($packages as $name => $info) {
+            $info = TypeHelper::shouldBeArray($info);
+            $version = isset($info['version']) ? trim(TypeHelper::shouldBeString($info['version'])) : '';
             $this->extractPackage(
-                isset($info['version']) && trim((string)$info['version']) !== ''
-                    ? "{$name}@{$info['version']}"
+                $version !== ''
+                    ? "{$name}@{$version}"
                     : $name,
-                Yii::getAlias('@app/vendor') . '/' . $name,
+                TypeHelper::shouldBeString(Yii::getAlias('@app/vendor')) . '/' . $name,
             );
         }
     }
