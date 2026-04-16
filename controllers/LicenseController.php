@@ -12,6 +12,7 @@ namespace app\controllers;
 
 use Yii;
 use app\actions\license\LicenseAction;
+use yii\base\Action;
 use yii\web\Application;
 use yii\web\Controller;
 
@@ -20,6 +21,8 @@ final class LicenseController extends Controller
 {
     /**
      * @inheritdoc
+     *
+     * @return array<string, array{class: class-string<Action>, directory: string, pageUrl: array<int|string, mixed>, title: string}>
      */
     public function actions()
     {

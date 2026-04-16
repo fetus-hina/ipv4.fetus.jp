@@ -35,7 +35,9 @@ final class m210423_090412_blocks extends Migration
         return true;
     }
 
-    // phpcs:ignore SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification
+    /**
+     * @return array<string, array<string, mixed>>
+     */
     private function getTables(): array
     {
         return [

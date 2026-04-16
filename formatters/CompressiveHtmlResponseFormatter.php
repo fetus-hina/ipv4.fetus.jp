@@ -54,7 +54,7 @@ final class CompressiveHtmlResponseFormatter extends HtmlResponseFormatter
         $request = Yii::$app->request;
         return array_keys(
             $request->parseAcceptHeader(
-                $request->getHeaders()->get('Accept-Encoding'),
+                $request->getHeaders()->get('Accept-Encoding') ?? '',
             ),
         );
     }

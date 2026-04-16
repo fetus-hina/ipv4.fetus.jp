@@ -59,6 +59,7 @@ final class ApplicationLanguage implements BootstrapInterface
      */
     public static function getValidLanguagesEx(): array
     {
+        /** @var array<string, Language>|null $cache */
         static $cache = null;
         if ($cache === null) {
             $cache = ArrayHelper::map(

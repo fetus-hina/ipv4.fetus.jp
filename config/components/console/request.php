@@ -8,7 +8,9 @@
 
 declare(strict_types=1);
 
-return array_merge(require(__DIR__ . '/../web/request.php'), [
+use app\helpers\TypeHelper;
+
+return array_merge(TypeHelper::shouldBeArray(require __DIR__ . '/../web/request.php'), [
     'cookieValidationKey' => 'test',
     'enableCsrfValidation' => false,
 ]);

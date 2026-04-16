@@ -35,6 +35,7 @@ return (function (): array {
             'log' => require __DIR__ . '/components/log.php',
             'urlManager' => require __DIR__ . '/components/console/url-manager.php',
         ],
+        'modules' => [],
         'params' => require __DIR__ . '/params.php',
     ];
 

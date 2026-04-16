@@ -8,6 +8,7 @@
 
 declare(strict_types=1);
 
+use app\helpers\TypeHelper;
 use yii\web\Application;
 
 if (
@@ -25,5 +26,5 @@ require __DIR__ . '/../vendor/autoload.php';
 require __DIR__ . '/../vendor/yiisoft/yii2/Yii.php';
 require __DIR__ . '/../config/bootstrap.php';
 
-(new Application(require __DIR__ . '/../config/test.php'))
+(new Application(TypeHelper::shouldBeArray(require __DIR__ . '/../config/test.php')))
     ->run();

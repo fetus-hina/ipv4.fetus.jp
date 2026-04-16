@@ -40,6 +40,7 @@ return (function (): array {
             'user' => require __DIR__ . '/components/user.php',
             'view' => require __DIR__ . '/components/web/view.php',
         ],
+        'modules' => [],
         'params' => require __DIR__ . '/params.php',
     ];
 

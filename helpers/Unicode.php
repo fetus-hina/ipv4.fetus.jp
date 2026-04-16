@@ -35,10 +35,13 @@ final class Unicode
 
         $cc = strtolower($cc);
         return implode('', array_map(
-            fn (string $c): string => TypeHelper::shouldBeString(mb_chr(
-                self::CODEPOINT_REGIONAL_INDICATOR_A + ord($c) - self::CODEPOINT_LATIN_SMALL_A,
-                'UTF-8',
-            )),
+            function (mixed $c): string {
+                $char = TypeHelper::shouldBeString($c);
+                return TypeHelper::shouldBeString(mb_chr(
+                    self::CODEPOINT_REGIONAL_INDICATOR_A + ord($char) - self::CODEPOINT_LATIN_SMALL_A,
+                    'UTF-8',
+                ));
+            },
             TypeHelper::shouldBeArray(
                 preg_split('//', $cc, -1, PREG_SPLIT_NO_EMPTY),
                 TypeHelper::ARRAY_DONTCARE,

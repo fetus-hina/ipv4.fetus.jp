@@ -12,6 +12,7 @@ namespace app\controllers;
 
 use app\actions\api\AllocationSummaryAction;
 use app\actions\api\IndexJsonAction;
+use yii\base\Action;
 use yii\web\Application;
 use yii\web\Controller;
 
@@ -20,6 +21,8 @@ final class ApiController extends Controller
 {
     /**
      * @inheritdoc
+     *
+     * @return array<string, class-string<Action>>
      */
     public function actions()
     {

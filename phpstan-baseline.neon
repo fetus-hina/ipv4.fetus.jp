@@ -145,64 +145,22 @@ parameters:
 			path: commands/UpdateController.php
 
 		-
-			message: '#^Parameter \#1 \.\.\.\$arrays of function array_merge expects array, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: config/components/console/request.php
-
-		-
-			message: '#^Parameter \#1 \.\.\.\$arrays of function array_merge expects array, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: config/components/console/url-manager.php
-
-		-
-			message: '#^Parameter \#1 \$db of closure expects array, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: config/components/db/test.php
-
-		-
-			message: '#^Parameter \#1 \.\.\.\$arrays of function array_merge expects array, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: config/components/test/url-manager.php
-
-		-
-			message: '#^Cannot access offset ''gii'' on mixed\.$#'
-			identifier: offsetAccess.nonOffsetAccessible
-			count: 1
-			path: config/console.php
-
-		-
-			message: '#^Cannot access offset ''debug'' on mixed\.$#'
-			identifier: offsetAccess.nonOffsetAccessible
-			count: 1
-			path: config/web.php
-
-		-
 			message: '#^Method app\\controllers\\ApiController\:\:actions\(\) return type with generic class yii\\base\\Action does not specify its types\: T$#'
 			identifier: missingType.generics
-			count: 4
+			count: 1
 			path: controllers/ApiController.php
 
 		-
 			message: '#^Method app\\controllers\\LicenseController\:\:actions\(\) return type with generic class yii\\base\\Action does not specify its types\: T$#'
 			identifier: missingType.generics
-			count: 4
+			count: 1
 			path: controllers/LicenseController.php
 
 		-
 			message: '#^Method app\\controllers\\SiteController\:\:actions\(\) return type with generic class yii\\base\\Action does not specify its types\: T$#'
 			identifier: missingType.generics
-			count: 4
-			path: controllers/SiteController.php
-
-		-
-			message: '#^Parameter \#1 \$header of method yii\\web\\Request\:\:parseAcceptHeader\(\) expects string, string\|null given\.$#'
-			identifier: argument.type
 			count: 1
-			path: formatters/CompressiveHtmlResponseFormatter.php
+			path: controllers/SiteController.php
 
 		-
 			message: '#^Argument of an invalid type mixed supplied for foreach, only iterables are supported\.$#'
@@ -325,7 +283,7 @@ parameters:
 			path: gii/model/Generator.php
 
 		-
-			message: '#^Method app\\helpers\\ApplicationLanguage\:\:getValidLanguagesEx\(\) should return array\<string, app\\models\\Language\> but returns mixed\.$#'
+			message: '#^Method app\\helpers\\ApplicationLanguage\:\:getValidLanguagesEx\(\) should return array\<string, app\\models\\Language\> but returns array\.$#'
 			identifier: return.type
 			count: 1
 			path: helpers/ApplicationLanguage.php
@@ -365,24 +323,6 @@ parameters:
 			identifier: argument.type
 			count: 1
 			path: helpers/DownloadFormatter.php
-
-		-
-			message: '#^Parameter \#1 \$callback of function array_map expects \(callable\(mixed\)\: mixed\)\|null, Closure\(string\)\: string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: helpers/Unicode.php
-
-		-
-			message: '#^Parameter \#2 \$columns of method yii\\db\\Migration\:\:createTable\(\) expects array, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: migrations/m210423_090412_blocks.php
-
-		-
-			message: '#^Cannot access offset string on mixed\.$#'
-			identifier: offsetAccess.nonOffsetAccessible
-			count: 1
-			path: migrations/m220803_054119_language.php
 
 		-
 			message: '#^Method m220803_054119_language\:\:getCharacterCategoryId\(\) should return int but returns mixed\.$#'
@@ -481,12 +421,6 @@ parameters:
 			path: views/region/view/list.php
 
 		-
-			message: '#^Parameter \#2 \$url of static method yii\\helpers\\BaseHtml\:\:a\(\) expects array\|string\|null, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: views/site/about.php
-
-		-
 			message: '#^Cannot access property \$formattedHtmlName on app\\models\\Region\|null\.$#'
 			identifier: property.nonObject
 			count: 1
@@ -499,13 +433,13 @@ parameters:
 			path: views/site/index/main.php
 
 		-
-			message: '#^Parameter \#1 \$config of class yii\\web\\Application constructor expects array\<string, mixed\>, mixed given\.$#'
+			message: '#^Parameter \#1 \$config of class yii\\web\\Application constructor expects array\<string, mixed\>, array given\.$#'
 			identifier: argument.type
 			count: 1
 			path: web/index-test.php
 
 		-
-			message: '#^Parameter \#1 \$config of class yii\\web\\Application constructor expects array\<string, mixed\>, mixed given\.$#'
+			message: '#^Parameter \#1 \$config of class yii\\web\\Application constructor expects array\<string, mixed\>, array given\.$#'
 			identifier: argument.type
 			count: 1
 			path: web/index.php
