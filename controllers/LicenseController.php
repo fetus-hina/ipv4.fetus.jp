@@ -22,7 +22,13 @@ final class LicenseController extends Controller
     /**
      * @inheritdoc
      *
+     * Action's template T (the controller type) is invariant, which makes
+     * `class-string<Action<self>>` reject any Action subclass that binds T
+     * to a different controller. Leave T unspecified.
+     *
      * @return array<string, array{class: class-string<Action>, directory: string, pageUrl: array<int|string, mixed>, title: string}>
+     *
+     * @phpstan-ignore missingType.generics
      */
     public function actions()
     {

@@ -22,7 +22,13 @@ final class ApiController extends Controller
     /**
      * @inheritdoc
      *
+     * Action's template T (the controller type) is invariant, which makes
+     * `class-string<Action<self>>` reject any Action subclass that binds T
+     * to a different controller. Leave T unspecified.
+     *
      * @return array<string, class-string<Action>>
+     *
+     * @phpstan-ignore missingType.generics
      */
     public function actions()
     {
