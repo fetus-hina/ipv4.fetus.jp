@@ -130,6 +130,9 @@ class Generator extends BaseGenerator
         };
     }
 
+    /**
+     * @return list<string>
+     */
     public function generateUses(string $tableName): array
     {
         $use = [
@@ -336,7 +339,7 @@ class Generator extends BaseGenerator
             $uniqueIndexes = array_unique($uniqueIndexes, SORT_REGULAR);
             foreach ($uniqueIndexes as $uniqueColumns) {
                 $columns = array_values(array_map(
-                    fn (mixed $v): string => (string)$v,
+                    fn (mixed $v): string => TypeHelper::shouldBeString($v),
                     TypeHelper::shouldBeArray($uniqueColumns),
                 ));
                 // Avoid validating auto incremental columns
@@ -384,7 +387,7 @@ class Generator extends BaseGenerator
                 'skipOnError' => true,
                 'targetClass' => new Expression(sprintf('%s::class', $refClassName)),
                 'targetAttribute' => array_map(
-                    fn (mixed $v): string => (string)$v,
+                    fn (mixed $v): string => TypeHelper::shouldBeString($v),
                     $refs,
                 ),
             ];
@@ -518,7 +521,7 @@ class Generator extends BaseGenerator
                 foreach ($value as $k => $v) {
                     $result .= vsprintf("%s%s => %s,\n", [
                         str_repeat(' ', $indentWidth + 4),
-                        is_int($k) ? (string)$k : $this->quote((string)$k),
+                        is_int($k) ? (string)$k : $this->quote(TypeHelper::shouldBeString($k)),
                         $this->autoQuote($v, $indentWidth + 4),
                     ]);
                 }
@@ -592,7 +595,7 @@ class Generator extends BaseGenerator
      */
     public function getInjectedTraits(string $tableName): array
     {
-        $genClass = $this->ns . '\\' . $this->generateClassName($tableName);
+        $genClass = TypeHelper::shouldBeString($this->ns) . '\\' . $this->generateClassName($tableName);
         return array_values(array_filter(
             $this->traits,
             fn (array $info): bool => in_array(

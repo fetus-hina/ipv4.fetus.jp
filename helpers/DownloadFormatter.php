@@ -330,6 +330,11 @@ final class DownloadFormatter
         throw new Exception('Unknown modifier: ' . $modifier);
     }
 
+    /**
+     * @param string|array<int|string, mixed> $thisUrl
+     * @param string|array<int|string, mixed> $pageUrl
+     * @return Generator<int, string>
+     */
     private static function generateHeaders(
         string $name,
         string|array $thisUrl,
@@ -354,9 +359,10 @@ final class DownloadFormatter
             yield $comment->block_begin;
         }
 
+        // phpcs:ignore SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable.DisallowedSuperGlobalVariable
+        $requestTime = $_SERVER['REQUEST_TIME'] ?? null;
         $time = (new DateTimeImmutable())
-            // phpcs:ignore SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable.DisallowedSuperGlobalVariable
-            ->setTimestamp((int)($_SERVER['REQUEST_TIME'] ?? time()))
+            ->setTimestamp(is_int($requestTime) ? $requestTime : time())
             ->setTimezone(new DateTimeZone(Yii::$app->timeZone));
 
         yield $row('');

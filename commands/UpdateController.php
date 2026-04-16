@@ -454,7 +454,7 @@ class UpdateController extends Controller
                 ++$inCount;
                 fwrite(
                     $pipes[0],
-                    TypeHelper::shouldBeArray($row)['cidr'] . "\n",
+                    TypeHelper::shouldBeString(TypeHelper::shouldBeArray($row)['cidr'] ?? null) . "\n",
                 );
             }
             fclose($pipes[0]);
@@ -546,7 +546,7 @@ class UpdateController extends Controller
                 foreach ($query->asArray()->each(200) as $cidr) {
                     fwrite(
                         $pipes[0],
-                        TypeHelper::shouldBeArray($cidr)['cidr'] . "\n",
+                        TypeHelper::shouldBeString(TypeHelper::shouldBeArray($cidr)['cidr'] ?? null) . "\n",
                     );
                 }
             }
