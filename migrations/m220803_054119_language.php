@@ -11,7 +11,6 @@ declare(strict_types=1);
 use app\helpers\TypeHelper;
 use yii\db\Migration;
 use yii\db\Query;
-use yii\helpers\ArrayHelper;
 
 final class m220803_054119_language extends Migration
 {
@@ -117,14 +116,16 @@ final class m220803_054119_language extends Migration
         /** @var array<string, int>|null $cache */
         static $cache = null;
         if ($cache === null) {
-            $cache = ArrayHelper::map(
-                (new Query())
-                    ->select(['id', 'key'])
-                    ->from('{{%character_category}}')
-                    ->all(TypeHelper::shouldBeDb($this->db)),
-                'key',
-                'id',
-            );
+            $rows = (new Query())
+                ->select(['id', 'key'])
+                ->from('{{%character_category}}')
+                ->all(TypeHelper::shouldBeDb($this->db));
+            $map = [];
+            foreach ($rows as $row) {
+                $row = TypeHelper::shouldBeArray($row);
+                $map[TypeHelper::shouldBeString($row['key'])] = TypeHelper::shouldBeInteger($row['id']);
+            }
+            $cache = $map;
         }
 
         return $cache[$key] ?? throw new Exception();

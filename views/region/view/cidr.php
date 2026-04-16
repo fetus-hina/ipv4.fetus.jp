@@ -57,11 +57,14 @@ if (
               'pageParam' => 'cidr-page',
               'pageSizeParam' => 'cidr-per-page',
             ],
-            'key' => fn (MergedCidr $model): string => vsprintf('cidr-%s', [
-              TypeHelper::shouldBeString(
-                preg_replace('/[^0-9]/', '-', $model->cidr),
-              ),
-            ]),
+            'key' => function (mixed $model): string {
+              $model = TypeHelper::instanceOf($model, MergedCidr::class);
+              return vsprintf('cidr-%s', [
+                TypeHelper::shouldBeString(
+                  preg_replace('/[^0-9]/', '-', $model->cidr),
+                ),
+              ]);
+            },
           ]),
           'columns' => [
             [

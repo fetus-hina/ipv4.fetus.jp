@@ -43,18 +43,6 @@ parameters:
 			path: gii/model/Generator.php
 
 		-
-			message: '#^Method app\\helpers\\ApplicationLanguage\:\:getValidLanguagesEx\(\) should return array\<string, app\\models\\Language\> but returns array\.$#'
-			identifier: return.type
-			count: 1
-			path: helpers/ApplicationLanguage.php
-
-		-
-			message: '#^Parameter \#1 \$headers of static method app\\helpers\\ClientHints\:\:filterCHHeaders\(\) expects array\<string, string\>, array\<mixed\> given\.$#'
-			identifier: argument.type
-			count: 1
-			path: helpers/ClientHints.php
-
-		-
 			message: '#^Binary operation "\." between mixed and string results in an error\.$#'
 			identifier: binaryOp.invalid
 			count: 1
@@ -67,37 +55,7 @@ parameters:
 			path: helpers/DownloadFormatter.php
 
 		-
-			message: '#^Method m220803_054119_language\:\:getCharacterCategoryId\(\) should return int but returns mixed\.$#'
-			identifier: return.type
-			count: 1
-			path: migrations/m220803_054119_language.php
-
-		-
 			message: '#^Parameter \#1 \(mixed\) of echo cannot be converted to string\.$#'
 			identifier: echo.nonString
 			count: 1
 			path: views/gii/model/model.php
-
-		-
-			message: '#^Property yii\\data\\ActiveDataProvider\<mixed,mixed\>\:\:\$key \(\(callable\(mixed\)\: mixed\)\|string\|null\) does not accept Closure\(app\\models\\MergedCidr\)\: non\-falsy\-string\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: views/region/view/cidr.php
-
-		-
-			message: '#^Property yii\\data\\ActiveDataProvider\<mixed,mixed\>\:\:\$key \(\(callable\(mixed\)\: mixed\)\|string\|null\) does not accept Closure\(app\\models\\AllocationCidr\)\: non\-falsy\-string\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: views/region/view/list.php
-
-		-
-			message: '#^Parameter \#1 \$config of class yii\\web\\Application constructor expects array\<string, mixed\>, array given\.$#'
-			identifier: argument.type
-			count: 1
-			path: web/index-test.php
-
-		-
-			message: '#^Parameter \#1 \$config of class yii\\web\\Application constructor expects array\<string, mixed\>, array given\.$#'
-			identifier: argument.type
-			count: 1
-			path: web/index.php

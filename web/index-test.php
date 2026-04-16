@@ -26,5 +26,11 @@ require __DIR__ . '/../vendor/autoload.php';
 require __DIR__ . '/../vendor/yiisoft/yii2/Yii.php';
 require __DIR__ . '/../config/bootstrap.php';
 
-(new Application(TypeHelper::shouldBeArray(require __DIR__ . '/../config/test.php')))
-    ->run();
+$config = TypeHelper::shouldBeArray(require __DIR__ . '/../config/test.php', TypeHelper::ARRAY_ASSOC);
+$stringKeyed = [];
+foreach ($config as $k => $v) {
+    if (is_string($k)) {
+        $stringKeyed[$k] = $v;
+    }
+}
+(new Application($stringKeyed))->run();

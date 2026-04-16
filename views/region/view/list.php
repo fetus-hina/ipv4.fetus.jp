@@ -89,9 +89,12 @@ if ($isPjax) {
               'pageParam' => 'list-page',
               'pageSizeParam' => 'list-per-page',
             ],
-            'key' => fn (AllocationCidr $model): string => vsprintf('list-%s', [
-              TypeHelper::shouldBeString(preg_replace('/[^0-9]/', '-', $model->cidr)),
-            ]),
+            'key' => function (mixed $model): string {
+              $model = TypeHelper::instanceOf($model, AllocationCidr::class);
+              return vsprintf('list-%s', [
+                TypeHelper::shouldBeString(preg_replace('/[^0-9]/', '-', $model->cidr)),
+              ]);
+            },
           ]),
           'columns' => [
             [

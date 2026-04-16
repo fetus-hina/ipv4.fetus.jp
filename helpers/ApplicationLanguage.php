@@ -18,7 +18,6 @@ use app\models\Language;
 use app\models\User;
 use yii\base\Application as BaseApplication;
 use yii\base\BootstrapInterface;
-use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use yii\web\Application;
 
@@ -62,11 +61,11 @@ final class ApplicationLanguage implements BootstrapInterface
         /** @var array<string, Language>|null $cache */
         static $cache = null;
         if ($cache === null) {
-            $cache = ArrayHelper::map(
-                Language::find()->orderBy(['sort' => SORT_ASC, 'id' => SORT_ASC])->all(),
-                'id',
-                fn (Language $model): Language => $model,
-            );
+            $map = [];
+            foreach (Language::find()->orderBy(['sort' => SORT_ASC, 'id' => SORT_ASC])->all() as $model) {
+                $map[$model->id] = $model;
+            }
+            $cache = $map;
         }
         return $cache;
     }

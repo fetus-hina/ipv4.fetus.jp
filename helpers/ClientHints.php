@@ -50,8 +50,18 @@ final class ClientHints
      */
     public static function getCHHeaders(?array $headers = null): array
     {
+        if (is_array($headers)) {
+            return self::filterCHHeaders($headers);
+        }
+
+        $stringHeaders = [];
         // phpcs:ignore SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable.DisallowedSuperGlobalVariable
-        return self::filterCHHeaders(is_array($headers) ? $headers : $_SERVER);
+        foreach ($_SERVER as $k => $v) {
+            if (is_string($k) && is_string($v)) {
+                $stringHeaders[$k] = $v;
+            }
+        }
+        return self::filterCHHeaders($stringHeaders);
     }
 
     /**
