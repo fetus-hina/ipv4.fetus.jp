@@ -8,11 +8,11 @@
 
 declare(strict_types=1);
 
+use app\log\ConsoleTarget;
 use yii\log\FileTarget;
 
-return [
-    'traceLevel' => defined('YII_DEBUG') && constant('YII_DEBUG') ? 3 : 0,
-    'targets' => [
+return (function (): array {
+    $targets = [
         [
             'class' => FileTarget::class,
             'levels' => [
@@ -20,5 +20,26 @@ return [
                 'warning',
             ],
         ],
-    ],
-];
+    ];
+
+    if (PHP_SAPI === 'cli') {
+        $targets[] = [
+            'class' => ConsoleTarget::class,
+            'exportInterval' => 1,
+            'levels' => [
+                'info',
+                'warning',
+                'error',
+            ],
+            'categories' => [
+                'app\\commands\\*',
+            ],
+            'logVars' => [],
+        ];
+    }
+
+    return [
+        'traceLevel' => defined('YII_DEBUG') && constant('YII_DEBUG') ? 3 : 0,
+        'targets' => $targets,
+    ];
+})();
