@@ -16,7 +16,6 @@ use app\assets\TooltipAsset;
 use yii\base\Widget;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
-use yii\web\View;
 
 use function is_string;
 
@@ -49,9 +48,7 @@ final class Tooltip extends Widget
 
     public function run(): string
     {
-        if (($view = $this->view) instanceof View) {
-            TooltipAsset::register($view);
-        }
+        TooltipAsset::register($this->view);
 
         $options = $this->options;
         $tag = ArrayHelper::remove($options, 'tag');

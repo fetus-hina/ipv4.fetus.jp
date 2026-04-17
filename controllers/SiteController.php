@@ -13,6 +13,7 @@ namespace app\controllers;
 use Yii;
 use app\helpers\ApplicationLanguage;
 use app\models\SearchForm;
+use yii\base\Action;
 use yii\filters\AccessControl;
 use yii\web\Application;
 use yii\web\BadRequestHttpException;
@@ -56,6 +57,14 @@ class SiteController extends Controller
 
     /**
      * @inheritdoc
+     *
+     * Action's template T (the controller type) is invariant, which makes
+     * `class-string<Action<self>>` reject any Action subclass that binds T
+     * to a different controller. Leave T unspecified.
+     *
+     * @return array<string, array{class: class-string<Action>}>
+     *
+     * @phpstan-ignore missingType.generics
      */
     public function actions()
     {

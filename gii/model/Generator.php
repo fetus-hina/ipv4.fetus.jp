@@ -64,6 +64,14 @@ use function vsprintf;
 use const SORT_REGULAR;
 use const SORT_STRING;
 
+/**
+ * @phpstan-type TraitInfo array{
+ *     class: string,
+ *     fqcn: class-string,
+ *     injectTo: list<class-string>,
+ *     interfaces: list<class-string>,
+ * }
+ */
 class Generator extends BaseGenerator
 {
     private const LINE_WIDTH_LIMIT = 120 - 4 * 4;
@@ -74,6 +82,7 @@ class Generator extends BaseGenerator
     /** @var bool */
     public $useTablePrefix = true;
 
+    /** @var list<TraitInfo> */
     private array $traits = [];
 
     /** @return void */
@@ -121,6 +130,9 @@ class Generator extends BaseGenerator
         };
     }
 
+    /**
+     * @return list<string>
+     */
     public function generateUses(string $tableName): array
     {
         $use = [
@@ -326,30 +338,28 @@ class Generator extends BaseGenerator
             );
             $uniqueIndexes = array_unique($uniqueIndexes, SORT_REGULAR);
             foreach ($uniqueIndexes as $uniqueColumns) {
+                $columns = array_values(array_map(
+                    fn (mixed $v): string => TypeHelper::shouldBeString($v),
+                    TypeHelper::shouldBeArray($uniqueColumns),
+                ));
                 // Avoid validating auto incremental columns
-                if (!$this->isColumnAutoIncremental($table, $uniqueColumns)) {
-                    $attributesCount = count($uniqueColumns);
+                if ($this->isColumnAutoIncremental($table, $columns)) {
+                    continue;
+                }
+                $attributesCount = count($columns);
 
-                    if ($attributesCount === 1) {
-                        $attrs = [
-                            'skipOnEmpty' => true,
-                            'skipOnError' => true,
-                        ];
-                        foreach ($this->formatRule((array)$uniqueColumns[0], 'unique') as $rule) {
-                            $rules[] = $rule;
-                        }
-                    } elseif ($attributesCount > 1) {
-                        $attrs = [
-                            'skipOnEmpty' => true,
-                            'skipOnError' => true,
-                            'targetAttribute' => array_map(
-                                fn ($v): string => (string)$v,
-                                $uniqueColumns,
-                            ),
-                        ];
-                        foreach ($this->formatRule($uniqueColumns, 'unique', $attrs) as $rule) {
-                            $rules[] = $rule;
-                        }
+                if ($attributesCount === 1) {
+                    foreach ($this->formatRule($columns, 'unique') as $rule) {
+                        $rules[] = $rule;
+                    }
+                } elseif ($attributesCount > 1) {
+                    $attrs = [
+                        'skipOnEmpty' => true,
+                        'skipOnError' => true,
+                        'targetAttribute' => $columns,
+                    ];
+                    foreach ($this->formatRule($columns, 'unique', $attrs) as $rule) {
+                        $rules[] = $rule;
                     }
                 }
             }
@@ -359,7 +369,8 @@ class Generator extends BaseGenerator
 
         // Exist rules for foreign keys
         foreach ($table->foreignKeys as $refs) {
-            $refTable = $refs[0];
+            $refs = TypeHelper::shouldBeArray($refs);
+            $refTable = TypeHelper::shouldBeString($refs[0] ?? null);
             $refTableSchema = $db->getTableSchema($refTable);
             if ($refTableSchema === null) {
                 // Foreign key could point to non-existing table: https://github.com/yiisoft/yii2-gii/issues/34
@@ -368,15 +379,19 @@ class Generator extends BaseGenerator
             $refClassName = $this->generateClassName($refTable);
             unset($refs[0]);
 
+            $refKeys = array_map(
+                fn (int|string $v): string => (string)$v,
+                array_keys($refs),
+            );
             $attrs = [
                 'skipOnError' => true,
                 'targetClass' => new Expression(sprintf('%s::class', $refClassName)),
                 'targetAttribute' => array_map(
-                    fn ($v): string => (string)$v,
+                    fn (mixed $v): string => TypeHelper::shouldBeString($v),
                     $refs,
                 ),
             ];
-            foreach ($this->formatRule(array_keys($refs), 'exist', $attrs) as $rule) {
+            foreach ($this->formatRule($refKeys, 'exist', $attrs) as $rule) {
                 $rules[] = $rule;
             }
         }
@@ -384,6 +399,11 @@ class Generator extends BaseGenerator
         return $rules;
     }
 
+    /**
+     * @param list<string> $columns
+     * @param array<string, mixed> $attributes
+     * @return list<string>
+     */
     private function formatRule(array $columns, string $type, array $attributes = [], bool $doNotSplit = false): array
     {
         if (!$columns) {
@@ -501,7 +521,7 @@ class Generator extends BaseGenerator
                 foreach ($value as $k => $v) {
                     $result .= vsprintf("%s%s => %s,\n", [
                         str_repeat(' ', $indentWidth + 4),
-                        is_int($k) ? (string)$k : $this->quote((string)$k),
+                        is_int($k) ? (string)$k : $this->quote(TypeHelper::shouldBeString($k)),
                         $this->autoQuote($v, $indentWidth + 4),
                     ]);
                 }
@@ -512,6 +532,9 @@ class Generator extends BaseGenerator
         throw new NotSupportedException('Unknown or unsupported type: ' . gettype($value));
     }
 
+    /**
+     * @return list<TraitInfo>
+     */
     private function findTraits(): array
     {
         $basePath = TypeHelper::shouldBeString(Yii::getAlias('@app/models/traits'));
@@ -529,10 +552,10 @@ class Generator extends BaseGenerator
                     str_replace(
                         '/',
                         '\\',
-                        substr($entry->getPath(), strlen($basePath)),
+                        substr(TypeHelper::shouldBeString($entry->getPath()), strlen($basePath)),
                     ) .
                     '\\' .
-                    $entry->getBasename('.php');
+                    TypeHelper::shouldBeString($entry->getBasename('.php'));
 
                 $info = [
                     'class' => $entry->getBasename('.php'),
@@ -567,19 +590,25 @@ class Generator extends BaseGenerator
         return $results;
     }
 
+    /**
+     * @return list<TraitInfo>
+     */
     public function getInjectedTraits(string $tableName): array
     {
-        $genClass = $this->ns . '\\' . $this->generateClassName($tableName);
-        return array_filter(
+        $genClass = TypeHelper::shouldBeString($this->ns) . '\\' . $this->generateClassName($tableName);
+        return array_values(array_filter(
             $this->traits,
             fn (array $info): bool => in_array(
                 $genClass,
                 $info['injectTo'],
                 true,
             ),
-        );
+        ));
     }
 
+    /**
+     * @return list<class-string>
+     */
     public function getImplementedInterfaces(string $tableName): array
     {
         $results = [];

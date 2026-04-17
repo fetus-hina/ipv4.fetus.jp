@@ -18,7 +18,6 @@ use yii\helpers\Html;
 
 use function array_fill;
 use function array_map;
-use function array_values;
 use function count;
 use function implode;
 use function range;
@@ -113,7 +112,7 @@ final class EuIsNotUnifiedWarning extends Widget
                             : null,
                     ],
                 ),
-                array_values($texts),
+                $texts,
                 range(0, count($texts) - 1, 1),
                 array_fill(0, count($texts), count($texts) - 1),
             )),

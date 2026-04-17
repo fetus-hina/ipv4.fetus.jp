@@ -81,6 +81,7 @@ final class AllocationSummaryAction extends Action
                     array_map(
                         fn (RegionStat $model): array => [
                             'cc' => $model->region_id,
+                            /** @phpstan-ignore nullsafe.neverNull */
                             'name' => $model->region?->formattedName ?? $model->region_id,
                             'count' => $model->total_address_count,
                         ],
@@ -130,6 +131,7 @@ final class AllocationSummaryAction extends Action
 
     private function getAllocatedAddressCount(): int
     {
+        /** @var int|null $cache */
         static $cache = null;
         if ($cache === null) {
             $cache = TypeHelper::shouldBeInteger(

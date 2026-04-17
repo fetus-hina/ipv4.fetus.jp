@@ -1,0 +1,24 @@
+--- a/src/Reflection/ComponentPropertyReflection.php
++++ b/src/Reflection/ComponentPropertyReflection.php
+@@ -19,7 +19,6 @@ final class ComponentPropertyReflection implements PropertyReflection {
+         $this->type = $type;
+     }
+
+-    // TODO: seems to be unused
+     public function getType(): Type {
+         return $this->type;
+     }
+@@ -49,11 +48,11 @@ final class ComponentPropertyReflection implements PropertyReflection {
+     }
+
+     public function getReadableType(): Type {
+-        return $this->fallbackProperty->getReadableType();
++        return $this->type;
+     }
+
+     public function getWritableType(): Type {
+-        return $this->fallbackProperty->getWritableType();
++        return $this->type;
+     }
+
+     public function canChangeTypeAfterAssignment(): bool {

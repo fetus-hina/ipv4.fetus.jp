@@ -27,6 +27,7 @@ use function file_exists;
 use function file_get_contents;
 use function fwrite;
 use function implode;
+use function is_string;
 use function pathinfo;
 use function preg_match;
 use function preg_replace;
@@ -59,7 +60,9 @@ trait LicenseExtractTrait
         return 0;
     }
 
-    // phpcs:ignore SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification
+    /**
+     * @return array<string, mixed>
+     */
     private function getPackages(): array
     {
         $cmdline = vsprintf('/usr/bin/env %s --no-interaction --no-plugins license --format=%s', [
@@ -71,19 +74,31 @@ trait LicenseExtractTrait
                 TypeHelper::shouldBeString($this->execCommand($cmdline)),
             ),
         );
-        return TypeHelper::shouldBeArray(
+        $deps = TypeHelper::shouldBeArray(
             ArrayHelper::getValue($json, 'dependencies'),
         );
+        $stringKeyed = [];
+        foreach ($deps as $k => $v) {
+            if (is_string($k)) {
+                $stringKeyed[$k] = $v;
+            }
+        }
+        return $stringKeyed;
     }
 
+    /**
+     * @param array<string, mixed> $packages
+     */
     private function extractPackages(array $packages): void
     {
         foreach ($packages as $name => $info) {
+            $info = TypeHelper::shouldBeArray($info);
+            $version = isset($info['version']) ? trim(TypeHelper::shouldBeString($info['version'])) : '';
             $this->extractPackage(
-                isset($info['version']) && trim((string)$info['version']) !== ''
-                    ? "{$name}@{$info['version']}"
+                $version !== ''
+                    ? "{$name}@{$version}"
                     : $name,
-                Yii::getAlias('@app/vendor') . '/' . $name,
+                TypeHelper::shouldBeString(Yii::getAlias('@app/vendor')) . '/' . $name,
             );
         }
     }

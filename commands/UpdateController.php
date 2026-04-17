@@ -155,8 +155,7 @@ class UpdateController extends Controller
 
         if (
             !$skipUpdate &&
-            $updateStartAt !== null &&
-            $updateFinishAt !== null
+            $updateStartAt !== null
         ) {
             $this->saveTimeRecord($updateStartAt, $updateFinishAt);
         }
@@ -220,6 +219,9 @@ class UpdateController extends Controller
         return ExitCode::OK;
     }
 
+    /**
+     * @param array{registry: string, cc: string, start: string, count: int, date: string, status: string} $info
+     */
     private function updateRecord(string $tag, array $info): bool
     {
         if (!isset($this->checkedCountries[$info['cc']])) {
@@ -308,7 +310,9 @@ class UpdateController extends Controller
         return true;
     }
 
-    // phpcs:ignore SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification
+    /**
+     * @return list<array{registry: string, cc: string, start: string, count: int, date: string, status: string}>|null
+     */
     private function downloadAndParse(string $tag, string $url): ?array
     {
         Yii::info("Starting download from {$url}", __METHOD__);
@@ -382,6 +386,9 @@ class UpdateController extends Controller
         return "/^{$registry}\\|{$cc}\\|{$type}\\|{$start}\\|{$count}\\|{$date}\\|{$status}/";
     }
 
+    /**
+     * @param array{registry: string, cc: string, start: string, count: int, date: string, status: string} $info
+     */
     private static function formatRecord(array $info): string
     {
         return implode('|', [
@@ -397,7 +404,7 @@ class UpdateController extends Controller
     public function actionMerged(): int
     {
         $method = __METHOD__;
-        return Yii::$app->db->transaction(function () use ($method): int {
+        return TypeHelper::shouldBeInteger(Yii::$app->db->transaction(function () use ($method): int {
             MergedCidr::deleteAll('1 = 1');
 
             $regions = Region::find()
@@ -409,7 +416,7 @@ class UpdateController extends Controller
             }
 
             return ExitCode::OK;
-        });
+        }));
     }
 
     private function updateMerged(Region $region): void
@@ -447,7 +454,7 @@ class UpdateController extends Controller
                 ++$inCount;
                 fwrite(
                     $pipes[0],
-                    TypeHelper::shouldBeArray($row)['cidr'] . "\n",
+                    TypeHelper::shouldBeString(TypeHelper::shouldBeArray($row)['cidr'] ?? null) . "\n",
                 );
             }
             fclose($pipes[0]);
@@ -480,7 +487,7 @@ class UpdateController extends Controller
     public function actionStat(): int
     {
         $method = __METHOD__;
-        return Yii::$app->db->transaction(function () use ($method): int {
+        return TypeHelper::shouldBeInteger(Yii::$app->db->transaction(function () use ($method): int {
             Yii::info('統計情報を更新します', $method);
 
             RegionStat::deleteAll('1 = 1');
@@ -500,7 +507,7 @@ class UpdateController extends Controller
 
             Yii::info('統計情報を更新しました', $method);
             return ExitCode::OK;
-        });
+        }));
     }
 
     public function actionKrfilter(): int
@@ -539,7 +546,7 @@ class UpdateController extends Controller
                 foreach ($query->asArray()->each(200) as $cidr) {
                     fwrite(
                         $pipes[0],
-                        TypeHelper::shouldBeArray($cidr)['cidr'] . "\n",
+                        TypeHelper::shouldBeString(TypeHelper::shouldBeArray($cidr)['cidr'] ?? null) . "\n",
                     );
                 }
             }
@@ -569,7 +576,7 @@ class UpdateController extends Controller
     {
         $method = __METHOD__;
         $now = new DateTimeImmutable('now', new DateTimeZone('Asia/Tokyo'));
-        return Yii::$app->db->transaction(function () use ($method, $now): int {
+        return TypeHelper::shouldBeInteger(Yii::$app->db->transaction(function () use ($method, $now): int {
             Yii::info('Ipv4bycc互換形式ファイルを作成します', $method);
 
             $pathCidr = vsprintf('@app/web/ipv4bycc/cidr/%s/%s-cidr.txt', [
@@ -593,14 +600,14 @@ class UpdateController extends Controller
             }
 
             return ExitCode::OK;
-        });
+        }));
     }
 
     public function actionNginxGeo(): int
     {
         $method = __METHOD__;
         $now = new DateTimeImmutable('now', new DateTimeZone('Asia/Tokyo'));
-        return Yii::$app->db->transaction(
+        return TypeHelper::shouldBeInteger(Yii::$app->db->transaction(
             function () use ($method, $now): int {
                 Yii::info('Nginxのgeo形式ファイルを作成します', $method);
                 $isSuccess = $this->saveGeneratorToFile(
@@ -613,7 +620,7 @@ class UpdateController extends Controller
                 return $isSuccess ? ExitCode::OK : ExitCode::UNSPECIFIED_ERROR;
             },
             Transaction::REPEATABLE_READ,
-        );
+        ));
     }
 
     public function actionPreformattedGitRepo(): int

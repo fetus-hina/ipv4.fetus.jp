@@ -38,12 +38,9 @@ final class AdSenseWidget extends Widget
             return '';
         }
 
-        $params = Yii::$app->params['adsense'];
-        if (!is_array($params)) {
-            return '';
-        }
-
-        if (!isset($params['slots'][$this->slot])) {
+        $slotId = self::getSlotId($this->slot);
+        $client = self::getClient();
+        if ($slotId === null || $client === null) {
             return '';
         }
 
@@ -53,8 +50,8 @@ final class AdSenseWidget extends Widget
                 Html::tag('ins', '', [
                     'class' => 'adsbygoogle',
                     'data' => [
-                        'ad-client' => $params['client'],
-                        'ad-slot' => $params['slots'][$this->slot],
+                        'ad-client' => $client,
+                        'ad-slot' => $slotId,
                     ],
                     'style' => $this->makeStyles($this->size),
                 ]),
@@ -69,6 +66,33 @@ final class AdSenseWidget extends Widget
                 'style' => $this->makeStyles($this->size),
             ]);
         }
+    }
+
+    public static function getSlotId(string $slot): ?string
+    {
+        $adsense = Yii::$app->params['adsense'] ?? null;
+        if (!is_array($adsense)) {
+            return null;
+        }
+
+        $slots = $adsense['slots'] ?? null;
+        if (!is_array($slots)) {
+            return null;
+        }
+
+        $value = $slots[$slot] ?? null;
+        return is_string($value) ? $value : null;
+    }
+
+    private static function getClient(): ?string
+    {
+        $adsense = Yii::$app->params['adsense'] ?? null;
+        if (!is_array($adsense)) {
+            return null;
+        }
+
+        $client = $adsense['client'] ?? null;
+        return is_string($client) ? $client : null;
     }
 
     /**

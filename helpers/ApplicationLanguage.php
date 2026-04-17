@@ -18,10 +18,8 @@ use app\models\Language;
 use app\models\User;
 use yii\base\Application as BaseApplication;
 use yii\base\BootstrapInterface;
-use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use yii\web\Application;
-use yii\web\View;
 
 use function array_keys;
 use function array_map;
@@ -60,13 +58,14 @@ final class ApplicationLanguage implements BootstrapInterface
      */
     public static function getValidLanguagesEx(): array
     {
+        /** @var array<string, Language>|null $cache */
         static $cache = null;
         if ($cache === null) {
-            $cache = ArrayHelper::map(
-                Language::find()->orderBy(['sort' => SORT_ASC, 'id' => SORT_ASC])->all(),
-                'id',
-                fn (Language $model): Language => $model,
-            );
+            $map = [];
+            foreach (Language::find()->orderBy(['sort' => SORT_ASC, 'id' => SORT_ASC])->all() as $model) {
+                $map[$model->id] = $model;
+            }
+            $cache = $map;
         }
         return $cache;
     }
@@ -109,10 +108,7 @@ final class ApplicationLanguage implements BootstrapInterface
             return;
         }
 
-        if (!($view = $app->view) instanceof View) {
-            return;
-        }
-
+        $view = $app->view;
         unset($url[self::URL_PARAM]);
 
         $view->registerLinkTag([

@@ -15,7 +15,6 @@ use app\helpers\TypeHelper;
 use yii\base\Widget;
 use yii\helpers\Html;
 use yii\helpers\Json;
-use yii\web\View;
 
 use function sprintf;
 use function vsprintf;
@@ -26,14 +25,13 @@ final class AllocationSummaryChart extends Widget
     {
         $id = TypeHelper::shouldBeString($this->id);
 
-        if (($v = $this->view) instanceof View) {
-            AllocationSummaryAsset::register($v);
-            $v->registerJs(vsprintf('jQuery(%s).chartAllocationSummary();', [
-                Json::encode(vsprintf('#%s-canvas', [
-                    $id,
-                ])),
-            ]));
-        }
+        $v = $this->view;
+        AllocationSummaryAsset::register($v);
+        $v->registerJs(vsprintf('jQuery(%s).chartAllocationSummary();', [
+            Json::encode(vsprintf('#%s-canvas', [
+                $id,
+            ])),
+        ]));
 
         return Html::tag(
             'div',

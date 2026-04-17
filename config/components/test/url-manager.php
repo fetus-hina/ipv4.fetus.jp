@@ -8,6 +8,8 @@
 
 declare(strict_types=1);
 
-return array_merge(require(__DIR__ . '/../web/url-manager.php'), [
+use app\helpers\TypeHelper;
+
+return array_merge(TypeHelper::shouldBeArray(require __DIR__ . '/../web/url-manager.php'), [
     'showScriptName' => true,
 ]);

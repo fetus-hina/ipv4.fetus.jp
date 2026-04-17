@@ -82,7 +82,7 @@ final class PhpController extends Controller
 
         $client = Yii::createObject([
             'class' => HttpClient::class,
-            'transport' => CurlTransport::class,
+            'transport' => Yii::createObject(CurlTransport::class),
         ]);
 
         $response = $client
@@ -141,11 +141,11 @@ final class PhpController extends Controller
     {
         $document = HTMLDocument::createFromString($html);
         $nodes = $document->querySelectorAll('section.version[id] > h3');
-        $versions = array_filter(
+        $versions = array_values(array_filter(
             array_map(
                 fn (Element $element): ?string => preg_match(
                     '/^Version\s+([0-9.]+)$/',
-                    trim($element->textContent),
+                    trim((string)$element->textContent),
                     $match,
                 )
                     ? $match[1]
@@ -153,9 +153,9 @@ final class PhpController extends Controller
                 self::extractDOMElements($nodes),
             ),
             fn ($v) => $v !== null,
-        );
+        ));
         usort($versions, fn ($a, $b) => version_compare($b, $a));
-        return array_values($versions);
+        return $versions;
     }
 
     private function detectRequiredPhpSeries(): ?string
@@ -180,15 +180,11 @@ final class PhpController extends Controller
     }
 
     /**
-     * @return Element[]
+     * @param NodeList<Element> $nodeList
+     * @return list<Element>
      */
     private static function extractDOMElements(NodeList $nodeList): array
     {
-        return array_values(
-            array_filter(
-                iterator_to_array($nodeList),
-                fn (mixed $node): bool => $node instanceof Element,
-            ),
-        );
+        return array_values(iterator_to_array($nodeList));
     }
 }

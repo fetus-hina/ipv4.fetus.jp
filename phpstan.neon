@@ -1,5 +1,6 @@
 includes:
-  - vendor/proget-hq/phpstan-yii2/extension.neon
+  - vendor/erickskrauch/phpstan-yii2/extension.neon
+  - vendor/erickskrauch/phpstan-yii2/rules.neon
 
 parameters:
   level: max

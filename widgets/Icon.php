@@ -88,13 +88,18 @@ final class Icon
      */
     private static function prepareAsset(string $fqcn): void
     {
+        /** @var array<class-string<AssetBundle>, true> $registered */
         static $registered = [];
         if (isset($registered[$fqcn])) {
             return;
         }
 
-        // @phpstan-ignore-next-line nullsafe.neverNull
+        // Yii::$app may be null when icons are emitted from bootstrap or
+        // tooling that runs before the application is initialized
+        // (e.g. `codecept build` during composer post-install).
+        // @phpstan-ignore nullCoalesce.expr
         $view = Yii::$app?->view ?? null;
+        // @phpstan-ignore instanceof.alwaysTrue
         if ($view instanceof View) {
             $view->registerAssetBundle($fqcn);
             $registered[$fqcn] = true;

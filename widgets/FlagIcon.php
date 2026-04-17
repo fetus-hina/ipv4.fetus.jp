@@ -17,12 +17,10 @@ use app\assets\InlineFlagIconsAsset;
 use app\helpers\Unicode;
 use yii\base\Widget;
 use yii\helpers\Html;
-use yii\web\View;
 
 use function base64_encode;
 use function file_exists;
 use function file_get_contents;
-use function is_string;
 use function preg_match;
 use function rawurlencode;
 use function strlen;
@@ -49,9 +47,7 @@ final class FlagIcon extends Widget
             }
         }
 
-        if (($view = $this->view) instanceof View) {
-            FlagIconsAsset::register($view);
-        }
+        FlagIconsAsset::register($this->view);
 
         return Html::tag(
             'span',
@@ -83,16 +79,13 @@ final class FlagIcon extends Widget
         $svgPath = Yii::getAlias("@vendor/lipis/flag-icons/flags/4x3/{$cc}.svg");
         if (
             !$svgPath ||
-            !is_string($svgPath) ||
             !@file_exists($svgPath) ||
             !($dataUri = $this->createDataUri($svgPath))
         ) {
             return null;
         }
 
-        if (($view = $this->view) instanceof View) {
-            InlineFlagIconsAsset::register($view);
-        }
+        InlineFlagIconsAsset::register($this->view);
 
         return Html::img($dataUri, [
             'alt' => Unicode::asciiToRegionalIndicator($cc),

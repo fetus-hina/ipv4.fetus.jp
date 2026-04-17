@@ -21,13 +21,11 @@ final class Hatebu extends Widget
 {
     public function run(): string
     {
-        if ($this->view instanceof View) {
-            $this->view->registerJsFile('https://b.st-hatena.com/js/bookmark_button.js', [
-                'async' => true,
-                'charset' => 'UTF-8',
-                'position' => View::POS_END,
-            ]);
-        }
+        $this->view->registerJsFile('https://b.st-hatena.com/js/bookmark_button.js', [
+            'async' => true,
+            'charset' => 'UTF-8',
+            'position' => View::POS_END,
+        ]);
 
         return Html::tag(
             'span',

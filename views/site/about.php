@@ -57,11 +57,12 @@ ApplicationLanguage::registerLink(Yii::$app, ['site/about']);
             <?= Yii::t('app/about', 'No responsibility is assumed for any problems that may arise, whether they are caused by Regional Internet Registry, our website, you, or any other communication channels.') . "\n" ?>
             <?= Yii::t('app/about', 'You should not use the information on this website if you need to guarantee its accuracy.') . "\n" ?>
           </p>
-<?php if (Yii::$app->params['repository']) { ?>
+<?php $repository = Yii::$app->params['repository'] ?? null ?>
+<?php if (is_string($repository) && $repository !== '') { ?>
           <p>
             <?= Html::a(
               Yii::t('app/about', 'If you find any problems, please contact us here.'),
-              Yii::$app->params['repository'],
+              $repository,
               [
                 'target' => '_blank',
                 'rel' => 'external noopener',
