@@ -16,19 +16,19 @@
   "devDependencies": {
     "@babel/cli": "^7.28.6",
     "@babel/core": "^7.29.0",
-    "@babel/preset-env": "^7.29.2",
+    "@babel/preset-env": "^7.29.3",
     "autoprefixer": "^10.5.0",
-    "cssnano": "^7.1.5",
-    "postcss": "^8.5.10",
+    "cssnano": "^7.1.7",
+    "postcss": "^8.5.13",
     "postcss-cli": "^11.0.1",
     "sass": "^1.99.0",
     "semistandard": "^17.0.0",
     "snazzy": "^9.0.0",
-    "stylelint": "^17.8.0",
+    "stylelint": "^17.9.1",
     "stylelint-config-sass-guidelines": "^13.0.0",
-    "terser": "^5.46.1",
+    "terser": "^5.46.2",
     "ttf2woff2": "^8.0.1",
-    "updates": "^17.15.5"
+    "updates": "^17.16.7"
   },
   "overrides": {
     "license-checker-rseidelsohn": {
