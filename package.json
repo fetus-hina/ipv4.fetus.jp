@@ -26,7 +26,7 @@
     "snazzy": "^9.0.0",
     "stylelint": "^17.11.0",
     "stylelint-config-sass-guidelines": "^13.0.0",
-    "terser": "^5.46.2",
+    "terser": "^5.47.1",
     "ttf2woff2": "^8.0.1",
     "updates": "^17.16.9"
   },
