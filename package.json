@@ -2,7 +2,7 @@
   "name": "ipv4.fetus.jp",
   "description": "",
   "dependencies": {
-    "@jp3cki/fetus.css": "^5.3.9",
+    "@jp3cki/fetus.css": "^5.3.10",
     "bootstrap": "^5.3.8",
     "chart.js": "^4.5.1",
     "inputmask": "^5.0.9",
