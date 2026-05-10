@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d0c0e990f541a45a1c2dcf17ce621f92",
+    "content-hash": "c11cf35c254766c8682fdd23e51aeb24",
     "packages": [
         {
             "name": "cebe/markdown",
@@ -345,22 +345,22 @@
         },
         {
             "name": "statink/yii2-sortable-table",
-            "version": "v1.0.2",
+            "version": "v1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/statink/yii2-sortable-table.git",
-                "reference": "f36fa067477cbe7015846be583d8723698fce887"
+                "reference": "69193170275cc4f9979fae4e5dc8d0ad05680c26"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/statink/yii2-sortable-table/zipball/f36fa067477cbe7015846be583d8723698fce887",
-                "reference": "f36fa067477cbe7015846be583d8723698fce887",
+                "url": "https://api.github.com/repos/statink/yii2-sortable-table/zipball/69193170275cc4f9979fae4e5dc8d0ad05680c26",
+                "reference": "69193170275cc4f9979fae4e5dc8d0ad05680c26",
                 "shasum": ""
             },
             "require": {
                 "npm-asset/stupid-table-plugin": "^1.1.3",
                 "php": ">= 7.1.0",
-                "yiisoft/yii2": "~2.0.15"
+                "yiisoft/yii2": "2.0.*"
             },
             "type": "yii2-extension",
             "autoload": {
@@ -379,10 +379,10 @@
             ],
             "description": "sortable-table asset bundle for stat.ink",
             "support": {
-                "source": "https://github.com/statink/yii2-sortable-table/tree/v1.0.2",
+                "source": "https://github.com/statink/yii2-sortable-table/tree/v1.0.3",
                 "issues": "https://github.com/statink/yii2-sortable-table/issues"
             },
-            "time": "2021-05-25T05:02:58+00:00"
+            "time": "2026-05-09T23:32:18+00:00"
         },
         {
             "name": "twbs/bootstrap",
