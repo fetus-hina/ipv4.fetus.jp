@@ -27,7 +27,7 @@
         "cweagans/composer-patches": "^1.7.3",
         "lipis/flag-icons": "^7.5.0",
         "matomo/device-detector": "^6.5.0",
-        "statink/yii2-sortable-table": "^1.0.2",
+        "statink/yii2-sortable-table": "^1.0.3",
         "twbs/bootstrap-icons": "^1.13.1",
         "yiisoft/yii2": "^2.0.55",
         "yiisoft/yii2-bootstrap5": "^2.0.51",
