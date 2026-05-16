@@ -40,7 +40,7 @@
         "codeception/module-yii2": "^1.1.12 || ^2.0.5",
         "codeception/specify": "^2.0.0",
         "codeception/verify": "^3.4.0",
-        "ergebnis/composer-normalize": "^2.51.0",
+        "ergebnis/composer-normalize": "^2.52.0",
         "erickskrauch/phpstan-yii2": "dev-master",
         "jp3cki/coding-standard": "^2.0.0",
         "squizlabs/php_codesniffer": "^4.0.1",

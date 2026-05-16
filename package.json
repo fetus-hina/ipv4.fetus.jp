@@ -24,11 +24,11 @@
     "sass": "^1.99.0",
     "semistandard": "^17.0.0",
     "snazzy": "^9.0.0",
-    "stylelint": "^17.11.0",
+    "stylelint": "^17.11.1",
     "stylelint-config-sass-guidelines": "^13.0.0",
     "terser": "^5.47.1",
     "ttf2woff2": "^8.0.1",
-    "updates": "^17.16.11"
+    "updates": "^17.16.12"
   },
   "overrides": {
     "license-checker-rseidelsohn": {
