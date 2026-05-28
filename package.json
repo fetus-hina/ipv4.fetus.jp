@@ -28,7 +28,7 @@
     "stylelint-config-sass-guidelines": "^13.0.0",
     "terser": "^5.48.0",
     "ttf2woff2": "^8.0.1",
-    "updates": "^17.17.2"
+    "updates": "^17.17.3"
   },
   "overrides": {
     "license-checker-rseidelsohn": {
