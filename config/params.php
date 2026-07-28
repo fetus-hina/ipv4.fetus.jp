@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (C) 2021-2025 AIZAWA Hina
+ * @copyright Copyright (C) 2021-2026 AIZAWA Hina
  * @license https://github.com/fetus-hina/ipv4.fetus.jp/blob/master/LICENSE MIT
  * @author AIZAWA Hina <hina@fetus.jp>
  */
@@ -21,7 +21,7 @@ return (function (): array {
     );
 
     return [
-        'copyrightYear' => '2014-2025',
+        'copyrightYear' => '2014-2026',
         'copyrightHolder' => 'AIZAWA Hina',
 
         'authorWebsite' => 'https://fetus.jp/',

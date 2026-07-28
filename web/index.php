@@ -1,7 +1,7 @@
 <?php //phpcs:disable PSR1.Files.SideEffects.FoundWithSymbols
 
 /**
- * @copyright Copyright (C) 2021-2025 AIZAWA Hina
+ * @copyright Copyright (C) 2021-2026 AIZAWA Hina
  * @license https://github.com/fetus-hina/ipv4.fetus.jp/blob/master/LICENSE MIT
  * @author AIZAWA Hina <hina@fetus.jp>
  */
