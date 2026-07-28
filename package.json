@@ -2,7 +2,7 @@
   "name": "ipv4.fetus.jp",
   "description": "",
   "dependencies": {
-    "@jp3cki/fetus.css": "^5.3.10",
+    "@jp3cki/fetus.css": "^5.3.11",
     "bootstrap": "^5.3.8",
     "chart.js": "^4.5.1",
     "inputmask": "^5.0.9",
@@ -17,18 +17,18 @@
     "@babel/cli": "^7.29.7",
     "@babel/core": "^7.29.7",
     "@babel/preset-env": "^7.29.7",
-    "autoprefixer": "^10.5.0",
-    "cssnano": "^8.0.1",
-    "postcss": "^8.5.15",
+    "autoprefixer": "^10.5.4",
+    "cssnano": "^8.0.2",
+    "postcss": "^8.5.24",
     "postcss-cli": "^11.0.1",
-    "sass": "^1.100.0",
+    "sass": "^1.102.0",
     "semistandard": "^17.0.0",
     "snazzy": "^9.0.0",
-    "stylelint": "^17.12.0",
+    "stylelint": "^17.14.1",
     "stylelint-config-sass-guidelines": "^13.0.0",
-    "terser": "^5.48.0",
+    "terser": "^5.49.0",
     "ttf2woff2": "^8.0.1",
-    "updates": "^17.17.3"
+    "updates": "^17.19.2"
   },
   "overrides": {
     "license-checker-rseidelsohn": {
