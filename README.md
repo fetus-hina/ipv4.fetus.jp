@@ -26,12 +26,12 @@ https://github.com/fetus-hina/ipv4.fetus.jp-exports
 
 ## Requirements
 
-- Linux (It might work if a Unix-like command line interface is provided)
+- Linux（Unix系のコマンドラインインターフェースが提供されていれば動作するかもしれません）
 - PHP (64bit) ≧ 8.4
   - PHP-FPM
-- Node.js (LTS or latest)
+- Node.js（LTSまたは最新版）
 - PostgreSQL
-- A web server as you like (Apache, Nginx, etc.)
+- お好きなウェブサーバ（Apache、Nginxなど）
 
 
 ## インストール（サーバ側）
