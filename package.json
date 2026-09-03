@@ -18,8 +18,8 @@
     "@babel/core": "^7.29.7",
     "@babel/preset-env": "^7.29.7",
     "autoprefixer": "^10.5.4",
-    "cssnano": "^8.0.10",
-    "postcss": "^8.5.26",
+    "cssnano": "^9.0.2",
+    "postcss": "^8.5.28",
     "postcss-cli": "^11.0.1",
     "sass": "^1.103.1",
     "semistandard": "^17.0.0",
@@ -28,7 +28,7 @@
     "stylelint-config-sass-guidelines": "^13.0.0",
     "terser": "^5.51.2",
     "ttf2woff2": "^8.0.1",
-    "updates": "^17.22.2"
+    "updates": "^18.1.0"
   },
   "overrides": {
     "license-checker-rseidelsohn": {

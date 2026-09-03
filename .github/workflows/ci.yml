@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       -
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       -
         name: 'Set up PHP ${{ matrix.env.php }}'
         uses: shivammathur/setup-php@v2
@@ -38,7 +38,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       -
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       -
         name: 'Set up PHP ${{ env.SYSTEM_PHP_VERSION }}'
         uses: shivammathur/setup-php@v2
@@ -49,7 +49,7 @@ jobs:
         run: |
           ln -s "$(which composer)" composer.phar
       -
-        uses: actions/cache@v5
+        uses: actions/cache@v6
         with:
           path: |
             ~/.cache/composer/files
@@ -65,9 +65,9 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       -
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       -
-        uses: actions/cache@v5
+        uses: actions/cache@v6
         with:
           path: |
             ~/.npm
@@ -84,19 +84,20 @@ jobs:
     needs: makeComposerCache
     steps:
       -
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       -
         name: 'Set up PHP ${{ env.SYSTEM_PHP_VERSION }}'
         uses: shivammathur/setup-php@v2
         with:
           php-version: '${{ env.SYSTEM_PHP_VERSION }}'
       -
-        uses: actions/cache@v5
+        uses: actions/cache/restore@v6
         with:
           path: |
             ~/.cache/composer/files
             vendor
           key: "${{ runner.os }}-composer-${{ hashFiles('composer.lock') }}"
+          fail-on-cache-miss: true
       -
         name: 'Run checker'
         run: composer normalize --dry-run
@@ -106,16 +107,15 @@ jobs:
     needs: makeComposerCache
     steps:
       -
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       -
-        uses: actions/cache@v5
+        uses: actions/cache/restore@v6
         with:
           path: |
             ~/.cache/composer/files
             vendor
           key: "${{ runner.os }}-composer-${{ hashFiles('composer.lock') }}"
-          restore-keys: |
-            ${{ runner.os }}-composer-
+          fail-on-cache-miss: true
       -
         name: 'Set up PHP ${{ env.SYSTEM_PHP_VERSION }}'
         uses: shivammathur/setup-php@v2
@@ -192,21 +192,23 @@ jobs:
         run: |
           sudo apt install -y gettext
       -
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       -
-        uses: actions/cache@v5
+        uses: actions/cache/restore@v6
         with:
           path: |
             ~/.cache/composer/files
             vendor
           key: "${{ runner.os }}-composer-${{ hashFiles('composer.lock') }}"
+          fail-on-cache-miss: true
       -
-        uses: actions/cache@v5
+        uses: actions/cache/restore@v6
         with:
           path: |
             ~/.npm
             node_modules
           key: "${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}"
+          fail-on-cache-miss: true
       -
         name: 'Set up ${{ matrix.env.php.label }}'
         uses: shivammathur/setup-php@v2
@@ -230,14 +232,15 @@ jobs:
       - makeNpmCache
     steps:
       -
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       -
-        uses: actions/cache@v5
+        uses: actions/cache/restore@v6
         with:
           path: |
             ~/.npm
             node_modules
           key: "${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}"
+          fail-on-cache-miss: true
       -
         name: 'Run semistandard'
         run: |
@@ -249,14 +252,15 @@ jobs:
       - makeNpmCache
     steps:
       -
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       -
-        uses: actions/cache@v5
+        uses: actions/cache/restore@v6
         with:
           path: |
             ~/.npm
             node_modules
           key: "${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}"
+          fail-on-cache-miss: true
       -
         name: 'Run stylelint'
         run: |
