@@ -14,9 +14,6 @@
     "yii2-pjax": "^2.0.8"
   },
   "devDependencies": {
-    "@babel/cli": "^8.0.6",
-    "@babel/core": "^8.0.6",
-    "@babel/preset-env": "^8.0.6",
     "autoprefixer": "^10.6.1",
     "cssnano": "^9.3.2",
     "postcss": "^8.5.29",

@@ -62,7 +62,7 @@ make check-style-ci       # podman で actionlint
 
 ### フロントエンドアセット
 
-ソースは `resources/js/*.es`（Babel→terser で `*.min.js`）と `resources/css/*.scss`（sass→autoprefixer→cssnano で `*.min.css`）。ビルド成果物はコミットされず `make` で生成され、`assets/*Asset.php` の AssetBundle が `sourcePath = '@app/resources'` から `*.min.*` を参照する。`.es`/`.scss` を編集したら `make` が必要。Bootstrap/jQuery 等の Yii 標準バンドルは `config/components/web/asset-manager/bundles/` で npm 版に差し替えている（`@bower`/`@npm` はどちらも `node_modules` を指す）。
+ソースは `resources/js/*.es`（トランスパイルせず terser で `*.min.js`。構文は `.browserslistrc` の対象ブラウザがそのまま解釈できる範囲で書くこと）と `resources/css/*.scss`（sass→autoprefixer→cssnano で `*.min.css`）。ビルド成果物はコミットされず `make` で生成され、`assets/*Asset.php` の AssetBundle が `sourcePath = '@app/resources'` から `*.min.*` を参照する。`.es`/`.scss` を編集したら `make` が必要。Bootstrap/jQuery 等の Yii 標準バンドルは `config/components/web/asset-manager/bundles/` で npm 版に差し替えている（`@bower`/`@npm` はどちらも `node_modules` を指す）。
 
 ### i18n
 

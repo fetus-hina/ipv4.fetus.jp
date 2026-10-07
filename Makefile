@@ -119,8 +119,8 @@ config/params/git-revision.php:
 	npx terser --compress --mangle -o $@ $<
 
 .PRECIOUS: %.js
-%.js: %.es node_modules
-	npx babel $< -o $@
+%.js: %.es
+	cp $< $@
 
 %.min.css: %.css node_modules
 	npx postcss $< --no-map --use cssnano -o $@
