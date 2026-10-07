@@ -255,7 +255,7 @@ jobs:
       -
         name: 'Run semistandard'
         run: |
-          npx semistandard 'resources/**/*.es' | npx snazzy
+          npx semistandard 'resources/**/*.js' | npx snazzy
   cssStyleCheck:
     name: 'CSS Coding Style'
     runs-on: ubuntu-24.04

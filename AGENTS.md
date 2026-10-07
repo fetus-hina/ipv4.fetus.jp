@@ -25,7 +25,7 @@ make check-style          # 以下すべて
 make check-style-phpcs    # vendor/bin/phpcs（JP3CKI 規約、views/tests/gii は対象外）
 make check-style-phpstan  # vendor/bin/phpstan --memory-limit=1G（level max、tests は対象外）
 make check-style-composer # composer normalize --dry-run
-make check-style-js       # semistandard（resources/**/*.es）
+make check-style-js       # semistandard（resources/**/*.js）
 make check-style-css      # stylelint（resources/**/*.scss）
 make check-style-ci       # podman で actionlint
 ```
@@ -62,7 +62,7 @@ make check-style-ci       # podman で actionlint
 
 ### フロントエンドアセット
 
-ソースは `resources/js/*.es`（トランスパイルせず terser で `*.min.js`。構文は `.browserslistrc` の対象ブラウザがそのまま解釈できる範囲で書くこと）と `resources/css/*.scss`（sass→autoprefixer→cssnano で `*.min.css`）。ビルド成果物はコミットされず `make` で生成され、`assets/*Asset.php` の AssetBundle が `sourcePath = '@app/resources'` から `*.min.*` を参照する。`.es`/`.scss` を編集したら `make` が必要。Bootstrap/jQuery 等の Yii 標準バンドルは `config/components/web/asset-manager/bundles/` で npm 版に差し替えている（`@bower`/`@npm` はどちらも `node_modules` を指す）。
+ソースは `resources/js/*.js`（トランスパイルせず terser で `*.min.js`。構文は `.browserslistrc` の対象ブラウザがそのまま解釈できる範囲で書くこと。`.gitignore` は `*.js` を無視しつつ `resources/js/*.js` だけ例外にしている）と `resources/css/*.scss`（sass→autoprefixer→cssnano で `*.min.css`）。ビルド成果物はコミットされず `make` で生成され、`assets/*Asset.php` の AssetBundle が `sourcePath = '@app/resources'` から `*.min.*` を参照する。`.js`/`.scss` を編集したら `make` が必要。Bootstrap/jQuery 等の Yii 標準バンドルは `config/components/web/asset-manager/bundles/` で npm 版に差し替えている（`@bower`/`@npm` はどちらも `node_modules` を指す）。
 
 ### i18n
 

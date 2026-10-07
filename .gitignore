@@ -21,6 +21,8 @@
 /resources/css/*.gz
 /resources/css/_bootstrap-icons.scss
 /resources/js/*.gz
+!/resources/js/*.js
+/resources/js/*.min.js
 /tests/_output/*
 /tests/_support/_generated
 /vendor
