@@ -28,7 +28,7 @@
         "lipis/flag-icons": "^7.5.0",
         "matomo/device-detector": "^6.5.2",
         "statink/yii2-sortable-table": "^1.0.3",
-        "twbs/bootstrap-icons": "^1.13.1",
+        "twbs/bootstrap-icons": "^1.13.2",
         "yiisoft/yii2": "^2.0.55",
         "yiisoft/yii2-bootstrap5": "^2.0.51",
         "yiisoft/yii2-httpclient": "^2.0.17"
