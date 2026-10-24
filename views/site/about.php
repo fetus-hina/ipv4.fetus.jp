@@ -57,19 +57,16 @@ ApplicationLanguage::registerLink(Yii::$app, ['site/about']);
             <?= Yii::t('app/about', 'No responsibility is assumed for any problems that may arise, whether they are caused by Regional Internet Registry, our website, you, or any other communication channels.') . "\n" ?>
             <?= Yii::t('app/about', 'You should not use the information on this website if you need to guarantee its accuracy.') . "\n" ?>
           </p>
-<?php $repository = Yii::$app->params['repository'] ?? null ?>
-<?php if (is_string($repository) && $repository !== '') { ?>
           <p>
             <?= Html::a(
               Yii::t('app/about', 'If you find any problems, please contact us here.'),
-              $repository,
+              Yii::$app->params['repository'],
               [
                 'target' => '_blank',
                 'rel' => 'external noopener',
               ]
             ) . "\n" ?>
           </p>
-<?php } ?>
           <p>
             <?= Yii::t('app/about', 'The definition of "what is country" and "name of country" are highly political issues.') . "\n" ?>
             <?= Yii::t('app/about', 'We do not have any political agenda.') . "\n" ?>

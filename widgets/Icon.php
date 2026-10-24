@@ -97,9 +97,7 @@ final class Icon
         // Yii::$app may be null when icons are emitted from bootstrap or
         // tooling that runs before the application is initialized
         // (e.g. `codecept build` during composer post-install).
-        // @phpstan-ignore nullCoalesce.expr
-        $view = Yii::$app?->view ?? null;
-        // @phpstan-ignore instanceof.alwaysTrue
+        $view = Yii::$app->view ?? null;
         if ($view instanceof View) {
             $view->registerAssetBundle($fqcn);
             $registered[$fqcn] = true;

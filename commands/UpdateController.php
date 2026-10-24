@@ -153,10 +153,7 @@ class UpdateController extends Controller
             return ExitCode::UNSPECIFIED_ERROR;
         }
 
-        if (
-            !$skipUpdate &&
-            $updateStartAt !== null
-        ) {
+        if (!$skipUpdate) {
             $this->saveTimeRecord($updateStartAt, $updateFinishAt);
         }
 
