@@ -1,6 +1,5 @@
 includes:
-  - vendor/erickskrauch/phpstan-yii2/extension.neon
-  - vendor/erickskrauch/phpstan-yii2/rules.neon
+  - vendor/mspirkov/yii2-phpstan/extension.neon
 
 parameters:
   level: max
@@ -17,6 +16,14 @@ parameters:
       reportUnmatched: false
       path: commands/PhpController.php
 
+    # TODO: remove after updating Yii2 to 2.0.56.
+    -
+      message: '#^Widget option "scrollTo" for yii\\widgets\\Pjax must be bool\|int, yii\\web\\JsExpression given\.$#'
+      identifier: mspirkovYii2.widgetPropertiesValidation
+    -
+      message: '#^Object option "pagination" for yii\\data\\ActiveDataProvider must be yii\\data\\Pagination\|false, array<string, string> given\.$#'
+      identifier: mspirkovYii2.yiiCreateObjectValidation
+
   paths:
     - ./
 
@@ -28,17 +35,51 @@ parameters:
     - tests
     - vendor
 
-  scanFiles:
+  tmpDir: runtime/phpstan
+
+  bootstrapFiles:
     - vendor/yiisoft/yii2/Yii.php
 
-  yii2:
-    config_path: %rootDir%/../../../config/web.php
-
-  dynamicConstantNames:
-    - YII_DEBUG
-    - YII_ENV
-    - YII_ENV_DEV
-    - YII_ENV_PROD
-    - YII_ENV_TEST
-
-  tmpDir: runtime/phpstan
+  mspirkovYii2:
+    enableAllRules: false
+    enableValidationRules: true
+    aliases:
+      '@app': .
+    yiiAppTypes:
+      -
+        paths:
+          - widgets/Icon.php
+        type: yii\web\Application
+        nullable: true
+      -
+        paths:
+          - actions
+          - assets
+          - controllers
+          - views
+          - widgets
+          - helpers/ApplicationLanguage.php
+          - formatters/CompressiveHtmlResponseFormatter.php
+        type: yii\web\Application
+        nullable: false
+      -
+        paths:
+          - commands
+        type: yii\console\Application
+        nullable: false
+      -
+        paths:
+          - .
+        type: yii\console\Application|yii\web\Application
+        nullable: false
+    applicationConfigs:
+      -
+        paths:
+          - .
+        files:
+          - config/web.php
+      -
+        paths:
+          - commands
+        files:
+          - config/console.php

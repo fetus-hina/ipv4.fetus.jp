@@ -20,6 +20,7 @@ use yii\base\Application as BaseApplication;
 use yii\base\BootstrapInterface;
 use yii\helpers\Url;
 use yii\web\Application;
+use yii\web\View;
 
 use function array_keys;
 use function array_map;
@@ -110,6 +111,10 @@ final class ApplicationLanguage implements BootstrapInterface
 
         $view = $app->view;
         unset($url[self::URL_PARAM]);
+
+        if (!$view instanceof View) {
+            return;
+        }
 
         $view->registerLinkTag([
             'href' => Url::to($url, true),
