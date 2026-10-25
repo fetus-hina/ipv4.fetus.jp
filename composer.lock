@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d68247ca8941b4577f71c02996af4242",
+    "content-hash": "5a26d42256f82707b020d5cfb6390a0a",
     "packages": [
         {
             "name": "cebe/markdown",
@@ -2146,69 +2146,6 @@
             "time": "2026-09-24T19:42:52+00:00"
         },
         {
-            "name": "erickskrauch/phpstan-yii2",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/erickskrauch/phpstan-yii2.git",
-                "reference": "be6b548ffe642f1557b15eb01fd5067df8e2f165"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/erickskrauch/phpstan-yii2/zipball/be6b548ffe642f1557b15eb01fd5067df8e2f165",
-                "reference": "be6b548ffe642f1557b15eb01fd5067df8e2f165",
-                "shasum": ""
-            },
-            "require": {
-                "nikic/php-parser": "^4 || ^5",
-                "php": "^7.4 || ^8.0",
-                "phpstan/phpstan": "^2",
-                "yiisoft/yii2": "~2.0.36"
-            },
-            "require-dev": {
-                "ely/php-code-style": "^1",
-                "ergebnis/composer-normalize": "^2.28",
-                "friendsofphp/php-cs-fixer": "^3.13",
-                "phpstan/extension-installer": "^1.1",
-                "phpstan/phpstan-phpunit": "^2",
-                "phpunit/phpunit": "^9"
-            },
-            "default-branch": true,
-            "type": "library",
-            "extra": {
-                "phpstan": {
-                    "includes": [
-                        "extension.neon",
-                        "rules.neon"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "ErickSkrauch\\PHPStan\\Yii2\\": "src/"
-                },
-                "exclude-from-classmap": [
-                    "src/Stubs/*"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "ErickSkrauch",
-                    "email": "erickskrauch@ely.by"
-                }
-            ],
-            "description": "Yii2 extension for PHPStan",
-            "support": {
-                "issues": "https://github.com/erickskrauch/phpstan-yii2/issues",
-                "source": "https://github.com/erickskrauch/phpstan-yii2/tree/master"
-            },
-            "time": "2025-04-29T08:20:43+00:00"
-        },
-        {
             "name": "guzzlehttp/psr7",
             "version": "2.13.1",
             "source": {
@@ -2620,6 +2557,83 @@
                 "source": "https://github.com/Masterminds/html5-php/tree/2.11.0"
             },
             "time": "2026-08-18T06:18:41+00:00"
+        },
+        {
+            "name": "mspirkov/yii2-phpstan",
+            "version": "0.16.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mspirkov/yii2-phpstan.git",
+                "reference": "83bd600c2b7745b63dec1e292dc6205dcfa2e044"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mspirkov/yii2-phpstan/zipball/83bd600c2b7745b63dec1e292dc6205dcfa2e044",
+                "reference": "83bd600c2b7745b63dec1e292dc6205dcfa2e044",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.4",
+                "phpstan/phpstan": "^2.2",
+                "yiisoft/yii2": "^2.0.53"
+            },
+            "replace": {
+                "mspirkov/yii2-phpstan-rules": "self.version"
+            },
+            "require-dev": {
+                "ergebnis/phpstan-rules": "^2.13",
+                "friendsofphp/php-cs-fixer": "^3.89",
+                "kubawerlos/php-cs-fixer-custom-fixers": "^3.37",
+                "mspirkov/yii2-db": "^0.3",
+                "phpstan/phpstan-phpunit": "^2.0",
+                "phpstan/phpstan-strict-rules": "^2.0",
+                "phpunit/phpunit": "^9.6",
+                "rector/rector": "^2.2",
+                "shipmonk/phpstan-rules": "^4.2",
+                "spaze/phpstan-disallowed-calls": "^4.7",
+                "yiisoft/yii2-mongodb": "^3.0",
+                "yiisoft/yii2-redis": "^2.1"
+            },
+            "suggest": {
+                "mspirkov/yii2-rector": "for automatic refactoring of Yii2 projects"
+            },
+            "type": "phpstan-extension",
+            "extra": {
+                "phpstan": {
+                    "includes": [
+                        "extension.neon"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "MSpirkov\\Yii2\\PHPStan\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Maksim Sprikov",
+                    "email": "spirkov.2001@mail.ru"
+                }
+            ],
+            "description": "PHPStan rules and type extensions for projects using the Yii2 framework",
+            "keywords": [
+                "PHPStan",
+                "code analyse",
+                "code analysis",
+                "static analysis",
+                "yii",
+                "yii2"
+            ],
+            "support": {
+                "issues": "https://github.com/mspirkov/yii2-phpstan/issues",
+                "source": "https://github.com/mspirkov/yii2-phpstan/tree/0.16.1"
+            },
+            "time": "2026-10-25T09:37:09+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -6671,9 +6685,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "erickskrauch/phpstan-yii2": 20
-    },
+    "stability-flags": {},
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
