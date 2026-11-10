@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2d6d215a155eb7cb6eec34563a723875",
+    "content-hash": "df26d1b96189a092bb4e3cb2271756ca",
     "packages": [
         {
             "name": "cebe/markdown",
@@ -388,7 +388,8 @@
                 "source": "https://github.com/statink/yii2-sortable-table/tree/v1.0.3",
                 "issues": "https://github.com/statink/yii2-sortable-table/issues"
             },
-            "time": "2026-05-09T23:32:18+00:00"
+            "time": "2026-05-09T23:32:18+00:00",
+            "published-time": "2026-11-10T15:00:55+00:00"
         },
         {
             "name": "twbs/bootstrap",
@@ -605,29 +606,32 @@
         },
         {
             "name": "yiisoft/yii2-bootstrap5",
-            "version": "2.0.51",
+            "version": "2.0.52",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-bootstrap5.git",
-                "reference": "23675f617ee3c86cf3e65a31a6afbc75e13028cb"
+                "reference": "e3619e85659ea5b00211075997670cdce03b7ecd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-bootstrap5/zipball/23675f617ee3c86cf3e65a31a6afbc75e13028cb",
-                "reference": "23675f617ee3c86cf3e65a31a6afbc75e13028cb",
+                "url": "https://api.github.com/repos/yiisoft/yii2-bootstrap5/zipball/e3619e85659ea5b00211075997670cdce03b7ecd",
+                "reference": "e3619e85659ea5b00211075997670cdce03b7ecd",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "php": ">=7.3",
+                "php": ">=7.4",
                 "twbs/bootstrap": "^5.2.3",
-                "yiisoft/yii2": "^2.0.42"
+                "yiisoft/yii2": "^2.0.54"
             },
             "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.95",
+                "mspirkov/yii2-rector": "^0.2",
+                "phpstan/phpstan": "^2.1",
+                "phpstan/phpstan-phpunit": "^2.0",
                 "phpunit/phpunit": "^9.6",
-                "symplify/easy-coding-standard": "^12.1",
-                "twbs/bootstrap-icons": "^1.7.2",
-                "yiisoft/yii2-coding-standards": "~2.0"
+                "rector/rector": "^2.6",
+                "twbs/bootstrap-icons": "^1.7.2"
             },
             "suggest": {
                 "twbs/bootstrap-icons": "Add this package to the `require` section of your `composer.json` if you'd like to use the bootstrap icon asset."
@@ -683,8 +687,8 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-12-03T13:29:11+00:00",
-            "published-time": "2025-12-03T13:30:38+00:00"
+            "time": "2026-11-07T08:25:45+00:00",
+            "published-time": "2026-11-07T08:25:59+00:00"
         },
         {
             "name": "yiisoft/yii2-composer",
