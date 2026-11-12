@@ -12,11 +12,11 @@ namespace app\widgets;
 
 use Yii;
 use app\assets\AdSenseAsset;
+use app\helpers\AdSenseConfig;
 use yii\base\Widget;
 use yii\helpers\Html;
 
 use function implode;
-use function is_array;
 use function is_string;
 use function preg_match;
 use function vsprintf;
@@ -70,29 +70,12 @@ final class AdSenseWidget extends Widget
 
     public static function getSlotId(string $slot): ?string
     {
-        $adsense = Yii::$app->params['adsense'] ?? null;
-        if (!is_array($adsense)) {
-            return null;
-        }
-
-        $slots = $adsense['slots'] ?? null;
-        if (!is_array($slots)) {
-            return null;
-        }
-
-        $value = $slots[$slot] ?? null;
-        return is_string($value) ? $value : null;
+        return AdSenseConfig::getSlotId($slot);
     }
 
     private static function getClient(): ?string
     {
-        $adsense = Yii::$app->params['adsense'] ?? null;
-        if (!is_array($adsense)) {
-            return null;
-        }
-
-        $client = $adsense['client'] ?? null;
-        return is_string($client) ? $client : null;
+        return AdSenseConfig::getClient();
     }
 
     /**

@@ -31,7 +31,6 @@ return (function (): array {
         'repository' => 'https://github.com/fetus-hina/ipv4.fetus.jp',
         'report' => 'https://github.com/fetus-hina/ipv4.fetus.jp/issues',
 
-        'adsense' => $load('adsense.php'),
         'dbUpdateTimestamp' => $load('database-update-timestamp.php'),
         'gitRevision' => $load('git-revision.php'),
     ];

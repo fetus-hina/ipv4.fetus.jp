@@ -10,11 +10,10 @@ declare(strict_types=1);
 
 namespace app\assets\adsense;
 
-use Yii;
+use app\helpers\AdSenseConfig;
 use yii\web\AssetBundle;
 
 use function http_build_query;
-use function is_array;
 use function vsprintf;
 
 use const PHP_QUERY_RFC3986;
@@ -39,13 +38,13 @@ class JSLoaderAsset extends AssetBundle
     {
         parent::init();
 
-        $params = Yii::$app->params['adsense'];
-        if (is_array($params)) {
+        $client = AdSenseConfig::getClient();
+        if ($client !== null) {
             $this->js[] = vsprintf('%s?%s', [
                 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js',
                 http_build_query(
                     [
-                        'client' => $params['client'],
+                        'client' => $client,
                     ],
                     '',
                     '&',
