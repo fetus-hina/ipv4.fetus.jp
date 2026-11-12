@@ -3,7 +3,7 @@
   "description": "",
   "dependencies": {
     "@jp3cki/fetus.css": "^5.3.12",
-    "bootstrap": "^5.3.8",
+    "bootstrap": "^5.3.9",
     "chart.js": "^4.6.1",
     "inputmask": "^5.0.10",
     "jquery": "^3.7.1",
@@ -18,7 +18,7 @@
     "cssnano": "^9.9.0",
     "postcss": "^8.5.32",
     "postcss-cli": "^12.0.0",
-    "sass": "^1.108.1",
+    "sass": "^1.108.2",
     "semistandard": "^17.0.0",
     "snazzy": "^9.0.0",
     "stylelint": "^17.16.0",
