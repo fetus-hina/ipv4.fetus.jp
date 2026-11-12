@@ -146,16 +146,16 @@ jobs:
               label: 'PHP 8.4'
               version: '8.4'
             pgsql:
-              label: 'PgSQL 13' # EL 9 default
-              version: 13-bookworm
+              label: 'PgSQL 12' # Current development
+              version: '12'
             experimental: false
           -
             php:
               label: 'PHP 8.4'
               version: '8.4'
             pgsql:
-              label: 'PgSQL 16' # Current production
-              version: 16-bookworm
+              label: 'PgSQL 18' # Current production
+              version: '18'
             experimental: false
           -
             php:
@@ -163,15 +163,23 @@ jobs:
               version: '8.4'
             pgsql:
               label: 'Latest PgSQL'
-              version: bookworm
+              version: latest
             experimental: false
+          -
+            php:
+              label: 'PHP 8.4'
+              version: '8.4'
+            pgsql:
+              label: 'PgSQL 19rc1'
+              version: '19rc1'
+            experimental: true
           -
             php:
               label: 'PHP 8.5'
               version: '8.5'
             pgsql:
               label: 'Latest PgSQL'
-              version: bookworm
+              version: latest
             experimental: false
           -
             php:
@@ -179,7 +187,7 @@ jobs:
               version: '8.6'
             pgsql:
               label: 'Latest PgSQL'
-              version: bookworm
+              version: latest
             experimental: true
     runs-on: ubuntu-24.04
     needs:
