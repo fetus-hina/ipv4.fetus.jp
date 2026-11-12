@@ -54,7 +54,8 @@ if (
             'query' => $region->getMergedCidrs()
               ->orderBy(['cidr' => SORT_ASC]),
             'sort' => false,
-            'pagination' => new Pagination([
+            'pagination' => Yii::createObject([
+              'class' => Pagination::class,
               'pageParam' => 'cidr-page',
               'pageSizeParam' => 'cidr-per-page',
             ]),

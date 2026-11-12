@@ -86,7 +86,8 @@ if ($isPjax) {
               ->andWhere(['{{%allocation_block}}.[[region_id]]' => $region->id])
               ->orderBy(['cidr' => SORT_ASC]),
             'sort' => false,
-            'pagination' => new Pagination([
+            'pagination' => Yii::createObject([
+              'class' => Pagination::class,
               'pageParam' => 'list-page',
               'pageSizeParam' => 'list-per-page',
             ]),
