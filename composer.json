@@ -25,12 +25,12 @@
         "ext-session": "*",
         "ext-spl": "*",
         "cweagans/composer-patches": "^1.7.3",
-        "lipis/flag-icons": "^7.5.0",
+        "lipis/flag-icons": "^7.6.0",
         "matomo/device-detector": "^6.5.2",
         "statink/yii2-sortable-table": "^1.0.3",
         "twbs/bootstrap-icons": "^1.13.2",
         "yiisoft/yii2": "^2.0.55",
-        "yiisoft/yii2-bootstrap5": "^2.0.51",
+        "yiisoft/yii2-bootstrap5": "^2.0.52",
         "yiisoft/yii2-httpclient": "^2.0.17"
     },
     "require-dev": {
@@ -40,13 +40,13 @@
         "codeception/module-yii2": "^1.1.12 || ^2.0.5",
         "codeception/specify": "^2.0.0",
         "codeception/verify": "^3.4.0",
-        "ergebnis/composer-normalize": "^2.54.0",
+        "ergebnis/composer-normalize": "^2.56.1",
         "jp3cki/coding-standard": "^2.0.0",
+        "mspirkov/yii2-phpstan": "^0.17.0",
         "squizlabs/php_codesniffer": "^4.0.4",
-        "symfony/browser-kit": "^6.4.44 || ^7.0.0 || ^8.0.0",
+        "symfony/browser-kit": "^6.4.50 || ^7.0.0 || ^8.0.0",
         "yiisoft/yii2-debug": "^2.1.28",
-        "yiisoft/yii2-gii": "^2.2.7",
-        "mspirkov/yii2-phpstan": "^0.17"
+        "yiisoft/yii2-gii": "^2.2.7"
     },
     "replace": {
         "bower-asset/bootstrap": "*",
@@ -89,7 +89,7 @@
             "yiisoft/yii2-composer": true
         },
         "platform": {
-            "php": "8.4.26"
+            "php": "8.4.27"
         },
         "process-timeout": 1800
     },
