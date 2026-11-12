@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace app\widgets\ads;
 
+use app\helpers\AdSenseConfig;
 use app\widgets\AdSenseWidget;
 use yii\base\Widget;
 use yii\helpers\Html;
@@ -20,7 +21,7 @@ final class SpRectAd extends Widget
     {
         if (
             AdSenseWidget::isDisabled() ||
-            AdSenseWidget::getSlotId('sp-rect') === null
+            AdSenseConfig::getSlotId('sp-rect') === null
         ) {
             return '';
         }

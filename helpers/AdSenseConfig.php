@@ -52,7 +52,9 @@ final class AdSenseConfig
     {
         if (self::$config === null) {
             self::$config = self::parse(
-                FileHelper::requireIfExists(Yii::getAlias(self::CONFIG_PATH)),
+                FileHelper::requireIfExists(
+                    TypeHelper::shouldBeString(Yii::getAlias(self::CONFIG_PATH)),
+                ),
             ) ?? false;
         }
 
@@ -69,15 +71,17 @@ final class AdSenseConfig
         }
 
         $client = $config['client'] ?? null;
-        $slots = $config['slots'] ?? null;
-        if (!is_string($client) || $client === '' || !is_array($slots)) {
+        if (!is_string($client) || $client === '') {
             return null;
         }
 
+        $slots = $config['slots'] ?? null;
         $validSlots = [];
-        foreach ($slots as $name => $id) {
-            if (is_string($name) && is_string($id) && $id !== '') {
-                $validSlots[$name] = $id;
+        if (is_array($slots)) {
+            foreach ($slots as $name => $id) {
+                if (is_string($name) && is_string($id) && $id !== '') {
+                    $validSlots[$name] = $id;
+                }
             }
         }
 

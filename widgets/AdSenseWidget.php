@@ -38,8 +38,8 @@ final class AdSenseWidget extends Widget
             return '';
         }
 
-        $slotId = self::getSlotId($this->slot);
-        $client = self::getClient();
+        $slotId = AdSenseConfig::getSlotId($this->slot);
+        $client = AdSenseConfig::getClient();
         if ($slotId === null || $client === null) {
             return '';
         }
@@ -66,16 +66,6 @@ final class AdSenseWidget extends Widget
                 'style' => $this->makeStyles($this->size),
             ]);
         }
-    }
-
-    public static function getSlotId(string $slot): ?string
-    {
-        return AdSenseConfig::getSlotId($slot);
-    }
-
-    private static function getClient(): ?string
-    {
-        return AdSenseConfig::getClient();
     }
 
     /**
