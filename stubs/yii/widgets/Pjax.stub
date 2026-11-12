@@ -1,0 +1,29 @@
+<?php
+
+/**
+ * @copyright Copyright (C) 2021-2026 AIZAWA Hina
+ * @license https://github.com/fetus-hina/ipv4.fetus.jp/blob/master/LICENSE MIT
+ * @author AIZAWA Hina <hina@fetus.jp>
+ */
+
+declare(strict_types=1);
+
+namespace yii\widgets;
+
+use yii\web\JsExpression;
+
+/**
+ * Backport of the upstream (yiisoft/yii2 > 2.0.55) type declaration of Pjax::$scrollTo.
+ *
+ * jquery-pjax accepts a callback function for scrollTo, but Yii 2.0.55 documents it as bool|int only.
+ * This stub is harmless after the upstream fix is released, but can be removed then.
+ *
+ * Stub files only override PHPDoc; the native class structure (parent class etc.) comes from the real source.
+ */
+class Pjax
+{
+    /**
+     * @var JsExpression|bool|int
+     */
+    public $scrollTo = false;
+}

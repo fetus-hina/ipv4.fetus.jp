@@ -13,6 +13,7 @@ use app\models\AllocationCidr;
 use app\models\Region;
 use yii\bootstrap5\LinkPager;
 use yii\data\ActiveDataProvider;
+use yii\data\Pagination;
 use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\web\JsExpression;
@@ -74,7 +75,7 @@ if ($isPjax) {
       <div class="table-responsive">
 <?php Pjax::begin([
   'id' => 'pjax-cidr-list',
-  'scrollTo' => new JsExpression('jQuery("#cidr-list").offset().top'),
+  'scrollTo' => new JsExpression('function () { return jQuery("#cidr-list").offset().top; }'),
 ]) ?>
         <?= GridView::widget([
           'dataProvider' => Yii::createObject([
@@ -85,10 +86,10 @@ if ($isPjax) {
               ->andWhere(['{{%allocation_block}}.[[region_id]]' => $region->id])
               ->orderBy(['cidr' => SORT_ASC]),
             'sort' => false,
-            'pagination' => [
+            'pagination' => new Pagination([
               'pageParam' => 'list-page',
               'pageSizeParam' => 'list-per-page',
-            ],
+            ]),
             'key' => function (mixed $model): string {
               $model = TypeHelper::instanceOf($model, AllocationCidr::class);
               return vsprintf('list-%s', [

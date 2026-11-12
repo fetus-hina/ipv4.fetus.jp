@@ -16,13 +16,9 @@ parameters:
       reportUnmatched: false
       path: commands/PhpController.php
 
-    # TODO: remove after updating Yii2 to 2.0.56.
-    -
-      message: '#^Widget option "scrollTo" for yii\\widgets\\Pjax must be bool\|int, yii\\web\\JsExpression given\.$#'
-      identifier: mspirkovYii2.widgetPropertiesValidation
-    -
-      message: '#^Object option "pagination" for yii\\data\\ActiveDataProvider must be yii\\data\\Pagination\|false, array<string, string> given\.$#'
-      identifier: mspirkovYii2.yiiCreateObjectValidation
+  stubFiles:
+    - stubs/yii/web/JsExpression.stub
+    - stubs/yii/widgets/Pjax.stub
 
   paths:
     - ./
