@@ -12,6 +12,7 @@ use app\helpers\TypeHelper;
 use app\models\MergedCidr;
 use app\models\Region;
 use yii\data\ActiveDataProvider;
+use yii\data\Pagination;
 use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\web\JsExpression;
@@ -45,7 +46,7 @@ if (
       <div class="table-responsive">
 <?php Pjax::begin([
   'id' => 'pjax-merged-cidr',
-  'scrollTo' => new JsExpression('jQuery("#merged-cidr").offset().top'),
+  'scrollTo' => new JsExpression('function () { return jQuery("#merged-cidr").offset().top; }'),
 ]) ?>
         <?= GridView::widget([
           'dataProvider' => Yii::createObject([
@@ -53,10 +54,13 @@ if (
             'query' => $region->getMergedCidrs()
               ->orderBy(['cidr' => SORT_ASC]),
             'sort' => false,
-            'pagination' => [
+            // Pass an object, not a config array: Yii 2.0.55 declares the property with the getter
+            // type only (Pagination|false), so PHPStan rejects the array form.
+            'pagination' => Yii::createObject([
+              'class' => Pagination::class,
               'pageParam' => 'cidr-page',
               'pageSizeParam' => 'cidr-per-page',
-            ],
+            ]),
             'key' => function (mixed $model): string {
               $model = TypeHelper::instanceOf($model, MergedCidr::class);
               return vsprintf('cidr-%s', [

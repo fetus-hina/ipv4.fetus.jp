@@ -27,8 +27,6 @@ final class LicenseController extends Controller
      * to a different controller. Leave T unspecified.
      *
      * @return array<string, array{class: class-string<Action>, directory: string, pageUrl: array<int|string, mixed>, title: string}>
-     *
-     * @phpstan-ignore missingType.generics
      */
     public function actions()
     {

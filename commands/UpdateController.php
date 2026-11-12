@@ -37,6 +37,7 @@ use yii\db\Transaction;
 use yii\helpers\FileHelper;
 use yii\httpclient\Client as HttpClient;
 
+use function array_any;
 use function basename;
 use function chdir;
 use function count;
@@ -99,8 +100,8 @@ class UpdateController extends Controller
 
     public function actionIndex(bool $skipUpdate = false): int
     {
-        /** @var int $status */
-        $status = ExitCode::OK;
+        /** @var list<int> $results */
+        $results = [];
 
         /** @var ?float $updateStartAt */
         $updateStartAt = null;
@@ -129,38 +130,37 @@ class UpdateController extends Controller
                     ];
                     foreach ($actions as $label => $action) {
                         Yii::info("Updating {$label}", __METHOD__);
-                        $status = $action();
-                        if ($status !== ExitCode::OK) {
-                            throw new Exception();
+                        if ($action() !== ExitCode::OK) {
+                            throw new Exception("Failed to update {$label}");
                         }
                     }
                 });
             } catch (Throwable $e) {
+                Yii::error($e, __METHOD__);
                 return ExitCode::UNSPECIFIED_ERROR;
             }
 
-            $this->actionMerged();
-            $this->actionStat();
+            $results[] = $this->actionMerged();
+            $results[] = $this->actionStat();
         }
-        $this->actionKrfilter();
-        $this->actionIpv4bycc();
-        $this->actionNginxGeo();
+        $results[] = $this->actionKrfilter();
+        $results[] = $this->actionIpv4bycc();
+        $results[] = $this->actionNginxGeo();
         $updateFinishAt = microtime(true);
 
-        $this->actionPreformattedGitRepo();
-
-        if ($status !== ExitCode::OK) {
+        // Do not publish the exports (git push) if regenerating the data failed.
+        if (array_any($results, fn (int $result): bool => $result !== ExitCode::OK)) {
             return ExitCode::UNSPECIFIED_ERROR;
         }
 
-        if (
-            !$skipUpdate &&
-            $updateStartAt !== null
-        ) {
+        // The timestamp covers the data regeneration only, not publishing the exports.
+        if (!$skipUpdate) {
             $this->saveTimeRecord($updateStartAt, $updateFinishAt);
         }
 
-        return ExitCode::OK;
+        return $this->actionPreformattedGitRepo() === ExitCode::OK
+            ? ExitCode::OK
+            : ExitCode::UNSPECIFIED_ERROR;
     }
 
     public function actionAfrinic(): int

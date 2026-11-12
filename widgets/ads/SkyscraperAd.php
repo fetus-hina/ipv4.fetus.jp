@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace app\widgets\ads;
 
+use app\helpers\AdSenseConfig;
 use app\widgets\AdSenseWidget;
 use yii\base\Widget;
 use yii\helpers\Html;
@@ -22,7 +23,7 @@ final class SkyscraperAd extends Widget
     {
         if (
             AdSenseWidget::isDisabled() ||
-            AdSenseWidget::getSlotId('pc-side2') === null
+            AdSenseConfig::getSlotId('pc-side2') === null
         ) {
             return '';
         }

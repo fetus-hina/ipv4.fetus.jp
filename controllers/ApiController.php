@@ -27,8 +27,6 @@ final class ApiController extends Controller
      * to a different controller. Leave T unspecified.
      *
      * @return array<string, class-string<Action>>
-     *
-     * @phpstan-ignore missingType.generics
      */
     public function actions()
     {

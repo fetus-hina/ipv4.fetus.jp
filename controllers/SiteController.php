@@ -63,8 +63,6 @@ class SiteController extends Controller
      * to a different controller. Leave T unspecified.
      *
      * @return array<string, array{class: class-string<Action>}>
-     *
-     * @phpstan-ignore missingType.generics
      */
     public function actions()
     {
