@@ -148,17 +148,19 @@ class UpdateController extends Controller
         $results[] = $this->actionNginxGeo();
         $updateFinishAt = microtime(true);
 
-        $results[] = $this->actionPreformattedGitRepo();
-
+        // Do not publish the exports (git push) if regenerating the data failed.
         if (array_any($results, fn (int $result): bool => $result !== ExitCode::OK)) {
             return ExitCode::UNSPECIFIED_ERROR;
         }
 
+        // The timestamp covers the data regeneration only, not publishing the exports.
         if (!$skipUpdate) {
             $this->saveTimeRecord($updateStartAt, $updateFinishAt);
         }
 
-        return ExitCode::OK;
+        return $this->actionPreformattedGitRepo() === ExitCode::OK
+            ? ExitCode::OK
+            : ExitCode::UNSPECIFIED_ERROR;
     }
 
     public function actionAfrinic(): int
