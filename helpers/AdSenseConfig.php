@@ -79,8 +79,9 @@ final class AdSenseConfig
         $validSlots = [];
         if (is_array($slots)) {
             foreach ($slots as $name => $id) {
-                if (is_string($name) && is_string($id) && $id !== '') {
-                    $validSlots[$name] = $id;
+                // Numeric-string keys (e.g. '300') are converted to int by PHP.
+                if (is_string($id) && $id !== '') {
+                    $validSlots[(string)$name] = $id;
                 }
             }
         }

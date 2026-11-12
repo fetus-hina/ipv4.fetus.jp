@@ -109,12 +109,8 @@ final class ApplicationLanguage implements BootstrapInterface
             return;
         }
 
-        $view = $app->view;
+        $view = TypeHelper::shouldBeInstanceOf($app->view, View::class);
         unset($url[self::URL_PARAM]);
-
-        if (!$view instanceof View) {
-            return;
-        }
 
         $view->registerLinkTag([
             'href' => Url::to($url, true),

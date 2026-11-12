@@ -54,6 +54,8 @@ if (
             'query' => $region->getMergedCidrs()
               ->orderBy(['cidr' => SORT_ASC]),
             'sort' => false,
+            // Pass an object, not a config array: Yii 2.0.55 declares the property with the getter
+            // type only (Pagination|false), so PHPStan rejects the array form.
             'pagination' => Yii::createObject([
               'class' => Pagination::class,
               'pageParam' => 'cidr-page',

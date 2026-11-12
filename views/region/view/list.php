@@ -86,6 +86,8 @@ if ($isPjax) {
               ->andWhere(['{{%allocation_block}}.[[region_id]]' => $region->id])
               ->orderBy(['cidr' => SORT_ASC]),
             'sort' => false,
+            // Pass an object, not a config array: Yii 2.0.55 declares the property with the getter
+            // type only (Pagination|false), so PHPStan rejects the array form.
             'pagination' => Yii::createObject([
               'class' => Pagination::class,
               'pageParam' => 'list-page',
