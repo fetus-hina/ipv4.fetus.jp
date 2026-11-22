@@ -40,7 +40,7 @@
         "codeception/module-yii2": "^1.1.12 || ^2.0.5",
         "codeception/specify": "^2.0.0",
         "codeception/verify": "^3.4.0",
-        "ergebnis/composer-normalize": "^2.57.0",
+        "ergebnis/composer-normalize": "^2.58.0",
         "jp3cki/coding-standard": "^2.0.0",
         "mspirkov/yii2-phpstan": "^0.17.0",
         "squizlabs/php_codesniffer": "^4.0.4",
@@ -89,7 +89,7 @@
             "yiisoft/yii2-composer": true
         },
         "platform": {
-            "php": "8.4.27"
+            "php": "8.4.28"
         },
         "process-timeout": 1800
     },
