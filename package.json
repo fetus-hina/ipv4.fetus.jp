@@ -4,7 +4,7 @@
   "dependencies": {
     "@jp3cki/fetus.css": "^5.3.12",
     "bootstrap": "^5.3.9",
-    "chart.js": "^4.6.1",
+    "chart.js": "^4.6.2",
     "inputmask": "^5.0.10",
     "jquery": "^3.8.0",
     "license-checker-rseidelsohn": "^5.0.1",
