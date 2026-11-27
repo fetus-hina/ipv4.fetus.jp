@@ -14,9 +14,9 @@
     "yii2-pjax": "^2.0.8"
   },
   "devDependencies": {
-    "autoprefixer": "^10.7.0",
+    "autoprefixer": "^10.7.1",
     "cssnano": "^9.9.0",
-    "postcss": "^8.5.33",
+    "postcss": "^8.5.34",
     "postcss-cli": "^12.0.0",
     "sass": "^1.108.2",
     "semistandard": "^17.0.0",
