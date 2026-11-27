@@ -2415,16 +2415,16 @@
         },
         {
             "name": "justinrainbow/json-schema",
-            "version": "6.15.1",
+            "version": "6.16.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jsonrainbow/json-schema.git",
-                "reference": "24021a898c17193ed7c2111b5fbf1c6486ae85ff"
+                "reference": "17a3a7903640817c1a4878d7c71c0221f9b5de97"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jsonrainbow/json-schema/zipball/24021a898c17193ed7c2111b5fbf1c6486ae85ff",
-                "reference": "24021a898c17193ed7c2111b5fbf1c6486ae85ff",
+                "url": "https://api.github.com/repos/jsonrainbow/json-schema/zipball/17a3a7903640817c1a4878d7c71c0221f9b5de97",
+                "reference": "17a3a7903640817c1a4878d7c71c0221f9b5de97",
                 "shasum": ""
             },
             "require": {
@@ -2440,6 +2440,9 @@
                 "phpspec/prophecy": "^1.19",
                 "phpstan/phpstan": "^1.12",
                 "phpunit/phpunit": "^8.5"
+            },
+            "suggest": {
+                "ext-intl": "Required to validate the idn-hostname format in Draft-07 and Draft 2019-09"
             },
             "bin": [
                 "bin/validate-json"
@@ -2474,7 +2477,7 @@
             ],
             "support": {
                 "issues": "https://github.com/jsonrainbow/json-schema/issues",
-                "source": "https://github.com/jsonrainbow/json-schema/tree/6.15.1"
+                "source": "https://github.com/jsonrainbow/json-schema/tree/6.16.0"
             },
             "funding": [
                 {
@@ -2482,8 +2485,8 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-11-24T20:35:12+00:00",
-            "published-time": "2026-11-24T20:35:18+00:00"
+            "time": "2026-11-27T15:41:07+00:00",
+            "published-time": "2026-11-27T15:41:12+00:00"
         },
         {
             "name": "marc-mabe/php-enum",
@@ -5138,32 +5141,32 @@
         },
         {
             "name": "slevomat/coding-standard",
-            "version": "8.31.3",
+            "version": "8.32.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/slevomat/coding-standard.git",
-                "reference": "b5c34b28811ee2ed323c52c7dabe2f2802dd2f8a"
+                "reference": "a3626af1ca230c42b8e0486c1448c19a8fb9d09f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/slevomat/coding-standard/zipball/b5c34b28811ee2ed323c52c7dabe2f2802dd2f8a",
-                "reference": "b5c34b28811ee2ed323c52c7dabe2f2802dd2f8a",
+                "url": "https://api.github.com/repos/slevomat/coding-standard/zipball/a3626af1ca230c42b8e0486c1448c19a8fb9d09f",
+                "reference": "a3626af1ca230c42b8e0486c1448c19a8fb9d09f",
                 "shasum": ""
             },
             "require": {
                 "dealerdirect/phpcodesniffer-composer-installer": "^0.7 || ^1.2.1",
                 "php": "^7.4 || ^8.0",
-                "phpstan/phpdoc-parser": "^2.3.6",
+                "phpstan/phpdoc-parser": "^2.4.1",
                 "squizlabs/php_codesniffer": "^4.0.4"
             },
             "require-dev": {
                 "phing/phing": "3.0.1|3.1.2",
                 "php-parallel-lint/php-parallel-lint": "1.4.0",
-                "phpstan/phpstan": "2.3.2",
-                "phpstan/phpstan-deprecation-rules": "2.0.5",
-                "phpstan/phpstan-phpunit": "2.1.1",
-                "phpstan/phpstan-strict-rules": "2.1.0",
-                "phpunit/phpunit": "9.6.38|10.5.66|11.4.4|11.5.57|12.5.40"
+                "phpstan/phpstan": "2.3.7",
+                "phpstan/phpstan-deprecation-rules": "2.0.6",
+                "phpstan/phpstan-phpunit": "2.1.3",
+                "phpstan/phpstan-strict-rules": "2.1.2",
+                "phpunit/phpunit": "9.6.38|10.5.66|11.4.4|11.5.58|12.5.45"
             },
             "type": "phpcodesniffer-standard",
             "extra": {
@@ -5187,7 +5190,7 @@
             ],
             "support": {
                 "issues": "https://github.com/slevomat/coding-standard/issues",
-                "source": "https://github.com/slevomat/coding-standard/tree/8.31.3"
+                "source": "https://github.com/slevomat/coding-standard/tree/8.32.0"
             },
             "funding": [
                 {
@@ -5199,8 +5202,8 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-10-28T16:34:46+00:00",
-            "published-time": "2026-10-28T16:36:09+00:00"
+            "time": "2026-11-26T06:14:25+00:00",
+            "published-time": "2026-11-26T06:36:39+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",
@@ -5846,16 +5849,16 @@
         },
         {
             "name": "symfony/finder",
-            "version": "v8.1.12",
+            "version": "v8.1.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
-                "reference": "7022913b72c56ac5123922726aa94f2f98b726ad"
+                "reference": "5dc8602a3ad3430a97efb70f9d7e9f0aec1410dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/finder/zipball/7022913b72c56ac5123922726aa94f2f98b726ad",
-                "reference": "7022913b72c56ac5123922726aa94f2f98b726ad",
+                "url": "https://api.github.com/repos/symfony/finder/zipball/5dc8602a3ad3430a97efb70f9d7e9f0aec1410dc",
+                "reference": "5dc8602a3ad3430a97efb70f9d7e9f0aec1410dc",
                 "shasum": ""
             },
             "require": {
@@ -5890,7 +5893,7 @@
             "description": "Finds files and directories via an intuitive fluent interface",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/finder/tree/v8.1.12"
+                "source": "https://github.com/symfony/finder/tree/v8.1.13"
             },
             "funding": [
                 {
@@ -5910,8 +5913,8 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-11-24T15:06:41+00:00",
-            "published-time": "2026-11-25T09:29:36+00:00"
+            "time": "2026-11-27T14:07:58+00:00",
+            "published-time": "2026-11-27T14:50:47+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -6337,16 +6340,16 @@
         },
         {
             "name": "symfony/string",
-            "version": "v8.1.12",
+            "version": "v8.1.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/string.git",
-                "reference": "b3f937ce8203f33efea3cce084ad4a9f0cce97c5"
+                "reference": "ff6a90fe4c4e0e4de484d07189aa25d6d7f447be"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/string/zipball/b3f937ce8203f33efea3cce084ad4a9f0cce97c5",
-                "reference": "b3f937ce8203f33efea3cce084ad4a9f0cce97c5",
+                "url": "https://api.github.com/repos/symfony/string/zipball/ff6a90fe4c4e0e4de484d07189aa25d6d7f447be",
+                "reference": "ff6a90fe4c4e0e4de484d07189aa25d6d7f447be",
                 "shasum": ""
             },
             "require": {
@@ -6403,7 +6406,7 @@
                 "utf8"
             ],
             "support": {
-                "source": "https://github.com/symfony/string/tree/v8.1.12"
+                "source": "https://github.com/symfony/string/tree/v8.1.13"
             },
             "funding": [
                 {
@@ -6423,8 +6426,8 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-11-24T15:59:55+00:00",
-            "published-time": "2026-11-25T09:30:00+00:00"
+            "time": "2026-11-27T13:27:33+00:00",
+            "published-time": "2026-11-27T14:50:30+00:00"
         },
         {
             "name": "symfony/var-dumper",
@@ -6516,16 +6519,16 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v8.1.12",
+            "version": "v8.1.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "deb300ddc3ef3eab0476569fd88d14e3b194881a"
+                "reference": "644371830ee15c591d6ee184738723cc58ca3de6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/deb300ddc3ef3eab0476569fd88d14e3b194881a",
-                "reference": "deb300ddc3ef3eab0476569fd88d14e3b194881a",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/644371830ee15c591d6ee184738723cc58ca3de6",
+                "reference": "644371830ee15c591d6ee184738723cc58ca3de6",
                 "shasum": ""
             },
             "require": {
@@ -6568,7 +6571,7 @@
             "description": "Loads and dumps YAML files",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/yaml/tree/v8.1.12"
+                "source": "https://github.com/symfony/yaml/tree/v8.1.13"
             },
             "funding": [
                 {
@@ -6588,8 +6591,8 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-11-16T12:51:10+00:00",
-            "published-time": "2026-11-25T09:28:53+00:00"
+            "time": "2026-11-27T13:27:33+00:00",
+            "published-time": "2026-11-27T14:50:18+00:00"
         },
         {
             "name": "theseer/tokenizer",
